@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="FinisarFAS1.View.EntryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinisarFAS1.View"
+             xmlns:converters="clr-namespace:FinisarFAS1.Converters"             
+             DataContext="{Binding EntryVM, Source={StaticResource Locator}}" 
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
+
+            <DataTemplate x:Key="ShowOnNotNull">
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+        </ResourceDictionary>        
+    </UserControl.Resources>
+
+    <Grid Background="LightGray" Width="1000" Height="960">
+        <StackPanel Width="360" Height="430" Orientation="Vertical" > <!-- *ackground="{DynamicResource ResourceKey=BlackGlass3b}" >*/ -->
+        <StackPanel.Background>
+            <ImageBrush ImageSource="../Images/Blue1.jpg" Opacity=".33" />
+        </StackPanel.Background>
+        <Image Margin="0,0" Width="380" Source="../Images/II-VI_Finisar5.jpg" />
+        <StackPanel Margin="5,15,5,5" Orientation="Horizontal" >
+            <Label Content="Operator"/>
+                <TextBox Margin="27,0,10,0" Height="25" FontSize="16" Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}"  Width="200" 
+                     KeyUp="TextBox_KeyUp" />
+            <Image Margin="0,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                   Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+        </StackPanel>
+
+            <StackPanel Margin="5,5" Orientation="Horizontal" >
+                <Label Content="Tool ID" />
+                <TextBox Margin="40,0,10,0" Height="25" FontSize="16" Text="{Binding Path=ToolID, UpdateSourceTrigger=LostFocus}" Width="200" KeyUp="TextBox_KeyUp" AcceptsReturn="True" />
+                <Image Margin="0,0" Width="20" Source="{Binding Path=ToolStatus}" 
+                       Visibility="{Binding ToolID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+            </StackPanel>
+
+            <StackPanel Margin="5,5" Orientation="Horizontal" >
+                <Label Content="Lot #" />
+                <TextBox Margin="50,0,10,0" Height="25" FontSize="16" Text="{Binding Path=LotID, UpdateSourceTrigger=LostFocus}" Width="200" KeyUp="TextBox_KeyUp"/>
+                <!--<Image Margin="0,0" Width="20" Source="../Images/CheckBoxRed.png" />-->
+                <Image Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
+                   Visibility="{Binding LotID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="15,15" Width="120" FontSize="22"
+                    Background="{StaticResource ResourceKey=RedGlass}" Foreground="White"
+                    Content="Clear" Name="btnClear" 
+                    Command="{Binding Path=btnClear}"/>
+            <Button Margin="15,15" Width="160" FontSize="22"
+                    Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
+                    Content="Confirm" Name="btnConfirm" 
+                    Command="{Binding Path=btnConfirm}"/>
+        </StackPanel>
+        </StackPanel>
+    </Grid>    
+</UserControl>

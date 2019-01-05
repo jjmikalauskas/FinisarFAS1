@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="FusionPledgeMaintenance.View.PledgesAvailable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:FusionPledgeMaintenance.Converters"
+             xmlns:dragdrop="clr-namespace:DragDrop"          Width="1130" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
+            <converters:OppositeBooleanToCollapsedConverter x:Key="OppBooleanToCollapsedConverter" />
+            <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
+            <converters:PaymentScheduleConverter x:Key="PaymentScheduleConverter" />
+            <converters:PanelMarginConverter x:Key="slidingPanelLeftMarginConverter" />
+
+            <DataTemplate x:Key="pledgeTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100" Text="{Binding Path=PledgeCode}" />
+                    <TextBlock Text="{Binding Path=Description}" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="pledgeAppealTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="60" Text="{Binding Path=PledgeCode}" />
+                    <TextBlock Width="60" Text="{Binding Path=AltPledgeCode}" />
+                    <TextBlock Text="{Binding}" />
+                    <TextBlock Width="40" Text="{Binding Path=Country}" />
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!--<UserControl.Background>
+        <LinearGradientBrush Opacity="0.9">
+            <GradientStop Offset="0.0" Color="LightYellow" />
+            <GradientStop Offset="0.5" Color="Transparent" />
+            <GradientStop Offset="0.8" Color="LightYellow" />
+        </LinearGradientBrush>
+    </UserControl.Background>-->
+    <!--  Background="{StaticResource ResourceKey=PledgeAvailableListBackgroundBrush}">  -->
+    <Grid Margin="0,0" >
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/blue1.jpg" Opacity=".95" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=Height}" Margin="10,5" Orientation="Horizontal" >
+            <GroupBox Width="380" MinHeight="720" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" 
+                      DockPanel.Dock="Left" Foreground="White" Header=" All Active Pledge Codes " >
+                <StackPanel Orientation="Vertical">
+                    <ListBox Name="lbPledgeCodesActive" Height="720" ItemTemplate="{StaticResource pledgeTemplate}" FontWeight="Normal"
+                             ItemsSource="{Binding Path=PledgeCodesActive}" SelectedItem="{Binding Path=PledgeCodeSelected}"
+                             SelectionMode="Single" dragdrop:DragDropHelper.DragDropTemplate="{StaticResource pledgeTemplate}"
+                             dragdrop:DragDropHelper.IsDragSource="True" dragdrop:DragDropHelper.IsDropTarget="True" >
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="5,1" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+            </GroupBox>
+            
+            <StackPanel Margin="7,15,7,5" Orientation="Vertical">
+                <StackPanel VerticalAlignment="Top" Orientation="Vertical" Width="150">
+                    <Button Width="96" Margin="5,60,5,0" Background="{DynamicResource ResourceKey=BlueGlass3}"
+                            Command="{Binding btnMoveRight}" Content="&gt;&gt;" Foreground="White" />
+                    <Button Width="96" Margin="5,20,5,0" Background="{DynamicResource ResourceKey=BlueGlass3}" 
+                            Command="{Binding btnMoveLeft}" Content="&lt;&lt;" Foreground="White" />
+
+                    <!-- hide Activate MJSPC button if HFTW mode -->
+                    <StackPanel Margin="0" Visibility="{Binding MainVM.OrigSettings.HftwEnabled, Converter={StaticResource ResourceKey=OppBooleanToCollapsedConverter}}" >
+                        <StackPanel Margin="0" Visibility="{Binding IsMAndJActive, Converter={StaticResource ResourceKey=OppBooleanToCollapsedConverter}}" >
+                            <Button Width="140" Height="Auto" Margin="3,25,3,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Background="{DynamicResource ResourceKey=ButtonGo1}" Command="{Binding PutPlaceHolderAtTopCmd}" BorderBrush="Black"
+                            FontSize="20" FontWeight="DemiBold" FontFamily="Arial Narrow" Foreground="White" Padding="5,0" >
+                                <TextBlock TextAlignment="Center" TextWrapping="WrapWithOverflow">Activate temp<LineBreak/>pledge code</TextBlock>
+                            </Button>
+                            <TextBox Text="{Binding PlaceholderDescription}" Margin="-5,5,-5,0" Width="160" MaxLength="40" Background="Yellow" BorderBrush="Black" FontFamily="Arial Narrow" FontSize="13" VerticalContentAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0" Visibility="{Binding IsMAndJActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                        <Button Width="140" Height="Auto" Margin="3,25,3,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource ResourceKey=ButtonStop1}"
+                        Command="{Binding RemovePlaceHolderAtTopCmd}" FontSize="20" FontWeight="DemiBold" FontFamily="Arial Narrow" Foreground="White" Padding="0"  BorderBrush="Black" >
+                            <TextBlock TextAlignment="Center" TextWrapping="WrapWithOverflow">Deactivate temp<LineBreak/>pledge code</TextBlock>
+                        </Button>
+                        <TextBox Margin="0,5,0,0" Visibility="Hidden" />   <!-- just to give equal spacing with above stackpanel -->
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                    <Button Width="96" Margin="5,80,5,0" Background="{DynamicResource ResourceKey=BlueGlass3}" Command="{Binding btnMoveUp}" Content="Move UP" Foreground="White" />
+                    <Button Width="96" Margin="5,20,5,5" Background="{DynamicResource ResourceKey=BlueGlass3}" Command="{Binding btnMoveDown}" Content="Move DOWN" Foreground="White" />
+                </StackPanel>
+            </StackPanel>
+            <GroupBox Width="380" Height="Auto" MinHeight="720" Margin="0,0,0,0" HorizontalAlignment="Left" 
+                      VerticalAlignment="Top" BorderThickness="1" Foreground="White" Header=" Available Pledge Codes " >
+                <ListBox Name="lbPledgesAvailable" Height="720" ItemTemplate="{StaticResource pledgeTemplate}" FontWeight="Normal"
+                         ItemsSource="{Binding Path=PledgesAvailable}" SelectedItem="{Binding Path=PledgeAvailableSelected}"
+                         SelectionMode="Single" dragdrop:DragDropHelper.DragDropTemplate="{StaticResource pledgeTemplate}"
+                         dragdrop:DragDropHelper.IsDragSource="True" dragdrop:DragDropHelper.IsDropTarget="True" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="5,1" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </GroupBox>
+            <StackPanel Width="178" >
+                <Label Content="Select target DBs:" Foreground="White" Margin="25,10,0,0" />
+                <ListBox Width="140" Height="66" Margin="10,0,0,60" Padding="0" VerticalAlignment="Top"  FontWeight="Normal" FontSize="13" DisplayMemberPath="Name"
+                         ItemsSource="{Binding MainVM.PMTargets, Mode=TwoWay}" SelectionMode="Multiple"  
+                             ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="10000" ToolTip="Select one or more target DBs" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="Padding" Value="2" />
+                            <Setter Property="ToolTip" >
+                                <Setter.Value>
+                                    <TextBlock Text="{Binding ConnInfo}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Name="Border" Padding="0" SnapsToDevicePixels="true">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"  />
+                                                <Setter Property="Foreground" Value="White"  />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <Button Width="120" Margin="15,25,5,5" VerticalAlignment="Top" Background="{DynamicResource ResourceKey=GreenGlass3}" 
+                        Command="{Binding Path=UpdatePledgeAvailCmd}" Content="Save Changes" Foreground="White" />
+                <Button Width="120" Margin="15,25,5,5" VerticalAlignment="Top" Background="{DynamicResource ResourceKey=BlueGlass3}" 
+                        Command="{Binding Path=btnReloadData}" Content="Reload Data" Foreground="White" />
+                <Button Width="120" Margin="15,25,5,5" VerticalAlignment="Top" Background="{DynamicResource ResourceKey=BlueGlass3}"
+                                Command="{Binding Path=AuditCmd}" Content="Show Audit Log" Foreground="White" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="FinisarFAS1.View.RightSideButtonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinisarFAS1.View"             
+             mc:Ignorable="d" Height="700" Width="200" >    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,15" />
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Width" Value="140"/>
+            </Style>
+        </ResourceDictionary>        
+    </UserControl.Resources>
+    
+    <StackPanel 
+             Background="{DynamicResource ResourceKey=BlackGlass3b}" Orientation="Vertical">
+        <StackPanel Orientation="Vertical" >
+            <!--<Image Margin="0,0" Width="Auto" Source="../Images/II-VI_Finisar5.jpg" />-->
+            <StackPanel Margin="10,150,10,5" Orientation="Vertical" VerticalAlignment="Bottom" >
+                <Button Margin="0,15,0,15" ToolTip="Start processing for this load port"
+                                Background="{StaticResource ResourceKey=LimeGlass}"
+                                Command="{Binding Path=StartCmd}"
+                                Foreground="White" >
+                    <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
+                        <Label FontSize="28" >Start</Label>
+                        <Image Margin="10,10,0,0" Height="32" Source="../Images/play_button.png" />
+                    </StackPanel>
+                </Button>
+                <Button ToolTip="Stop current processing for this load port"
+                                Background="{StaticResource ResourceKey=RedGlass}"
+                                Command="{Binding Path=StopCmd}"
+                                Foreground="White" >
+                    <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
+                        <Label FontSize="28" >Stop</Label>
+                        <Image Margin="5,5,0,0" Height="28" Source="../Images/stop_button.png" />
+                    </StackPanel>
+                </Button>
+                <Button ToolTip="Pause current processing"
+                                Background="{StaticResource ResourceKey=YellowGlass}"
+                                Command="{Binding Path=PauseCmd}"
+                                Foreground="Black" >
+                    <StackPanel Margin="-8,-6,0,0" Orientation="Horizontal">
+                        <Label FontSize="28" >Pause</Label>
+                        <Image Margin="5,5,0,0" Height="28" Source="../Images/pause_button.png" />
+                    </StackPanel>
+                </Button>
+                <Button ToolTip="Reset this current lot"
+                                Background="{StaticResource ResourceKey=BlackGlass}"
+                                Command="{Binding Path=ResetCmd}"
+                                Content="Reset" Foreground="White" />                
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
