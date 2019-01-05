@@ -15,6 +15,7 @@ namespace EquipmentCommunications
 
         public EvaTech()
         {
+
         }
 
         public bool AreYouThere(object equipmentId)

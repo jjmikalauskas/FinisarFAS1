@@ -193,6 +193,10 @@
       <Project>{01526205-24BB-488E-8F33-D78ED82E8CA1}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EquipmentCommunications\EquipmentCommunications.csproj">
+      <Project>{eefef148-2d81-415b-b22e-5d8f3abb1552}</Project>
+      <Name>EquipmentCommunications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MESCommunications\MESCommunications.csproj">
       <Project>{E58DFEBE-5129-4361-B952-4FF8516795D1}</Project>
       <Name>MESCommunications</Name>
@@ -201,6 +205,9 @@
       <Project>{F50F5F04-154D-4A97-92C4-9D1C4A9471F0}</Project>
       <Name>Tests</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FinisarLogo1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

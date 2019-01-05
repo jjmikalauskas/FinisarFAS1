@@ -18,8 +18,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="View/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
             <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
+            <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
 
             <Storyboard x:Key="expandWafer">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
@@ -99,24 +100,19 @@
             Margin="10,5,10,5" Background="{DynamicResource ResourceKey=BlackGlass3b}" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
                 <StackPanel Margin="5,5" Orientation="Horizontal" >
-                    <Label Foreground="White" Content="Operator"/>
-                    <TextBox Margin="10,0,5,0" Height="25" FontSize="16" Text="{Binding Path=Operator}"  Width="120" />
+                    <Label Content="Operator:"/>
+                    <Label Margin="10,0,5,0" FontSize="18" Content="{Binding Path=Operator}" Width="160" />
                 </StackPanel>
                 <StackPanel Margin="5,5" Orientation="Horizontal" >
-                    <Label Foreground="White" Content="Tool ID" />
-                    <TextBox Margin="10,0,5,0" Height="25" FontSize="16" Text="{Binding Path=Tool}" Width="120" />
+                    <Label Content="Tool:" />
+                    <Label Margin="10,0,5,0" FontSize="18" Content="{Binding Path=Tool}" Width="130" />
                 </StackPanel>
                 <StackPanel Margin="5,5" Orientation="Horizontal" >
-                    <Label Foreground="White" Content="Lot #" />
-                    <TextBox Margin="10,0,5,0" Height="25" FontSize="16" Text="{Binding Path=Lot}" Width="120" />
+                    <Label Content="Lot #" />
+                    <Label Margin="10,0,5,0" FontSize="18" Content="{Binding Path=Lot}" />
                 </StackPanel>
             </StackPanel>
-            <TextBlock Margin="5,5" TextWrapping="WrapWithOverflow" 
-                       FontSize="18" Height="28" Background="Red" Padding="8,0,0,0"
-                       VerticalAlignment="Stretch" Foreground="White"
-                       Visibility="Collapsed"
-                       Text="{Binding CurrentAlarm}" />
-            <!--Visibility="Collapsed"-->
+            
             <TextBlock Margin="15,15" TextWrapping="WrapWithOverflow" 
                        FontSize="18"
                        VerticalAlignment="Stretch" Foreground="White"
@@ -126,7 +122,7 @@
                     <TabItem.Header>
                         <Grid Margin="-5,0" Height="31" Width="120" >
                             <!--<ProgressBar Height="31" Width="120" Value="5" Foreground="Lime" />-->
-                            <TextBlock Padding="24,6,0,0" Text="Load Port 1" />
+                            <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[0]}" />
                         </Grid>
                     </TabItem.Header>
                     <StackPanel Orientation="Horizontal" >
@@ -171,41 +167,54 @@
                     <TabItem.Header>
                         <Grid Margin="-5,0" Height="30" Width="120" >
                             <!--<ProgressBar Height="30" Width="120" Value="25" Foreground="Lime" />-->
-                            <TextBlock Padding="24,6,0,0" Text="Load Port 2" />
+                            <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[1]}" />
                         </Grid>
                     </TabItem.Header>
-                    <DataGrid x:Name="_mainDataGrid2" 
-                              IsReadOnly="True" AutoGenerateColumns="False"
-                              RowHeight="24" FontSize="16" >
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="Background" Value="{Binding StatusColor}"/>
-                            </Style>
-                        </DataGrid.RowStyle>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="65"
-                                                    Binding="{Binding WaferNo}"
-                                                    Header="Wafer #" />
-                            <DataGridTextColumn Width="50"
-                                                    Binding="{Binding Slot}"
-                                                    Header="Slot" />
-                            <DataGridTextColumn Width="80" Binding="{Binding Scrap}" Header="Scrap" />
-                            <DataGridTextColumn Width="105"
-                                                    Binding="{Binding Recipe}"
-                                                    Header="Recipe" />
-                            <DataGridTextColumn Width="160"
-                                                    Binding="{Binding Status}"
-                                                    Header="Processing Status" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name="_mainDataGrid2" 
+                                  Grid.Column="0" Width="730"
+                                  IsReadOnly="True" AutoGenerateColumns="False"
+                                  RowHeight="24" FontSize="16" >
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="{Binding StatusColor}"/>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="120"
+                                                        Binding="{Binding WaferNo}"
+                                                        Header="Wafer #" />
+                                    <DataGridTextColumn Width="50"
+                                                        Binding="{Binding Slot}"
+                                                        Header="Slot" />
+                                    <DataGridTextColumn Width="120" Binding="{Binding Scrap}" Header="Scrap" />
+                                    <DataGridTextColumn Width="125"
+                                                        Binding="{Binding Recipe}"
+                                                        Header="Recipe" />
+                                    <DataGridTextColumn Width="180"
+                                                        Binding="{Binding Status}"
+                                                        Header="Processing Status" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Grid.Column="1">
+                                <view:RightSideButtonView Height="700" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
                 </TabItem>
-                <TabItem Header="Load Port 3">
+
+                <TabItem Header="{Binding LoadPortNames[2]}" Visibility="{Binding PortCActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                     <Label Content="Load port 3 table" />
                 </TabItem>
-                <TabItem Header="Load Port 4">
+                <TabItem Header="{Binding LoadPortNames[3]}" Visibility="{Binding PortDActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
                     <Label Content="Load port 4 table" />
                 </TabItem>
-                <TabItem Header="Alarms">
+                <TabItem Header="Alarms" >
                     <Label Content="Alarm history for this run here..." />
                 </TabItem>
                 <TabItem Header="Logs">
@@ -222,7 +231,12 @@
                 <Ellipse Canvas.Top="50" Canvas.Left="50"
                   Fill="Red" Height="25" Width="25" />              
             </Canvas>-->
-            <StackPanel Orientation="Horizontal" Margin="0,55,0,0" >
+            <TextBlock Margin="5,5" TextWrapping="WrapWithOverflow" 
+                       FontSize="18" Height="28" Background="Red" Padding="8,0,0,0"
+                       VerticalAlignment="Stretch" Foreground="White"
+                       Text="{Binding CurrentAlarm}" />
+            <!--Visibility="Collapsed"-->
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
                 <Button ToolTip="Exit FAS program"
                                     Background="{StaticResource ResourceKey=BlackGlass}"
                                     Command="{Binding Path=ExitHostCmd}"
@@ -232,6 +246,16 @@
                                     Background="{StaticResource ResourceKey=BlackGlass}"
                                     Command="{Binding Path=CamstarCmd}"
                                     Content="Camstar" 
+                                    Foreground="White" />
+                <Button ToolTip="Alarm listing during current run"
+                                    Background="{StaticResource ResourceKey=BlackGlass}"
+                                    Command="{Binding Path=AlarmListingCmd}"
+                                    Content="Alarms" 
+                                    Foreground="White" />
+                <Button ToolTip="Log during current run"
+                                    Background="{StaticResource ResourceKey=BlackGlass}"
+                                    Command="{Binding Path=LogListingCmd}"
+                                    Content="Logs" 
                                     Foreground="White" />
             </StackPanel>
         </StackPanel>

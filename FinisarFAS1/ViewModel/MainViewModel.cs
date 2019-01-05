@@ -1,9 +1,11 @@
+using Common;
 using FinisarFAS1.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace FinisarFAS1.ViewModel
@@ -39,18 +41,64 @@ namespace FinisarFAS1.ViewModel
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
                 CurrentAlarm = "Alarm Id: 63-Chamber pressure low";
             }
-            // Regist for messages 
-            Messenger.Default.Register<EntryValuesMessage>(this, UpdateEntryValuesMsg);
+            // Register for messages 
+            RegisterForMessages();
 
+            SetEnvironment(); 
         }
+
+        private void RegisterForMessages()
+        {
+            Messenger.Default.Register<EntryValuesMessage>(this, UpdateEntryValuesMsg);
+            Messenger.Default.Register<Ports>(this, UpdateLoadPortsMsg);
+        }
+
+        private void SetEnvironment()
+        {
+            NumberOfLoadPorts = EquipmentCommunications.Properties.Settings.Default.LoadPorts;
+            LoadLock = EquipmentCommunications.Properties.Settings.Default.LoadLock;
+            Port1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
+            Port2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
+            Ports = new Ports(NumberOfLoadPorts, LoadLock, Port1Name);
+            Ports.LoadPort2Name = Port2Name;
+            Messenger.Default.Send<Ports>(Ports); 
+        }
+
+        #region PUBLIC VARIABLES
+        public int NumberOfLoadPorts;
+        public bool LoadLock;
+        public string Port1Name; 
+        public string Port2Name;
+        public Ports Ports; 
+        #endregion 
 
         private void UpdateEntryValuesMsg(EntryValuesMessage msg)
         {
-            this.Operator = msg.op?.OperatorName;
+            this.Operator = msg.op;
             this.Tool = msg.tool?.ToolName;
-            this.Lot = msg.lot?.LotInfo;
+            this.Lot = "61851-001, 61851-002" ;
         }
 
+        private void UpdateLoadPortsMsg(Ports msg)
+        {
+            LoadPortNames = new ObservableCollection<string> { msg.LoadPort1Name };
+
+            if (msg.NumberOfLoadPorts > 1)
+            {
+                PortBActive = true;
+                LoadPortNames.Add(msg.LoadPort2Name);
+            }
+            if (msg.NumberOfLoadPorts > 2)
+            {
+                PortCActive = true;
+                LoadPortNames.Add(msg.LoadPort3Name);
+            }
+            if (msg.NumberOfLoadPorts > 3)
+            {
+                PortDActive = true;
+                LoadPortNames.Add(msg.LoadPort4Name);
+            }            
+        }
 
         #region UI BINDINGS
         private string gridData;
@@ -88,6 +136,14 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private ObservableCollection<string> _loadPortNames;
+        public ObservableCollection<string> LoadPortNames {
+            get { return _loadPortNames; }
+            set {
+                _loadPortNames = value;
+            }
+        }
+
         private string _currentAlarm;
         public string CurrentAlarm {
             get { return _currentAlarm; }
@@ -121,6 +177,33 @@ namespace FinisarFAS1.ViewModel
             set {
                 _actualWaferSetup = value;
                 RaisePropertyChanged("ActualWaferSetup");
+            }
+        }
+
+        private bool _portBActive;
+        public bool PortBActive {
+            get { return _portBActive; }
+            set {
+                _portBActive = value;
+                RaisePropertyChanged(nameof(PortBActive));
+            }
+        }
+
+        private bool _portCActive;
+        public bool PortCActive {
+            get { return _portCActive; }
+            set {
+                _portCActive = value;
+                RaisePropertyChanged(nameof(PortCActive));
+            }
+        }
+
+        private bool _portDActive;
+        public bool PortDActive {
+            get { return _portDActive; }
+            set {
+                _portDActive = value;
+                RaisePropertyChanged(nameof(PortDActive));
             }
         }
 

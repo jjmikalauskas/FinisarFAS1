@@ -8,9 +8,10 @@ namespace Common
 {
     public interface IMESService
     {
-        Operator GetOperator(string operatorName, int id);
-        Tool GetTool(string toolName, int id);
-        Lot GetLot(string lotName, int id);
+        // Operator GetOperator(string operatorName);
+        Tool GetTool(string toolName);
+        Lot GetLot(string lotName);
+
         bool ValidateUserFromCamstar(string userName);
         string GetToolStatusFromCamstar(string toolName); 
         bool GetLotOrWaferInfoFromCamstar(string lotId, int currentCassette);
@@ -22,7 +23,7 @@ namespace Common
 
     public interface IOperatorRepository
     {
-        Operator GetOperator(string opName); 
+        bool ValidateUserFromCamstar(string opName); 
     }
 
 

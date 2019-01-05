@@ -40,11 +40,11 @@ namespace FinisarFAS1.View
     class ShowWaferWindowMessage
     {
         public bool bVisible;
-        private Operator op;
+        private string op;
         private Tool tool;
         private Lot lot;
 
-        public ShowWaferWindowMessage(Operator op, Tool tool, Lot lot, bool bVisible)
+        public ShowWaferWindowMessage(string op, Tool tool, Lot lot, bool bVisible)
         {
             this.op = op;
             this.tool = tool;
@@ -55,11 +55,11 @@ namespace FinisarFAS1.View
 
     internal class EntryValuesMessage           // message for sneding the main 3 values around
     {
-        public Operator op;
+        public string op;
         public Tool tool;
         public Lot lot;
 
-        public EntryValuesMessage(Operator op, Tool tool, Lot lot)       
+        public EntryValuesMessage(string op, Tool tool, Lot lot)       
         {
             this.op = op;
             this.tool = tool;

@@ -21,48 +21,95 @@
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
+            
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0,5" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Width" Value="240" />
+                <Setter Property="Margin" Value="5,0" />
+            </Style>
 
         </ResourceDictionary>        
     </UserControl.Resources>
 
     <Grid Background="LightGray" Width="1000" Height="960">
-        <StackPanel Width="360" Height="430" Orientation="Vertical" > <!-- *ackground="{DynamicResource ResourceKey=BlackGlass3b}" >*/ -->
-        <StackPanel.Background>
+        <StackPanel Width="360" Height="460"  Orientation="Vertical" Background="{DynamicResource ResourceKey=BlackGlass2b}" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <!--<StackPanel.Background>
             <ImageBrush ImageSource="../Images/Blue1.jpg" Opacity=".33" />
-        </StackPanel.Background>
-        <Image Margin="0,0" Width="380" Source="../Images/II-VI_Finisar5.jpg" />
-        <StackPanel Margin="5,15,5,5" Orientation="Horizontal" >
-            <Label Content="Operator"/>
-                <TextBox Margin="27,0,10,0" Height="25" FontSize="16" Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}"  Width="200" 
-                     KeyUp="TextBox_KeyUp" />
-            <Image Margin="0,0" Width="20" Source="{Binding Path=OperatorStatus}" 
-                   Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
-        </StackPanel>
+        </StackPanel.Background>-->
+                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,20" Width="340" Source="../Images/FinisarLogo1.png" />
 
-            <StackPanel Margin="5,5" Orientation="Horizontal" >
-                <Label Content="Tool ID" />
-                <TextBox Margin="40,0,10,0" Height="25" FontSize="16" Text="{Binding Path=ToolID, UpdateSourceTrigger=LostFocus}" Width="200" KeyUp="TextBox_KeyUp" AcceptsReturn="True" />
-                <Image Margin="0,0" Width="20" Source="{Binding Path=ToolStatus}" 
+                <Label Grid.Row="2" Grid.Column="0" Content="Operator" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}" 
+                        KeyUp="TextBox_KeyUp" />
+                <Image Grid.Row="2" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                        Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Tool ID" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=ToolID, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" AcceptsReturn="True" />
+                <Image Grid.Row="3" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=ToolStatus}" 
                        Visibility="{Binding ToolID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
-            </StackPanel>
 
-            <StackPanel Margin="5,5" Orientation="Horizontal" >
-                <Label Content="Lot #" />
-                <TextBox Margin="50,0,10,0" Height="25" FontSize="16" Text="{Binding Path=LotID, UpdateSourceTrigger=LostFocus}" Width="200" KeyUp="TextBox_KeyUp"/>
-                <!--<Image Margin="0,0" Width="20" Source="../Images/CheckBoxRed.png" />-->
-                <Image Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
-                   Visibility="{Binding LotID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="15,15" Width="120" FontSize="22"
-                    Background="{StaticResource ResourceKey=RedGlass}" Foreground="White"
-                    Content="Clear" Name="btnClear" 
-                    Command="{Binding Path=btnClear}"/>
-            <Button Margin="15,15" Width="160" FontSize="22"
-                    Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
-                    Content="Confirm" Name="btnConfirm" 
-                    Command="{Binding Path=btnConfirm}"/>
-        </StackPanel>
+                <Label Grid.Row="4" Grid.Column="0" Content="Port A Lot ID" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=LotAID, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp"/>
+                <Image Grid.Row="4" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
+                   Visibility="{Binding LotAID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Port B Lot ID" Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=LotBID, UpdateSourceTrigger=LostFocus}" 
+                         KeyUp="TextBox_KeyUp" Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <Image Grid.Row="5" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
+                        Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+
+                <Label Grid.Row="6" Grid.Column="0" Content="Port C Lot ID" Visibility="{Binding LotCActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <TextBox Grid.Row="6" Grid.Column="1"  Text="{Binding Path=LotCID, UpdateSourceTrigger=LostFocus}" 
+                         KeyUp="TextBox_KeyUp" Visibility="{Binding LotCActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <Image Grid.Row="6" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
+                        Visibility="{Binding LotCActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+
+                <Label Grid.Row="7" Grid.Column="0" Content="Port D Lot ID " Visibility="{Binding LotDActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Path=LotDID, UpdateSourceTrigger=LostFocus}" 
+                         KeyUp="TextBox_KeyUp" Visibility="{Binding LotDActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                <Image Grid.Row="7" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=LotStatus}" 
+                        Visibility="{Binding LotDActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+
+                <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,15,0,0"  Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="15,15" Width="120" FontSize="22"
+                        Background="{StaticResource ResourceKey=RedGlass}" Foreground="White"
+                        Content="Clear" Name="btnClear" 
+                        Command="{Binding Path=btnClear}"/>
+                    <Button Margin="15,15" Width="160" FontSize="22"
+                        Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
+                        Content="Confirm" Name="btnConfirm" 
+                        Command="{Binding Path=btnConfirm}"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>    
 </UserControl>

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EquipmentBase.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Lot.cs" />
     <Compile Include="MESContract.cs" />
     <Compile Include="Operator.cs" />

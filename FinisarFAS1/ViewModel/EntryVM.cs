@@ -28,11 +28,11 @@ namespace FinisarFAS1.ViewModel
 
         public EntryViewModel()
         {
-            _mesService = new MESCommunications.MESService(new MockMESService());
+            _mesService = new MESCommunications.MESService(new MoqMESService());
 
             OperatorID = "John Smith";
             ToolID = "6-6-EVAP-01";
-            LotID = "61851-003";            
+            LotAID = "61851-003";            
         }
 
         private InputType GetInputType(string s)
@@ -88,7 +88,7 @@ namespace FinisarFAS1.ViewModel
             }
             else if (iType == InputType.Lot)
             {
-                LotID = vString; 
+                LotAID = vString; 
             }
             else // Error
             {
@@ -104,8 +104,8 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (GetInputType(value) == InputType.Operator) {
                     _operator = value;
-                    var op = _mesService.GetOperator(value, 0);
-                    OperatorStatus = op == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                    var op = _mesService.ValidateUserFromCamstar(value);
+                    OperatorStatus = op == false ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace FinisarFAS1.ViewModel
                 if (GetInputType(value) == InputType.Tool)
                 {
                     _tool = value;
-                    var tool = _mesService.GetTool(value, 0);
+                    var tool = _mesService.GetTool(value);
                     ToolStatus = tool == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 }
                 else
@@ -137,14 +137,14 @@ namespace FinisarFAS1.ViewModel
         }
 
         private string _lot;
-        public string LotID
+        public string LotAID
         {
             get { return _lot; }
             set {
                 if (GetInputType(value) == InputType.Lot)
                 {
                     _lot = value;
-                    var lot = _mesService.GetLot(value, 0);
+                    var lot = _mesService.GetLot(value);
                     LotStatus = lot == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 }
                 else
@@ -152,9 +152,67 @@ namespace FinisarFAS1.ViewModel
                     _lot = "";
                     ProcessInputType(InputType.Lot, GetInputType(value), value);
                 }
-                RaisePropertyChanged(nameof(LotID));
+                RaisePropertyChanged(nameof(LotAID));
             }
         }
+       
+        private string _lotB;
+        public string LotBID {
+            get { return _lotB; }
+            set {
+                if (GetInputType(value) == InputType.Lot)
+                {
+                    _lotB = value;
+                    var lot = _mesService.GetLot(value);
+                    LotStatus = lot == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                }
+                else
+                {
+                    _lotB = "";
+                    ProcessInputType(InputType.Lot, GetInputType(value), value);
+                }
+                RaisePropertyChanged(nameof(LotBID));
+            }
+        }
+
+        private string _lotC;
+        public string LotCID {
+            get { return _lotC; }
+            set {
+                if (GetInputType(value) == InputType.Lot)
+                {
+                    _lotC = value;
+                    var lot = _mesService.GetLot(value);
+                    LotStatus = lot == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                }
+                else
+                {
+                    _lotC = "";
+                    ProcessInputType(InputType.Lot, GetInputType(value), value);
+                }
+                RaisePropertyChanged(nameof(LotCID));
+            }
+        }
+
+        private string _lotD;
+        public string LotDID {
+            get { return _lotD; }
+            set {
+                if (GetInputType(value) == InputType.Lot)
+                {
+                    _lotD = value;
+                    var lot = _mesService.GetLot(value);
+                    LotStatus = lot == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                }
+                else
+                {
+                    _lotD = "";
+                    ProcessInputType(InputType.Lot, GetInputType(value), value);
+                }
+                RaisePropertyChanged(nameof(LotDID));
+            }
+        }
+
 
         private string _operatorStatus;
         public string OperatorStatus {
@@ -187,19 +245,19 @@ namespace FinisarFAS1.ViewModel
         {
             OperatorID = "";
             ToolID = "";
-            LotID = ""; 
+            LotAID = ""; 
         }
 
         private void confirmEntry()
         {
             // Confirm all entries exist in the MES
             var mes = _mesService; // .MESService(new MockMESService());
-            var op = mes.GetOperator(OperatorID, 0);
-            var tool = mes.GetTool(ToolID, 0);
-            var lot = mes.GetLot(LotID, 0);
+            var op = mes.ValidateUserFromCamstar(OperatorID);
+            var tool = mes.GetTool(ToolID);
+            var lot = mes.GetLot(LotAID);
 
-            Messenger.Default.Send(new ShowWaferWindowMessage(op, tool, lot, true));            
-            Messenger.Default.Send(new EntryValuesMessage(op, tool, lot));            
+            Messenger.Default.Send(new ShowWaferWindowMessage(OperatorID, tool, lot, true));            
+            Messenger.Default.Send(new EntryValuesMessage(OperatorID, tool, lot));            
         }
 
     }
