@@ -56,7 +56,7 @@ namespace FinisarFAS1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.BeginStoryboard((Storyboard)this.Resources["collapseWafer"]);
+            //this.BeginStoryboard((Storyboard)this.Resources["collapseWafer"]);
 
             this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
 
@@ -90,7 +90,7 @@ namespace FinisarFAS1
             if (msg.bVisible)
             {
                 this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
-                this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
+                //this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
             }
             else
             {

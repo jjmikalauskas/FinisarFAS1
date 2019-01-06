@@ -91,6 +91,9 @@
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\WaferConfirmationVM.cs" />
+    <Compile Include="View\EntryWaferView.xaml.cs">
+      <DependentUpon>EntryWaferView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Messages.cs" />
     <Compile Include="View\EntryView.xaml.cs">
       <DependentUpon>EntryView.xaml</DependentUpon>
@@ -121,6 +124,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EntryWaferView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

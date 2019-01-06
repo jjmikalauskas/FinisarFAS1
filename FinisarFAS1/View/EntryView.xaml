@@ -38,7 +38,7 @@
         </ResourceDictionary>        
     </UserControl.Resources>
 
-    <Grid Background="LightGray" Width="1000" Height="960">
+    <!--<Grid Background="LightGray" Width="1000" Height="960">-->
         <StackPanel Width="360" Height="460"  Orientation="Vertical" Background="{DynamicResource ResourceKey=BlackGlass2b}" >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -111,5 +111,5 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-    </Grid>    
+    <!--</Grid>-->    
 </UserControl>

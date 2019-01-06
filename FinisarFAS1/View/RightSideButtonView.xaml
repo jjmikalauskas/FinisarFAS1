@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinisarFAS1.View"             
-             mc:Ignorable="d" Height="700" Width="200" >    
+             mc:Ignorable="d" Width="200" >    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,11 +19,10 @@
         </ResourceDictionary>        
     </UserControl.Resources>
     
-    <StackPanel 
-             Background="{DynamicResource ResourceKey=BlackGlass3b}" Orientation="Vertical">
+    <StackPanel Background="{DynamicResource ResourceKey=BlackGlass3b}" Orientation="Vertical">
         <StackPanel Orientation="Vertical" >
             <!--<Image Margin="0,0" Width="Auto" Source="../Images/II-VI_Finisar5.jpg" />-->
-            <StackPanel Margin="10,150,10,5" Orientation="Vertical" VerticalAlignment="Bottom" >
+            <StackPanel Margin="0,150,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
                 <Button Margin="0,15,0,15" ToolTip="Start processing for this load port"
                                 Background="{StaticResource ResourceKey=LimeGlass}"
                                 Command="{Binding Path=StartCmd}"

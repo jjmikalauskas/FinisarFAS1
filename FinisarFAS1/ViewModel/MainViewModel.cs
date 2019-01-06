@@ -211,6 +211,7 @@ namespace FinisarFAS1.ViewModel
         public ICommand StartCmd => new RelayCommand(startCmdHandler);
         public ICommand StopCmd => new RelayCommand(stopCmdHandler);
         public ICommand PauseCmd => new RelayCommand(pauseCmdHandler);
+        public ICommand ResetCmd => new RelayCommand(resetCmdHandler);
         public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
 
@@ -233,6 +234,10 @@ namespace FinisarFAS1.ViewModel
         }
 
         private void pauseCmdHandler()
+        {
+        }
+
+        private void resetCmdHandler()
         {
         }
 
