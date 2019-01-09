@@ -6,12 +6,24 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class Wafer
+    public class Wafer: Operator
     {
         string waferNo;
         public string WaferNo {
             get { return this.waferNo; }
             set { this.waferNo = value; }
+        }
+
+        string waferId;
+        public string WaferID {
+            get { return this.waferId; }
+            set { this.waferId = value; }
+        }
+
+        string scribeId;
+        public string ScribeID {
+            get { return this.scribeId; }
+            set { this.scribeId = value; }
         }
 
         string slot;
@@ -50,6 +62,13 @@ namespace Common
             }
         }
 
+        public override string ToString()
+        {
+            return "Slot #" + Slot + ": " + WaferID + " - " + ScribeID;
+        }
+
 
     }
+
+
 }

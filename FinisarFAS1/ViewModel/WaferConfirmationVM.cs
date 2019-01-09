@@ -45,7 +45,7 @@ namespace FinisarFAS1.ViewModel
             //var tool = mes.GetTool(ToolID);
             //var lot = mes.GetLot(LotID);
 
-            Messenger.Default.Send(new ShowWaferWindowMessage(null, null, null, false));
+            Messenger.Default.Send(new GoToMainWindowMessage(null, null, null, false));
         }
     }
 }

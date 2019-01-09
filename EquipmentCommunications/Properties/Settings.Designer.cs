@@ -34,7 +34,7 @@ namespace EquipmentCommunications.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int LoadPorts {
             get {
                 return ((int)(this["LoadPorts"]));
@@ -43,7 +43,7 @@ namespace EquipmentCommunications.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Load Port A")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Port 1")]
         public string LoadPort1Name {
             get {
                 return ((string)(this["LoadPort1Name"]));
@@ -56,6 +56,24 @@ namespace EquipmentCommunications.Properties {
         public string LoadPort2Name {
             get {
                 return ((string)(this["LoadPort2Name"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EvaTec")]
+        public string ToolBrand {
+            get {
+                return ((string)(this["ToolBrand"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6-6-EVAP-01")]
+        public string ToolID {
+            get {
+                return ((string)(this["ToolID"]));
             }
         }
     }

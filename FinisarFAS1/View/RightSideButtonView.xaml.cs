@@ -24,5 +24,10 @@ namespace FinisarFAS1.View
         {
             InitializeComponent();
         }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

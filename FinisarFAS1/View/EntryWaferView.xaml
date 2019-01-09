@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:FinisarFAS1.View"
-             xmlns:converters="clr-namespace:FinisarFAS1.Converters"             
+             xmlns:converters="clr-namespace:FinisarFAS1.Converters"
+             xmlns:progress="clr-namespace:ThreadingComponent"
              DataContext="{Binding EntryVM, Source={StaticResource Locator}}" 
              mc:Ignorable="d" >
     
@@ -13,8 +14,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
-       
-        <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
+
+            <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
+            <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
+            <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
 
         <DataTemplate x:Key="ShowOnNotNull">
             <DataTemplate.Triggers>
@@ -27,7 +30,7 @@
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0,12,-25,0" />
             <Setter Property="FontSize" Value="18" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
         </Style>
 
         <Style TargetType="TextBox">
@@ -40,11 +43,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-
     <!--<Grid Width="1000" Height="830" Background="{DynamicResource ResourceKey=BlackGlass2b}">-->
-    <StackPanel Background="LightGray" Width="1000" Height="960" >
+    <StackPanel Background="LightBlue" Width="1000" Height="800" >
     <Grid Width="1000" Height="960" 
-        Background="{DynamicResource ResourceKey=BlackGlass2b}">        
+        Background="{DynamicResource ResourceKey=BlueGlass}">        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
@@ -78,7 +80,7 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,20" Width="480" Source="../Images/FinisarLogo1.png" />
+                    <!--<Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,20" Width="480" Source="../Images/FinisarLogo1.png" />-->
                     
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="490" Background="{StaticResource ResourceKey=GreenGlass}" Padding="10,5,10,5" Foreground="White" FontSize="18"
                            Text="Type or scan your Operator Name, Tool ID and Lot Number then setup the actual wafer port configuration" TextWrapping="WrapWithOverflow" />
@@ -86,29 +88,29 @@
                     <Label Grid.Row="2" Grid.Column="0" Content="Operator" />
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}" 
                         KeyUp="TextBox_KeyUp" />
-                    <Image Grid.Row="2" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                    <Image Grid.Row="2" Grid.Column="2" Margin="0,11,30,0" Width="20" Source="{Binding Path=OperatorStatus}" 
                         Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
 
                     <Label Grid.Row="3" Grid.Column="0" Content="Tool ID" />
                     <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=ToolID, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" AcceptsReturn="True" />
-                    <Image Grid.Row="3" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=ToolStatus}" 
+                    <Image Grid.Row="3" Grid.Column="2" Margin="0,12,30,0" Width="20" Source="{Binding Path=ToolStatus}" 
                        Visibility="{Binding ToolID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
 
-                    <Label Grid.Row="4" Grid.Column="0" Content="Port A Lot ID" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Port 1: Lot 1" />
                     <!--<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=LotAID, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp"/>-->
                     <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"  >
                         <TextBox Text="{Binding Path=LotAID, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" />
-                        <Button Margin="5,5,40,5" Width="110" FontSize="16" Height="27"
+                            <Button Margin="5,5,36,5" Width="110" FontSize="16" Height="27"
                                 HorizontalAlignment="Right"
                                 Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
                                 Visibility="{Binding LotAID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
-                                Content="Setup Lot" Name="SetupLot1" 
+                                Content="Setup Port A Wafers" Name="SetupLot1" 
                                 Command="{Binding Path=SetupLot1Cmd}"/>
-                    </StackPanel>
+                        </StackPanel>
                     <Image Grid.Row="4" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=Lot1Status}" 
                         Visibility="{Binding LotAID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
 
-                    <Label Grid.Row="5" Grid.Column="0" Content="Port B Lot ID" Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Port 1: Lot 2" Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                     <!--<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=LotBID, UpdateSourceTrigger=LostFocus}" 
                          KeyUp="TextBox_KeyUp" Visibility="{Binding LotBActive, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />-->
                     <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"  
@@ -117,8 +119,7 @@
                         <Button Margin="5,5,40,5" Width="110" FontSize="16" Height="27"
                                 HorizontalAlignment="Right"
                                 Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
-                                Visibility="{Binding LotBID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
-                                Content="Setup Lot" Name="SetupLot2" 
+                                Content="Setup Port B Wafers" Name="SetupLot2" 
                                 Command="{Binding Path=SetupLot2Cmd}"/>
                     </StackPanel>
                     <Image Grid.Row="5" Grid.Column="2" Margin="0,0" Width="20" Source="{Binding Path=Lot2Status}" 
@@ -158,34 +159,58 @@
 
                     <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,15,0,0"  Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Margin="15,15" Width="120" FontSize="22"
-                            Background="{StaticResource ResourceKey=RedGlass}" Foreground="White"
                             Content="Clear" Name="btnClear" 
                             Command="{Binding Path=btnClear}"/>
-                        <Button Margin="15,15" Width="160" FontSize="22"
-                            Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"
-                            Content="Confirm" Name="btnConfirm" 
-                            Command="{Binding Path=btnConfirm}"/>
-                    </StackPanel>
+                            <Button Margin="15,15" Width="160" FontSize="22"                            
+                                Name="btnConfirm" 
+                                Command="{Binding Path=btnConfirm}">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Confirm" Margin="0,-2,0,0" FontSize="22" />
+                                    <Viewbox Width="45" Margin="0,0,0,0" Visibility="{Binding IsMESRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"  >
+                                        <progress:CircularProgressBar 
+                                            Visibility="{Binding IsMESRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" />
+                                    </Viewbox>
+                                </StackPanel>
+                            </Button>
+                            <!--Visibility="{Binding IsMESRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}" />-->
+                            <!--Background="{StaticResource ResourceKey=GreenGlass}" Foreground="White"-->
+                            
+                        </StackPanel>
                 </Grid>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal"  >
-            <GroupBox Width="365" Height="Auto" MinHeight="720" Margin="20,0,0,0" HorizontalAlignment="Left" 
-                          VerticalAlignment="Top" BorderThickness="1" Foreground="White" Header="{Binding ActualWaferSlotHeaderText}" >
-                <ListBox Name="ActualWaferSlots" Height="720" 
-                            SelectionMode="Single" >
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Padding" Value="5,1" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </GroupBox>
+           <StackPanel Orientation="Vertical" Margin="20,15,0,0" >
+                <TextBlock FontSize="22" Margin="0,0,0,0" Padding="5,3" Width="353"
+                    Foreground="White" Background="Green"
+                    Text="{Binding ActualWaferSlotHeaderText}" />            
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
+                        <Grid Width="353">                           
+                            <DataGrid x:Name="_entryWaferGrid" 
+                                  IsReadOnly="True" AutoGenerateColumns="False"
+                                  RowHeight="24" FontSize="16" >                                
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="50"
+                                                        Binding="{Binding Slot}"
+                                                        Header="Slot" />
+                                    <DataGridTextColumn Width="135"
+                                                        Binding="{Binding WaferNo}"
+                                                        Header="Wafer #" />                                   
+                                    <DataGridTextColumn Width="160"
+                                                        Binding="{Binding ScribeID}"
+                                                        Header="Scribe ID" />
+                                </DataGrid.Columns>
+                            </DataGrid>                            
+                        </Grid>
+                    </StackPanel>
+            </StackPanel>
 
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="7,0,0,0" >
-                <Button Width="90" Margin="5,15" Background="{DynamicResource ResourceKey=BlueGlass}" Command="{Binding btnMoveUp}" Content="Move UP" Foreground="White" />
-                <Button Width="90" Margin="5,5" Background="{DynamicResource ResourceKey=BlueGlass}" Command="{Binding btnMoveDown}" Content="Move DOWN" Foreground="White" />
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="7,0,0,0" >
+                <Button Width="90" Margin="5,15" 
+                        Command="{Binding btnMoveUp}" Content="Move UP"  />
+                <Button Width="90" Margin="5,5"  
+                        Command="{Binding btnMoveDown}" Content="Move DOWN"  />
             </StackPanel>
             
         </StackPanel>
@@ -198,7 +223,9 @@
             </StackPanel>
         </StackPanel>
 
-    </Grid>
+        <!--<view:InterfaceStatusView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" />-->
+
+        </Grid>
     </StackPanel>
 </UserControl>
 

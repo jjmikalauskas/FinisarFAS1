@@ -5,11 +5,14 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Tests.MoqTests;
 
 namespace FinisarFAS1.ViewModel
@@ -32,14 +35,86 @@ namespace FinisarFAS1.ViewModel
 
             OperatorID = "John Smith";
             ToolID = "6-6-EVAP-01";
-            LotAID = "61851-003";            
+            LotAID = "61851-003";
+            LotBID = "61851-001";
+
+            setupLot1();
+
+            LotBActive = "true"; 
+            LotCActive = "";
+            LotDActive = "";
+
+            IsMESRetrieveBusy = false; 
+            RegisterForMessages(); 
         }
+
+        private void RegisterForMessages()
+        {
+            Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
+        }
+
+        private void UpdateLoadPortsMsg(Tool msg)
+        {
+            Ports ports = msg?.Ports;
+            LoadPortNames = new ObservableCollection<string> { ports.LoadPort1Name };
+
+            // For the EvaTec, we want Port B to show
+            //if (msg.NumberOfLoadPorts > 1)
+            //{
+            //    PortBActive = true;
+            //    LoadPortNames.Add(ports.LoadPort2Name);
+            //}
+            if (msg.NumberOfLoadPorts > 2)
+            {
+                PortCActive = true;
+                LoadPortNames.Add(ports.LoadPort3Name);
+            }
+            if (msg.NumberOfLoadPorts > 3)
+            {
+                PortDActive = true;
+                LoadPortNames.Add(ports.LoadPort4Name);
+            }
+        }
+
+        private bool _portBActive;
+        public bool PortBActive
+        {
+            get { return _portBActive; }
+            set
+            {
+                _portBActive = value;
+                RaisePropertyChanged(nameof(PortBActive));
+            }
+        }
+
+        private bool _portCActive;
+        public bool PortCActive
+        {
+            get { return _portCActive; }
+            set
+            {
+                _portCActive = value;
+                RaisePropertyChanged(nameof(PortCActive));
+            }
+        }
+
+        private bool _portDActive;
+        public bool PortDActive
+        {
+            get { return _portDActive; }
+            set
+            {
+                _portDActive = value;
+                RaisePropertyChanged(nameof(PortDActive));
+            }
+        }
+
 
         private InputType GetInputType(string s)
         {
             // Test for Operator pattern first, then lot then tool else return error
             // For now, test for 3 simple names
-            if (s.Contains("John") || s == "bob" || s == "cindy")
+            if (s.All(c => Char.IsLetter(c) || c==' ')) 
                 return InputType.Operator;
 
             // Test for integer
@@ -136,6 +211,16 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private ObservableCollection<string> _loadPortNames;
+        public ObservableCollection<string> LoadPortNames
+        {
+            get { return _loadPortNames; }
+            set
+            {
+                _loadPortNames = value;
+            }
+        }
+
         private string _lot;
         public string LotAID
         {
@@ -213,6 +298,38 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private string _lotBActive;
+        public string LotBActive {
+            get { return _lotBActive; }
+            set {
+                _lotBActive = value;
+                RaisePropertyChanged(nameof(LotBActive));
+            }
+        }
+
+        private string _lotCActive;
+        public string LotCActive {
+            get { return _lotCActive; }
+            set {
+                _lotCActive = value;
+                RaisePropertyChanged(nameof(LotCActive));
+            }
+        }
+
+        private string _lotDActive;
+        public string LotDActive {
+            get { return _lotDActive; }
+            set {
+                _lotDActive = value;
+                RaisePropertyChanged(nameof(LotDActive));
+            }
+        }
+
+        private string _actualWaferSlotHeaderText;
+        public string ActualWaferSlotHeaderText {
+            get { return _actualWaferSlotHeaderText; }
+            set { _actualWaferSlotHeaderText = value; RaisePropertyChanged(nameof(ActualWaferSlotHeaderText)); }
+        }
 
         private string _operatorStatus;
         public string OperatorStatus {
@@ -232,10 +349,21 @@ namespace FinisarFAS1.ViewModel
             set { _lotStatus = value; RaisePropertyChanged(nameof(LotStatus)); }
         }
 
+        private bool _busy;
+        public bool IsMESRetrieveBusy
+        {
+            get { return _busy; }
+            set { _busy = value; RaisePropertyChanged(nameof(IsMESRetrieveBusy)); }
+        }
+
         #region COMMANDS AND HANDLERS
 
         public ICommand btnClear { get { return new RelayCommand(clearEntryView); } }
         public ICommand btnConfirm { get { return new RelayCommand(confirmEntry); } }
+        public ICommand SetupLot1Cmd { get { return new RelayCommand(setupLot1); } }
+        public ICommand SetupLot2Cmd { get { return new RelayCommand(setupLot2); } }
+        public ICommand SetupLot3Cmd { get { return new RelayCommand(setupLot3); } }
+        public ICommand SetupLot4Cmd { get { return new RelayCommand(setupLot4); } }
 
         #endregion 
 
@@ -251,13 +379,49 @@ namespace FinisarFAS1.ViewModel
         private void confirmEntry()
         {
             // Confirm all entries exist in the MES
-            var mes = _mesService; // .MESService(new MockMESService());
-            var op = mes.ValidateUserFromCamstar(OperatorID);
-            var tool = mes.GetTool(ToolID);
-            var lot = mes.GetLot(LotAID);
+            IsMESRetrieveBusy = true;
+            Wait(2); 
+            var op = _mesService.ValidateUserFromCamstar(OperatorID);
+            var tool = _mesService.GetTool(ToolID);
+            var lot = _mesService.GetLot(LotAID);
+            if (lot != null)
+                lot.Lot2Name = LotBID; 
 
-            Messenger.Default.Send(new ShowWaferWindowMessage(OperatorID, tool, lot, true));            
-            Messenger.Default.Send(new EntryValuesMessage(OperatorID, tool, lot));            
+            Messenger.Default.Send(new EntryValuesMessage(OperatorID, tool, lot, null));
+            Messenger.Default.Send(new GoToMainWindowMessage(OperatorID, tool, lot, true));
+
+            IsMESRetrieveBusy = false;
+        }
+
+        private void Wait(double seconds)
+        {
+            var frame = new DispatcherFrame();
+            new Thread((ThreadStart)(() =>
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(seconds));
+                frame.Continue = false;
+            })).Start();
+            Dispatcher.PushFrame(frame);
+        }
+
+        private void setupLot1()
+        {
+            ActualWaferSlotHeaderText = "Port 1 Wafer Configuration";
+        }
+
+        private void setupLot2()
+        {
+            ActualWaferSlotHeaderText = "Load Port B Wafer Configuration";
+        }
+
+        private void setupLot3()
+        {
+            ActualWaferSlotHeaderText = "Load Port C Wafer Configuration";
+        }
+
+        private void setupLot4()
+        {
+            ActualWaferSlotHeaderText = "Load Port D Wafer Configuration";
         }
 
     }

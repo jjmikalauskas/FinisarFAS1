@@ -4,9 +4,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace FinisarFAS1.ViewModel
 {
@@ -35,33 +38,44 @@ namespace FinisarFAS1.ViewModel
                 // CamstarStatusColor = "Red";
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
                 CurrentAlarm = "Alarm Id: 63-Chamber pressure low";
+                TimeToProcess = false; 
             }
             else
             {
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
                 CurrentAlarm = "Alarm Id: 63-Chamber pressure low";
+                TimeToProcess = false; 
             }
+
+            CamstarStatusColor = "Lime";
+            EquipmentStatusColor = "Lime";
+            ProcessState = "Started";
+
             // Register for messages 
             RegisterForMessages();
 
-            SetEnvironment(); 
+            SetupToolEnvironment(); 
         }
 
         private void RegisterForMessages()
         {
             Messenger.Default.Register<EntryValuesMessage>(this, UpdateEntryValuesMsg);
-            Messenger.Default.Register<Ports>(this, UpdateLoadPortsMsg);
+            Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
         }
 
-        private void SetEnvironment()
+        private void SetupToolEnvironment()
         {
-            NumberOfLoadPorts = EquipmentCommunications.Properties.Settings.Default.LoadPorts;
-            LoadLock = EquipmentCommunications.Properties.Settings.Default.LoadLock;
-            Port1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
-            Port2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
-            Ports = new Ports(NumberOfLoadPorts, LoadLock, Port1Name);
-            Ports.LoadPort2Name = Port2Name;
-            Messenger.Default.Send<Ports>(Ports); 
+            // Read from Config 
+            CurrentTool = new Tool();
+            CurrentTool.ToolId = EquipmentCommunications.Properties.Settings.Default.ToolID;
+            CurrentTool.ToolBrand = EquipmentCommunications.Properties.Settings.Default.ToolBrand;
+            CurrentTool.NumberOfLoadPorts = EquipmentCommunications.Properties.Settings.Default.LoadPorts;
+            CurrentTool.LoadLock = EquipmentCommunications.Properties.Settings.Default.LoadLock;
+
+            CurrentTool.Ports.LoadPort1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
+            CurrentTool.Ports.LoadPort2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
+
+            Messenger.Default.Send<Tool>(CurrentTool); 
         }
 
         #region PUBLIC VARIABLES
@@ -69,38 +83,76 @@ namespace FinisarFAS1.ViewModel
         public bool LoadLock;
         public string Port1Name; 
         public string Port2Name;
-        public Ports Ports; 
+        public Tool CurrentTool; 
         #endregion 
 
         private void UpdateEntryValuesMsg(EntryValuesMessage msg)
         {
             this.Operator = msg.op;
-            this.Tool = msg.tool?.ToolName;
-            this.Lot = "61851-001, 61851-002" ;
+            this.Tool = msg.tool?.ToolId;
+            this.Lot = msg.lot?.Lot1Name + ", " + msg.lot?.Lot2Name ;
         }
 
-        private void UpdateLoadPortsMsg(Ports msg)
+        private void UpdateLoadPortsMsg(Tool msg)
         {
-            LoadPortNames = new ObservableCollection<string> { msg.LoadPort1Name };
+            Ports ports = msg?.Ports;
+            LoadPortNames = new ObservableCollection<string> { ports.LoadPort1Name };
 
             if (msg.NumberOfLoadPorts > 1)
             {
                 PortBActive = true;
-                LoadPortNames.Add(msg.LoadPort2Name);
+                LoadPortNames.Add(ports.LoadPort2Name);
             }
             if (msg.NumberOfLoadPorts > 2)
             {
                 PortCActive = true;
-                LoadPortNames.Add(msg.LoadPort3Name);
+                LoadPortNames.Add(ports.LoadPort3Name);
             }
             if (msg.NumberOfLoadPorts > 3)
             {
                 PortDActive = true;
-                LoadPortNames.Add(msg.LoadPort4Name);
+                LoadPortNames.Add(ports.LoadPort4Name);
             }            
         }
 
         #region UI BINDINGS
+
+        private bool _TimeToProcess;
+        public bool TimeToProcess {
+            get { return _TimeToProcess; }
+            set {
+                _TimeToProcess = value;
+                RaisePropertyChanged(nameof(TimeToProcess));
+            }
+        }
+
+        private string _port1Lot1;
+        public string Port1Lot1 {
+            get { return _port1Lot1; }
+            set {
+                _port1Lot1 = value;
+                RaisePropertyChanged(nameof(Port1Lot1));
+            }
+        }
+
+        private string _port1Lot2;
+        public string Port1Lot2 {
+            get { return _port1Lot2; }
+            set {
+                _port1Lot2 = value;
+                RaisePropertyChanged(nameof(Port1Lot2));
+            }
+        }
+
+        private string _processState;
+        public string ProcessState {
+            get { return _processState; }
+            set {
+                _processState = value;
+                RaisePropertyChanged(nameof(ProcessState));
+            }
+        }
+
         private string gridData;
         public string GridData {
             get { return gridData; }
@@ -161,6 +213,24 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private string _camstarStatusColor;
+        public string CamstarStatusColor {
+            get { return _camstarStatusColor; }
+            set {
+                _camstarStatusColor = value;
+                RaisePropertyChanged("CamstarStatusColor");
+            }
+        }
+
+        private string _equipmentStatusColor;
+        public string EquipmentStatusColor {
+            get { return _equipmentStatusColor; }
+            set {
+                _equipmentStatusColor = value;
+                RaisePropertyChanged("EquipmentStatusColor");
+            }
+        }
+
 
         // SCREEN 2
         private List<string> _currentWaferSetup;
@@ -208,6 +278,9 @@ namespace FinisarFAS1.ViewModel
         }
 
 
+        public ICommand ConfirmPort1Cmd => new RelayCommand( () => { TimeToProcess = true; ProcessState = "Confirmed"; });
+        public ICommand CancelPort1Cmd => new RelayCommand(cancelPort1CmdHandler);
+        public ICommand LoadPortACmd => new RelayCommand(loadPortACmdHandler);
         public ICommand StartCmd => new RelayCommand(startCmdHandler);
         public ICommand StopCmd => new RelayCommand(stopCmdHandler);
         public ICommand PauseCmd => new RelayCommand(pauseCmdHandler);
@@ -215,30 +288,46 @@ namespace FinisarFAS1.ViewModel
         public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
 
+
+        private void cancelPort1CmdHandler()
+        {
+
+        }
+
+        private void loadPortACmdHandler()
+        {
+            Messenger.Default.Send(new ShowEntryWindowMessage(true));
+        }
+
         private void startCmdHandler()
         {
             //await dialogService.ShowMessage("Test message to Start", "Start Process Title");
             //DialogMessage dialogMsg = new DialogMessage(ex.Message, null);
             //dialogMsg.Icon = System.Windows.MessageBoxImage.Error;
             //Messenger.Default.Send(dialogMsg);
+            ProcessState = "Started";
         }
 
         private void stopCmdHandler()
         {
+            ProcessState = "Stopped";
             Messenger.Default.Send(new ShowEntryWindowMessage(true));
         }
 
         private void backToWaferView()
         {
-            Messenger.Default.Send(new ShowWaferWindowMessage(null, null, null, true));
+            Messenger.Default.Send(new GoToMainWindowMessage(null, null, null, true));
         }
 
         private void pauseCmdHandler()
         {
+            ProcessState = "Paused";
         }
 
         private void resetCmdHandler()
         {
+            TimeToProcess = false;
+            ProcessState = "Stopped";
         }
 
         private void exitHostCmdHandler()
@@ -251,6 +340,18 @@ namespace FinisarFAS1.ViewModel
         }
 
         #endregion
+
+        private void Wait(double seconds)
+        {
+            var frame = new DispatcherFrame();
+            new Thread((ThreadStart)(() =>
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(seconds));
+                frame.Continue = false;
+            })).Start();
+            Dispatcher.PushFrame(frame);
+        }
+
         ////}
     }
 }

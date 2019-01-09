@@ -16,9 +16,9 @@ namespace Tests.MoqTests
             //repo.Setup(r => r.ValidateUserFromCamstar("John Smith")).Returns(new Operator() { Id = 101, OperatorName = "John Doe", OperatorInfo = "John Doe Info" });
             //repo.Setup(r => r.ValidateUserFromCamstar("cindy")).Returns(new Operator() { Id = 202, OperatorName = "Cindy Doe", OperatorInfo = "Cindy Info" });
             //repo.Setup(r => r.ValidateUserFromCamstar("bobby")).Returns(new Operator() { Id = 303, OperatorName = "Bobby", OperatorInfo = "Bobby Info" });
-            repo.Setup(r => r.ValidateUserFromCamstar("John Smith")).Returns(true);
-            repo.Setup(r => r.ValidateUserFromCamstar("cindy")).Returns(true);
             repo.Setup(r => r.ValidateUserFromCamstar("bobby")).Returns(false); 
+            repo.Setup(r => r.ValidateUserFromCamstar("")).Returns(false);
+            repo.Setup(r => r.ValidateUserFromCamstar(It.IsAny<string>())).Returns(true);
             return repo; 
         }
 
@@ -50,10 +50,18 @@ namespace Tests.MoqTests
             if (lot.Id < 100)
                 lot = null;
             return lot;
-        }       
+        }
+        
+        private async void fakeDelay()
+        {
+            await Task.Delay(2000);
+        }
 
         public bool ValidateUserFromCamstar(string userName)
         {
+            //fakeDelay();
+            var slowTask = Task.Factory.StartNew( () => fakeDelay());
+            //await slowTask; 
             var repo = CreateOperatorRepository();
             return repo.Object.ValidateUserFromCamstar(userName);
         }

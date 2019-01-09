@@ -255,9 +255,14 @@
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BlueGlass" Opacity="0.9">
-        <GradientStop Offset="0.12" Color="Black" />
+        <GradientStop Offset="0.12" Color="AliceBlue" />
+        <GradientStop Offset="0.88" Color="AliceBlue" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BlueGlass2" Opacity="0.99">
+        <GradientStop Offset="0.12" Color="LightBlue" />
         <GradientStop Offset="0.6" Color="Gray" />
-        <GradientStop Offset="0.88" Color="Black" />
+        <GradientStop Offset="0.88" Color="LightBlue" />
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="BlackGlass2b" Opacity="0.75">
@@ -304,7 +309,6 @@
 
     <LinearGradientBrush x:Key="LimeGlass" Opacity="0.99">
         <GradientStop Offset="0.20" Color="Lime" />
-        <GradientStop Offset="0.4" Color="DarkGray" />
         <GradientStop Offset="0.75" Color="Lime" />
     </LinearGradientBrush>
 
@@ -315,7 +319,6 @@
 
     <LinearGradientBrush x:Key="RedGlass" Opacity="0.99">
         <GradientStop Offset="0.20" Color="Red" />
-        <GradientStop Offset="0.4" Color="LightGray" />
         <GradientStop Offset="0.75" Color="Red" />
     </LinearGradientBrush>
 
@@ -327,7 +330,6 @@
     
     <LinearGradientBrush x:Key="YellowGlass" Opacity="0.99">
         <GradientStop Offset="0.20" Color="Yellow" />
-        <GradientStop Offset="0.4" Color="DarkGray" />
         <GradientStop Offset="0.75" Color="Yellow" />
     </LinearGradientBrush>
 

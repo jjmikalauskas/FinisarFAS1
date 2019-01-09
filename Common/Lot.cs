@@ -11,12 +11,13 @@ namespace Common
         public Lot()
         {
             Id = 0;
-            LotName = "Lot Number: " + Id.ToString();
+            Lot1Name = "Lot Number: " + Id.ToString();
             LotInfo = "This is a lot of wafers to process "; 
         }
 
         public int Id { get; set; }
-        public string LotName { get; set; }
+        public string Lot1Name { get; set; }
+        public string Lot2Name { get; set; }
         public string LotInfo { get; set; }
     }
 }

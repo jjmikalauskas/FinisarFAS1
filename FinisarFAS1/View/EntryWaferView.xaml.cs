@@ -30,9 +30,9 @@ namespace FinisarFAS1.View
 
         private void LoadWafers()
         {
-            var wafers = MESDAL.GetCurrentWaferSetup(1);
+            var wafers = MESDAL.GetCurrentWaferConfigurationSetup(1);
 
-            ActualWaferSlots.ItemsSource = wafers;
+            _entryWaferGrid.ItemsSource = wafers;
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)

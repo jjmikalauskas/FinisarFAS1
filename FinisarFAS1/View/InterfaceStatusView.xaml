@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinisarFAS1.View"
              xmlns:vm="clr-namespace:FinisarFAS1.ViewModel"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Width="255" Height="135"
              DataContext="{Binding StatusVM, Source={StaticResource Locator}}" >
     <UserControl.Resources>
         <ResourceDictionary>
@@ -13,26 +13,34 @@
                 <ResourceDictionary Source="MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>        
-    </UserControl.Resources>   
+    </UserControl.Resources>
 
     <StackPanel 
-            Margin="0,0" Background="{DynamicResource ResourceKey=BlackGlass}" Orientation="Vertical">
-        <TextBlock Foreground="White">Statuses</TextBlock>
-        <StackPanel Margin="10, 15" Orientation="Horizontal">
+        Margin="0,0" Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
+        <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
+        <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
+        <StackPanel Margin="20,5,0,5" Orientation="Horizontal">
             <TextBlock FontSize="22"
-                    Text="Camstar MES" Foreground="{DynamicResource ResourceKey=GreenGlassText}" />
+                    Text="Camstar MES" /> 
+            <!--Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
             <Canvas>
                 <Ellipse Canvas.Top="5" Canvas.Left="35"
                              Fill="{Binding CamstarStatusColor}" Height="25" Width="25" />
             </Canvas>
         </StackPanel>
-        <StackPanel Margin="10, 10" Orientation="Horizontal">
+        <StackPanel Margin="20, 5, 0, 5" Orientation="Horizontal">
             <TextBlock FontSize="22"
-                    Text="Equipment" Foreground="{DynamicResource ResourceKey=GreenGlassText}" />
+                    Text="Equipment" />
+            <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
             <Canvas>
                 <Ellipse Canvas.Top="5" Canvas.Left="58"
                             Fill="{Binding EquipmentStatusColor}" Height="25" Width="25" />
             </Canvas>
         </StackPanel>
+        <StackPanel Margin="5, 25, 5, 5" Orientation="Horizontal">
+            <Label Margin="0,0,0,0" FontSize="18" Content="Process State: " />
+            <TextBlock FontSize="18" Text="{Binding ProcessState}" />
+        </StackPanel>
+        
     </StackPanel>
 </UserControl>

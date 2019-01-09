@@ -32,37 +32,30 @@ namespace FinisarFAS1
             InitializeComponent();
 
             Messenger.Default.Register<ShowEntryWindowMessage>(this, ShowEntryDialogMsg);
-            Messenger.Default.Register<ShowWaferWindowMessage>(this, ShowWaferDialogMsg);
+            Messenger.Default.Register<GoToMainWindowMessage>(this, ShowMainWindowMsg);
 
             LoadTable1();
-
-            LoadTable2();
+            
         }
 
         private void LoadTable1()
         {
-            var wafers = MESDAL.GetCurrentWaferSetup(1);  
-
+            // var wafers = MESDAL.GetCurrentWaferSetup(1);
+            var wafers = MESDAL.GetCurrentWaferConfigurationSetup(1);
             
             _mainDataGrid1.ItemsSource = wafers;
-        }
+        }       
 
-        private void LoadTable2()
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            var wafers = MESDAL.GetCurrentWaferSetup(2); 
 
-            _mainDataGrid2.ItemsSource = wafers;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.BeginStoryboard((Storyboard)this.Resources["collapseWafer"]);
-
-            this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
-
+            //this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
             //Messenger.Default.Send(new ShowSearchWindowMessage(true));
-
-            this.BeginStoryboard((Storyboard)this.Resources["expandEntry"]);
+            //this.BeginStoryboard((Storyboard)this.Resources["expandEntry"]);
             //this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
 
         }
@@ -74,28 +67,27 @@ namespace FinisarFAS1
 
         private void ShowEntryDialogMsg(ShowEntryWindowMessage msg)
         {
-            if (msg.bVisible)
-            {
-                this.BeginStoryboard((Storyboard)this.Resources["expandEntry"]);
-            }
-            else
-            {
+            //if (msg.bVisible)
+            //{
+            //    this.BeginStoryboard((Storyboard)this.Resources["expandEntry"]);
+            //}
+            //else
+            //{
                 this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
-            }
+            //}
         }
 
 
-        private void ShowWaferDialogMsg(ShowWaferWindowMessage msg)
+        private void ShowMainWindowMsg(GoToMainWindowMessage msg)
         {
-            if (msg.bVisible)
-            {
-                this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
-                //this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
-            }
-            else
-            {
-                this.BeginStoryboard((Storyboard)this.Resources["collapseWafer"]);
-            }
+            //if (msg.bVisible)
+            //{
+            //    this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
+            //}
+            //else
+            //{
+            //    this.BeginStoryboard((Storyboard)this.Resources["collapseWafer"]);
+            //}
         }
 
 

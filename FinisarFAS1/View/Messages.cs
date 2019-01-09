@@ -1,4 +1,5 @@
 ﻿using Common;
+using System.Collections.Generic;
 
 namespace FinisarFAS1.View
 {
@@ -37,14 +38,14 @@ namespace FinisarFAS1.View
         }
     }
 
-    class ShowWaferWindowMessage
+    class GoToMainWindowMessage
     {
         public bool bVisible;
         private string op;
         private Tool tool;
         private Lot lot;
 
-        public ShowWaferWindowMessage(string op, Tool tool, Lot lot, bool bVisible)
+        public GoToMainWindowMessage(string op, Tool tool, Lot lot, bool bVisible)
         {
             this.op = op;
             this.tool = tool;
@@ -58,12 +59,14 @@ namespace FinisarFAS1.View
         public string op;
         public Tool tool;
         public Lot lot;
+        public List<Wafer> wafers; 
 
-        public EntryValuesMessage(string op, Tool tool, Lot lot)       
+        public EntryValuesMessage(string op, Tool tool, Lot lot, List<Wafer> wafers)       
         {
             this.op = op;
             this.tool = tool;
             this.lot = lot;
+            this.wafers = wafers; 
         }
     }
 

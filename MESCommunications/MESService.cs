@@ -19,7 +19,7 @@ namespace MESCommunications
         #region PUBLIC METHODS             
 
         public bool ValidateUserFromCamstar(string userName)
-        {
+        {            
             return _mesService.ValidateUserFromCamstar(userName);
         }
 
@@ -27,7 +27,7 @@ namespace MESCommunications
         {
             var tool = new Tool();
             tool.Id = GetNextRandom(toolName);
-            tool.ToolName = toolName; 
+            tool.ToolId = toolName; 
             return tool;
         }
 
@@ -75,7 +75,7 @@ namespace MESCommunications
         public static List<Wafer> GetCurrentWaferSetup(int id)
         {
             var wafers = new List<Wafer>();
-            for (int i = 1; i <= 25; ++i)
+            for (int i = 20; i <= 25; ++i)
             {
                 wafers.Add(new Wafer() { Slot = i.ToString(), WaferNo = id.ToString() + '-' + i.ToString(), Scrap = "No scrap " + i.ToString(), Recipe = "V300" });
             }

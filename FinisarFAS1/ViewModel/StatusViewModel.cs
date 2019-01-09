@@ -12,7 +12,8 @@ namespace FinisarFAS1.ViewModel
         public StatusVM()
         {
             CamstarStatusColor = "Lime";
-            EquipmentStatusColor = "Lime"; 
+            EquipmentStatusColor = "Lime";
+            ProcessState = "Started"; 
         }
 
         private string _camstarStatusColor;
@@ -27,12 +28,20 @@ namespace FinisarFAS1.ViewModel
         }
 
         private string _equipmentStatusColor;
-
         public string EquipmentStatusColor
         {
             get { return _equipmentStatusColor; }
             set { _equipmentStatusColor = value;
                 RaisePropertyChanged("EquipmentStatusColor");
+            }
+        }
+
+        private string _processState;
+        public string ProcessState {
+            get { return _processState; }
+            set {
+                _processState = value;
+                RaisePropertyChanged("ProcessState");
             }
         }
 
