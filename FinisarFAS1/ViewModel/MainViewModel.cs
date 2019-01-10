@@ -1,4 +1,5 @@
 using Common;
+using FinisarFAS1.Utility;
 using FinisarFAS1.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Tests.MoqTests;
 
 namespace FinisarFAS1.ViewModel
 {
@@ -27,10 +29,13 @@ namespace FinisarFAS1.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private readonly IDialogService2 dialogService;
+        private IMESService _mesService;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(IDialogService2 dialogService)
         {
             if (IsInDesignMode)
             {
@@ -47,6 +52,9 @@ namespace FinisarFAS1.ViewModel
                 TimeToProcess = false; 
             }
 
+            this.dialogService = dialogService;
+            _mesService = new MESCommunications.MESService(new MoqMESService());
+
             CamstarStatusColor = "Lime";
             EquipmentStatusColor = "Lime";
             ProcessState = "Started";
@@ -59,7 +67,6 @@ namespace FinisarFAS1.ViewModel
 
         private void RegisterForMessages()
         {
-            Messenger.Default.Register<EntryValuesMessage>(this, UpdateEntryValuesMsg);
             Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
         }
 
@@ -86,13 +93,7 @@ namespace FinisarFAS1.ViewModel
         public Tool CurrentTool; 
         #endregion 
 
-        private void UpdateEntryValuesMsg(EntryValuesMessage msg)
-        {
-            this.Operator = msg.op;
-            this.Tool = msg.tool?.ToolId;
-            this.Lot = msg.lot?.Lot1Name + ", " + msg.lot?.Lot2Name ;
-        }
-
+       
         private void UpdateLoadPortsMsg(Tool msg)
         {
             Ports ports = msg?.Ports;
@@ -117,6 +118,7 @@ namespace FinisarFAS1.ViewModel
 
         #region UI BINDINGS
 
+        // PORT 1
         private bool _TimeToProcess;
         public bool TimeToProcess {
             get { return _TimeToProcess; }
@@ -131,6 +133,7 @@ namespace FinisarFAS1.ViewModel
             get { return _port1Lot1; }
             set {
                 _port1Lot1 = value;
+
                 RaisePropertyChanged(nameof(Port1Lot1));
             }
         }
@@ -153,6 +156,43 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        // PORT 2
+        private bool _TimeToProcess2;
+        public bool TimeToProcess2 {
+            get { return _TimeToProcess2; }
+            set {
+                _TimeToProcess2 = value;
+                RaisePropertyChanged(nameof(TimeToProcess2));
+            }
+        }
+
+        private string _port2Lot1;
+        public string Port2Lot1 {
+            get { return _port2Lot1; }
+            set {
+                _port2Lot1 = value;
+                RaisePropertyChanged(nameof(Port2Lot1));
+            }
+        }
+
+        private string _port2Lot2;
+        public string Port2Lot2 {
+            get { return _port2Lot2; }
+            set {
+                _port2Lot2 = value;
+                RaisePropertyChanged(nameof(Port2Lot2));
+            }
+        }
+
+        private string _processState2;
+        public string ProcessState2 {
+            get { return _processState2; }
+            set {
+                _processState2 = value;
+                RaisePropertyChanged(nameof(ProcessState2));
+            }
+        }
+
         private string gridData;
         public string GridData {
             get { return gridData; }
@@ -166,6 +206,9 @@ namespace FinisarFAS1.ViewModel
             get { return _operator; }
             set {
                 _operator = value;
+                bool op = true; 
+                op = _mesService.ValidateUserFromCamstar(value);
+                OperatorStatus = op == false ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 RaisePropertyChanged(nameof(Operator));
             }
         }
@@ -175,17 +218,22 @@ namespace FinisarFAS1.ViewModel
             get { return _tool; }
             set {
                 _tool = value;
+                var tool1 = _mesService.GetLot(value);
+                ToolStatus = tool1 == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 RaisePropertyChanged(nameof(Tool));
             }
         }
 
-        private string _lot;
-        public string Lot {
-            get { return _lot; }
-            set {
-                _lot = value;
-                RaisePropertyChanged(nameof(Lot));
-            }
+        private string _operatorStatus;
+        public string OperatorStatus {
+            get { return _operatorStatus; }
+            set { _operatorStatus = value; RaisePropertyChanged(nameof(OperatorStatus)); }
+        }
+
+        private string _toolStatus;
+        public string ToolStatus {
+            get { return _toolStatus; }
+            set { _toolStatus = value; RaisePropertyChanged(nameof(ToolStatus)); }
         }
 
         private ObservableCollection<string> _loadPortNames;
@@ -278,20 +326,49 @@ namespace FinisarFAS1.ViewModel
         }
 
 
-        public ICommand ConfirmPort1Cmd => new RelayCommand( () => { TimeToProcess = true; ProcessState = "Confirmed"; });
+        // PORT 1 CMDS
+        public ICommand ConfirmPort1Cmd => new RelayCommand(confirmPort1CmdHandler);
         public ICommand CancelPort1Cmd => new RelayCommand(cancelPort1CmdHandler);
         public ICommand LoadPortACmd => new RelayCommand(loadPortACmdHandler);
         public ICommand StartCmd => new RelayCommand(startCmdHandler);
         public ICommand StopCmd => new RelayCommand(stopCmdHandler);
         public ICommand PauseCmd => new RelayCommand(pauseCmdHandler);
         public ICommand ResetCmd => new RelayCommand(resetCmdHandler);
+
+        // PORT 2 CMDS
+        public ICommand ConfirmPort2Cmd => new RelayCommand(confirmPort2CmdHandler);
+        public ICommand CancelPort2Cmd => new RelayCommand(cancelPort2CmdHandler);
+        public ICommand LoadPort2Cmd => new RelayCommand(loadPort2CmdHandler);
+        public ICommand StartPort2Cmd => new RelayCommand(startPort2CmdHandler);
+        public ICommand StopPort2Cmd => new RelayCommand(stopPort2CmdHandler);
+        public ICommand PausePort2Cmd => new RelayCommand(pausePort2CmdHandler);
+        public ICommand ResetPort2Cmd => new RelayCommand(resetPort2CmdHandler);
+
         public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
 
+        // PORT 1 CMD HANDLERS
+        private void confirmPort1CmdHandler()
+        {
+            var vm = new DialogViewModel("Are you sure you want to Confirm these lots?", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault()==true)
+            {
+                TimeToProcess = true;
+                ProcessState = "Confirmed";
+            }
+            else
+            {
+
+            }
+        }
 
         private void cancelPort1CmdHandler()
         {
-
+            var vm = new DialogViewModel("Are you sure you want to Cancel?", "Yes", "No");
+           
+            bool? result = dialogService.ShowDialog(vm); 
         }
 
         private void loadPortACmdHandler()
@@ -301,22 +378,13 @@ namespace FinisarFAS1.ViewModel
 
         private void startCmdHandler()
         {
-            //await dialogService.ShowMessage("Test message to Start", "Start Process Title");
-            //DialogMessage dialogMsg = new DialogMessage(ex.Message, null);
-            //dialogMsg.Icon = System.Windows.MessageBoxImage.Error;
-            //Messenger.Default.Send(dialogMsg);
-            ProcessState = "Started";
+            ProcessState = "In Process";
         }
 
         private void stopCmdHandler()
         {
             ProcessState = "Stopped";
             Messenger.Default.Send(new ShowEntryWindowMessage(true));
-        }
-
-        private void backToWaferView()
-        {
-            Messenger.Default.Send(new GoToMainWindowMessage(null, null, null, true));
         }
 
         private void pauseCmdHandler()
@@ -326,8 +394,79 @@ namespace FinisarFAS1.ViewModel
 
         private void resetCmdHandler()
         {
-            TimeToProcess = false;
-            ProcessState = "Stopped";
+            var vm = new DialogViewModel("Are you sure you want to reset?", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                TimeToProcess = false;
+                ProcessState = "Reset";
+            }
+            else
+            {
+
+            }
+        }
+
+        // PORT 2 CMD HANDLERS
+        private void confirmPort2CmdHandler()
+        {
+            var vm = new DialogViewModel("Are you sure you want to Confirm these lots?", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                TimeToProcess = true;
+                ProcessState2 = "Confirmed";
+            }
+            else
+            {
+
+            }
+        }
+
+        private void cancelPort2CmdHandler()
+        {
+            var vm = new DialogViewModel("Are you sure you want to Cancel?", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+        }
+
+        private void loadPort2CmdHandler()
+        {
+            Messenger.Default.Send(new ShowEntryWindowMessage(true));
+        }
+
+        private void startPort2CmdHandler()
+        {
+            ProcessState2 = "In Process";
+        }
+
+        private void stopPort2CmdHandler()
+        {
+            ProcessState2 = "Stopped";
+            Messenger.Default.Send(new ShowEntryWindowMessage(true));
+        }
+
+        private void pausePort2CmdHandler()
+        {
+            ProcessState2 = "Paused";
+        }
+
+        private void resetPort2CmdHandler()
+        {
+            var vm = new DialogViewModel("Are you sure you want to reset?", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                TimeToProcess = false;
+                ProcessState2 = "Reset";
+            }
+            else
+            {
+
+            }
         }
 
         private void exitHostCmdHandler()

@@ -109,7 +109,6 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-
         private InputType GetInputType(string s)
         {
             // Test for Operator pattern first, then lot then tool else return error

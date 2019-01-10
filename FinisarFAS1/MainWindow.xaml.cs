@@ -43,7 +43,8 @@ namespace FinisarFAS1
             // var wafers = MESDAL.GetCurrentWaferSetup(1);
             var wafers = MESDAL.GetCurrentWaferConfigurationSetup(1);
             
-            _mainDataGrid1.ItemsSource = wafers;
+            _maindgPort1.ItemsSource = wafers;
+            _maindgPort2.ItemsSource = wafers;
         }       
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)

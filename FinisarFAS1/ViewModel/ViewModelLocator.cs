@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using FinisarFAS1.Utility;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
@@ -30,62 +31,53 @@ namespace FinisarFAS1.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-        public ViewModelLocator()
-        {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+        //public ViewModelLocator()
+        //{
+        //    ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+        //    ////if (ViewModelBase.IsInDesignModeStatic)
+        //    ////{
+        //    ////    // Create design time view services and models
+        //    ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
+        //    ////}
+        //    ////else
+        //    ////{
+        //    ////    // Create run time view services and models
+        //    ////    SimpleIoc.Default.Register<IDataService, DataService>();
+        //    ////}
+        //    SimpleIoc.Default.Register<MyDialogService>(() => { return new MyDialogService(null); });
+        //    SimpleIoc.Default.Register<IDialogService2>(() => { return SimpleIoc.Default.GetInstance<MyDialogService>(); });
+        //    SimpleIoc.Default.Register<MainViewModel>();
+        //    SimpleIoc.Default.Register<WaferConfirmationViewModel>();
+        //    SimpleIoc.Default.Register<EntryViewModel>();
+        //}
 
-            //SimpleIoc.Default.Register<IDialogService, DialogService>();
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<WaferConfirmationViewModel>();
-            SimpleIoc.Default.Register<StatusVM>();
-            SimpleIoc.Default.Register<EntryViewModel>();
-        }
+        //public MainViewModel Main {
+        //    get {
+        //        return ServiceLocator.Current.GetInstance<MainViewModel>();
+        //    }
+        //}
 
-        public MainViewModel Main {
-            get {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        //public WaferConfirmationViewModel WaferVM
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<WaferConfirmationViewModel>();
+        //    }
+        //}
+       
+        //public EntryViewModel EntryVM
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<EntryViewModel>();
+        //    }
+        //}
 
-        public WaferConfirmationViewModel WaferVM
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<WaferConfirmationViewModel>();
-            }
-        }
-
-        public StatusVM StatusVM
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<StatusVM>();
-            }
-        }
-
-        public EntryViewModel EntryVM
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<EntryViewModel>();
-            }
-        }
-
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
-        }
+        //public static void Cleanup()
+        //{
+        //    // TODO Clear the ViewModels
+        //}
     }
 
     //public class DialogService : IDialogService

@@ -48,6 +48,30 @@ namespace Common
             }
         }
 
+        string containerID;
+        public string ContainerID {
+            get { return this.containerID; }
+            set {
+                this.containerID = value;
+            }
+        }
+
+        string operation;
+        public string Operation {
+            get { return this.operation; }
+            set {
+                this.operation = value;
+            }
+        }
+
+        string product;
+        public string Product {
+            get { return this.product; }
+            set {
+                this.product = value;
+            }
+        }
+
         string status;
         public string Status {
             get { return this.status; }

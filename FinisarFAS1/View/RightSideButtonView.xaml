@@ -45,8 +45,7 @@
             <!--<Image Margin="0,0" Width="Auto" Source="../Images/II-VI_Finisar5.jpg" />-->
             <!--Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"-->
             <StackPanel Margin="0,10,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
-
-                <StackPanel Margin="0,0,0,10" Orientation="Vertical" 
+                <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
                             Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
                     <Label Content="Port 1: Lot 1" HorizontalAlignment="Center" />
                     <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
@@ -64,13 +63,13 @@
                         </StackPanel>
                     </Button>
                     <Button ToolTip="Cancel current lot"
-                                    Command="{Binding Path=CancelPortCmd}"
+                                    Command="{Binding Path=CancelPort1Cmd}"
                                     Background="{StaticResource ResourceKey=RedGlass}"
                                     Content="Cancel" />
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
-                    <Button Margin="0,15,0,15" ToolTip="Start processing for this load port"
+                    <Button Margin="0,55,0,15" ToolTip="Start processing for this load port"
                                 Background="{StaticResource ResourceKey=LimeGlass}"
                                 Command="{Binding Path=StartCmd}"
                                 Foreground="White" >
@@ -104,4 +103,5 @@
             </StackPanel>
         </StackPanel>
     </StackPanel>
+
 </UserControl>
