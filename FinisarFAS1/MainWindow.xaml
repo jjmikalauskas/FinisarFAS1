@@ -153,9 +153,11 @@
                             </Grid.ColumnDefinitions>
 
                             <DataGrid x:Name="_maindgPort1" 
-                                  Grid.Column="0" 
-                                  IsReadOnly="True" AutoGenerateColumns="False"
-                                  RowHeight="24" FontSize="16" Grid.ColumnSpan="2" >
+                                      Grid.Column="0" Grid.ColumnSpan="2" 
+                                      RowHeight="24" FontSize="16" 
+                                      ItemsSource="{Binding Port1Wafers}" AutoGenerateColumns="False" 
+                                      IsReadOnly="True" 
+                                      CanUserAddRows="False" CanUserReorderColumns="False" >
                                 <DataGrid.RowStyle>
                                     <Style TargetType="DataGridRow">
                                         <Setter Property="Background" Value="{Binding StatusColor}"/>
@@ -200,7 +202,6 @@
                                             <Label Content="Port 1: Lot 1" HorizontalAlignment="Center" />
                                             <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
                                                      KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
-
                                             <Label Content="Port 1: Lot 2"  HorizontalAlignment="Center"  />
                                             <TextBox Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
                                                      KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
@@ -329,7 +330,7 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess2, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                                        <Button Margin="0,5,0,15" ToolTip="Load wafer lot into this load port"
+                                        <Button Margin="0,25,0,15" ToolTip="Load wafer lot into this load port"
                                                             Background="{StaticResource ResourceKey=LimeGlass}"
                                                             Command="{Binding Path=ConfirmPort2Cmd}" >
                                             <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">

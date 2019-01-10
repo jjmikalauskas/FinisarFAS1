@@ -96,7 +96,7 @@ namespace MESCommunications
             return wafers; 
         }
 
-        public static List<Wafer> GetCurrentWaferConfigurationSetup(int id)
+        public static List<Wafer> GetCurrentWaferConfigurationSetup2(int id)
         {
             List<Wafer> wafers = new List<Wafer>();
             int waferId; 

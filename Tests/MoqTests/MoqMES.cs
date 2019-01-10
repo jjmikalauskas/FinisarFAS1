@@ -60,7 +60,7 @@ namespace Tests.MoqTests
         public bool ValidateUserFromCamstar(string userName)
         {
             //fakeDelay();
-            var slowTask = Task.Factory.StartNew( () => fakeDelay());
+            // var slowTask = Task.Factory.StartNew( () => fakeDelay());
             //await slowTask; 
             var repo = CreateOperatorRepository();
             return repo.Object.ValidateUserFromCamstar(userName);

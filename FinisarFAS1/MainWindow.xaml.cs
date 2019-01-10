@@ -34,17 +34,17 @@ namespace FinisarFAS1
             Messenger.Default.Register<ShowEntryWindowMessage>(this, ShowEntryDialogMsg);
             Messenger.Default.Register<GoToMainWindowMessage>(this, ShowMainWindowMsg);
 
-            LoadTable1();
+            //LoadTable1();
             
         }
 
         private void LoadTable1()
         {
             // var wafers = MESDAL.GetCurrentWaferSetup(1);
-            var wafers = MESDAL.GetCurrentWaferConfigurationSetup(1);
+            //var wafers = MESDAL.GetCurrentWaferConfigurationSetup(1);
             
-            _maindgPort1.ItemsSource = wafers;
-            _maindgPort2.ItemsSource = wafers;
+            //_maindgPort1.ItemsSource = wafers;
+            //_maindgPort2.ItemsSource = wafers;
         }       
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)

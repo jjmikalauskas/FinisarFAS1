@@ -5,9 +5,11 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
+using MESCommunications;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -55,15 +57,47 @@ namespace FinisarFAS1.ViewModel
             this.dialogService = dialogService;
             _mesService = new MESCommunications.MESService(new MoqMESService());
 
+            // Default settings
             CamstarStatusColor = "Lime";
             EquipmentStatusColor = "Lime";
             ProcessState = "Started";
+
+            Port1Wafers = CreateEmptyPortRows(); 
 
             // Register for messages 
             RegisterForMessages();
 
             SetupToolEnvironment(); 
         }
+
+        private ObservableCollection<Wafer> port1Wafers;
+        public ObservableCollection<Wafer> Port1Wafers {
+            get { return port1Wafers; }
+            set { port1Wafers = value;
+                RaisePropertyChanged(nameof(Port1Wafers));
+            }
+        }
+
+        private ObservableCollection<Wafer> port2Wafers;
+        public ObservableCollection<Wafer> Port2Wafers {
+            get { return port2Wafers; }
+            set {
+                port2Wafers = value;
+                RaisePropertyChanged(nameof(Port2Wafers));
+            }
+        }
+
+        private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount=20)
+        {
+            ObservableCollection<Wafer> tempList = new ObservableCollection<Wafer>();
+            // rowCount = 1; 
+            for (int i=rowCount; i>0; --i)
+            {
+                tempList.Add(new Wafer() { Slot = i.ToString() });
+            }
+            return tempList; 
+        }
+
 
         private void RegisterForMessages()
         {
@@ -132,16 +166,68 @@ namespace FinisarFAS1.ViewModel
         public string Port1Lot1 {
             get { return _port1Lot1; }
             set {
+                if (_port1Lot1 != value)
+                {
+                    var wafers = MESDAL.GetCurrentWaferConfigurationSetup(value);
+                    if (wafers!=null)
+                    {
+                        AddWafersToGrid(wafers);
+                        //RaisePropertyChanged("Port1Wafers");
+                    }
+                }
                 _port1Lot1 = value;
-
                 RaisePropertyChanged(nameof(Port1Lot1));
             }
+        }
+
+        private void AddWafersToGrid(List<Wafer> wafers)
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            int MAXROWS = 20; 
+            int slotNo = 0;
+
+            var goodList = currentWafers.ToList().Where(w => !string.IsNullOrEmpty(w.WaferID));
+            currentWafers = new ObservableCollection<Wafer>(goodList); 
+
+            Port1Wafers = new ObservableCollection<Wafer>(wafers);
+
+            // Add currentwafers to bottom then add in empty then renumber slots
+            foreach (var tempwafer in currentWafers)
+            {
+                Port1Wafers.Add(tempwafer);
+            }
+
+            // Add in empty slots at top
+            slotNo = Port1Wafers.Count;
+            for (int i=MAXROWS-slotNo; i>0; --i)
+            {
+                Port1Wafers.Insert(0, new Wafer()); 
+            }
+
+            // Renumber
+            slotNo = MAXROWS; 
+            foreach (var tempwafer in Port1Wafers)
+            {
+                tempwafer.Slot = slotNo.ToString();
+                --slotNo; 
+            }
+
+            // Port1Wafers = currentWafers; 
         }
 
         private string _port1Lot2;
         public string Port1Lot2 {
             get { return _port1Lot2; }
             set {
+                if (_port1Lot2 != value)
+                {
+                    var wafers = MESDAL.GetCurrentWaferConfigurationSetup(value);
+                    if (wafers != null)
+                    {
+                        AddWafersToGrid(wafers);
+                        RaisePropertyChanged("Port1Wafers");
+                    }
+                }
                 _port1Lot2 = value;
                 RaisePropertyChanged(nameof(Port1Lot2));
             }
@@ -369,6 +455,11 @@ namespace FinisarFAS1.ViewModel
             var vm = new DialogViewModel("Are you sure you want to Cancel?", "Yes", "No");
            
             bool? result = dialogService.ShowDialog(vm); 
+            if (result.HasValue && result==true)
+            {
+                Port1Wafers = CreateEmptyPortRows();
+                Port1Lot1 = Port1Lot2 = ""; 
+            }
         }
 
         private void loadPortACmdHandler()
