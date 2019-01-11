@@ -11,12 +11,20 @@ namespace Common
         public Operator()
         {
             Id = 0;
-            OperatorName = "Bruce Wayne ";
-            OperatorInfo = "Bruce Wayne " + Id.ToString();
+            OperatorName = "";
+            OperatorInfo = "";
         }
 
         public int Id { get; set; }
         public string OperatorName { get; set; }
         public string OperatorInfo { get; set; }
     }
+
+    public enum AuthorizationLevel
+    {
+        Operator, 
+        Engineer, 
+        Admin
+    }
+
 }

@@ -34,6 +34,8 @@ namespace FinisarFAS1.ViewModel
         private readonly IDialogService2 dialogService;
         private IMESService _mesService;
 
+        const int MAXROWS = 25;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -44,13 +46,13 @@ namespace FinisarFAS1.ViewModel
                 // Code runs in Blend --> create design time data.
                 // CamstarStatusColor = "Red";
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
-                CurrentAlarm = "Alarm Id: 63-Chamber pressure low";
+                CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
                 TimeToProcess = false; 
             }
             else
             {
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
-                CurrentAlarm = "Alarm Id: 63-Chamber pressure low";
+                CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
                 TimeToProcess = false; 
             }
 
@@ -98,10 +100,10 @@ namespace FinisarFAS1.ViewModel
             return tempList; 
         }
 
-
         private void RegisterForMessages()
         {
             Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
+            Messenger.Default.Register<RenumberWafersMessage>(this, RenumberWafersHandler);
         }
 
         private void SetupToolEnvironment()
@@ -202,8 +204,7 @@ namespace FinisarFAS1.ViewModel
         //  GRID MANIPULATION
         private void AddWafersToGrid(List<Wafer> wafers)
         {
-            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
-            int MAXROWS = 20;
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);            
             int slotNo = 0;
 
             var goodList = currentWafers.ToList().Where(w => !string.IsNullOrEmpty(w.WaferID));
@@ -233,6 +234,18 @@ namespace FinisarFAS1.ViewModel
             }
 
             // Port1Wafers = currentWafers; 
+        }
+
+
+        private void RenumberWafersHandler(RenumberWafersMessage msg)
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            int idx = 0; 
+            for (int i = MAXROWS-1; i >= 0; --i)
+            {
+                currentWafers[idx++].Slot = i.ToString(); 
+            }
+            Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
         }
 
         private void SetAllWafersToYellow()

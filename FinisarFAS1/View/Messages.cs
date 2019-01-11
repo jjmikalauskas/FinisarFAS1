@@ -45,6 +45,13 @@ namespace FinisarFAS1.View
         }
     }
 
+    class RenumberWafersMessage
+    {
+        public RenumberWafersMessage()
+        {
+        }
+    }
+
     class GoToMainWindowMessage
     {
         public bool bVisible;

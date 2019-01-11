@@ -82,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DragDrop\DragDropHelper.cs" />
+    <Compile Include="DragDrop\DraggedAdorner.cs" />
+    <Compile Include="DragDrop\InsertionAdorner.cs" />
+    <Compile Include="DragDrop\Utilities.cs" />
     <Compile Include="Utility\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -191,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\FinisarLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DragInsert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
