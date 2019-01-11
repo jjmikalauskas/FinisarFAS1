@@ -31,7 +31,7 @@ namespace FinisarFAS1
 
             InitializeComponent();
 
-            Messenger.Default.Register<ShowEntryWindowMessage>(this, ShowEntryDialogMsg);
+            Messenger.Default.Register<ShowAlarmWindowMessage>(this, ShowAlarmDialogMsg);
             Messenger.Default.Register<GoToMainWindowMessage>(this, ShowMainWindowMsg);
 
             //LoadTable1();
@@ -66,7 +66,7 @@ namespace FinisarFAS1
             // Messenger.Default.Send(new CancelTransactionMessage());
         }
 
-        private void ShowEntryDialogMsg(ShowEntryWindowMessage msg)
+        private void ShowAlarmDialogMsg(ShowAlarmWindowMessage msg)
         {
             //if (msg.bVisible)
             //{
@@ -74,7 +74,7 @@ namespace FinisarFAS1
             //}
             //else
             //{
-                this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
+            //    this.BeginStoryboard((Storyboard)this.Resources["collapseEntry"]);
             //}
         }
 

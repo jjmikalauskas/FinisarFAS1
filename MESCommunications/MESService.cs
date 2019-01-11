@@ -100,11 +100,23 @@ namespace MESCommunications
         static readonly string lot2 = "61851-002";
         static readonly string lot3 = "61851-003";
 
+        public static async void fakeDelay2(int delayTime)
+        {
+            int i = 0;
+            Task wait = Task.Delay(delayTime);
+            await wait;
+        }
+
+
         public static List<Wafer> GetCurrentWaferConfigurationSetup(string lotId)
         {
             List<Wafer> wafers = new List<Wafer>();
             List<Wafer> returnList; 
-            int waferId; 
+            int waferId;
+
+            // var slowTask = Task.Factory.StartNew(() => Globals.fakeDelay(3000));
+            // await slowTask;
+            // fakeDelay2(3000);
 
             for (int i = 30; i > 0; --i)
             {
@@ -125,8 +137,6 @@ namespace MESCommunications
             wafers[0].ScribeID = "J4989083FFE9";
             //wafers[1].Status = "In Process...";
             wafers[1].ScribeID = "J4989082FFD8";
-            
-            
 
             wafers[2].ScribeID = "J4989081FFC7";
             wafers[3].ScribeID = "J4989080FFB6";

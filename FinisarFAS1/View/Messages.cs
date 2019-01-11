@@ -28,13 +28,20 @@ namespace FinisarFAS1.View
         }
     }
 
-    class ShowEntryWindowMessage
+    class ShowAlarmWindowMessage
     {
         public bool bVisible;
 
-        public ShowEntryWindowMessage(bool bVisible)
+        public ShowAlarmWindowMessage(bool bVisible)
         {
             this.bVisible = bVisible;
+        }
+    }
+
+    class CloseAlarmMessage
+    {
+        public CloseAlarmMessage()
+        {
         }
     }
 

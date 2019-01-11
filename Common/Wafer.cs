@@ -82,7 +82,7 @@ namespace Common
 
         public string StatusColor {
             get {
-                return this.status == "Completed" ? "Lime" : (this.status == "In Progress...") ? "Yellow" : "Azure";
+                return this.status == "Completed" ? "Lime" : (this.status == "In Process...") ? "Yellow" : "Azure";
             }
         }
 

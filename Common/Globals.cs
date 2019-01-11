@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-        //public class Globals
-        //{
+        public class Globals
+        {
         //    public static bool IsLive;
         //    public static string FusionEnvironment;
 
@@ -46,5 +46,13 @@ namespace Common
         //        UserName = Environment.UserName;
 
         //    }
-        //}
+
+        static public async void fakeDelay(int delayTime)
+        {
+            int i = 0;
+            Task wait = Task.Delay(delayTime); 
+            await wait;
+            i = 99; 
+        }
+    }
 }

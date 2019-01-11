@@ -81,7 +81,7 @@ namespace MESCommunications
             }
 
             wafers[0].Status = "Completed";
-            wafers[1].Status = "In Progress...";
+            wafers[1].Status = "In Process...";
 
             if (id==1)
             {
@@ -90,16 +90,20 @@ namespace MESCommunications
                 wafers[2].Status = "Completed";
                 wafers[3].Status = "Completed";
                 wafers[4].Status = "Completed";
-                wafers[5].Status = "In Progress...";
+                wafers[5].Status = "In Process...";
             }
 
             return wafers; 
         }
 
+        // THIS DOES NOT GET CALLED
         public static List<Wafer> GetCurrentWaferConfigurationSetup2(int id)
         {
             List<Wafer> wafers = new List<Wafer>();
-            int waferId; 
+            int waferId;
+
+            var slowTask = Task.Factory.StartNew(() => fakeDelay(1000));
+            // await slowTask; 
 
             for (int i = 20; i > 0; --i)
             {

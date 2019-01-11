@@ -51,17 +51,19 @@ namespace Tests.MoqTests
                 lot = null;
             return lot;
         }
-        
-        private async void fakeDelay()
+
+        public async void fakeDelay2(int delayTime)
         {
-            await Task.Delay(2000);
+            int i = 0;
+            Task wait = Task.Delay(delayTime);
+            await wait;
         }
 
         public bool ValidateUserFromCamstar(string userName)
         {
             //fakeDelay();
-            // var slowTask = Task.Factory.StartNew( () => fakeDelay());
-            //await slowTask; 
+            //var slowTask = Task.Factory.StartNew( () => fakeDelay2(52000));
+            
             var repo = CreateOperatorRepository();
             return repo.Object.ValidateUserFromCamstar(userName);
         }
