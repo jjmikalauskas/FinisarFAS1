@@ -11,8 +11,8 @@ namespace Common
         public Lot()
         {
             Id = 0;
-            Lot1Name = "Lot Number: " + Id.ToString();
-            LotInfo = "This is a lot of wafers to process "; 
+            Lot1Name = "";
+            LotInfo = ""; 
         }
 
         public int Id { get; set; }

@@ -226,12 +226,13 @@ namespace FinisarFAS1.ViewModel
             }
 
             // Renumber
-            slotNo = MAXROWS;
-            foreach (var tempwafer in Port1Wafers)
-            {
-                tempwafer.Slot = slotNo.ToString();
-                --slotNo;
-            }
+            RenumberWafersHandler(null);
+            //slotNo = MAXROWS;
+            //foreach (var tempwafer in Port1Wafers)
+            //{
+            //    tempwafer.Slot = slotNo.ToString();
+            //    --slotNo;
+            //}
 
             // Port1Wafers = currentWafers; 
         }

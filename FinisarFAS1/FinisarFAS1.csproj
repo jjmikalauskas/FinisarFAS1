@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="Utility\Converters.cs" />
     <Compile Include="Utility\IDialog.cs" />
+    <Compile Include="Utility\UIHelpers.cs" />
     <Compile Include="ViewModel\DialogViewModel.cs" />
     <Compile Include="ViewModel\EntryVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
