@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Hardcodet.Wpf.Util
+namespace FinisarFAS1.Utility
 {
   /// <summary>
   /// Common UI related helper methods.

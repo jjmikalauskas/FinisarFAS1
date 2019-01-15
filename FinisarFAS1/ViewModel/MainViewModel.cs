@@ -6,9 +6,11 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using MESCommunications;
+using MESCommunications.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
@@ -47,61 +49,95 @@ namespace FinisarFAS1.ViewModel
                 // CamstarStatusColor = "Red";
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
-                TimeToProcess = false; 
+                TimeToProcess = false;
             }
             else
             {
                 CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
-                TimeToProcess = false; 
+                TimeToProcess = false;
             }
 
             this.dialogService = dialogService;
+            //
+            // DI the MESService, for now use the Moq
+            //
             _mesService = new MESCommunications.MESService(new MoqMESService());
 
-            // Default settings
-            CamstarStatusColor = "Lime";
-            EquipmentStatusColor = "Lime";
-            ProcessState = "Idle";
+            InitializeSystem(); 
+           
+            Port1Wafers = CreateEmptyPortRows();
 
-            Port1Wafers = CreateEmptyPortRows(); 
-
-            // Register for messages 
-            RegisterForMessages();
-
-            SetupToolEnvironment(); 
+            SetupToolEnvironment();
         }
 
-        private ObservableCollection<Wafer> port1Wafers;
-        public ObservableCollection<Wafer> Port1Wafers {
-            get { return port1Wafers; }
-            set { port1Wafers = value;
-                RaisePropertyChanged(nameof(Port1Wafers));
-            }
-        }
-
-        private ObservableCollection<Wafer> port2Wafers;
-        public ObservableCollection<Wafer> Port2Wafers {
-            get { return port2Wafers; }
-            set {
-                port2Wafers = value;
-                RaisePropertyChanged(nameof(Port2Wafers));
-            }
-        }
-
-        private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount=20)
+        private void InitializeSystem()
         {
-            ObservableCollection<Wafer> tempList = new ObservableCollection<Wafer>();
-            // rowCount = 1; 
-            for (int i=rowCount; i>0; --i)
+            RegisterForMessages();
+            // Default settings
+            GetCurrentStatuses();
+        }
+
+        private void GetCurrentStatuses()
+        {
+            DataTable dtCamstar = _mesService.GetResourceStatus("Camstar-DEV", "Server IP:1.1.1.1");
+            UpdateCamstarStatusHandler(new CamstarStatusMessage(dtCamstar));
+
+            UpdateEquipmentStatusHandler(new EquipmentStatusMessage("Online/Remote"));
+
+            ProcessState = "Idle";
+        }
+
+        private void UpdateCamstarStatusHandler(CamstarStatusMessage msg)
+        {
+            string tempStatus = "Offline";
+            string tempColor = "Red";
+
+            if (msg != null)
             {
-                tempList.Add(new Wafer() { Slot = i.ToString() });
+                tempStatus = msg.Availability;
+                if (msg.Availability.Contains("On"))
+                    tempColor = "Lime";
+                else
+                    tempColor = "Yellow";
             }
-            return tempList; 
+            else
+            {
+                tempStatus = "Offline";
+                tempColor = "Red";
+            }
+            // Only update at end so the colors are not flashing...
+            CamstarStatus = tempStatus;
+            CamstarStatusColor = tempColor;
+        }
+
+        private void UpdateEquipmentStatusHandler(EquipmentStatusMessage msg)
+        {
+            string tempStatus = "Offline";
+            string tempColor = "Red";
+
+            if (msg != null)
+            {
+                tempStatus = msg.Availability;
+                if (msg.Availability.Contains("Remote"))
+                    tempColor = "Lime";
+                else
+                    tempColor = "Yellow";
+            }
+            else
+            {
+                tempStatus = "Offline";
+                tempColor = "Red";
+            }
+            // Only update at end so the colors are not flashing...
+            EquipmentStatus = tempStatus;
+            EquipmentStatusColor = tempColor;
         }
 
         private void RegisterForMessages()
         {
+            Messenger.Default.Register<CamstarStatusMessage>(this, UpdateCamstarStatusHandler);
+            Messenger.Default.Register<EquipmentStatusMessage>(this, UpdateEquipmentStatusHandler);
             Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
             Messenger.Default.Register<RenumberWafersMessage>(this, RenumberWafersHandler);
         }
@@ -154,6 +190,39 @@ namespace FinisarFAS1.ViewModel
 
         #region UI BINDINGS
 
+        private ObservableCollection<Wafer> port1Wafers;
+        public ObservableCollection<Wafer> Port1Wafers
+        {
+            get { return port1Wafers; }
+            set
+            {
+                port1Wafers = value;
+                RaisePropertyChanged(nameof(Port1Wafers));
+            }
+        }
+
+        private ObservableCollection<Wafer> port2Wafers;
+        public ObservableCollection<Wafer> Port2Wafers
+        {
+            get { return port2Wafers; }
+            set
+            {
+                port2Wafers = value;
+                RaisePropertyChanged(nameof(Port2Wafers));
+            }
+        }
+
+        private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount = 20)
+        {
+            ObservableCollection<Wafer> tempList = new ObservableCollection<Wafer>();
+            // rowCount = 1; 
+            for (int i = rowCount; i > 0; --i)
+            {
+                tempList.Add(new Wafer() { Slot = i.ToString() });
+            }
+            return tempList;
+        }
+
         // PORT 1
         private bool _TimeToProcess;
         public bool TimeToProcess {
@@ -170,9 +239,10 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (!string.IsNullOrEmpty(value) && _port1Lot1 != value)
                 {
-                    var wafers = MESDAL.GetCurrentWaferConfigurationSetup(value);
-                    if (wafers!=null)
+                    var dtWafers = _mesService.GetLotStatus(value); 
+                    if (dtWafers!=null)
                     {
+                        var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers); 
                         AddWafersToGrid(wafers);
                         //RaisePropertyChanged("Port1Wafers");
                     }
@@ -188,10 +258,11 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (!string.IsNullOrEmpty(value) && _port1Lot2 != value)
                 {
-                    var wafers = MESDAL.GetCurrentWaferConfigurationSetup(value);
-                    if (wafers != null)
+                    var dtWafers = _mesService.GetLotStatus(value);
+                    if (dtWafers != null)
                     {
-                        AddWafersToGrid(wafers);
+                        var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers);
+                        AddWafersToGrid(wafers); 
                         RaisePropertyChanged("Port1Wafers");
                     }
                 }
@@ -199,7 +270,6 @@ namespace FinisarFAS1.ViewModel
                 RaisePropertyChanged(nameof(Port1Lot2));
             }
         }
-
 
         //  GRID MANIPULATION
         private void AddWafersToGrid(List<Wafer> wafers)
@@ -226,17 +296,8 @@ namespace FinisarFAS1.ViewModel
             }
 
             // Renumber
-            RenumberWafersHandler(null);
-            //slotNo = MAXROWS;
-            //foreach (var tempwafer in Port1Wafers)
-            //{
-            //    tempwafer.Slot = slotNo.ToString();
-            //    --slotNo;
-            //}
-
-            // Port1Wafers = currentWafers; 
+            RenumberWafersHandler(null);           
         }
-
 
         private void RenumberWafersHandler(RenumberWafersMessage msg)
         {
@@ -244,7 +305,7 @@ namespace FinisarFAS1.ViewModel
             int idx = 0; 
             for (int i = MAXROWS-1; i >= 0; --i)
             {
-                currentWafers[idx++].Slot = i.ToString(); 
+                currentWafers[idx++].Slot = (i+1).ToString(); 
             }
             Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
         }
@@ -263,10 +324,32 @@ namespace FinisarFAS1.ViewModel
 
         private string _processState;
         public string ProcessState {
-            get { return _processState; }
+            get { return "Process State: " + _processState; }
             set {
                 _processState = value;
                 RaisePropertyChanged(nameof(ProcessState));
+            }
+        }
+
+        private string _camstarStatus;
+        public string CamstarStatus
+        {
+            get { return _camstarStatus; }
+            set
+            {
+                _camstarStatus = value;
+                RaisePropertyChanged(nameof(CamstarStatus));
+            }
+        }
+
+        private string _equipmentStatus;
+        public string EquipmentStatus
+        {
+            get { return _equipmentStatus; }
+            set
+            {
+                _equipmentStatus = value;
+                RaisePropertyChanged(nameof(EquipmentStatus));
             }
         }
 
@@ -315,17 +398,55 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        private string _operator;
-        public string Operator {
-            get { return _operator; }
+        private Operator Operator = null ; 
+
+        private string _operatorID;
+        public string OperatorID {
+            get { return _operatorID; }
             set {
-                _operator = value;
-                bool op = true; 
-                op = _mesService.ValidateUserFromCamstar(value);
-                OperatorStatus = op == false ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
-                RaisePropertyChanged(nameof(Operator));
+                _operatorID = value;
+                var op = _mesService.GetOperator(value);
+                // Set check box 
+                OperatorStatus = op == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                Operator = op; 
+                RaisePropertyChanged(nameof(OperatorID));
+                RaisePropertyChanged(nameof(OperatorLevel));
+                RaisePropertyChanged(nameof(OperatorColor));
             }
         }
+
+        //private string _opLevel;
+        public string OperatorLevel
+        {
+            get {
+                if (Operator?.AuthLevel == AuthorizationLevel.Engineer)
+                    return "Engineer"; 
+                else
+                    if (Operator?.AuthLevel == AuthorizationLevel.Admin)
+                    return "Administator";
+                return "Operator";
+            }
+            //set { _opLevel = value;
+            //    RaisePropertyChanged(nameof(OperatorLevel));
+            //}
+        }
+
+        //private string _opColor;
+        public string OperatorColor
+        {
+            get {
+                if (OperatorStatus == "../Images/CheckBoxRed.png")
+                    return "red";
+                else
+                    return "lime";
+            }
+            //set
+            //{
+            //    _opColor = value;
+            //    RaisePropertyChanged(nameof(OperatorColor));
+            //}
+        }
+
 
         private string _tool;
         public string Tool {

@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="View/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
+            <converters:StringNullOrEmptyToHiddenConverter x:Key="NullHiddenConverter" />            
             <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
             <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
             <converters:OppositeBooleanToCollapsedConverter x:Key="OppositeBooleanToCollapsedConverter" />
@@ -81,7 +82,7 @@
                     <TextBlock Text="{Binding Path=Description}" />
                 </StackPanel>
             </DataTemplate>
-            
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -105,9 +106,9 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid   x:Name="layoutRoot"
-            MouseLeftButtonUp="OnMouseLeftButtonUp"
-            MouseMove="OnMouseMove">
+    <Grid   x:Name="layoutRoot" >
+        <!--MouseLeftButtonUp="OnMouseLeftButtonUp"
+            MouseMove="OnMouseMove">-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
@@ -119,18 +120,17 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
             Margin="0,0,0,0" Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
-            
-            <StackPanel Margin="0,8,0,0" Orientation="Horizontal" >                
+
+            <StackPanel Margin="0,8,0,0" Orientation="Horizontal" >
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Operator:" VerticalAlignment="Center" />
                     <!--<Label Margin="2,0,5,0" FontSize="22" Content="{Binding Path=Operator}" MaxWidth="250" />-->
                     <TextBox x:Name="OperatorField" Width="250" KeyboardNavigation.TabIndex="0" 
-                             Text="{Binding Path=Operator, UpdateSourceTrigger=LostFocus}" 
+                             Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}" 
                              KeyUp="TextBox_KeyUp" VerticalAlignment="Center" />
                     <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
-                           Visibility="{Binding Operator, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
+                           Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
                            VerticalAlignment="Center" />
-
                 </StackPanel>
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Tool:" VerticalAlignment="Center" />
@@ -138,19 +138,23 @@
                              Text="{Binding Path=Tool, UpdateSourceTrigger=LostFocus}" 
                              KeyUp="TextBox_KeyUp" AcceptsReturn="True"  VerticalAlignment="Center" />
                     <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
-                           Visibility="{Binding Tool, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
+                           Visibility="{Binding Tool, Converter={StaticResource ResourceKey=NullHiddenConverter}}"
                            VerticalAlignment="Center" />
                 </StackPanel>
-                
+
                 <StackPanel Margin="15,5,0,0" Orientation="Vertical" 
                             Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
-                    <StackPanel Orientation="Horizontal"  >
+                    <StackPanel Orientation="Horizontal" >
                         <Label FontSize="18" Content="Port 1 Lot 1:" />
                         <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                   Text="{Binding Path=Port1Lot1}" VerticalAlignment="Center" />                    
-                        <Label Margin="15,0,0,0" FontSize="18" Content="Port 1 Lot 2:"  />
+                                   Text="{Binding Path=Port1Lot1}" VerticalAlignment="Center" />
+                        <Label Margin="15,0,0,0" FontSize="18" Content="Port 1 Lot 2:"
+                               Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
+                               />
                         <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                   Text="{Binding Path=Port1Lot2}" VerticalAlignment="Center" />
+                                   Text="{Binding Path=Port1Lot2}" VerticalAlignment="Center" 
+                                   Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
+                                   />
                     </StackPanel>
                 </StackPanel>
                 <!--<StackPanel Margin="2,5" Orientation="Horizontal" >
@@ -158,11 +162,19 @@
                     <Label Margin="2,0,5,0" FontSize="22" Content="{Binding Path=Lot}" />
                 </StackPanel>-->
             </StackPanel>
+            <StackPanel Margin="0,-7,0,0" Orientation="Horizontal" >
+                <TextBlock Margin="90,0,0,0" Width="250" Padding="3,0" FontSize="14" FontWeight="Bold"
+                               Text="{Binding OperatorLevel}" HorizontalAlignment="Left"
+                               Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
+                               />
+                <TextBlock Margin="88,0,0,0" FontSize="14" FontWeight="Bold"
+                           Text="{Binding ProcessState}"  />
+            </StackPanel>
+
             <TextBlock Margin="8,2,10,15" TextWrapping="WrapWithOverflow" 
                        FontSize="18"
-                       VerticalAlignment="Stretch" 
                        Text="{Binding CurrentRecipe}" />
-            
+
             <!-- MAIN TABS-->
             <TabControl>
                 <TabItem Width="120" Background="LightGray">
@@ -172,141 +184,7 @@
                             <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[0]}" />
                         </Grid>
                     </TabItem.Header>
-                    <StackPanel Orientation="Horizontal" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="206*" />
-                                <ColumnDefinition Width="811*"/>
-                                <ColumnDefinition Width="170*" />
-                            </Grid.ColumnDefinitions>
-
-                            <DataGrid x:Name="_maindgPort1" 
-                                      Grid.Column="0" Grid.ColumnSpan="2" 
-                                      RowHeight="24" FontSize="16" 
-                                      ItemsSource="{Binding Port1Wafers}" AutoGenerateColumns="False" 
-                                      IsReadOnly="True" 
-                                      CanUserAddRows="False" CanUserReorderColumns="False"
-                                      SelectionMode="Single"
-                                      BeginningEdit="OnBeginEdit"
-                                      CellEditEnding="OnEndEdit" 
-                                      PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
-                                      >
-                               
-                                <DataGrid.RowStyle>
-                                    <Style TargetType="DataGridRow">
-                                        <Setter Property="Background" Value="{Binding StatusColor}"/>
-                                    </Style>
-                                </DataGrid.RowStyle>
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Width="50"
-                                                        Binding="{Binding Slot}"
-                                                        Header="Slot" />
-                                    <DataGridTextColumn Width="100"
-                                                        Binding="{Binding ContainerID}"
-                                                        Header="Container ID" />
-                                    <DataGridTextColumn Width="130"
-                                                        Binding="{Binding WaferNo}"
-                                                        Header="Wafer ID" />
-                                    <DataGridTextColumn Width="130"
-                                                        Binding="{Binding ScribeID}"
-                                                        Header="Scribe ID" />
-                                    <DataGridTextColumn Width="90"
-                                                        Binding="{Binding Product}"
-                                                        Header="Product" />
-                                    <DataGridTextColumn Width="120" 
-                                                        Binding="{Binding Operation}" 
-                                                        Header="Operation" />
-                                    <DataGridTextColumn Width="175"
-                                                        Binding="{Binding Recipe}"
-                                                        Header="Recipe" />
-                                    <DataGridTextColumn Width="220"
-                                                        Binding="{Binding Status}"
-                                                        Header="Wafer Status" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,0,0,0"
-                                        Background="{DynamicResource ResourceKey=BlueGlass}" >
-                                <StackPanel Orientation="Vertical" >
-                                    <!--<Image Margin="0,0" Width="Auto" Source="../Images/II-VI_Finisar5.jpg" />-->
-                                    <!--Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"-->
-                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
-                                        <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
-                                                Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                                            <Label Content="Port 1: Lot 1" HorizontalAlignment="Center" />
-                                            <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
-                                            <Label Content="Port 1: Lot 2"  HorizontalAlignment="Center"  />
-                                            <TextBox Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
-                                        </StackPanel>
-
-                                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                                            <Button Margin="0,10,0,15" ToolTip="Load wafer lot into this load port"
-                                                            Background="{StaticResource ResourceKey=LimeGlass}"
-                                                            Command="{Binding Path=ConfirmPort1Cmd}" >
-                                                <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                    <Label FontSize="26" >Confirm</Label>
-                                                </StackPanel>
-                                            </Button>
-                                            <Button ToolTip="Cancel current lot"
-                                                        Command="{Binding Path=CancelPort1Cmd}"
-                                                        Background="{StaticResource ResourceKey=RedGlass}"
-                                                        Content="Cancel" />
-                                        </StackPanel>
-
-                                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
-                                            <StackPanel Margin="0,5,0,0" Orientation="Vertical" >
-                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
-                                                    <Label Margin="0,5,0,0" FontSize="18" Content="Port 1 Lot 1:" />
-                                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                                                Text="{Binding Path=Port1Lot1}" HorizontalAlignment="Center" />
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  >
-                                                    <Label FontSize="18" Content="Port 1 Lot 2:"  />
-                                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                                                 Text="{Binding Path=Port1Lot2}" HorizontalAlignment="Center" />
-                                                </StackPanel>
-                                            </StackPanel>
-
-                                            <Button Margin="0,15,0,15" ToolTip="Start processing for this load port"
-                                                        Background="{StaticResource ResourceKey=LimeGlass}"
-                                                        Command="{Binding Path=StartCmd}"
-                                                        Foreground="White" >
-                                                <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                    <Label FontSize="28" >Start</Label>
-                                                    <Image Margin="10,10,0,0" Height="32" Source="Images/play_button.png" />
-                                                </StackPanel>
-                                            </Button>
-                                            <Button ToolTip="Stop current processing for this load port"
-                                                        Background="{StaticResource ResourceKey=RedGlass}"
-                                                        Command="{Binding Path=StopCmd}"
-                                                        Foreground="White" >
-                                                <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                    <Label FontSize="28" >Stop</Label>
-                                                    <Image Margin="5,5,0,0" Height="28" Source="Images/stop_button.png" />
-                                                </StackPanel>
-                                            </Button>
-                                            <Button ToolTip="Pause current processing"
-                                                        Background="{StaticResource ResourceKey=YellowGlass}"
-                                                        Command="{Binding Path=PauseCmd}"
-                                                        Foreground="Black" >
-                                                <StackPanel Margin="-8,-6,0,0" Orientation="Horizontal">
-                                                    <Label FontSize="28" >Pause</Label>
-                                                    <Image Margin="5,5,0,0" Height="28" Source="Images/pause_button.png" />
-                                                </StackPanel>
-                                            </Button>
-                                            <Button ToolTip="Reset this current lot"
-                                Command="{Binding Path=ResetCmd}"
-                                Content="Reset" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <!--<view:RightSideButtonView Height="650" />-->
-                        </Grid>
-                    </StackPanel>
+                    <view:WaferGrid />
                 </TabItem>
 
                 <TabItem  Height="30" Width="120" Background="LightGray" Visibility="{Binding PortBActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
@@ -441,7 +319,7 @@
 
         <!--<view:RightSideButtonView Grid.Row="0" Grid.Column="1" />-->
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,-42,0" 
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,30,0" 
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
             <!--<Canvas>
                 <Ellipse Canvas.Top="50" Canvas.Left="50"
@@ -457,9 +335,9 @@
                 <Button Margin="-27,10,5,5" Command="{Binding CloseAlarmCmd}"
                         FontSize="10" Height="20" Width="15" Foreground="Black"
                         Visibility="{Binding CurrentAlarm, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
-                        Background="Pink"  >X</Button>            
-            </StackPanel>            
-            
+                        Background="Pink"  >X</Button>
+            </StackPanel>
+
             <!--Visibility="Collapsed"-->
             <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
                 <Button ToolTip="Exit FAS program"
@@ -480,34 +358,47 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" 
-                    Margin="40,0,0,0" VerticalAlignment="Bottom"
-                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
+                    Margin="-30,0,0,0" VerticalAlignment="Bottom"
+                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
             <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
             <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
-            <StackPanel Margin="20,25,0,5" Orientation="Horizontal">
-                <TextBlock FontSize="22"
-                    Text="Camstar MES" />
-                <!--Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
-                <Canvas>
-                    <Ellipse Canvas.Top="5" Canvas.Left="35"
-                             Fill="{Binding CamstarStatusColor}" Height="25" Width="25" />
-                </Canvas>
-            </StackPanel>
-            <StackPanel Margin="20, 15, 0, 5" Orientation="Horizontal">
-                <TextBlock FontSize="22"
-                    Text="Equipment" />
+            <Grid Margin="0,25,10,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+            
+            <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="Camstar MES" VerticalAlignment="Center"  />
+                <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <!--<TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="Binding CamstarStatus}" VerticalAlignment="Center" />-->
+            <!--</StackPanel>-->
+            <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+            <TextBlock Grid.Row="2" Grid.Column="0" FontSize="22" Text="Equipment" VerticalAlignment="Center" />
+                <Border Grid.Row="2" Grid.Column="1" Background="{Binding EquipmentStatusColor}" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" FontSize="22" Text="{Binding EquipmentStatus}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" FontSize="22" Text="Binding EquipmentStatus}" VerticalAlignment="Center" />-->
                 <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
-                <Canvas>
+                <!--<Canvas>
                     <Ellipse Canvas.Top="5" Canvas.Left="58"
                             Fill="{Binding EquipmentStatusColor}" Height="25" Width="25" />
-                </Canvas>
-            </StackPanel>
-            <StackPanel Margin="15, 10, 5, 0" Orientation="Horizontal">
+                </Canvas>-->
+            <!--</StackPanel>-->
+            <!--<StackPanel Margin="15, 10, 5, 0" Orientation="Horizontal">
                 <Label Margin="0,0,0,0" FontSize="18" Content="Process State: " VerticalAlignment="Center" />
                 <TextBlock FontSize="18" Text="{Binding ProcessState}" VerticalAlignment="Center" />
-            </StackPanel>
+            </StackPanel>-->
+            </Grid>
         </StackPanel>
-        
+
         <!--<StackPanel x:Name="entryPanel" 
                     Grid.Row="0" Grid.RowSpan="2"
                     Grid.Column="0" Grid.ColumnSpan="2"
@@ -538,7 +429,7 @@
                              Margin="-380,35,0,0" >
             <progress:CircularProgressBar Visibility="{Binding IsRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}" />
         </Viewbox>-->
-        <Popup
+        <!--<Popup
           x:Name="popup1"
           IsHitTestVisible="False"
           Placement="RelativePoint"
@@ -564,7 +455,7 @@
                         Margin="8,0,0,0" />
                 </StackPanel>
             </Border>
-        </Popup>
+        </Popup>-->
     </Grid>
-   
+
 </Window>

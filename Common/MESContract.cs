@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,18 @@ namespace Common
 {
     public interface IMESService
     {
-        // Operator GetOperator(string operatorName);
+        Operator GetOperator(string operatorName);
         Tool GetTool(string toolName);
         Lot GetLot(string lotName);
 
-        bool ValidateUserFromCamstar(string userName);
+        // Operator ValidateUserFromCamstar(string userName);
+
         string GetToolStatusFromCamstar(string toolName); 
-        bool GetLotOrWaferInfoFromCamstar(string lotId, int currentCassette);
+        DataTable GetLotStatus(string lotId);
         string LotMoveInCamstar(string lot);
+
+        DataTable GetResourceStatus(string resourceName, string dbServerName);
+
 
     }
 
@@ -23,9 +28,11 @@ namespace Common
 
     public interface IOperatorRepository
     {
-        bool ValidateUserFromCamstar(string opName); 
+        // bool ValidateUserFromCamstar(string opName); 
+        Operator GetOperator(string operatorName);
+        DataTable GetLotStatus(string lotId); 
     }
 
 
-   
+
 }

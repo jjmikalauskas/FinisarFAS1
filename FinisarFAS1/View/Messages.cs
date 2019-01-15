@@ -1,5 +1,6 @@
 ﻿using Common;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FinisarFAS1.View
 {
@@ -49,6 +50,44 @@ namespace FinisarFAS1.View
     {
         public RenumberWafersMessage()
         {
+        }
+    }
+
+    class CamstarStatusMessage
+    {
+        public string Availability { get; private set; } = "Offline";
+        public string ResourceName { get; private set; } = "Error";
+        public string ResourceSubStateName { get; private set; } = "Error";
+
+        public CamstarStatusMessage(string availability, string resourceName, string resourceSubstateName)
+        {
+            this.Availability = availability;
+            this.ResourceName = resourceName;
+            this.ResourceSubStateName = resourceSubstateName;
+        }
+
+        public CamstarStatusMessage(DataTable dtCamstar)
+        {
+            try
+            {
+                Availability = dtCamstar.Rows[0]["Availability"].ToString();
+                ResourceName = dtCamstar.Rows[0]["ResourceName"].ToString();
+                ResourceSubStateName = dtCamstar.Rows[0]["ResourceSubStateName"].ToString();
+            } 
+            catch
+            {
+
+            }
+        }
+    }
+
+    class EquipmentStatusMessage
+    {
+        public string Availability { get; private set; } = "Offline";
+
+        public EquipmentStatusMessage(string availability)
+        {
+            this.Availability = availability;
         }
     }
 
