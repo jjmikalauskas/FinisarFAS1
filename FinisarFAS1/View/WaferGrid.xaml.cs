@@ -171,7 +171,34 @@ namespace FinisarFAS1.View
         if (row != null) _maindgPort1.SelectedItem = row.Item;
     }
 
-    #endregion
+        #endregion
 
+        #region MENU HANDLERS
+        private void MoveUp_Click(object sender, RoutedEventArgs e)
+        {
+            //Get the clicked MenuItem
+            var menuItem = (MenuItem)sender;
+
+            //Get the ContextMenu to which the menuItem belongs
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            //Find the placementTarget
+            var item = (DataGrid)contextMenu.PlacementTarget;
+
+            //Get the underlying item, that you cast to your object that is bound
+            //to the DataGrid (and has subject and state as property)
+            var toDeleteFromBindedList = (Wafer)item.SelectedCells[0].Item;
+
+            Messenger.Default.Send(new MoveWafersMessage(toDeleteFromBindedList)); 
+            //Remove the toDeleteFromBindedList object from your ObservableCollection
+            // yourObservableCollection.Remove(toDeleteFromBindedList);
+        }
+
+        private void MoveDown_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

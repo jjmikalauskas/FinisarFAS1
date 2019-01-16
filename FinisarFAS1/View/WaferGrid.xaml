@@ -55,6 +55,12 @@
                                       CellEditEnding="OnEndEdit" 
                                       PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
                                       >
+                <DataGrid.ContextMenu>
+                    <ContextMenu >
+                        <MenuItem Header="Clear row" Click="MoveUp_Click"  />
+                        <!--<MenuItem Header="Move Wafers down" Click="MoveDown_Click"  />-->
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">

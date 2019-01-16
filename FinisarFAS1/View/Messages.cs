@@ -53,6 +53,16 @@ namespace FinisarFAS1.View
         }
     }
 
+    class MoveWafersMessage
+    {
+        public int SlotToMove { get; internal set; }
+
+        public MoveWafersMessage(Wafer waferToMove)
+        {
+            SlotToMove = int.Parse(waferToMove.Slot);
+        }
+    }
+
     class CamstarStatusMessage
     {
         public string Availability { get; private set; } = "Offline";

@@ -140,6 +140,7 @@ namespace FinisarFAS1.ViewModel
             Messenger.Default.Register<EquipmentStatusMessage>(this, UpdateEquipmentStatusHandler);
             Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
             Messenger.Default.Register<RenumberWafersMessage>(this, RenumberWafersHandler);
+            Messenger.Default.Register<MoveWafersMessage>(this, MoveWafersHandler);
         }
 
         private void SetupToolEnvironment()
@@ -165,6 +166,16 @@ namespace FinisarFAS1.ViewModel
         public Tool CurrentTool; 
         #endregion 
 
+        private void MoveWafersHandler(MoveWafersMessage msg)
+        {
+            int idxToMove = MAXROWS  - msg.SlotToMove ;
+            Wafer mtWafer = new Wafer();
+            // Remove top 1 if moving up
+            Port1Wafers.RemoveAt(0); 
+            Port1Wafers.Insert(idxToMove, mtWafer);
+            RenumberWafersHandler(null);
+            RaisePropertyChanged("Port1Wafers");
+        }
        
         private void UpdateLoadPortsMsg(Tool msg)
         {
@@ -310,13 +321,13 @@ namespace FinisarFAS1.ViewModel
             Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
         }
 
-        private void SetAllWafersToYellow()
+        private void SetAllWafersToMovedIn()
         {
             ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
             for (int i=0; i< currentWafers.Count; ++i)
             {
                 if (!string.IsNullOrEmpty(currentWafers[i].WaferID))
-                    currentWafers[i].Status = "In Process..."; 
+                    currentWafers[i].Status = "Moved In"; 
             }
             Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
         }
@@ -607,7 +618,7 @@ namespace FinisarFAS1.ViewModel
             bool? result = dialogService.ShowDialog(vm);
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
-                SetAllWafersToYellow(); 
+                SetAllWafersToMovedIn(); 
                 TimeToProcess = true;
                 ProcessState = "Idle";
             }
