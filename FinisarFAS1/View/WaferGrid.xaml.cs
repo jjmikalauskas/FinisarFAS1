@@ -27,6 +27,20 @@ namespace FinisarFAS1.View
         public WaferGrid()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<WafersConfirmedMessage>(this, WafersConfirmedHandler);
+            Messenger.Default.Register<WafersInGridMessage>(this, WafersInGridHandler);
+
+        }
+
+        private void WafersConfirmedHandler(WafersConfirmedMessage msg)
+        {
+            this.IsConfirmed = msg.Confirmed;
+        }
+
+        private void WafersInGridHandler(WafersInGridMessage msg)
+        {
+            this.NumberOfWafers = msg.NumberOfWafers.GetValueOrDefault();
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
@@ -52,6 +66,9 @@ namespace FinisarFAS1.View
     }
 
     #endregion
+
+    public bool IsConfirmed { get; set; }
+    public int NumberOfWafers { get; set; }
 
     #region edit mode monitoring
 
@@ -87,7 +104,7 @@ namespace FinisarFAS1.View
     /// </summary>
     private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        if (IsEditing) return;
+        if (IsEditing || IsConfirmed || NumberOfWafers<=0) return;
 
         var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(_maindgPort1));
         if (row == null || row.IsEditing) return;

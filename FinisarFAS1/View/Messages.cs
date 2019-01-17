@@ -63,6 +63,26 @@ namespace FinisarFAS1.View
         }
     }
 
+    class WafersConfirmedMessage
+    {
+        public bool Confirmed { get; internal set; }
+
+        public WafersConfirmedMessage(bool confirmed)
+        {
+            this.Confirmed = confirmed;
+        }
+    }
+
+    class WafersInGridMessage
+    {
+        public int? NumberOfWafers { get; internal set; }
+
+        public WafersInGridMessage(int? numWafers)
+        {
+            this.NumberOfWafers = numWafers.GetValueOrDefault(); 
+        }
+    }
+
     class CamstarStatusMessage
     {
         public string Availability { get; private set; } = "Offline";
