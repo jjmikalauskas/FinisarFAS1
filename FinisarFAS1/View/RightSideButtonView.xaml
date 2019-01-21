@@ -47,10 +47,10 @@
             <StackPanel Margin="0,10,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
                 <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
                             Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                    <Label Content="Port 1: Lot 1" HorizontalAlignment="Center" />
+                    <Label Content="Lot 1" HorizontalAlignment="Center" />
                     <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
 
-                    <Label Content="Port 1: Lot 2"  HorizontalAlignment="Center"  />
+                    <Label Content="Lot 2"  HorizontalAlignment="Center"  />
                     <TextBox Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />                       
                 </StackPanel>
                 
@@ -96,9 +96,17 @@
                             <Image Margin="5,5,0,0" Height="28" Source="../Images/pause_button.png" />
                         </StackPanel>
                     </Button>
-                    <Button ToolTip="Reset this current lot"
-                                Command="{Binding Path=ResetCmd}"
-                                Content="Reset" />
+                    <Button ToolTip="Abort current processing"
+                                Background="{StaticResource ResourceKey=BlackGlass}"
+                                Command="{Binding Path=AbortCmd}"
+                                Foreground="White" >
+                        <StackPanel Margin="-8,-6,0,0" Orientation="Horizontal">
+                            <Label FontSize="28" >Abort</Label>
+                            <!--<Image Margin="5,5,0,0" Height="28" Source="../Images/pause_button.png" />-->
+                        </StackPanel>
+                    </Button>
+                    
+                    
                 </StackPanel>
             </StackPanel>
         </StackPanel>

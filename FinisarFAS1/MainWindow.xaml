@@ -14,7 +14,9 @@
         Loaded="Window_Loaded" 
         Closing="Window_Closing" Background="Gray"
         FocusManager.FocusedElement="{Binding ElementName=OperatorField}"
-        Title="Factory Automation System - Tool: 6-6-EVAP-01" Width="1210" Height="960" >
+        Title="Factory Automation System - Tool: 6-6-EVAP-01" 
+        ResizeMode="NoResize"
+        MaxWidth="2000" Width="1400" Height="960" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -171,9 +173,55 @@
                            Text="{Binding ProcessState}"  />
             </StackPanel>
 
-            <TextBlock Margin="8,2,10,15" TextWrapping="WrapWithOverflow" 
+            <StackPanel>
+                <StackPanel Margin="2,5,0,15" Orientation="Horizontal" >
+                    <Label FontSize="18" Content="Recipe:" VerticalAlignment="Center" />
+                    <TextBox x:Name="RecipeField" 
+                             Margin="21,5,0,5" Width="250" KeyboardNavigation.TabIndex="2" 
+                             Text="{Binding Path=CurrentRecipe, UpdateSourceTrigger=LostFocus}" 
+                             IsEnabled="{Binding IsRecipeOverridable}"
+                             KeyUp="TextBox_KeyUp" VerticalAlignment="Center" />
+                </StackPanel>
+                <!--<TextBlock Margin="8,2,10,15" TextWrapping="WrapWithOverflow" 
                        FontSize="18"
-                       Text="{Binding CurrentRecipe}" />
+                       Text="{Binding CurrentRecipe}" />-->
+            </StackPanel>
+            
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Visibility="Collapsed"
+                    Margin="0,0,0,0" VerticalAlignment="Bottom"
+                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
+                <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
+                <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
+                <Grid Margin="0,25,10,10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="Camstar MES" VerticalAlignment="Center"  />
+                    <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <!--<TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="Binding CamstarStatus}" VerticalAlignment="Center" />-->
+                    <!--</StackPanel>-->
+                    <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="22" Text="Equipment" VerticalAlignment="Center" />
+                    <Border Grid.Row="2" Grid.Column="1" Background="{Binding EquipmentStatusColor}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" FontSize="22" Text="{Binding EquipmentStatus}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" FontSize="22" Text="Binding EquipmentStatus}" VerticalAlignment="Center" />-->
+                    <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
+                    <!--</StackPanel>-->
+                </Grid>
+            </StackPanel>
+
 
             <!-- MAIN TABS-->
             <TabControl>
@@ -184,127 +232,11 @@
                             <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[0]}" />
                         </Grid>
                     </TabItem.Header>
-                    <view:WaferGrid />
+                    <view:WaferGrid Width="Auto" />
                 </TabItem>
 
                 <TabItem  Height="30" Width="120" Background="LightGray" Visibility="{Binding PortBActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
-                    <TabItem.Header>
-                        <Grid Margin="-5,0" Height="30" Width="120" >
-                            <!--<ProgressBar Height="30" Width="120" Value="25" Foreground="Lime" />-->
-                            <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[1]}" />
-                        </Grid>
-                    </TabItem.Header>
-                    <StackPanel Orientation="Horizontal" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1008*" />
-                                <ColumnDefinition Width="169*" />
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name="_maindgPort2" 
-                                  Grid.Column="0" 
-                                  IsReadOnly="True" AutoGenerateColumns="False"
-                                  RowHeight="24" FontSize="16" >
-                                <DataGrid.RowStyle>
-                                    <Style TargetType="DataGridRow">
-                                        <Setter Property="Background" Value="{Binding StatusColor}"/>
-                                    </Style>
-                                </DataGrid.RowStyle>
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Width="50"
-                                                        Binding="{Binding Slot}"
-                                                        Header="Slot" />
-                                    <DataGridTextColumn Width="100"
-                                                        Binding="{Binding ContainerID}"
-                                                        Header="Container ID" />
-                                    <DataGridTextColumn Width="130"
-                                                        Binding="{Binding WaferNo}"
-                                                        Header="Wafer ID" />
-                                    <DataGridTextColumn Width="130"
-                                                        Binding="{Binding ScribeID}"
-                                                        Header="Scribe ID" />
-                                    <DataGridTextColumn Width="90"
-                                                        Binding="{Binding Product}"
-                                                        Header="Product" />
-                                    <DataGridTextColumn Width="120" 
-                                                        Binding="{Binding Operation}" 
-                                                        Header="Operation" />
-                                    <DataGridTextColumn Width="175"
-                                                        Binding="{Binding Recipe}"
-                                                        Header="Recipe" />
-                                    <DataGridTextColumn Width="220"
-                                                        Binding="{Binding Status}"
-                                                        Header="Wafer Status" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,0,0,0"
-                                        Background="{DynamicResource ResourceKey=BlueGlass}" >
-                            <StackPanel Orientation="Vertical" >
-                                <!--<Image Margin="0,0" Width="Auto" Source="../Images/II-VI_Finisar5.jpg" />-->
-                                <!--Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"-->
-                                <StackPanel Margin="0,10,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
-                                    <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
-                                                Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                                        <Label Content="Port 2: Lot 1" HorizontalAlignment="Center" />
-                                        <TextBox Text="{Binding Path=Port2Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
-
-                                        <Label Content="Port 2: Lot 2"  HorizontalAlignment="Center"  />
-                                        <TextBox Text="{Binding Path=Port2Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess2, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
-                                        <Button Margin="0,25,0,15" ToolTip="Load wafer lot into this load port"
-                                                            Background="{StaticResource ResourceKey=LimeGlass}"
-                                                            Command="{Binding Path=ConfirmPort2Cmd}" >
-                                            <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                <Label FontSize="26" >Confirm</Label>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button ToolTip="Cancel current lot"
-                                                        Command="{Binding Path=CancelPort2Cmd}"
-                                                        Background="{StaticResource ResourceKey=RedGlass}"
-                                                        Content="Cancel" />
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess2, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
-                                        <Button Margin="0,55,0,15" ToolTip="Start processing for this load port"
-                                                        Background="{StaticResource ResourceKey=LimeGlass}"
-                                                        Command="{Binding Path=StartPort2Cmd}"
-                                                        Foreground="White" >
-                                            <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                <Label FontSize="28" >Start</Label>
-                                                <Image Margin="10,10,0,0" Height="32" Source="Images/play_button.png" />
-                                            </StackPanel>
-                                        </Button>
-                                        <Button ToolTip="Stop current processing for this load port"
-                                                        Background="{StaticResource ResourceKey=RedGlass}"
-                                                        Command="{Binding Path=StopPort2Cmd}"
-                                                        Foreground="White" >
-                                            <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
-                                                <Label FontSize="28" >Stop</Label>
-                                                <Image Margin="5,5,0,0" Height="28" Source="Images/stop_button.png" />
-                                            </StackPanel>
-                                        </Button>
-                                        <Button ToolTip="Pause current processing"
-                                                        Background="{StaticResource ResourceKey=YellowGlass}"
-                                                        Command="{Binding Path=PausePort2Cmd}"
-                                                        Foreground="Black" >
-                                            <StackPanel Margin="-8,-6,0,0" Orientation="Horizontal">
-                                                <Label FontSize="28" >Pause</Label>
-                                                <Image Margin="5,5,0,0" Height="28" Source="Images/pause_button.png" />
-                                            </StackPanel>
-                                        </Button>
-                                        <Button ToolTip="Reset this current lot"
-                                Command="{Binding Path=ResetPort2Cmd}"
-                                Content="Reset" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-
-                    </StackPanel>
+                   
                 </TabItem>
 
                 <TabItem Header="{Binding LoadPortNames[2]}" Visibility="{Binding PortCActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
@@ -319,12 +251,9 @@
 
         <!--<view:RightSideButtonView Grid.Row="0" Grid.Column="1" />-->
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,30,0" 
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,0,0,0" 
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
-            <!--<Canvas>
-                <Ellipse Canvas.Top="50" Canvas.Left="50"
-                  Fill="Red" Height="25" Width="25" />              
-            </Canvas>-->
             <StackPanel Orientation="Horizontal" >
                 <Label DockPanel.Dock="Left" Margin="5,10,0,5" FontSize="18"  Content="Alarm:" />
                 <TextBlock Margin="0,10,5,5" 
@@ -339,13 +268,7 @@
             </StackPanel>
 
             <!--Visibility="Collapsed"-->
-            <StackPanel Orientation="Horizontal" Margin="0,15,0,0" >
-                <Button ToolTip="Exit FAS program"
-                                    Command="{Binding Path=ExitHostCmd}"
-                                    Content="Exit Host"  />
-                <Button ToolTip="Open up Camstar internal website"
-                                    Command="{Binding Path=CamstarCmd}"
-                                    Content="Camstar"  />
+            <DockPanel Margin="0,5,0,0"  >
                 <StackPanel Orientation="Horizontal"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                     <Button ToolTip="Alarm listing during current run"
                                     Command="{Binding Path=AlarmListingCmd}"
@@ -354,51 +277,27 @@
                                     Command="{Binding Path=LogListingCmd}"
                                     Content="Logs"  />
                 </StackPanel>
-            </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"                    
+                            Margin="0,5,0,0" >
+                    <Button ToolTip="Go Remote" Width="160"
+                            Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"
+                                        Command="{Binding Path=GoRemoteCmd}"
+                                        Content="Go Remote"  />
+                    <Button ToolTip="Go Local" Width="160"
+                            Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}"                            
+                                        Command="{Binding Path=GoLocalCmd}"
+                                        Content="Go Local"  />
+                    <Button ToolTip="Open up Camstar internal website" Width="160"
+                                        Command="{Binding Path=CamstarCmd}"
+                                        Content="Camstar"  />
+                    <Button ToolTip="Reset FAS program" Width="160"
+                                    Command="{Binding Path=ExitHostCmd}"
+                                    Content="Reset Host"  />
+                </StackPanel>
+            </DockPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" 
-                    Margin="-30,0,0,0" VerticalAlignment="Bottom"
-                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
-            <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
-            <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
-            <Grid Margin="0,25,10,10" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="40"/>
-                </Grid.RowDefinitions>
-            
-            <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
-                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="Camstar MES" VerticalAlignment="Center"  />
-                <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <!--<TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="Binding CamstarStatus}" VerticalAlignment="Center" />-->
-            <!--</StackPanel>-->
-            <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
-            <TextBlock Grid.Row="2" Grid.Column="0" FontSize="22" Text="Equipment" VerticalAlignment="Center" />
-                <Border Grid.Row="2" Grid.Column="1" Background="{Binding EquipmentStatusColor}" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" FontSize="22" Text="{Binding EquipmentStatus}" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" FontSize="22" Text="Binding EquipmentStatus}" VerticalAlignment="Center" />-->
-                <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
-                <!--<Canvas>
-                    <Ellipse Canvas.Top="5" Canvas.Left="58"
-                            Fill="{Binding EquipmentStatusColor}" Height="25" Width="25" />
-                </Canvas>-->
-            <!--</StackPanel>-->
-            <!--<StackPanel Margin="15, 10, 5, 0" Orientation="Horizontal">
-                <Label Margin="0,0,0,0" FontSize="18" Content="Process State: " VerticalAlignment="Center" />
-                <TextBlock FontSize="18" Text="{Binding ProcessState}" VerticalAlignment="Center" />
-            </StackPanel>-->
-            </Grid>
-        </StackPanel>
-
+      
         <!--<StackPanel x:Name="entryPanel" 
                     Grid.Row="0" Grid.RowSpan="2"
                     Grid.Column="0" Grid.ColumnSpan="2"
@@ -411,51 +310,11 @@
                                     Width="1000" Height="800" />
         </StackPanel>-->
 
-        <!--<StackPanel x:Name="waferPanel"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="-1000,0,0,0"
-                    HorizontalAlignment="Left">
-            <StackPanel.RenderTransform>
-                <TranslateTransform />
-            </StackPanel.RenderTransform>
-            <view:WaferConfirmationView x:Name="waferView"
-                                    Width="1000" />
-        </StackPanel>-->
-
         <!--<Viewbox Width="60" 
                              Margin="-380,35,0,0" >
             <progress:CircularProgressBar Visibility="{Binding IsRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}" />
         </Viewbox>-->
-        <!--<Popup
-          x:Name="popup1"
-          IsHitTestVisible="False"
-          Placement="RelativePoint"
-          PlacementTarget="{Binding ElementName=me}"
-          AllowsTransparency="True">
-            <Border
-                BorderBrush="LightSteelBlue"
-                BorderThickness="2"
-                Background="White"
-                Opacity="0.75">
-                <StackPanel
-                      Orientation="Horizontal"
-                      Margin="4,3,8,3">     
-                    <Image
-                        Source="Images/DragInsert.png"
-                        Width="16"
-                        Height="16" />
-                    <TextBlock
-                        FontSize="14"
-                        FontWeight="Bold"
-                        VerticalAlignment="Center"
-                        Text="{Binding ElementName=me, Path=DraggedItem}"
-                        Margin="8,0,0,0" />
-                </StackPanel>
-            </Border>
-        </Popup>-->
+      
     </Grid>
 
 </Window>

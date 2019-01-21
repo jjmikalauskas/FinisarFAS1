@@ -47,13 +47,13 @@ namespace FinisarFAS1.ViewModel
             {
                 // Code runs in Blend --> create design time data.
                 // CamstarStatusColor = "Red";
-                CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
+                CurrentRecipe = @"Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
                 TimeToProcess = false;
             }
             else
             {
-                CurrentRecipe = @"Recipe: Production\6Inch\Contpe\V300";
+                CurrentRecipe = @"Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
                 TimeToProcess = false;
             }
@@ -79,7 +79,8 @@ namespace FinisarFAS1.ViewModel
 
             // Set UI bindings
             Started = false;
-            TimeToProcess = false; 
+            TimeToProcess = false;
+            IsRecipeOverridable = false;
             RaisePropertyChanged(nameof(AreThereWafers));
             Messenger.Default.Send(new WafersInGridMessage(0));
         }
@@ -222,17 +223,6 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        //private ObservableCollection<Wafer> port2Wafers;
-        //public ObservableCollection<Wafer> Port2Wafers
-        //{
-        //    get { return port2Wafers; }
-        //    set
-        //    {
-        //        port2Wafers = value;
-        //        RaisePropertyChanged(nameof(Port2Wafers));
-        //        Messenger.Default.Send(new WafersInGridMessage(port1Wafers?.Count));
-        //    }
-        //}
 
         private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount = MAXROWS)
         {
@@ -267,6 +257,18 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private bool _localMode;
+        public bool LocalMode {
+            get { return _localMode; }
+            set {
+                _localMode = value;
+                RaisePropertyChanged(nameof(LocalMode));
+                RaisePropertyChanged(nameof(IsLocal));
+            }
+        }
+
+        public bool IsLocal => LocalMode; 
+
         public bool IsStoppable => Started;
 
         public bool AreThereWafers {
@@ -282,6 +284,15 @@ namespace FinisarFAS1.ViewModel
                     }
                 }
                 return false; 
+            }
+        }
+
+        private bool _isRecipeOverridable;
+        public bool IsRecipeOverridable {
+            get { return _isRecipeOverridable; }
+            set {
+                _isRecipeOverridable = value;
+                RaisePropertyChanged(nameof(IsRecipeOverridable));
             }
         }
 
@@ -510,23 +521,6 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        //private string _processState2;
-        //public string ProcessState2 {
-        //    get { return _processState2; }
-        //    set {
-        //        _processState2 = value;
-        //        RaisePropertyChanged(nameof(ProcessState2));
-        //    }
-        //}
-
-        //private string gridData;
-        //public string GridData {
-        //    get { return gridData; }
-        //    set {
-        //        gridData = value;
-        //    }
-        //}
-
         private Operator Operator = null ; 
 
         private string _operatorID;
@@ -537,7 +531,11 @@ namespace FinisarFAS1.ViewModel
                 var op = _mesService.GetOperator(value);
                 // Set check box 
                 OperatorStatus = op == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
-                Operator = op; 
+                Operator = op;
+                if (Operator.AuthLevel != AuthorizationLevel.Operator)
+                    IsRecipeOverridable = true;
+                else
+                    IsRecipeOverridable = false; 
                 RaisePropertyChanged(nameof(OperatorID));
                 RaisePropertyChanged(nameof(OperatorLevel));
                 RaisePropertyChanged(nameof(OperatorColor));
@@ -697,6 +695,10 @@ namespace FinisarFAS1.ViewModel
         public ICommand StartCmd => new RelayCommand(startCmdHandler);
         public ICommand StopCmd => new RelayCommand(stopCmdHandler);
         public ICommand PauseCmd => new RelayCommand(pauseCmdHandler);
+        public ICommand AbortCmd => new RelayCommand(abortCmdHandler);
+
+        public ICommand GoLocalCmd => new RelayCommand(goLocalCmdHandler);
+        public ICommand GoRemoteCmd => new RelayCommand(goRemoteCmdHandler);
         public ICommand ResetCmd => new RelayCommand(resetCmdHandler);
 
         // PORT 2 CMDS
@@ -780,6 +782,26 @@ namespace FinisarFAS1.ViewModel
         {
             Started = false; 
             ProcessState = "Paused";
+        }
+
+        private void abortCmdHandler()
+        {
+            Started = false;
+            ProcessState = "Aborted";
+        }
+
+        private void goLocalCmdHandler()
+        {
+            Started = false;
+            LocalMode = true; 
+            ProcessState = "Local ONLY";
+        }
+
+        private void goRemoteCmdHandler()
+        {
+            Started = false;
+            LocalMode = false; 
+            ProcessState = "Remote Online";
         }
 
         private void resetCmdHandler()

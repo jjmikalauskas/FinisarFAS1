@@ -98,9 +98,6 @@
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Messages.cs" />
-    <Compile Include="View\RightSideButtonView.xaml.cs">
-      <DependentUpon>RightSideButtonView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\WaferGrid.xaml.cs">
       <DependentUpon>WaferGrid.xaml</DependentUpon>
     </Compile>
@@ -127,10 +124,6 @@
     <Page Include="View\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\RightSideButtonView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\WaferGrid.xaml">
       <SubType>Designer</SubType>
