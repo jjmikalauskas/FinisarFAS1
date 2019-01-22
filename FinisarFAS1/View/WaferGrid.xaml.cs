@@ -43,6 +43,13 @@ namespace FinisarFAS1.View
             this.NumberOfWafers = msg.NumberOfWafers.GetValueOrDefault();
         }
 
+        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            var box = sender as TextBox;
+            if (box != null)
+                box.SelectAll();
+        }
+
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
 

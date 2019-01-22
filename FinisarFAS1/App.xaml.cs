@@ -8,6 +8,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FinisarFAS1
 {
@@ -18,12 +20,31 @@ namespace FinisarFAS1
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyUpEvent, new KeyEventHandler(TextBox_HandleEnterKey));
+            base.OnStartup(e);
+
             IDialogService2 dialogService = new MyDialogService(MainWindow);
             dialogService.Register<DialogViewModel, DialogWindow>();
             var vm = new MainViewModel(dialogService);
             var view = new MainWindow { DataContext = vm };
             view.ShowDialog();
+
         }
+
+        // On KeyDown
+        private void TextBox_HandleEnterKey(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var uie = e.OriginalSource as UIElement;
+
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                uie.MoveFocus(
+                new TraversalRequest(
+                FocusNavigationDirection.Next));
+            }
+        }
+
         //public App()
         //{
         //    DisplayMainWindow();

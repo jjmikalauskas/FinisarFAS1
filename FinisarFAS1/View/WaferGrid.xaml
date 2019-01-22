@@ -48,14 +48,12 @@
                       Grid.Column="0" Grid.ColumnSpan="1" 
                       RowHeight="24" FontSize="16" 
                       ItemsSource="{Binding Port1Wafers}" AutoGenerateColumns="False" 
-                      IsReadOnly="True" 
-                      CanUserAddRows="False" CanUserReorderColumns="False"
-                      SelectionMode="Single"
+                      IsReadOnly="True"  CanUserAddRows="False" CanUserReorderColumns="False"
+                      SelectionMode="Extended" SelectionUnit="FullRow"
                       BeginningEdit="OnBeginEdit"
                       CellEditEnding="OnEndEdit" 
                       PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
-                      ContextMenuService.IsEnabled="{Binding CanRightClick}"
-                                      >
+                      ContextMenuService.IsEnabled="{Binding CanRightClick}" >
                 <DataGrid.ContextMenu>
                     <ContextMenu >
                         <MenuItem Header="Insert empty slot" Click="MoveUp_Click"  />
@@ -107,10 +105,13 @@
                                                 Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
                             <Label Content="Lot 1" HorizontalAlignment="Center" />
                             <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
+                                     GotKeyboardFocus="TextBox_GotKeyboardFocus"
+                                     KeyUp="TextBox_KeyUp" 
+                                     HorizontalAlignment="Center" />
                             <Label Content="Lot 2"  HorizontalAlignment="Center"  />
                             <TextBox Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
-                                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
+                                     GotKeyboardFocus="TextBox_GotKeyboardFocus"
+                                     KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >

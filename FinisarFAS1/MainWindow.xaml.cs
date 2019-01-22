@@ -61,7 +61,13 @@ namespace FinisarFAS1
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
+            var uie = e.OriginalSource as UIElement;
 
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                uie.MoveFocus( new TraversalRequest( FocusNavigationDirection.Next));
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
