@@ -83,6 +83,16 @@ namespace FinisarFAS1.View
         }
     }
 
+    class SelectedWafersInGridMessage
+    {
+        public List<Wafer> wafers { get; internal set; }
+
+        public SelectedWafersInGridMessage(List<Wafer> selectedWafers)
+        {
+            this.wafers = selectedWafers; 
+        }
+    }
+
     class CamstarStatusMessage
     {
         public string Availability { get; private set; } = "Offline";

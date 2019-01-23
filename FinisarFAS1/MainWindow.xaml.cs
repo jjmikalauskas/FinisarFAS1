@@ -109,125 +109,125 @@ namespace FinisarFAS1
             //}
         }
 
-    //    #region edit mode monitoring
+        //    #region edit mode monitoring
 
-    //    /// <summary>
-    //    /// State flag which indicates whether the grid is in edit
-    //    /// mode or not.
-    //    /// </summary>
-    //    public bool IsEditing { get; set; }
+        //    /// <summary>
+        //    /// State flag which indicates whether the grid is in edit
+        //    /// mode or not.
+        //    /// </summary>
+        //    public bool IsEditing { get; set; }
 
-    //    private void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-    //    {
-    //        IsEditing = true;
-    //        //in case we are in the middle of a drag/drop operation, cancel it...
-    //        if (IsDragging) ResetDragDrop();
-    //    }
+        //    private void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        //    {
+        //        IsEditing = true;
+        //        //in case we are in the middle of a drag/drop operation, cancel it...
+        //        if (IsDragging) ResetDragDrop();
+        //    }
 
-    //    private void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
-    //    {
-    //        IsEditing = false;
-    //    }
+        //    private void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        //    {
+        //        IsEditing = false;
+        //    }
 
-    //    #endregion
-    //    #region Drag and Drop Rows
+        //    #endregion
+        //    #region Drag and Drop Rows
 
-    //    /// <summary>
-    //    /// Keeps in mind whether
-    //    /// </summary>
-    //    public bool IsDragging { get; set; }
+        //    /// <summary>
+        //    /// Keeps in mind whether
+        //    /// </summary>
+        //    public bool IsDragging { get; set; }
 
-    //    /// <summary>
-    //    /// Initiates a drag action if the grid is not in edit mode.
-    //    /// </summary>
-    //    private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    //    {
-    //        if (IsEditing) return;
+        //    /// <summary>
+        //    /// Initiates a drag action if the grid is not in edit mode.
+        //    /// </summary>
+        //    private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //    {
+        //        if (IsEditing) return;
 
-    //        var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(_maindgPort1));
-    //        if (row == null || row.IsEditing) return;
+        //        var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(_maindgPort1));
+        //        if (row == null || row.IsEditing) return;
 
-    //        //set flag that indicates we're capturing mouse movements
-    //        IsDragging = true;
-    //        DraggedItem = (Wafer)row.Item;
-    //    }
-
-
-    //    /// <summary>
-    //    /// Completes a drag/drop operation.
-    //    /// </summary>
-    //    private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    //    {
-    //        if (!IsDragging || IsEditing)
-    //        {
-    //            return;
-    //        }
-
-    //        var vm = (MainViewModel)DataContext;
-    //        //get the target item
-    //        Wafer targetItem = (Wafer)_maindgPort1.SelectedItem;
-
-    //        if (targetItem == null || !ReferenceEquals(DraggedItem, targetItem))
-    //        {
-    //            //remove the source from the list
-    //            vm.Port1Wafers.Remove(DraggedItem);
-
-    //            //get target index
-    //            var targetIndex = vm.Port1Wafers.IndexOf(targetItem);
-
-    //            //move source at the target's location
-    //            vm.Port1Wafers.Insert(targetIndex, DraggedItem);
-
-    //            //select the dropped item
-    //            _maindgPort1.SelectedItem = DraggedItem;
-    //            //RenumberSlots(vm.Port1Wafers); 
-    //            Messenger.Default.Send(new RenumberWafersMessage()); 
-    //        }
-
-    //        //reset
-    //        ResetDragDrop();
-    //    }
-
-    ///// <summary>
-    ///// Closes the popup and resets the
-    ///// grid to read-enabled mode.
-    ///// </summary>
-    //private void ResetDragDrop()
-    //    {
-    //        IsDragging = false;
-    //        popup1.IsOpen = false;
-    //        _maindgPort1.IsReadOnly = false;
-    //    }
+        //        //set flag that indicates we're capturing mouse movements
+        //        IsDragging = true;
+        //        DraggedItem = (Wafer)row.Item;
+        //    }
 
 
-    //    /// <summary>
-    //    /// Updates the popup's position in case of a drag/drop operation.
-    //    /// </summary>
-    //    private void OnMouseMove(object sender, MouseEventArgs e)
-    //    {
-    //        if (!IsDragging || e.LeftButton != MouseButtonState.Pressed) return;
+        //    /// <summary>
+        //    /// Completes a drag/drop operation.
+        //    /// </summary>
+        //    private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //    {
+        //        if (!IsDragging || IsEditing)
+        //        {
+        //            return;
+        //        }
 
-    //        //display the popup if it hasn't been opened yet
-    //        if (!popup1.IsOpen)
-    //        {
-    //            //switch to read-only mode
-    //            _maindgPort1.IsReadOnly = true;
+        //        var vm = (MainViewModel)DataContext;
+        //        //get the target item
+        //        Wafer targetItem = (Wafer)_maindgPort1.SelectedItem;
 
-    //            //make sure the popup is visible
-    //            popup1.IsOpen = true;
-    //        }
+        //        if (targetItem == null || !ReferenceEquals(DraggedItem, targetItem))
+        //        {
+        //            //remove the source from the list
+        //            vm.Port1Wafers.Remove(DraggedItem);
+
+        //            //get target index
+        //            var targetIndex = vm.Port1Wafers.IndexOf(targetItem);
+
+        //            //move source at the target's location
+        //            vm.Port1Wafers.Insert(targetIndex, DraggedItem);
+
+        //            //select the dropped item
+        //            _maindgPort1.SelectedItem = DraggedItem;
+        //            //RenumberSlots(vm.Port1Wafers); 
+        //            Messenger.Default.Send(new RenumberWafersMessage()); 
+        //        }
+
+        //        //reset
+        //        ResetDragDrop();
+        //    }
+
+        ///// <summary>
+        ///// Closes the popup and resets the
+        ///// grid to read-enabled mode.
+        ///// </summary>
+        //private void ResetDragDrop()
+        //    {
+        //        IsDragging = false;
+        //        popup1.IsOpen = false;
+        //        _maindgPort1.IsReadOnly = false;
+        //    }
 
 
-    //        Size popupSize = new Size(popup1.ActualWidth, popup1.ActualHeight);
-    //        popup1.PlacementRectangle = new Rect(e.GetPosition(this), popupSize);
+        //    /// <summary>
+        //    /// Updates the popup's position in case of a drag/drop operation.
+        //    /// </summary>
+        //    private void OnMouseMove(object sender, MouseEventArgs e)
+        //    {
+        //        if (!IsDragging || e.LeftButton != MouseButtonState.Pressed) return;
 
-    //        //make sure the row under the grid is being selected
-    //        Point position = e.GetPosition(_maindgPort1);
-    //        var row = UIHelpers.TryFindFromPoint<DataGridRow>(_maindgPort1, position);
-    //        if (row != null) _maindgPort1.SelectedItem = row.Item;
-    //    }
+        //        //display the popup if it hasn't been opened yet
+        //        if (!popup1.IsOpen)
+        //        {
+        //            //switch to read-only mode
+        //            _maindgPort1.IsReadOnly = true;
 
-    //    #endregion
+        //            //make sure the popup is visible
+        //            popup1.IsOpen = true;
+        //        }
+
+
+        //        Size popupSize = new Size(popup1.ActualWidth, popup1.ActualHeight);
+        //        popup1.PlacementRectangle = new Rect(e.GetPosition(this), popupSize);
+
+        //        //make sure the row under the grid is being selected
+        //        Point position = e.GetPosition(_maindgPort1);
+        //        var row = UIHelpers.TryFindFromPoint<DataGridRow>(_maindgPort1, position);
+        //        if (row != null) _maindgPort1.SelectedItem = row.Item;
+        //    }
+
+        //    #endregion       
 
     }
 }

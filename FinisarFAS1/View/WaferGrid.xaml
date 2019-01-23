@@ -49,14 +49,16 @@
                       RowHeight="24" FontSize="16" 
                       ItemsSource="{Binding Port1Wafers}" AutoGenerateColumns="False" 
                       IsReadOnly="True"  CanUserAddRows="False" CanUserReorderColumns="False"
-                      SelectionMode="Extended" SelectionUnit="FullRow"
-                      BeginningEdit="OnBeginEdit"
-                      CellEditEnding="OnEndEdit" 
-                      PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
+                      SelectionMode="Extended" SelectionUnit="FullRow"                    
+                      SelectionChanged="DataGrid_SelectionChanged"                      
                       ContextMenuService.IsEnabled="{Binding CanRightClick}" >
+                <!--BeginningEdit="OnBeginEdit"
+                PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
+                      CellEditEnding="OnEndEdit"-->
+
                 <DataGrid.ContextMenu>
                     <ContextMenu >
-                        <MenuItem Header="Insert empty slot" Click="MoveUp_Click"  />
+                        <MenuItem Header="Insert empty slot" Click="Grid_RightClick"  />
                         <!--<MenuItem Header="Move Wafers down" Click="MoveDown_Click"  />-->
                     </ContextMenu>
                 </DataGrid.ContextMenu>
@@ -66,7 +68,12 @@
                         <Setter Property="Background" Value="{Binding StatusColor}"/>
                     </Style>
                 </DataGrid.RowStyle>
-                
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="#0078D7"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0078D7"/>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="5*" MinWidth="50"
                                                         Binding="{Binding Slot}"
@@ -104,12 +111,14 @@
                         <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
                                                 Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
                             <Label Content="Lot 1" HorizontalAlignment="Center" />
-                            <TextBox Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
+                            <TextBox Margin="0,0,0,0"
+                                Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
                                      GotKeyboardFocus="TextBox_GotKeyboardFocus"
                                      KeyUp="TextBox_KeyUp" 
                                      HorizontalAlignment="Center" />
-                            <Label Content="Lot 2"  HorizontalAlignment="Center"  />
-                            <TextBox Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
+                            <Label Margin="0,10,0,0" Content="Lot 2"  HorizontalAlignment="Center"  />
+                            <TextBox Margin="0,0,0,10"
+                                Text="{Binding Path=Port1Lot2, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="3" 
                                      GotKeyboardFocus="TextBox_GotKeyboardFocus"
                                      KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
                         </StackPanel>
@@ -130,19 +139,105 @@
                                     Background="{StaticResource ResourceKey=RedGlass}"
                                     IsEnabled="{Binding AreThereWafers}"
                                     Content="Cancel" />
+                            
+                            <StackPanel Margin="-60,60,0,0" Orientation="Vertical"
+                                        Visibility="{Binding AreThereWafers, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"
+                                        >
+                                <Button Height="80" ToolTip="Move up"
+                                        Background="Transparent" BorderBrush="Transparent"
+                                    Command="{Binding MoveUpCmd}" >
+                                    <StackPanel>
+                                        <Image Margin="0,0" Height="60" Source="../Images/up3.png" />
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                
+                                <Button Height="80" Margin="0,15,0,0" ToolTip="Add empty row"
+                                        Background="Transparent" BorderBrush="Transparent"
+                                    Command="{Binding AddEmptyRowCmd}" >
+                                    <StackPanel>
+                                        <Image Margin="0,0" Height="60" Source="../Images/both3.png" />
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Height="80" Margin="0,15,0,0" ToolTip="Move down"
+                                        Background="Transparent" BorderBrush="Transparent"
+                                    Command="{Binding MoveDownCmd}" >
+                                    <StackPanel>
+                                        <Image Margin="0,0" Height="60" Source="../Images/updown3.png" />
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                             <StackPanel Margin="0,5,0,0" Orientation="Vertical" >
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
-                                    <Label Margin="0,5,0,0" FontSize="18" Content="Port 1 Lot 1:" />
+                                    <Label Margin="0,5,0,0" FontSize="18" Content="Lot 1:" />
                                     <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                                                Text="{Binding Path=Port1Lot1}" HorizontalAlignment="Center" />
+                                               Text="{Binding Path=Port1Lot1}" HorizontalAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  >
-                                    <Label FontSize="18" Content="Port 1 Lot 2:"  />
+                                    <Label FontSize="18" Content="Lot 2:"
+                                           Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                                     <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
-                                                                 Text="{Binding Path=Port1Lot2}" HorizontalAlignment="Center" 
+                                               Text="{Binding Path=Port1Lot2}" HorizontalAlignment="Center" 
                                                Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                                 </StackPanel>
                             </StackPanel>

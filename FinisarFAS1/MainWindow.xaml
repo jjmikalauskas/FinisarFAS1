@@ -130,18 +130,18 @@
                     <TextBox x:Name="OperatorField" Width="250" KeyboardNavigation.TabIndex="0" 
                              Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}"                              
                              VerticalAlignment="Center" />
-                    <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                    <!--<Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
                            Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
-                           VerticalAlignment="Center" />
+                           VerticalAlignment="Center" />-->
                 </StackPanel>
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Tool:" VerticalAlignment="Center" />
                     <TextBox Width="180" KeyboardNavigation.TabIndex="1" 
                              Text="{Binding Path=Tool, UpdateSourceTrigger=LostFocus}"                              
                              VerticalAlignment="Center" />
-                    <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
+                    <!--<Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
                            Visibility="{Binding Tool, Converter={StaticResource ResourceKey=NullHiddenConverter}}"
-                           VerticalAlignment="Center" />
+                           VerticalAlignment="Center" />-->
                 </StackPanel>
 
                 <StackPanel Margin="15,5,0,0" Orientation="Vertical" 
@@ -291,7 +291,7 @@
                                         Command="{Binding Path=CamstarCmd}"
                                         Content="Camstar"  />
                     <Button ToolTip="Reset FAS program" Width="160"
-                                    Command="{Binding Path=ExitHostCmd}"
+                                    Command="{Binding Path=ResetHostCmd}"
                                     Content="Reset Host"  />
                 </StackPanel>
             </DockPanel>

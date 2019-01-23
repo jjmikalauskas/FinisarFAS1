@@ -30,7 +30,13 @@ namespace FinisarFAS1.View
 
             Messenger.Default.Register<WafersConfirmedMessage>(this, WafersConfirmedHandler);
             Messenger.Default.Register<WafersInGridMessage>(this, WafersInGridHandler);
+            Messenger.Default.Register<SelectedWafersInGridMessage>(this, SelectedWafersInGridHandler);
+        }
 
+        private void SelectedWafersInGridHandler(SelectedWafersInGridMessage msg)
+        {
+            if (msg.wafers?.Count>0)
+               msg.wafers.ForEach(wafer => _maindgPort1.SelectedItems.Add(wafer)); 
         }
 
         private void WafersConfirmedHandler(WafersConfirmedMessage msg)
@@ -63,16 +69,19 @@ namespace FinisarFAS1.View
         public static readonly DependencyProperty DraggedItemProperty =
         DependencyProperty.Register("DraggedItem", typeof(Wafer), typeof(MainWindow));
 
-    /// <summary>
-    /// Gets or sets the DraggedItem property.  This dependency property 
-    /// indicates ....
-    /// </summary>
-    public Wafer DraggedItem {
-        get { return (Wafer)GetValue(DraggedItemProperty); }
-        set { SetValue(DraggedItemProperty, value); }
-    }
+        /// <summary>
+        /// Gets or sets the DraggedItem property.  This dependency property 
+        /// indicates ....
+        /// </summary>
+        public Wafer DraggedItem {
+            get {
+                var w = (Wafer)GetValue(DraggedItemProperty);
+                return (Wafer)GetValue(DraggedItemProperty);
+            }
+            set { SetValue(DraggedItemProperty, value); }
+        }
 
-    #endregion
+        #endregion
 
     public bool IsConfirmed { get; set; }
     public int NumberOfWafers { get; set; }
@@ -198,7 +207,8 @@ namespace FinisarFAS1.View
         #endregion
 
         #region MENU HANDLERS
-        private void MoveUp_Click(object sender, RoutedEventArgs e)
+
+        private void Grid_RightClick(object sender, RoutedEventArgs e)
         {
             //Get the clicked MenuItem
             var menuItem = (MenuItem)sender;
@@ -218,11 +228,24 @@ namespace FinisarFAS1.View
             // yourObservableCollection.Remove(toDeleteFromBindedList);
         }
 
-        private void MoveDown_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         #endregion
+
+        public MainViewModel MyViewModel {
+            get {
+                return this.DataContext as MainViewModel;
+            }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ... Get SelectedItems from DataGrid.
+            var grid = sender as DataGrid;
+            var selected = grid.SelectedItems;
+
+            List<Wafer> selectedObjects = selected.OfType<Wafer>().ToList();
+
+            MyViewModel.SelectedWafers = selectedObjects;
+        }
     }
 }

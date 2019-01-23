@@ -88,7 +88,7 @@ namespace Common
 
         public override string ToString()
         {
-            return WaferID + " - " + ScribeID;
+            return Slot + "=>" + WaferID + " - " + ScribeID;
         }
 
     }

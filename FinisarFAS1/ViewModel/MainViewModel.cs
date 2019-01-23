@@ -64,8 +64,8 @@ namespace FinisarFAS1.ViewModel
             //
             _mesService = new MESCommunications.MESService(new MoqMESService());
 
-            InitializeSystem(); 
-           
+            InitializeSystem();
+
             Port1Wafers = CreateEmptyPortRows();
 
             SetupToolEnvironment();
@@ -162,28 +162,28 @@ namespace FinisarFAS1.ViewModel
             CurrentTool.Ports.LoadPort1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
             CurrentTool.Ports.LoadPort2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
 
-            Messenger.Default.Send<Tool>(CurrentTool); 
+            Messenger.Default.Send<Tool>(CurrentTool);
         }
 
         #region PUBLIC VARIABLES
         public int NumberOfLoadPorts;
         public bool LoadLock;
-        public string Port1Name; 
+        public string Port1Name;
         public string Port2Name;
-        public Tool CurrentTool; 
-        #endregion 
+        public Tool CurrentTool;
+        #endregion
 
         private void MoveWafersHandler(MoveWafersMessage msg)
         {
-            int idxToMove = MAXROWS  - msg.SlotToMove ;
+            int idxToMove = MAXROWS - msg.SlotToMove;
             Wafer mtWafer = new Wafer();
             // Remove top 1 if moving up
-            Port1Wafers.RemoveAt(0); 
+            Port1Wafers.RemoveAt(0);
             Port1Wafers.Insert(idxToMove, mtWafer);
             RenumberWafersHandler(null);
             RaisePropertyChanged("Port1Wafers");
         }
-       
+
         private void UpdateLoadPortsMsg(Tool msg)
         {
             Ports ports = msg?.Ports;
@@ -203,17 +203,15 @@ namespace FinisarFAS1.ViewModel
             {
                 PortDActive = true;
                 LoadPortNames.Add(ports.LoadPort4Name);
-            }            
+            }
         }
 
         #region UI BINDINGS
 
         private ObservableCollection<Wafer> port1Wafers;
-        public ObservableCollection<Wafer> Port1Wafers
-        {
+        public ObservableCollection<Wafer> Port1Wafers {
             get { return port1Wafers; }
-            set
-            {
+            set {
                 port1Wafers = value;
                 RaisePropertyChanged(nameof(Port1Wafers));
                 if (AreThereWafers)
@@ -267,7 +265,7 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        public bool IsLocal => LocalMode; 
+        public bool IsLocal => LocalMode;
 
         public bool IsStoppable => Started;
 
@@ -277,13 +275,13 @@ namespace FinisarFAS1.ViewModel
                     return false;
                 else
                 {
-                    for (int i=0; i<MAXROWS; ++i)
+                    for (int i = 0; i < MAXROWS; ++i)
                     {
                         if (!string.IsNullOrEmpty(port1Wafers[i].WaferID))
                             return true;
                     }
                 }
-                return false; 
+                return false;
             }
         }
 
@@ -298,8 +296,8 @@ namespace FinisarFAS1.ViewModel
 
         public bool CanRightClick {
             get {
-                
-                return !TimeToProcess && AreThereWafers; 
+
+                return !TimeToProcess && AreThereWafers;
             }
         }
 
@@ -309,10 +307,10 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (!string.IsNullOrEmpty(value) && _port1Lot1 != value)
                 {
-                    var dtWafers = _mesService.GetLotStatus(value); 
-                    if (dtWafers!=null)
+                    var dtWafers = _mesService.GetLotStatus(value);
+                    if (dtWafers != null)
                     {
-                        var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers); 
+                        var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers);
                         AddWafersToGrid(wafers);
                         //RaisePropertyChanged("Port1Wafers");
                     }
@@ -321,7 +319,7 @@ namespace FinisarFAS1.ViewModel
                 RaisePropertyChanged(nameof(Port1Lot1));
             }
         }
-       
+
         private string _port1Lot2;
         public string Port1Lot2 {
             get { return _port1Lot2; }
@@ -333,7 +331,7 @@ namespace FinisarFAS1.ViewModel
                     {
                         var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers);
                         _port1Lot2 = value;
-                        AddWafersToTopGrid(wafers); 
+                        AddWafersToTopGrid(wafers);
                         RaisePropertyChanged("Port1Wafers");
                     }
                 }
@@ -343,124 +341,6 @@ namespace FinisarFAS1.ViewModel
                 RaisePropertyChanged(nameof(Port1Lot2));
             }
         }
-
-        //  GRID MANIPULATION
-        private void AddWafersToTopGrid(List<Wafer> wafers)
-        {
-            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
-            ObservableCollection<Wafer> goodList = new ObservableCollection<Wafer>();
-            ObservableCollection<Wafer> bottomList = new ObservableCollection<Wafer>();
-            int slotNo = 0;
-
-            // Find first top index
-            int topIdx = 0;
-            for (int i = 0; i < MAXROWS; ++i)
-            {
-                if (!string.IsNullOrEmpty(currentWafers[i].WaferID))
-                {
-                    topIdx = i;
-                    break;
-                }
-            }
-
-            // Copy good rows to goodList
-            if (topIdx > 0)
-            {
-                for (int i = topIdx; i < MAXROWS; ++i)
-                {
-                    bottomList.Add(currentWafers[i]);
-                }
-            }
-
-            int newListCount = wafers.Count;
-
-            if (topIdx - newListCount < 0)
-            {
-                var vm = new DialogViewModel("There are too many new wafers to add to current list. Continue?", "Yes", "No");
-
-                bool? result = dialogService.ShowDialog(vm);
-                if (result.HasValue && result.GetValueOrDefault() == true)
-                {
-                }
-                Port1Wafers = currentWafers;
-                RenumberWafersHandler(null);
-                Port1Lot2 = ""; 
-                return; 
-            }
-            
-            // Set currentWafers to goodList and
-            Port1Wafers = new ObservableCollection<Wafer>(wafers);
-
-            // Add currentwafers to bottom then add in empty then renumber slots
-            foreach (var tempwafer in bottomList)
-            {
-                Port1Wafers.Add(tempwafer);
-            }
-
-            // Add in empty slots at top
-            slotNo = Port1Wafers.Count;
-            for (int i = MAXROWS - slotNo; i > 0; --i)
-            {
-                Port1Wafers.Insert(0, new Wafer());
-            }
-
-            RaisePropertyChanged(nameof(CanRightClick));
-
-            // Renumber
-            RenumberWafersHandler(null);
-        }
-
-        private void AddWafersToGrid(List<Wafer> wafers)
-        {
-            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
-            int slotNo = 0;
-
-            var goodList = currentWafers.ToList().Where(w => !string.IsNullOrEmpty(w.WaferID));
-            currentWafers = new ObservableCollection<Wafer>(goodList);
-
-            Port1Wafers = new ObservableCollection<Wafer>(wafers);
-
-            // Add currentwafers to bottom then add in empty then renumber slots
-            foreach (var tempwafer in currentWafers)
-            {
-                Port1Wafers.Add(tempwafer);
-            }
-
-            // Add in empty slots at top
-            slotNo = Port1Wafers.Count;
-            for (int i = MAXROWS - slotNo; i > 0; --i)
-            {
-                Port1Wafers.Insert(0, new Wafer());
-            }
-
-            RaisePropertyChanged(nameof(AreThereWafers));
-            RaisePropertyChanged(nameof(CanRightClick));
-            // Renumber
-            RenumberWafersHandler(null);
-        }
-
-        private void RenumberWafersHandler(RenumberWafersMessage msg)
-        {
-            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
-            int idx = 0; 
-            for (int i = MAXROWS-1; i >= 0; --i)
-            {
-                currentWafers[idx++].Slot = (i+1).ToString(); 
-            }
-            Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
-        }
-
-        private void SetAllWafersToMovedIn()
-        {
-            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
-            for (int i=0; i< currentWafers.Count; ++i)
-            {
-                if (!string.IsNullOrEmpty(currentWafers[i].WaferID))
-                    currentWafers[i].Status = "Moved In"; 
-            }
-            Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
-        }
-
 
         private string _processState;
         public string ProcessState {
@@ -472,22 +352,18 @@ namespace FinisarFAS1.ViewModel
         }
 
         private string _camstarStatus;
-        public string CamstarStatus
-        {
+        public string CamstarStatus {
             get { return _camstarStatus; }
-            set
-            {
+            set {
                 _camstarStatus = value;
                 RaisePropertyChanged(nameof(CamstarStatus));
             }
         }
 
         private string _equipmentStatus;
-        public string EquipmentStatus
-        {
+        public string EquipmentStatus {
             get { return _equipmentStatus; }
-            set
-            {
+            set {
                 _equipmentStatus = value;
                 RaisePropertyChanged(nameof(EquipmentStatus));
             }
@@ -521,7 +397,7 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        private Operator Operator = null ; 
+        private Operator Operator = null;
 
         private string _operatorID;
         public string OperatorID {
@@ -535,7 +411,7 @@ namespace FinisarFAS1.ViewModel
                 if (Operator.AuthLevel != AuthorizationLevel.Operator)
                     IsRecipeOverridable = true;
                 else
-                    IsRecipeOverridable = false; 
+                    IsRecipeOverridable = false;
                 RaisePropertyChanged(nameof(OperatorID));
                 RaisePropertyChanged(nameof(OperatorLevel));
                 RaisePropertyChanged(nameof(OperatorColor));
@@ -543,11 +419,10 @@ namespace FinisarFAS1.ViewModel
         }
 
         //private string _opLevel;
-        public string OperatorLevel
-        {
+        public string OperatorLevel {
             get {
                 if (Operator?.AuthLevel == AuthorizationLevel.Engineer)
-                    return "Engineer"; 
+                    return "Engineer";
                 else
                     if (Operator?.AuthLevel == AuthorizationLevel.Admin)
                     return "Administator";
@@ -559,8 +434,7 @@ namespace FinisarFAS1.ViewModel
         }
 
         //private string _opColor;
-        public string OperatorColor
-        {
+        public string OperatorColor {
             get {
                 if (OperatorStatus == "../Images/CheckBoxRed.png")
                     return "red";
@@ -686,12 +560,214 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        
+        #region GRID MANIPULATION
+        //  GRID MANIPULATION
+        private void AddWafersToTopGrid(List<Wafer> wafers)
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            ObservableCollection<Wafer> goodList = new ObservableCollection<Wafer>();
+            ObservableCollection<Wafer> bottomList = new ObservableCollection<Wafer>();
+            int slotNo = 0;
+
+            // Find first top index
+            int topIdx = 0;
+            for (int i = 0; i < MAXROWS; ++i)
+            {
+                if (!string.IsNullOrEmpty(currentWafers[i].WaferID))
+                {
+                    topIdx = i;
+                    break;
+                }
+            }
+
+            // Copy good rows to goodList
+            if (topIdx > 0)
+            {
+                for (int i = topIdx; i < MAXROWS; ++i)
+                {
+                    bottomList.Add(currentWafers[i]);
+                }
+            }
+
+            int newListCount = wafers.Count;
+
+            if (topIdx - newListCount < 0)
+            {
+                var vm = new DialogViewModel("There are too many new wafers to add to current list. Continue?", "Yes", "No");
+
+                bool? result = dialogService.ShowDialog(vm);
+                if (result.HasValue && result.GetValueOrDefault() == true)
+                {
+                }
+                Port1Wafers = currentWafers;
+                RenumberWafersHandler(null);
+                Port1Lot2 = "";
+                return;
+            }
+
+            // Set currentWafers to goodList and
+            Port1Wafers = new ObservableCollection<Wafer>(wafers);
+
+            // Add currentwafers to bottom then add in empty then renumber slots
+            foreach (var tempwafer in bottomList)
+            {
+                Port1Wafers.Add(tempwafer);
+            }
+
+            // Add in empty slots at top
+            slotNo = Port1Wafers.Count;
+            for (int i = MAXROWS - slotNo; i > 0; --i)
+            {
+                Port1Wafers.Insert(0, new Wafer());
+            }
+
+            RaisePropertyChanged(nameof(CanRightClick));
+
+            // Renumber
+            RenumberWafersHandler(null);
+        }
+
+        private void AddWafersToGrid(List<Wafer> wafers)
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            int slotNo = 0;
+
+            var goodList = currentWafers.ToList().Where(w => !string.IsNullOrEmpty(w.WaferID));
+            currentWafers = new ObservableCollection<Wafer>(goodList);
+
+            Port1Wafers = new ObservableCollection<Wafer>(wafers);
+
+            // Add currentwafers to bottom then add in empty then renumber slots
+            foreach (var tempwafer in currentWafers)
+            {
+                Port1Wafers.Add(tempwafer);
+            }
+
+            // Add in empty slots at top
+            slotNo = Port1Wafers.Count;
+            for (int i = MAXROWS - slotNo; i > 0; --i)
+            {
+                Port1Wafers.Insert(0, new Wafer());
+            }
+
+            RaisePropertyChanged(nameof(AreThereWafers));
+            RaisePropertyChanged(nameof(CanRightClick));
+            // Renumber
+            RenumberWafersHandler(null);
+        }
+
+        private void RenumberWafersHandler(RenumberWafersMessage msg)
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            for (int i = MAXROWS - 1, idx = 0; i >= 0; --i, ++idx)
+            {
+                string newSlot = (i + 1).ToString();
+                currentWafers[idx].Slot = newSlot;
+            }
+            Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
+        }
+
+        private void SetAllWafersToMovedIn()
+        {
+            ObservableCollection<Wafer> currentWafers = new ObservableCollection<Wafer>(Port1Wafers);
+            for (int i = 0; i < currentWafers.Count; ++i)
+            {
+                if (!string.IsNullOrEmpty(currentWafers[i].WaferID))
+                    currentWafers[i].Status = "Moved In";
+            }
+            Port1Wafers = new ObservableCollection<Wafer>(currentWafers);
+        }
+
+        public List<Wafer> SelectedWafers { get; set; }
+
+        private List<Wafer> GetAscendingListOfWafersBySlot(List<Wafer> selectedWafers)
+        {
+            List<Wafer> orderedList;
+            if (selectedWafers?.Count > 1)
+                orderedList = selectedWafers.OrderBy(w => Int32.Parse(w.Slot)).Reverse().ToList();
+            else
+                orderedList = new List<Wafer>(selectedWafers);
+            return orderedList;
+        }
+
+        private void moveUpCmdHandler()
+        {
+            int? cnt = SelectedWafers?.Count;
+            if (cnt == null || cnt <= 0) return;
+
+            // Remove from list 
+            List<Wafer> moveWafers = GetAscendingListOfWafersBySlot(SelectedWafers);
+
+            moveWafers.ForEach(wafer =>
+              {
+                  Port1Wafers.Remove(wafer);
+                  Port1Wafers.Insert(MAXROWS - Int32.Parse(wafer.Slot) - 1, wafer);
+              });
+            //for (int i = 0; i < cnt.GetValueOrDefault(); ++i)
+            //{
+            //    //int idx = Int32.Parse(moveWafers[i].Slot)-1;
+            //    //Port1Wafers.RemoveAt(idx);                
+            //    Port1Wafers.Remove(moveWafers[i]);
+            //}
+
+            // Reinsert at slot # which is 1 up
+            //for (int i = 0; i < cnt.GetValueOrDefault(); ++i)
+            //{
+            //    int idx = Int32.Parse(moveWafers[i].Slot);
+            //    moveWafers[i].Status = "Moved to " + idx.ToString();
+            //    Port1Wafers.Insert(idx, moveWafers[i]);
+            //}
+
+            RenumberWafersHandler(null);
+            Messenger.Default.Send(new SelectedWafersInGridMessage(moveWafers));
+        }
+
+        private void moveDownCmdHandler()
+        {
+            int? cnt = SelectedWafers?.Count;
+            if (cnt == null || cnt <= 0) return;
+
+            // Remove from list 
+            List<Wafer> moveWafers = GetAscendingListOfWafersBySlot(SelectedWafers);
+            if (moveWafers.Last().Slot == "1")
+                return;
+
+            moveWafers.Reverse();
+            moveWafers.ForEach(wafer =>
+            {
+                Port1Wafers.Remove(wafer);
+                Port1Wafers.Insert(MAXROWS - Int32.Parse(wafer.Slot) + 1, wafer);
+            });
+
+
+            RenumberWafersHandler(null);
+            Messenger.Default.Send(new SelectedWafersInGridMessage(moveWafers));
+        }
+
+        private void addEmptyRowCmdHandler()
+        {
+            int? cnt = SelectedWafers?.Count;
+            if (cnt == null || cnt <= 0) return;
+
+            // Remove from list 
+            List<Wafer> moveWafers = GetAscendingListOfWafersBySlot(SelectedWafers);
+
+            moveWafers.ForEach(wafer =>
+            {
+                Messenger.Default.Send(new MoveWafersMessage(wafer));
+            });            
+        }
+
+        #endregion
 
         // PORT 1 CMDS
         public ICommand ConfirmPort1Cmd => new RelayCommand(confirmPort1CmdHandler);
         public ICommand CancelPort1Cmd => new RelayCommand(cancelPort1CmdHandler);
-        //public ICommand LoadPortACmd => new RelayCommand(loadPortACmdHandler);
+
+        public ICommand MoveUpCmd => new RelayCommand(moveUpCmdHandler);
+        public ICommand MoveDownCmd => new RelayCommand(moveDownCmdHandler);
+        public ICommand AddEmptyRowCmd => new RelayCommand(addEmptyRowCmdHandler);
+
         public ICommand StartCmd => new RelayCommand(startCmdHandler);
         public ICommand StopCmd => new RelayCommand(stopCmdHandler);
         public ICommand PauseCmd => new RelayCommand(pauseCmdHandler);
@@ -699,22 +775,15 @@ namespace FinisarFAS1.ViewModel
 
         public ICommand GoLocalCmd => new RelayCommand(goLocalCmdHandler);
         public ICommand GoRemoteCmd => new RelayCommand(goRemoteCmdHandler);
-        public ICommand ResetCmd => new RelayCommand(resetCmdHandler);
+        public ICommand ResetHostCmd => new RelayCommand(resetHostCmdHandler);
 
-        // PORT 2 CMDS
-  //    public ICommand ConfirmPort2Cmd => new RelayCommand(confirmPort2CmdHandler);
-  //    public ICommand CancelPort2Cmd => new RelayCommand(cancelPort2CmdHandler);
-  //    //public ICommand LoadPort2Cmd => new RelayCommand(loadPort2CmdHandler);
-  //    public ICommand StartPort2Cmd => new RelayCommand(startPort2CmdHandler);
-  //    public ICommand StopPort2Cmd => new RelayCommand(stopPort2CmdHandler);
-  //    public ICommand PausePort2Cmd => new RelayCommand(pausePort2CmdHandler);
-  //    public ICommand ResetPort2Cmd => new RelayCommand(resetPort2CmdHandler);
-
-        public ICommand AlarmListingCmd => new RelayCommand(exitHostCmdHandler);
-        public ICommand LogListingCmd => new RelayCommand(exitHostCmdHandler);
+        public ICommand AlarmListingCmd => new RelayCommand(alarmListingCmdHandler);
+        public ICommand LogListingCmd => new RelayCommand(logListingCmdHandler);
         public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
         public ICommand CloseAlarmCmd => new RelayCommand(closeAlarmCmdHandler);
+
+        
 
         // PORT 1 CMD HANDLERS
         private void closeAlarmCmdHandler()
@@ -804,17 +873,23 @@ namespace FinisarFAS1.ViewModel
             ProcessState = "Remote Online";
         }
 
-        private void resetCmdHandler()
+        private void alarmListingCmdHandler()
         {
-            var vm = new DialogViewModel("Are you sure you want to Reset?", "Yes", "No");
+        }
+
+        private void logListingCmdHandler()
+        {
+
+        }
+
+        private void resetHostCmdHandler()
+        {
+            var vm = new DialogViewModel("Are you sure you want to Reset Host?", "Yes", "No");
 
             bool? result = dialogService.ShowDialog(vm);
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
-                Port1Wafers = CreateEmptyPortRows();
-                Port1Lot1 = Port1Lot2 = "";
-                TimeToProcess = false;
-                ProcessState = "Reset";
+                ReInitializeSystem();
             }
             else
             {
@@ -822,68 +897,16 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        // PORT 2 CMD HANDLERS
-        //private void confirmPort2CmdHandler()
-        //{
-        //    var vm = new DialogViewModel("Are you sure you want to Confirm these lots?", "Yes", "No");
-
-        //    bool? result = dialogService.ShowDialog(vm);
-        //    if (result.HasValue && result.GetValueOrDefault() == true)
-        //    {
-        //        TimeToProcess = true;
-        //        ProcessState2 = "Confirmed";
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
-
-        //private void cancelPort2CmdHandler()
-        //{
-        //    var vm = new DialogViewModel("Are you sure you want to Cancel?", "Yes", "No");
-
-        //    bool? result = dialogService.ShowDialog(vm);
-        //}
-
-        ////private void loadPort2CmdHandler()
-        ////{
-        ////    Messenger.Default.Send(new ShowEntryWindowMessage(true));
-        ////}
-
-        //private void startPort2CmdHandler()
-        //{
-        //    Started = true; 
-        //    ProcessState2 = "In Process...";
-        //}
-
-        //private void stopPort2CmdHandler()
-        //{
-        //    Started = false; 
-        //    ProcessState2 = "Stopped";
-        //    // Messenger.Default.Send(new ShowEntryWindowMessage(true));
-        //}
-
-        //private void pausePort2CmdHandler()
-        //{
-        //    ProcessState2 = "Paused";
-        //}
-
-        //private void resetPort2CmdHandler()
-        //{
-        //    var vm = new DialogViewModel("Are you sure you want to reset?", "Yes", "No");
-
-        //    bool? result = dialogService.ShowDialog(vm);
-        //    if (result.HasValue && result.GetValueOrDefault() == true)
-        //    {
-        //        TimeToProcess = false;
-        //        ProcessState2 = "Reset";
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
+        private void ReInitializeSystem()
+        {
+            Port1Wafers = CreateEmptyPortRows();
+            OperatorID = "";
+            Tool = "";
+            CurrentRecipe = ""; 
+            Port1Lot1 = Port1Lot2 = "";
+            TimeToProcess = false;
+            ProcessState = "Reset";
+        }
 
         private void exitHostCmdHandler()
         {
