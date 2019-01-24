@@ -46,6 +46,23 @@ namespace FinisarFAS1.View
         }
     }
 
+    class ShowLogWindowMessage
+    {
+        public bool bVisible;
+
+        public ShowLogWindowMessage(bool bVisible)
+        {
+            this.bVisible = bVisible;
+        }
+    }
+
+    class CloseLogMessage
+    {
+        public CloseLogMessage()
+        {
+        }
+    }
+
     class RenumberWafersMessage
     {
         public RenumberWafersMessage()

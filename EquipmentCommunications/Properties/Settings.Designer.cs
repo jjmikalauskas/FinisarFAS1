@@ -43,15 +43,6 @@ namespace EquipmentCommunications.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Port 1")]
-        public string LoadPort1Name {
-            get {
-                return ((string)(this["LoadPort1Name"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Load Port B2")]
         public string LoadPort2Name {
             get {
@@ -70,10 +61,37 @@ namespace EquipmentCommunications.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6-6-EVAP-01")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6-6-EVAP-03")]
         public string ToolID {
             get {
                 return ((string)(this["ToolID"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Port 1")]
+        public string LoadPort1Name {
+            get {
+                return ((string)(this["LoadPort1Name"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Pocket")]
+        public string SlotColumnName {
+            get {
+                return ((string)(this["SlotColumnName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Camstar Status")]
+        public string CamstarString {
+            get {
+                return ((string)(this["CamstarString"]));
             }
         }
     }

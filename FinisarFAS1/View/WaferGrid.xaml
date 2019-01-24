@@ -40,8 +40,8 @@
                  MouseMove="OnMouseMove" Orientation="Horizontal" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="900*" />
-                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1210" />
+                <ColumnDefinition Width="170"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid x:Name="_maindgPort1" 
@@ -75,28 +75,28 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="5*" MinWidth="50"
+                    <DataGridTextColumn Width="2*" MinWidth="60" 
                                                         Binding="{Binding Slot}"
-                                                        Header="Slot" />
-                    <DataGridTextColumn Width="4*" MinWidth="120"
+                                                        Header="Pocket" />
+                    <DataGridTextColumn Width="3*" MinWidth="120"
                                                         Binding="{Binding ContainerID}"
                                                         Header="Container ID" />
-                    <DataGridTextColumn Width="3*" MinWidth="140"
+                    <DataGridTextColumn Width="3*" MinWidth="125"
                                                         Binding="{Binding WaferNo}"
                                                         Header="Wafer ID" />
-                    <DataGridTextColumn Width="2*" MinWidth="140"
+                    <DataGridTextColumn Width="3*" MinWidth="125"
                                                         Binding="{Binding ScribeID}"
                                                         Header="Scribe ID" />
-                    <DataGridTextColumn Width="9*" MinWidth="140"
+                    <DataGridTextColumn Width="9*" MinWidth="125"
                                                         Binding="{Binding Product}"
                                                         Header="Product" />
-                    <DataGridTextColumn Width="12*" MinWidth="180"
+                    <DataGridTextColumn Width="12*" MinWidth="170"
                                                         Binding="{Binding Operation}" 
                                                         Header="Operation" />
-                    <DataGridTextColumn Width="15*" MinWidth="220"
+                    <DataGridTextColumn Width="15*" MinWidth="200"
                                                         Binding="{Binding Recipe}"
                                                         Header="Recipe" />
-                    <DataGridTextColumn Width="22*" MinWidth="220"
+                    <DataGridTextColumn Width="15*" MinWidth="200"
                                                         Binding="{Binding Status}"
                                                         Header="Wafer Status" />
                 </DataGrid.Columns>
@@ -109,7 +109,7 @@
                     <!--Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"-->
                     <StackPanel Margin="0,10,0,0" Orientation="Vertical" VerticalAlignment="Bottom" >
                         <StackPanel Margin="0,10,0,10" Orientation="Vertical" 
-                                                Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
+                                                Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
                             <Label Content="Lot 1" HorizontalAlignment="Center" />
                             <TextBox Margin="0,0,0,0"
                                 Text="{Binding Path=Port1Lot1, UpdateSourceTrigger=LostFocus}" KeyboardNavigation.TabIndex="2" 
@@ -123,7 +123,7 @@
                                      KeyUp="TextBox_KeyUp" HorizontalAlignment="Center" />
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
+                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}" >
                             <Button Margin="0,10,0,15" ToolTip="Do a MoveIn for these wafers"
                                     Background="{StaticResource ResourceKey=LimeGlass}"
                                     IsEnabled="{Binding AreThereWafers}"
@@ -226,7 +226,7 @@
                             </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                        <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                             <StackPanel Margin="0,5,0,0" Orientation="Vertical" >
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
                                     <Label Margin="0,5,0,0" FontSize="18" Content="Lot 1:" />

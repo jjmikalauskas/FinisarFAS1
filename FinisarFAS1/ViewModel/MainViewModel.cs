@@ -1,4 +1,5 @@
 using Common;
+using EquipmentCommunications;
 using FinisarFAS1.Utility;
 using FinisarFAS1.View;
 using GalaSoft.MvvmLight;
@@ -49,13 +50,11 @@ namespace FinisarFAS1.ViewModel
                 // CamstarStatusColor = "Red";
                 CurrentRecipe = @"Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
-                TimeToProcess = false;
             }
             else
             {
                 CurrentRecipe = @"Production\6Inch\Contpe\V300";
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
-                TimeToProcess = false;
             }
 
             this.dialogService = dialogService;
@@ -66,20 +65,21 @@ namespace FinisarFAS1.ViewModel
 
             InitializeSystem();
 
-            Port1Wafers = CreateEmptyPortRows();
-
-            SetupToolEnvironment();
+            Port1Wafers = CreateEmptyPortRows();            
         }
 
         private void InitializeSystem()
         {
             RegisterForMessages();
+
             // Default settings
             GetCurrentStatuses();
 
+            SetupToolEnvironment();
+            
             // Set UI bindings
             Started = false;
-            TimeToProcess = false;
+            TimeToStart = false;
             IsRecipeOverridable = false;
             RaisePropertyChanged(nameof(AreThereWafers));
             Messenger.Default.Send(new WafersInGridMessage(0));
@@ -88,9 +88,16 @@ namespace FinisarFAS1.ViewModel
         private void GetCurrentStatuses()
         {
             DataTable dtCamstar = _mesService.GetResourceStatus("Camstar-DEV", "Server IP:1.1.1.1");
+
+            // Update CamStar first 
             UpdateCamstarStatusHandler(new CamstarStatusMessage(dtCamstar));
 
-            UpdateEquipmentStatusHandler(new EquipmentStatusMessage("Online/Remote"));
+            // Get Tool status 
+            var equip = new EvaTech();
+            var equipStatus = "Offline";
+            if (equip.AreYouThere(null))
+                equipStatus = "Online:Remote"; 
+            UpdateEquipmentStatusHandler(new EquipmentStatusMessage(equipStatus));
 
             ProcessState = "Idle";
         }
@@ -121,7 +128,7 @@ namespace FinisarFAS1.ViewModel
         private void UpdateEquipmentStatusHandler(EquipmentStatusMessage msg)
         {
             string tempStatus = "Offline";
-            string tempColor = "Red";
+            string tempColor = "Red";           
 
             if (msg != null)
             {
@@ -162,6 +169,9 @@ namespace FinisarFAS1.ViewModel
             CurrentTool.Ports.LoadPort1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
             CurrentTool.Ports.LoadPort2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
 
+            CamstarStatusText = EquipmentCommunications.Properties.Settings.Default.CamstarString;
+
+            Title = "Factory Automation System -" + CurrentTool.ToolId; 
             Messenger.Default.Send<Tool>(CurrentTool);
         }
 
@@ -206,6 +216,16 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount = MAXROWS)
+        {
+            ObservableCollection<Wafer> tempList = new ObservableCollection<Wafer>();
+            // rowCount = 1; 
+            for (int i = rowCount; i > 0; --i)
+            {
+                tempList.Add(new Wafer() { Slot = i.ToString() });
+            }
+            return tempList;
+        }
         #region UI BINDINGS
 
         private ObservableCollection<Wafer> port1Wafers;
@@ -219,27 +239,15 @@ namespace FinisarFAS1.ViewModel
                 else
                     Messenger.Default.Send(new WafersInGridMessage(0));
             }
-        }
-
-
-        private ObservableCollection<Wafer> CreateEmptyPortRows(int rowCount = MAXROWS)
-        {
-            ObservableCollection<Wafer> tempList = new ObservableCollection<Wafer>();
-            // rowCount = 1; 
-            for (int i = rowCount; i > 0; --i)
-            {
-                tempList.Add(new Wafer() { Slot = i.ToString() });
-            }
-            return tempList;
-        }
+        }       
 
         // PORT 1
         private bool _timeToProcess;
-        public bool TimeToProcess {
+        public bool TimeToStart {
             get { return _timeToProcess; }
             set {
                 _timeToProcess = value;
-                RaisePropertyChanged(nameof(TimeToProcess));
+                RaisePropertyChanged(nameof(TimeToStart));
                 RaisePropertyChanged(nameof(CanRightClick));
                 Messenger.Default.Send(new WafersConfirmedMessage(value && AreThereWafers));
             }
@@ -297,7 +305,7 @@ namespace FinisarFAS1.ViewModel
         public bool CanRightClick {
             get {
 
-                return !TimeToProcess && AreThereWafers;
+                return !TimeToStart && AreThereWafers;
             }
         }
 
@@ -348,6 +356,23 @@ namespace FinisarFAS1.ViewModel
             set {
                 _processState = value;
                 RaisePropertyChanged(nameof(ProcessState));
+            }
+        }
+
+        private string _title;
+        public string Title {
+            get { return _title; }
+            set { _title = value;
+                RaisePropertyChanged(nameof(Title));
+            }
+        }
+
+        private string _camstarStatusText;
+        public string CamstarStatusText {
+            get { return _camstarStatusText; }
+            set {
+                _camstarStatusText = value;
+                RaisePropertyChanged(nameof(CamstarStatusText));
             }
         }
 
@@ -559,6 +584,10 @@ namespace FinisarFAS1.ViewModel
                 RaisePropertyChanged(nameof(PortDActive));
             }
         }
+
+        public AlarmViewModel AlarmVM => new AlarmViewModel(); 
+        public LogViewModel LogVM => new LogViewModel(); 
+
 
         #region GRID MANIPULATION
         //  GRID MANIPULATION
@@ -810,7 +839,7 @@ namespace FinisarFAS1.ViewModel
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
                 SetAllWafersToMovedIn(); 
-                TimeToProcess = true;
+                TimeToStart = true;
                 ProcessState = "Idle";
                 // Messenger.Default.Send(new WafersConfirmedMessage(true));
             }
@@ -827,10 +856,7 @@ namespace FinisarFAS1.ViewModel
             bool? result = dialogService.ShowDialog(vm); 
             if (result.HasValue && result==true)
             {
-                Port1Wafers = CreateEmptyPortRows();
-                Port1Lot1 = Port1Lot2 = "";
-                TimeToProcess = false;
-                ProcessState = "Idle";
+                ReInitializeSystem(1);
             }
         }
 
@@ -855,8 +881,19 @@ namespace FinisarFAS1.ViewModel
 
         private void abortCmdHandler()
         {
-            Started = false;
-            ProcessState = "Aborted";
+          
+            var vm = new DialogViewModel("Are you sure you want to Abort?", "Yes", "No");
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                Started = false;
+                ProcessState = "Aborted";
+                // ReInitializeSystem();
+            }
+            else
+            {
+
+            }
         }
 
         private void goLocalCmdHandler()
@@ -875,11 +912,12 @@ namespace FinisarFAS1.ViewModel
 
         private void alarmListingCmdHandler()
         {
+            Messenger.Default.Send(new ShowAlarmWindowMessage(true));
         }
 
         private void logListingCmdHandler()
         {
-
+            Messenger.Default.Send(new ShowLogWindowMessage(true));
         }
 
         private void resetHostCmdHandler()
@@ -897,15 +935,20 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
-        private void ReInitializeSystem()
-        {
+        private void ReInitializeSystem(int level=0)
+        {            
+            if (level == 0)
+            {
+                OperatorID = "";
+                Tool = "";
+                CurrentRecipe = "";
+            }
             Port1Wafers = CreateEmptyPortRows();
-            OperatorID = "";
-            Tool = "";
-            CurrentRecipe = ""; 
             Port1Lot1 = Port1Lot2 = "";
-            TimeToProcess = false;
+            TimeToStart = false;
             ProcessState = "Reset";
+            RaisePropertyChanged(nameof(AreThereWafers));
+            RaisePropertyChanged(nameof(CanRightClick));
         }
 
         private void exitHostCmdHandler()

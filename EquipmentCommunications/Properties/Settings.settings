@@ -8,9 +8,6 @@
     <Setting Name="LoadPorts" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LoadPort1Name" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Port 1</Value>
-    </Setting>
     <Setting Name="LoadPort2Name" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Load Port B2</Value>
     </Setting>
@@ -18,7 +15,16 @@
       <Value Profile="(Default)">EvaTec</Value>
     </Setting>
     <Setting Name="ToolID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">6-6-EVAP-01</Value>
+      <Value Profile="(Default)">6-6-EVAP-03</Value>
+    </Setting>
+    <Setting Name="LoadPort1Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Port 1</Value>
+    </Setting>
+    <Setting Name="SlotColumnName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Pocket</Value>
+    </Setting>
+    <Setting Name="CamstarString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Camstar Status</Value>
     </Setting>
   </Settings>
 </SettingsFile>

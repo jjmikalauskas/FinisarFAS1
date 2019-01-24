@@ -14,7 +14,7 @@
         Loaded="Window_Loaded" 
         Closing="Window_Closing" Background="Gray"
         FocusManager.FocusedElement="{Binding ElementName=OperatorField}"
-        Title="Factory Automation System - Tool: 6-6-EVAP-01" 
+        Title="{Binding Title}"
         ResizeMode="NoResize"
         MaxWidth="2000" Width="1400" Height="960" >
 
@@ -29,40 +29,39 @@
             <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
             <converters:OppositeBooleanToCollapsedConverter x:Key="OppositeBooleanToCollapsedConverter" />
 
-
-            <!--<Storyboard x:Key="expandWafer">
+            <Storyboard x:Key="expandAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
                     <DoubleAnimation Duration="0:0:0.5"
                                      From="0"
-                                     Storyboard.TargetName="waferPanel"
-                                     To="1000" />
+                                     Storyboard.TargetName="alarmPanel"
+                                     To="1310" />
                 </Storyboard>
             </Storyboard>
-            <Storyboard x:Key="collapseWafer">
+            <Storyboard x:Key="collapseAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
                     <DoubleAnimation Duration="0:0:0.3"
-                                     From="1000"
-                                     Storyboard.TargetName="waferPanel"
+                                     From="1310"
+                                     Storyboard.TargetName="alarmPanel"
                                      To="0" />
                 </Storyboard>
-            </Storyboard>-->
+            </Storyboard>
 
-            <!--<Storyboard x:Key="expandEntry">
+            <Storyboard x:Key="expandLog">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
                     <DoubleAnimation Duration="0:0:0.5"
                                      From="0"
-                                     Storyboard.TargetName="entryPanel"
-                                     To="1000" />
+                                     Storyboard.TargetName="logPanel"
+                                     To="1310" />
                 </Storyboard>
             </Storyboard>
-            <Storyboard x:Key="collapseEntry">
+            <Storyboard x:Key="collapseLog">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
                     <DoubleAnimation Duration="0:0:0.3"
-                                     From="1000"
-                                     Storyboard.TargetName="entryPanel"
+                                     From="1310"
+                                     Storyboard.TargetName="logPanel"
                                      To="0" />
                 </Storyboard>
-            </Storyboard>-->
+            </Storyboard>
 
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="15,10" />
@@ -76,6 +75,10 @@
                 <Setter Property="Height" Value="25" />
                 <Setter Property="Width" Value="120" />
                 <Setter Property="Margin" Value="0,5,3,0" />
+            </Style>
+
+            <Style TargetType="{x:Type TabPanel}">
+                <Setter Property="Background" Value="Transparent"></Setter>
             </Style>
 
             <DataTemplate x:Key="pledgeTemplate">
@@ -92,10 +95,6 @@
         <vm:MainViewModel></vm:MainViewModel>
     </Window.DataContext>-->
 
-    <!--<Window.Background>
-        <ImageBrush ImageSource="/Images/Blue1.jpg" Opacity="0.9" />
-    </Window.Background>-->
-
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
@@ -108,19 +107,20 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid   x:Name="layoutRoot" >
+    <Grid x:Name="layoutRoot" Background="Azure" >
         <!--MouseLeftButtonUp="OnMouseLeftButtonUp"
             MouseMove="OnMouseMove">-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="16*" />
+            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
             Margin="0,0,0,0" Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" >
@@ -130,27 +130,27 @@
                     <TextBox x:Name="OperatorField" Width="250" KeyboardNavigation.TabIndex="0" 
                              Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}"                              
                              VerticalAlignment="Center" />
-                    <!--<Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                    <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
                            Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
-                           VerticalAlignment="Center" />-->
+                           VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Tool:" VerticalAlignment="Center" />
                     <TextBox Width="180" KeyboardNavigation.TabIndex="1" 
                              Text="{Binding Path=Tool, UpdateSourceTrigger=LostFocus}"                              
                              VerticalAlignment="Center" />
-                    <!--<Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
+                    <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
                            Visibility="{Binding Tool, Converter={StaticResource ResourceKey=NullHiddenConverter}}"
-                           VerticalAlignment="Center" />-->
+                           VerticalAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Margin="15,5,0,0" Orientation="Vertical" 
-                            Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                            Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                     <StackPanel Orientation="Horizontal" >
-                        <Label FontSize="18" Content="Port 1 Lot 1:" />
+                        <Label FontSize="18" Content="Lot 1:" />
                         <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
                                    Text="{Binding Path=Port1Lot1}" VerticalAlignment="Center" />
-                        <Label Margin="15,0,0,0" FontSize="18" Content="Port 1 Lot 2:"
+                        <Label Margin="15,0,0,0" FontSize="18" Content="Lot 2:"
                                Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
                                />
                         <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
@@ -186,16 +186,16 @@
                        FontSize="18"
                        Text="{Binding CurrentRecipe}" />-->
             </StackPanel>
-            
 
-            <StackPanel Grid.Row="0" Grid.Column="1" Visibility="Collapsed"
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" 
                     Margin="0,0,0,0" VerticalAlignment="Bottom"
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
                 <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
                 <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
                 <Grid Margin="0,25,10,10" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="150" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -205,7 +205,7 @@
                     </Grid.RowDefinitions>
 
                     <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="Camstar MES" VerticalAlignment="Center"  />
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="{Binding CamstarStatusText}" VerticalAlignment="Center"  />
                     <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -222,36 +222,29 @@
                 </Grid>
             </StackPanel>
 
+        <!-- MAIN TABS-->
+        
+        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" >            
+            <TabItem Width="Auto" >
+                <TabItem.Header>
+                        <TextBlock Padding="10,5,0,0"  Text="{Binding LoadPortNames[0]}" />
+                </TabItem.Header>
+                <view:WaferGrid />
+            </TabItem>
 
-            <!-- MAIN TABS-->
-            <TabControl>
-                <TabItem Width="120" Background="LightGray">
-                    <TabItem.Header>
-                        <Grid Margin="-5,0" Height="31" Width="120" >
-                            <!--<ProgressBar Height="31" Width="120" Value="5" Foreground="Lime" />-->
-                            <TextBlock Padding="24,6,0,0" Text="{Binding LoadPortNames[0]}" />
-                        </Grid>
-                    </TabItem.Header>
-                    <view:WaferGrid Width="Auto" />
-                </TabItem>
+            <!--<TabItem  Height="30" Width="120" Background="LightGray" Visibility="{Binding PortBActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
+            </TabItem>
 
-                <TabItem  Height="30" Width="120" Background="LightGray" Visibility="{Binding PortBActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
-                   
-                </TabItem>
+            <TabItem Header="{Binding LoadPortNames[2]}" Visibility="{Binding PortCActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                <Label Content="Load port 3 table" />
+            </TabItem>
+            <TabItem Header="{Binding LoadPortNames[3]}" Visibility="{Binding PortDActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
+                <Label Content="Load port 4 table" />
+            </TabItem>-->
 
-                <TabItem Header="{Binding LoadPortNames[2]}" Visibility="{Binding PortCActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
-                    <Label Content="Load port 3 table" />
-                </TabItem>
-                <TabItem Header="{Binding LoadPortNames[3]}" Visibility="{Binding PortDActive, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}">
-                    <Label Content="Load port 4 table" />
-                </TabItem>
+        </TabControl>
 
-            </TabControl>
-        </StackPanel>
-
-        <!--<view:RightSideButtonView Grid.Row="0" Grid.Column="1" />-->
-
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+        <StackPanel Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="2"
                     Margin="0,0,0,0" 
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
@@ -269,7 +262,8 @@
 
             <!--Visibility="Collapsed"-->
             <DockPanel Margin="0,5,0,0"  >
-                <StackPanel Orientation="Horizontal"  Visibility="{Binding TimeToProcess, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                <StackPanel Orientation="Horizontal"  >
+                    <!--Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >-->
                     <Button ToolTip="Alarm listing during current run"
                                     Command="{Binding Path=AlarmListingCmd}"
                                     Content="Alarms"  />
@@ -296,19 +290,30 @@
                 </StackPanel>
             </DockPanel>
         </StackPanel>
-
       
-        <!--<StackPanel x:Name="entryPanel" 
-                    Grid.Row="0" Grid.RowSpan="2"
+        <StackPanel x:Name="alarmPanel" 
+                    Grid.Row="0" Grid.RowSpan="3"
                     Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="-1000,0,0,0"
+                    Margin="-1230,30,0,0"
                     HorizontalAlignment="Left">
             <StackPanel.RenderTransform>
                 <TranslateTransform />
             </StackPanel.RenderTransform>
-            <view:EntryWaferView x:Name="entryView"
-                                    Width="1000" Height="800" />
-        </StackPanel>-->
+            <view:AlarmLogView x:Name="alarmView"
+                                    Width="1210" Height="800" />
+        </StackPanel>
+
+        <StackPanel x:Name="logPanel" 
+                    Grid.Row="0" Grid.RowSpan="3"
+                    Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="-1230,30,0,0"
+                    HorizontalAlignment="Left">
+            <StackPanel.RenderTransform>
+                <TranslateTransform />
+            </StackPanel.RenderTransform>
+            <view:LogView x:Name="logView"
+                                    Width="1210" Height="800" />
+        </StackPanel>
 
         <!--<Viewbox Width="60" 
                              Margin="-380,35,0,0" >
