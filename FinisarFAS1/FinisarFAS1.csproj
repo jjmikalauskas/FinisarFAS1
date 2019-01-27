@@ -85,10 +85,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DragDrop\DragDropHelper.cs" />
-    <Compile Include="DragDrop\DraggedAdorner.cs" />
-    <Compile Include="DragDrop\InsertionAdorner.cs" />
-    <Compile Include="DragDrop\Utilities.cs" />
     <Compile Include="Utility\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
@@ -97,6 +93,7 @@
     <Compile Include="Utility\UIHelpers.cs" />
     <Compile Include="ViewModel\AlarmViewModel.cs" />
     <Compile Include="ViewModel\DialogViewModel.cs" />
+    <Compile Include="ViewModel\EmailViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AlarmLogView.xaml.cs">
@@ -106,6 +103,9 @@
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\Messages.cs" />
+    <Compile Include="View\EmailView.xaml.cs">
+      <DependentUpon>EmailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

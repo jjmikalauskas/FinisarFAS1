@@ -30,7 +30,7 @@ namespace FinisarFAS1.ViewModel
 
         private void closeAlarmHandler()
         {
-            Messenger.Default.Send(new ShowAlarmWindowMessage(false));
+            Messenger.Default.Send(new ToggleAlarmViewMessage(false));
         }
         
     }

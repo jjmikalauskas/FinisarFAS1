@@ -35,9 +35,9 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel  x:Name="layoutRoot" 
-                 MouseLeftButtonUp="OnMouseLeftButtonUp"
-                 MouseMove="OnMouseMove" Orientation="Horizontal" >
+    <StackPanel  x:Name="layoutRoot" >
+        <!--MouseLeftButtonUp="OnMouseLeftButtonUp"
+                 MouseMove="OnMouseMove" Orientation="Horizontal" >-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1210" />
@@ -51,17 +51,14 @@
                       IsReadOnly="True"  CanUserAddRows="False" CanUserReorderColumns="False"
                       SelectionMode="Extended" SelectionUnit="FullRow"                    
                       SelectionChanged="DataGrid_SelectionChanged"                      
-                      ContextMenuService.IsEnabled="{Binding CanRightClick}" >
-                <!--BeginningEdit="OnBeginEdit"
-                PreviewMouseLeftButtonDown="OnMouseLeftButtonDown"
-                      CellEditEnding="OnEndEdit"-->
-
-                <DataGrid.ContextMenu>
+                       >
+               
+                <!--<DataGrid.ContextMenu>
                     <ContextMenu >
                         <MenuItem Header="Insert empty slot" Click="Grid_RightClick"  />
-                        <!--<MenuItem Header="Move Wafers down" Click="MoveDown_Click"  />-->
+                        --><!--<MenuItem Header="Move Wafers down" Click="MoveDown_Click"  />--><!--
                     </ContextMenu>
-                </DataGrid.ContextMenu>
+                </DataGrid.ContextMenu>-->
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -242,12 +239,16 @@
                                 </StackPanel>
                             </StackPanel>
 
+                            
+
                             <Button Margin="0,15,0,15" ToolTip="Start processing for this load port"
                                     Background="{StaticResource ResourceKey=LimeGlass}" Foreground="White"
                                     Command="{Binding Path=StartCmd}"
                                     Visibility="{Binding Started, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}">
                                 <StackPanel Margin="0,-6,0,0" Orientation="Horizontal">
                                     <Label FontSize="28" >Start</Label>
+                                    <Label FontSize="13" Margin="-8,13,0,0" Content="{Binding StartTimerLeft}"
+                                           Visibility="{Binding StartTimerLeft, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                                     <Image Margin="5,5,0,0" Height="28" Source="../Images/play_button.png" />
                                 </StackPanel>
                             </Button>
@@ -279,7 +280,16 @@
                                     <!--<Image Margin="5,5,0,0" Height="28" Source="../Images/pause_button.png" />-->
                                 </StackPanel>
                             </Button>
-                            <!--Background="{StaticResource ResourceKey=BlackGlass}"-->
+                            <StackPanel Margin="0,260,0,0"  >
+                                <Button ToolTip="Go Remote" Width="140" FontSize="22"
+                                        Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"
+                                            Command="{Binding Path=GoRemoteCmd}"
+                                            Content="Go Remote"  />
+                                <Button ToolTip="Go Local" Width="140" FontSize="22"
+                                        Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}"                            
+                                            Command="{Binding Path=GoLocalCmd}"
+                                            Content="Go Local"  />
+                            </StackPanel>
 
                         </StackPanel>
                     </StackPanel>
@@ -309,9 +319,11 @@
                         FontSize="14"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
-                        Text="{Binding ElementName=me, Path=DraggedItem.WaferID}"
+                        Text="{Binding ElementName=me}"
                         Margin="8,0,0,0" />
                 </StackPanel>
+                <!--Text="{Binding ElementName=me, Path=DraggedItem.WaferID}"-->
+
             </Border>
         </Popup>
         

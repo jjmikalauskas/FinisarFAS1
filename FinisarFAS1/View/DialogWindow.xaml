@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FinisarFAS1.View"
         xmlns:converters="clr-namespace:FinisarFAS1.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="{Binding TitleText}" Height="200" Width="400">
+        Title="{Binding TitleText}" Height="340" Width="560">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
+            <converters:StringToOppositeVisibilityConverter x:Key="OppositeNullVisibilityConverter" />
             <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
             <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
             <converters:OppositeBooleanToCollapsedConverter x:Key="OppositeBooleanToCollapsedConverter" />
@@ -38,16 +39,25 @@
     <DockPanel Background="AliceBlue" >
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="12" HorizontalAlignment="Right" >
             <Button ToolTip="Ok" IsDefault="True"
-                                    Command="{Binding OkCommand}"
-                                    Background="{StaticResource ResourceKey=GreenGlass}"
-                                    Content="{Binding YesText}" />
+                    Command="{Binding OkCommand}"
+                    Background="{StaticResource ResourceKey=GreenGlass}"
+                    Content="{Binding YesText}"
+                    Visibility="{Binding YesText, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
+                    />
             <Button ToolTip="Cancel" IsCancel="True"
-                                    Command="{Binding CancelCommand}"
-                                    Background="{StaticResource ResourceKey=RedGlass}"
-                                    Content="{Binding CancelText}" />
+                    Command="{Binding CancelCommand}"
+                    Background="{StaticResource ResourceKey=RedGlass}"
+                    Content="{Binding CancelText}"
+                    Visibility="{Binding YesText, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
+            <Button ToolTip="Cancel" IsDefault="True"
+                    Command="{Binding CancelCommand}"
+                    Content="{Binding CancelText}"
+                    Visibility="{Binding YesText, Converter={StaticResource ResourceKey=OppositeNullVisibilityConverter}}" />
         </StackPanel>
         <TextBlock DockPanel.Dock="Top" FontSize="20" TextWrapping="Wrap"
+                   Width="Auto" Height="Auto"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="{Binding Message, FallbackValue='DIALOG MESSAGE'}" 
-                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    />
     </DockPanel> 
 </Window>

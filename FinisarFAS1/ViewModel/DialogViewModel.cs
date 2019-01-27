@@ -1,10 +1,6 @@
 ﻿using FinisarFAS1.Utility;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FinisarFAS1.ViewModel
@@ -15,7 +11,6 @@ namespace FinisarFAS1.ViewModel
         public string Message { get; private set; }
         public string YesText { get; private set; }
         public string CancelText { get; private set; }
-
 
         public DialogViewModel(string message, string yes, string cancel)
         {

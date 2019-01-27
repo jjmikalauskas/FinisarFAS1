@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Tests.MoqTests;
@@ -37,12 +38,23 @@ namespace FinisarFAS1.ViewModel
         private readonly IDialogService2 dialogService;
         private IMESService _mesService;
 
+        private Tool currentTool;
+
+        #region PUBLIC VARIABLES
+        //public int NumberOfLoadPorts;
+        //public bool LoadLock;
+        //public string Port1Name;
+        //public string Port2Name;
+        #endregion
+
         const int MAXROWS = 25;
+
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IDialogService2 dialogService)
+        public MainViewModel() // IDialogService2 dialogService)
         {
             if (IsInDesignMode)
             {
@@ -57,7 +69,10 @@ namespace FinisarFAS1.ViewModel
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
             }
 
-            this.dialogService = dialogService;
+            IDialogService2 dialogService1 = new MyDialogService(null);
+            dialogService1.Register<DialogViewModel, DialogWindow>();
+
+            this.dialogService = dialogService1;
             //
             // DI the MESService, for now use the Moq
             //
@@ -75,11 +90,16 @@ namespace FinisarFAS1.ViewModel
             // Default settings
             GetCurrentStatuses();
 
-            SetupToolEnvironment();
-            
+            CamstarStatusText = EquipmentCommunications.Properties.Settings.Default.CamstarString;
+
+            Title = "Factory Automation System -" + currentTool.ToolId;
+            // Messenger.Default.Send<Tool>(CurrentTool);
+
             // Set UI bindings
             Started = false;
             TimeToStart = false;
+            StartTimerLeft = ""; 
+            // RaisePropertyChanged(nameof(StartTimerLeft));
             IsRecipeOverridable = false;
             RaisePropertyChanged(nameof(AreThereWafers));
             Messenger.Default.Send(new WafersInGridMessage(0));
@@ -96,7 +116,11 @@ namespace FinisarFAS1.ViewModel
             var equip = new EvaTech();
             var equipStatus = "Offline";
             if (equip.AreYouThere(null))
-                equipStatus = "Online:Remote"; 
+                equipStatus = "Online:Remote";
+
+            currentTool = equip.SetupToolEnvironment();
+            Messenger.Default.Send(currentTool);
+            
             UpdateEquipmentStatusHandler(new EquipmentStatusMessage(equipStatus));
 
             ProcessState = "Idle";
@@ -155,33 +179,9 @@ namespace FinisarFAS1.ViewModel
             Messenger.Default.Register<Tool>(this, UpdateLoadPortsMsg);
             Messenger.Default.Register<RenumberWafersMessage>(this, RenumberWafersHandler);
             Messenger.Default.Register<MoveWafersMessage>(this, MoveWafersHandler);
+            Messenger.Default.Register<CloseEmailWindowMessage>(this, CloseEmailResponseMsgHandler);            
         }
-
-        private void SetupToolEnvironment()
-        {
-            // Read from Config 
-            CurrentTool = new Tool();
-            CurrentTool.ToolId = EquipmentCommunications.Properties.Settings.Default.ToolID;
-            CurrentTool.ToolBrand = EquipmentCommunications.Properties.Settings.Default.ToolBrand;
-            CurrentTool.NumberOfLoadPorts = EquipmentCommunications.Properties.Settings.Default.LoadPorts;
-            CurrentTool.LoadLock = EquipmentCommunications.Properties.Settings.Default.LoadLock;
-
-            CurrentTool.Ports.LoadPort1Name = EquipmentCommunications.Properties.Settings.Default.LoadPort1Name;
-            CurrentTool.Ports.LoadPort2Name = EquipmentCommunications.Properties.Settings.Default.LoadPort2Name;
-
-            CamstarStatusText = EquipmentCommunications.Properties.Settings.Default.CamstarString;
-
-            Title = "Factory Automation System -" + CurrentTool.ToolId; 
-            Messenger.Default.Send<Tool>(CurrentTool);
-        }
-
-        #region PUBLIC VARIABLES
-        public int NumberOfLoadPorts;
-        public bool LoadLock;
-        public string Port1Name;
-        public string Port2Name;
-        public Tool CurrentTool;
-        #endregion
+     
 
         private void MoveWafersHandler(MoveWafersMessage msg)
         {
@@ -197,8 +197,10 @@ namespace FinisarFAS1.ViewModel
         private void UpdateLoadPortsMsg(Tool msg)
         {
             Ports ports = msg?.Ports;
-            LoadPortNames = new ObservableCollection<string> { ports.LoadPort1Name };
+            LoadPortNames = new ObservableCollection<string> {  ports.LoadPort1Name };
 
+            // This probably needs to be a dictionary! 
+            // I should not rely on sequence...
             if (msg.NumberOfLoadPorts > 1)
             {
                 PortBActive = true;
@@ -226,6 +228,7 @@ namespace FinisarFAS1.ViewModel
             }
             return tempList;
         }
+
         #region UI BINDINGS
 
         private ObservableCollection<Wafer> port1Wafers;
@@ -808,11 +811,18 @@ namespace FinisarFAS1.ViewModel
 
         public ICommand AlarmListingCmd => new RelayCommand(alarmListingCmdHandler);
         public ICommand LogListingCmd => new RelayCommand(logListingCmdHandler);
+
         public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
         public ICommand CloseAlarmCmd => new RelayCommand(closeAlarmCmdHandler);
 
-        
+        private int startTimerLeft;
+
+        private string _startTimerLeft = "";
+        public string StartTimerLeft {
+            get { return "(" + _startTimerLeft + ")"; }
+            set { _startTimerLeft = value; RaisePropertyChanged(nameof(StartTimerLeft)); }
+        }
 
         // PORT 1 CMD HANDLERS
         private void closeAlarmCmdHandler()
@@ -838,15 +848,30 @@ namespace FinisarFAS1.ViewModel
             bool? result = dialogService.ShowDialog(vm);
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
-                SetAllWafersToMovedIn(); 
+                SetAllWafersToMovedIn();
                 TimeToStart = true;
                 ProcessState = "Idle";
-                // Messenger.Default.Send(new WafersConfirmedMessage(true));
+                StartTimer(300);
             }
             else
             {
 
             }
+        }
+
+        private void StartTimer(int seconds)
+        {
+            dispatcherTimer.Tick += new EventHandler(startTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            startTimerLeft = seconds;
+            StartTimerLeft = seconds.ToString(); 
+            dispatcherTimer.Start();
+        }
+
+        private void StopTimer()
+        {
+            dispatcherTimer.Stop();
+            dispatcherTimer.Tick -= new EventHandler(startTimer_Tick);
         }
 
         private void cancelPort1CmdHandler()
@@ -862,15 +887,55 @@ namespace FinisarFAS1.ViewModel
 
         private void startCmdHandler()
         {
+            StopTimer();
+            var vm = new DialogViewModel("Please make sure the door is closed and the ports are ready", "Yes", "No");
+
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                
+            }
+            else
+            {
+
+            }
             Started = true; 
             ProcessState = "In Process";
         }
 
+        private void startTimerExpiredHandler()
+        {
+            StopTimer();
+            var vm = new DialogViewModel("The timer has expired to press Start. This lot will be placed onHold in Camstar now.", "", "Ok");
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true) {
+            }
+            else {
+            }
+            emailViewHandler("Start Timer expired");
+            ReInitializeSystem();
+        }
+
+        private void startTimer_Tick(object sender, EventArgs e)
+        {
+            --startTimerLeft;
+            if (startTimerLeft <= 0)
+            {
+                StopTimer();
+                startTimerExpiredHandler();
+            }
+            else
+            {
+                StartTimerLeft = startTimerLeft.ToString();
+            }
+        }
+
         private void stopCmdHandler()
         {
+            StopTimer();
             Started = false; 
             ProcessState = "Stopped";
-            Messenger.Default.Send(new ShowAlarmWindowMessage(true));
+            // Not sure why I ever called this? Messenger.Default.Send(new ToggleAlarmViewMessage());
         }
 
         private void pauseCmdHandler()
@@ -881,14 +946,14 @@ namespace FinisarFAS1.ViewModel
 
         private void abortCmdHandler()
         {
-          
+            StopTimer();
             var vm = new DialogViewModel("Are you sure you want to Abort?", "Yes", "No");
             bool? result = dialogService.ShowDialog(vm);
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
                 Started = false;
                 ProcessState = "Aborted";
-                // ReInitializeSystem();
+                ReInitializeSystem();
             }
             else
             {
@@ -912,29 +977,51 @@ namespace FinisarFAS1.ViewModel
 
         private void alarmListingCmdHandler()
         {
-            Messenger.Default.Send(new ShowAlarmWindowMessage(true));
+            Messenger.Default.Send(new ToggleAlarmViewMessage());
         }
 
         private void logListingCmdHandler()
         {
-            Messenger.Default.Send(new ShowLogWindowMessage(true));
+            Messenger.Default.Send(new ToggleLogViewMessage());
         }
 
         private void resetHostCmdHandler()
         {
-            var vm = new DialogViewModel("Are you sure you want to Reset Host?", "Yes", "No");
-
-            bool? result = dialogService.ShowDialog(vm);
-            if (result.HasValue && result.GetValueOrDefault() == true)
-            {
+            //var vm = new DialogViewModel("Are you sure you want to Reset Host?", "Yes", "No");
+            //bool? result = dialogService.ShowDialog(vm);
+            //if (result.HasValue && result.GetValueOrDefault() == true)
+            //{
+                emailViewHandler("Resetting Host"); 
                 ReInitializeSystem();
+            //}
+            //else
+            //{
+
+            //}
+        }
+
+        private void emailViewHandler(string eventText)
+        {    
+            var vm = new EmailViewModel("ZahirHague@FinisarCorp.com", eventText);
+            var view = new EmailView() { DataContext = vm, WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            view.ShowDialog();
+        }
+
+        private void CloseEmailResponseMsgHandler(CloseEmailWindowMessage msg)
+        {
+            if (!string.IsNullOrEmpty(msg.SendTo))
+            {
+                string s = $"FAS would be sending email to {msg.SendTo} about {msg.Subject} with body {msg.EmailBody}";
+                var vm = new DialogViewModel(s, "Yes", "No");
+                bool? result = dialogService.ShowDialog(vm);
             }
             else
             {
-
+                var vm = new DialogViewModel("Operator cancelled the sending of email", "Yes", "No");
+                bool? result = dialogService.ShowDialog(vm);
             }
         }
-
+       
         private void ReInitializeSystem(int level=0)
         {            
             if (level == 0)
@@ -946,6 +1033,7 @@ namespace FinisarFAS1.ViewModel
             Port1Wafers = CreateEmptyPortRows();
             Port1Lot1 = Port1Lot2 = "";
             TimeToStart = false;
+            StartTimerLeft = "";
             ProcessState = "Reset";
             RaisePropertyChanged(nameof(AreThereWafers));
             RaisePropertyChanged(nameof(CanRightClick));

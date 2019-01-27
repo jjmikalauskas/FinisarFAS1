@@ -23,12 +23,12 @@ namespace FinisarFAS1
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyUpEvent, new KeyEventHandler(TextBox_HandleEnterKey));
             base.OnStartup(e);
 
-            IDialogService2 dialogService = new MyDialogService(MainWindow);
-            dialogService.Register<DialogViewModel, DialogWindow>();
-            var vm = new MainViewModel(dialogService);
+            //IDialogService2 dialogService = new MyDialogService(MainWindow);
+            //dialogService.Register<DialogViewModel, DialogWindow>();
+            //var vm = new MainViewModel(dialogService);          
+            var vm = new MainViewModel();
             var view = new MainWindow { DataContext = vm };
             view.ShowDialog();
-
         }
 
         // On KeyDown

@@ -1,11 +1,9 @@
-﻿<Window x:Class="FinisarFAS1.MainWindow"
-     
+﻿<Window x:Class="FinisarFAS1.MainWindow"     
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:FinisarFAS1.Converters"        
-        xmlns:dragdrop="clr-namespace:DragDrop"        
         xmlns:progress="clr-namespace:ThreadingComponent"
         xmlns:local="clr-namespace:FinisarFAS1"
         xmlns:view="clr-namespace:FinisarFAS1.View"
@@ -31,37 +29,37 @@
 
             <Storyboard x:Key="expandAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.5"
+                    <DoubleAnimation Duration="0:0:0.1"
                                      From="0"
                                      Storyboard.TargetName="alarmPanel"
-                                     To="1310" />
+                                     To="1385" />
                 </Storyboard>
             </Storyboard>
             <Storyboard x:Key="collapseAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.3"
-                                     From="1310"
+                    <DoubleAnimation Duration="0:0:0.1"
+                                     From="1385"
                                      Storyboard.TargetName="alarmPanel"
                                      To="0" />
                 </Storyboard>
             </Storyboard>
 
-            <Storyboard x:Key="expandLog">
+            <!--<Storyboard x:Key="expandLog">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.5"
+                    <DoubleAnimation Duration="0:0:0.1"
                                      From="0"
                                      Storyboard.TargetName="logPanel"
-                                     To="1310" />
+                                     To="1390" />
                 </Storyboard>
             </Storyboard>
             <Storyboard x:Key="collapseLog">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.3"
-                                     From="1310"
+                    <DoubleAnimation Duration="0:0:0.1"
+                                     From="1390"
                                      Storyboard.TargetName="logPanel"
                                      To="0" />
                 </Storyboard>
-            </Storyboard>
+            </Storyboard>-->
 
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="15,10" />
@@ -273,14 +271,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"                    
                             Margin="0,5,0,0" >
-                    <Button ToolTip="Go Remote" Width="160"
-                            Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"
-                                        Command="{Binding Path=GoRemoteCmd}"
-                                        Content="Go Remote"  />
-                    <Button ToolTip="Go Local" Width="160"
-                            Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}"                            
-                                        Command="{Binding Path=GoLocalCmd}"
-                                        Content="Go Local"  />
+                    
                     <Button ToolTip="Open up Camstar internal website" Width="160"
                                         Command="{Binding Path=CamstarCmd}"
                                         Content="Camstar"  />
@@ -294,25 +285,24 @@
         <StackPanel x:Name="alarmPanel" 
                     Grid.Row="0" Grid.RowSpan="3"
                     Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="-1230,30,0,0"
+                    Margin="-1385,0,0,0"
                     HorizontalAlignment="Left">
             <StackPanel.RenderTransform>
                 <TranslateTransform />
             </StackPanel.RenderTransform>
             <view:AlarmLogView x:Name="alarmView"
-                                    Width="1210" Height="800" />
+                                    Width="1385" Height="800" />
         </StackPanel>
 
-        <StackPanel x:Name="logPanel" 
+        <StackPanel x:Name="logPanel" Visibility="Collapsed"
                     Grid.Row="0" Grid.RowSpan="3"
                     Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="-1230,30,0,0"
-                    HorizontalAlignment="Left">
+                    Margin="0,0" >
             <StackPanel.RenderTransform>
                 <TranslateTransform />
             </StackPanel.RenderTransform>
             <view:LogView x:Name="logView"
-                                    Width="1210" Height="800" />
+                                    Width="1385" Height="800" />
         </StackPanel>
 
         <!--<Viewbox Width="60" 

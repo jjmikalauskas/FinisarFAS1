@@ -35,8 +35,8 @@ namespace FinisarFAS1
 
             InitializeComponent();
 
-            Messenger.Default.Register<ShowAlarmWindowMessage>(this, ShowAlarmViewMsg);
-            Messenger.Default.Register<ShowLogWindowMessage>(this, ShowLogViewMsg);
+            Messenger.Default.Register<ToggleAlarmViewMessage>(this, ShowAlarmViewMsg);
+            Messenger.Default.Register<ToggleLogViewMessage>(this, ShowLogViewMsg);
         } 
         
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
@@ -57,8 +57,8 @@ namespace FinisarFAS1
             this.BeginStoryboard((Storyboard)this.Resources["expandAlarm"]);
             this.BeginStoryboard((Storyboard)this.Resources["collapseAlarm"]);
 
-            this.BeginStoryboard((Storyboard)this.Resources["expandLog"]);
-            this.BeginStoryboard((Storyboard)this.Resources["collapseLog"]);
+            //this.BeginStoryboard((Storyboard)this.Resources["expandLog"]);
+            //this.BeginStoryboard((Storyboard)this.Resources["collapseLog"]);
             //this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
 
         }
@@ -68,27 +68,41 @@ namespace FinisarFAS1
             // Messenger.Default.Send(new CancelTransactionMessage());
         }
 
-        private void ShowAlarmViewMsg(ShowAlarmWindowMessage msg)
+        static bool alarmOut = false;
+        static bool logOut = false; 
+
+        private void ShowAlarmViewMsg(ToggleAlarmViewMessage msg)
         {
-            if (msg.bVisible)
+            alarmOut = !alarmOut; 
+            //if (msg.bVisible)
+            if (alarmOut)
             {
-                this.BeginStoryboard((Storyboard)this.Resources["expandAlarm"]);
+                if (logPanel.Visibility == Visibility.Visible)
+                    ShowLogViewMsg(new ToggleLogViewMessage(false));
+                this.BeginStoryboard((Storyboard)this.Resources["expandAlarm"]);                
             }
             else
             {
                 this.BeginStoryboard((Storyboard)this.Resources["collapseAlarm"]);
             }
+            // alarmOut = msg.bVisible;
         }
 
-        private void ShowLogViewMsg(ShowLogWindowMessage msg)
+        private void ShowLogViewMsg(ToggleLogViewMessage msg)
         {
-            if (msg.bVisible)
+            logOut = !logOut;
+            //if (msg.bVisible)
+            if (logOut)
             {
-                this.BeginStoryboard((Storyboard)this.Resources["expandLog"]);
+                if (alarmOut)
+                    ShowAlarmViewMsg(new ToggleAlarmViewMessage(false)); 
+                logPanel.Visibility = Visibility.Visible;
+                //this.BeginStoryboard((Storyboard)this.Resources["expandLog"]);
             }
             else
             {
-                this.BeginStoryboard((Storyboard)this.Resources["collapseLog"]);
+                logPanel.Visibility = Visibility.Collapsed;
+                //this.BeginStoryboard((Storyboard)this.Resources["collapseLog"]);
             }
         }
 

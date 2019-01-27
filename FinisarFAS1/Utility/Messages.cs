@@ -29,13 +29,14 @@ namespace FinisarFAS1.View
         }
     }
 
-    class ShowAlarmWindowMessage
+    class ToggleAlarmViewMessage
     {
-        public bool bVisible;
+        public bool bVisible = false;
 
-        public ShowAlarmWindowMessage(bool bVisible)
+        public ToggleAlarmViewMessage(bool? bVisible = null)
         {
-            this.bVisible = bVisible;
+            if (!bVisible.HasValue)
+                this.bVisible = bVisible.GetValueOrDefault();
         }
     }
 
@@ -46,20 +47,14 @@ namespace FinisarFAS1.View
         }
     }
 
-    class ShowLogWindowMessage
+    class ToggleLogViewMessage
     {
-        public bool bVisible;
+        public bool bVisible = false;
 
-        public ShowLogWindowMessage(bool bVisible)
+        public ToggleLogViewMessage(bool? bVisible = null)
         {
-            this.bVisible = bVisible;
-        }
-    }
-
-    class CloseLogMessage
-    {
-        public CloseLogMessage()
-        {
+            if (!bVisible.HasValue)
+                this.bVisible = bVisible.GetValueOrDefault();
         }
     }
 
@@ -146,46 +141,60 @@ namespace FinisarFAS1.View
         {
             this.Availability = availability;
         }
-    }
+    }   
 
-    class GoToMainWindowMessage
+    class CloseEmailWindowMessage
     {
-        public bool bVisible;
-        private string op;
-        private Tool tool;
-        private Lot lot;
+        public string SendTo { get; private set; } = "";
+        public string Subject { get; private set; } = "";
+        public string EmailBody { get; private set; } = "";
 
-        public GoToMainWindowMessage(string op, Tool tool, Lot lot, bool bVisible)
+        public CloseEmailWindowMessage(string sendTo, string subject, string emailBody)
         {
-            this.op = op;
-            this.tool = tool;
-            this.lot = lot;
-            this.bVisible = bVisible;
+            this.SendTo = sendTo;
+            this.Subject = subject;
+            this.EmailBody = emailBody;
         }
     }
 
-    internal class EntryValuesMessage           // message for sneding the main 3 values around
-    {
-        public string op;
-        public Tool tool;
-        public Lot lot;
-        public List<Wafer> wafers; 
+    //class GoToMainWindowMessage
+    //{
+    //    public bool bVisible;
+    //    private string op;
+    //    private Tool tool;
+    //    private Lot lot;
 
-        public EntryValuesMessage(string op, Tool tool, Lot lot, List<Wafer> wafers)       
-        {
-            this.op = op;
-            this.tool = tool;
-            this.lot = lot;
-            this.wafers = wafers; 
-        }
-    }
+    //    public GoToMainWindowMessage(string op, Tool tool, Lot lot, bool bVisible)
+    //    {
+    //        this.op = op;
+    //        this.tool = tool;
+    //        this.lot = lot;
+    //        this.bVisible = bVisible;
+    //    }
+    //}
 
-    class ShowSearchBlurMessage
-    {
-        public bool blurOn;
-        public ShowSearchBlurMessage(bool blur)
-        {
-            blurOn = blur;
-        }
-    }
+    //internal class EntryValuesMessage           // message for sneding the main 3 values around
+    //{
+    //    public string op;
+    //    public Tool tool;
+    //    public Lot lot;
+    //    public List<Wafer> wafers; 
+
+    //    public EntryValuesMessage(string op, Tool tool, Lot lot, List<Wafer> wafers)       
+    //    {
+    //        this.op = op;
+    //        this.tool = tool;
+    //        this.lot = lot;
+    //        this.wafers = wafers; 
+    //    }
+    //}
+
+    //class ShowSearchBlurMessage
+    //{
+    //    public bool blurOn;
+    //    public ShowSearchBlurMessage(bool blur)
+    //    {
+    //        blurOn = blur;
+    //    }
+    //}
 }

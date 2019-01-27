@@ -10,12 +10,27 @@ namespace EquipmentCommunications
     public class EvaTech : IEquipmentMessages
     {
         // EvaTech spcific variables
+        public Tool currentTool; 
 
         Random r = new Random(); 
 
         public EvaTech()
         {
+        }
 
+        public Tool SetupToolEnvironment()
+        {
+            // Read from Config 
+            Tool CurrentTool = new Tool();
+            CurrentTool.ToolId = Properties.Settings.Default.ToolID;
+            CurrentTool.ToolBrand = Properties.Settings.Default.ToolBrand;
+            CurrentTool.NumberOfLoadPorts = Properties.Settings.Default.LoadPorts;
+            CurrentTool.LoadLock = Properties.Settings.Default.LoadLock;
+
+            CurrentTool.Ports.LoadPort1Name = Properties.Settings.Default.LoadPort1Name;
+            CurrentTool.Ports.LoadPort2Name = Properties.Settings.Default.LoadPort2Name;
+         
+            return CurrentTool;
         }
 
         public bool AreYouThere(object equipmentId)

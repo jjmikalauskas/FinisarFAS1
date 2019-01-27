@@ -30,7 +30,7 @@ namespace FinisarFAS1.ViewModel
 
         private void closeLogHandler()
         {
-            Messenger.Default.Send(new ShowLogWindowMessage(false));
+            Messenger.Default.Send(new ToggleLogViewMessage(false));
         }
         
     }
