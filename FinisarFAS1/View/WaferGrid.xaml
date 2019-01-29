@@ -226,12 +226,12 @@
                         <StackPanel Orientation="Vertical"  Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                             <StackPanel Margin="0,5,0,0" Orientation="Vertical" >
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
-                                    <Label Margin="0,5,0,0" FontSize="18" Content="Lot 1:" />
-                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
+                                    <Label Margin="0,0" FontSize="18" Content="Lot 1:" HorizontalAlignment="Center" />
+                                    <TextBlock Margin="0,0" FontSize="18" Background="Yellow" Padding="5,0"
                                                Text="{Binding Path=Port1Lot1}" HorizontalAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  >
-                                    <Label FontSize="18" Content="Lot 2:"
+                                    <Label FontSize="18" Content="Lot 2:" HorizontalAlignment="Center" 
                                            Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                                     <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
                                                Text="{Binding Path=Port1Lot2}" HorizontalAlignment="Center" 
@@ -280,7 +280,7 @@
                                     <!--<Image Margin="5,5,0,0" Height="28" Source="../Images/pause_button.png" />-->
                                 </StackPanel>
                             </Button>
-                            <StackPanel Margin="0,260,0,0"  >
+                            <StackPanel Margin="0,200,0,0"  >
                                 <Button ToolTip="Go Remote" Width="140" FontSize="22"
                                         Visibility="{Binding IsLocal, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"
                                             Command="{Binding Path=GoRemoteCmd}"
@@ -297,7 +297,7 @@
             </StackPanel>
         </Grid>
 
-        <Popup
+        <!--<Popup
           x:Name="popup1"
           IsHitTestVisible="False"
           Placement="RelativePoint"
@@ -322,10 +322,9 @@
                         Text="{Binding ElementName=me}"
                         Margin="8,0,0,0" />
                 </StackPanel>
-                <!--Text="{Binding ElementName=me, Path=DraggedItem.WaferID}"-->
-
+                Text="{Binding ElementName=me, Path=DraggedItem.WaferID}"
             </Border>
-        </Popup>
+        </Popup>-->
         
     </StackPanel>    
     

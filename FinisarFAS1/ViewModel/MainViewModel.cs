@@ -39,14 +39,7 @@ namespace FinisarFAS1.ViewModel
         private IMESService _mesService;
 
         private Tool currentTool;
-
-        #region PUBLIC VARIABLES
-        //public int NumberOfLoadPorts;
-        //public bool LoadLock;
-        //public string Port1Name;
-        //public string Port2Name;
-        #endregion
-
+     
         const int MAXROWS = 25;
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -69,6 +62,7 @@ namespace FinisarFAS1.ViewModel
                 CurrentAlarm = DateTime.Now.ToLongTimeString() + " 63-Chamber pressure low";
             }
 
+            // Initialize DI objects
             IDialogService2 dialogService1 = new MyDialogService(null);
             dialogService1.Register<DialogViewModel, DialogWindow>();
 
@@ -76,11 +70,11 @@ namespace FinisarFAS1.ViewModel
             //
             // DI the MESService, for now use the Moq
             //
-            _mesService = new MESCommunications.MESService(new MoqMESService());
+            //_mesService = new MoqMESService(); <--- does not allow for easy testing...
+            _mesService = new MESService(new MoqMESService()); 
+            //_mesService = MESService.GetInstance(new MoqMESService());
 
-            InitializeSystem();
-
-            Port1Wafers = CreateEmptyPortRows();            
+            InitializeSystem();               
         }
 
         private void InitializeSystem()
@@ -91,6 +85,7 @@ namespace FinisarFAS1.ViewModel
             GetCurrentStatuses();
 
             CamstarStatusText = EquipmentCommunications.Properties.Settings.Default.CamstarString;
+            _startTimerSeconds = EquipmentCommunications.Properties.Settings.Default.StartTimerSeconds;
 
             Title = "Factory Automation System -" + currentTool.ToolId;
             // Messenger.Default.Send<Tool>(CurrentTool);
@@ -103,10 +98,14 @@ namespace FinisarFAS1.ViewModel
             IsRecipeOverridable = false;
             RaisePropertyChanged(nameof(AreThereWafers));
             Messenger.Default.Send(new WafersInGridMessage(0));
+
+            Port1Wafers = CreateEmptyPortRows();
         }
 
         private void GetCurrentStatuses()
         {
+            var q = _mesService.Initialize("6-6=EVAP-001");
+
             DataTable dtCamstar = _mesService.GetResourceStatus("Camstar-DEV", "Server IP:1.1.1.1");
 
             // Update CamStar first 
@@ -379,6 +378,16 @@ namespace FinisarFAS1.ViewModel
             }
         }
 
+        private string _startTimerSeconds;
+        public int StartTimerSeconds {
+            get {
+                int seconds = 0;
+                if (Int32.TryParse(_startTimerSeconds, out seconds))
+                    return seconds;
+                return 0; 
+            }
+        }
+         
         private string _camstarStatus;
         public string CamstarStatus {
             get { return _camstarStatus; }
@@ -396,35 +405,7 @@ namespace FinisarFAS1.ViewModel
                 RaisePropertyChanged(nameof(EquipmentStatus));
             }
         }
-
-        // PORT 2
-        //private bool _TimeToProcess2;
-        //public bool TimeToProcess2 {
-        //    get { return _TimeToProcess2; }
-        //    set {
-        //        _TimeToProcess2 = value;
-        //        RaisePropertyChanged(nameof(TimeToProcess2));
-        //    }
-        //}
-
-        private string _port2Lot1;
-        public string Port2Lot1 {
-            get { return _port2Lot1; }
-            set {
-                _port2Lot1 = value;
-                RaisePropertyChanged(nameof(Port2Lot1));
-            }
-        }
-
-        private string _port2Lot2;
-        public string Port2Lot2 {
-            get { return _port2Lot2; }
-            set {
-                _port2Lot2 = value;
-                RaisePropertyChanged(nameof(Port2Lot2));
-            }
-        }
-
+     
         private Operator Operator = null;
 
         private string _operatorID;
@@ -851,7 +832,7 @@ namespace FinisarFAS1.ViewModel
                 SetAllWafersToMovedIn();
                 TimeToStart = true;
                 ProcessState = "Idle";
-                StartTimer(300);
+                StartTimer(StartTimerSeconds);
             }
             else
             {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Moq;
 using System.Data;
 using MESCommunications.Utility;
+using System.Text.RegularExpressions;
 
 namespace Tests.MoqTests
 {
@@ -15,6 +16,21 @@ namespace Tests.MoqTests
         readonly string lot1 = "61851-001";
         readonly string lot2 = "61851-002";
         readonly string lot3 = "61851-003";
+
+        public bool Initialize(string resname)
+        {
+            try
+            {
+                var match = Regex.Match(resname, @"^\d+\-\d+\-[A-Za-z]+\-\d{2}$");
+                if (match.Success)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false; 
+        }
 
         public  List<Wafer> GetCurrentWaferConfigurationSetup(string lotId)
         {
@@ -135,14 +151,7 @@ namespace Tests.MoqTests
             if (lot.Id < 100)
                 lot = null;
             return lot;
-        }
-
-        public async void fakeDelay2(int delayTime)
-        {
-            int i = 0;
-            Task wait = Task.Delay(delayTime);
-            await wait;
-        }       
+        }     
 
         public string GetToolStatusFromCamstar(string toolName)
         {
@@ -175,6 +184,15 @@ namespace Tests.MoqTests
         }
 
         #endregion
+
+        public async void fakeDelay2(int delayTime)
+        {
+            //int i = 0;
+            Task wait = Task.Delay(delayTime);
+            await wait;
+
+            await Task.Delay(delayTime); 
+        }
 
         private int GetNextRandom(string s)
         {

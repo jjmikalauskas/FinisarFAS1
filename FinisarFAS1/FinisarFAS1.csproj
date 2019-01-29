@@ -185,8 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Blue1.jpg" />
-    <Resource Include="Images\Blue2.jpg" />
-    <Resource Include="Images\Blue3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\CheckBoxGreen.PNG" />
@@ -219,24 +217,7 @@
     <Resource Include="Images\FinisarLogo1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\DragInsert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\arrowDown.png" />
-    <Resource Include="Images\arrowUp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\emptyrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\EmptyCircle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\EmptyCircle2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\both3.png" />
-    <Resource Include="Images\down1.png" />
     <Resource Include="Images\up3.png" />
     <Resource Include="Images\updown3.png" />
   </ItemGroup>

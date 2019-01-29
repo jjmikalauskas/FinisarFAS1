@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EquipmentCommunications.Properties {
+namespace MESCommunications.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
-    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -25,82 +25,94 @@ namespace EquipmentCommunications.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LoadLock {
+        [global::System.Configuration.DefaultSettingValueAttribute("tex-cs613db-uat.texas.ads.finisar.com")]
+        public string DBServerName {
             get {
-                return ((bool)(this["LoadLock"]));
+                return ((string)(this["DBServerName"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int LoadPorts {
+        [global::System.Configuration.DefaultSettingValueAttribute("insite")]
+        public string DatabaseName {
             get {
-                return ((int)(this["LoadPorts"]));
+                return ((string)(this["DatabaseName"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Load Port B2")]
-        public string LoadPort2Name {
+        [global::System.Configuration.DefaultSettingValueAttribute("insite")]
+        public string DBUserName {
             get {
-                return ((string)(this["LoadPort2Name"]));
+                return ((string)(this["DBUserName"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("EvaTec")]
-        public string ToolBrand {
+        [global::System.Configuration.DefaultSettingValueAttribute("Nf4bUeDWqjspbkXXIw8AIQ==")]
+        public string DBPasswordEncrypt {
             get {
-                return ((string)(this["ToolBrand"]));
+                return ((string)(this["DBPasswordEncrypt"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6-6-EVAP-03")]
-        public string ToolID {
+        [global::System.Configuration.DefaultSettingValueAttribute("tex-cs613uat.texas.ads.finisar.com")]
+        public string InsiteHost {
             get {
-                return ((string)(this["ToolID"]));
+                return ((string)(this["InsiteHost"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Port 1")]
-        public string LoadPort1Name {
+        [global::System.Configuration.DefaultSettingValueAttribute("2881")]
+        public string InsitePort {
             get {
-                return ((string)(this["LoadPort1Name"]));
+                return ((string)(this["InsitePort"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Pocket")]
-        public string SlotColumnName {
+        [global::System.Configuration.DefaultSettingValueAttribute("InsiteAdmin")]
+        public string InsiteUser {
             get {
-                return ((string)(this["SlotColumnName"]));
+                return ((string)(this["InsiteUser"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Nf4bUeDWqjspbkXXIw8AIQ==")]
+        public string InsitePwd {
+            get {
+                return ((string)(this["InsitePwd"]));
+            }
+            set {
+                this["InsitePwd"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Camstar Status")]
-        public string CamstarString {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\MESDLL\\Log\\")]
+        public string strLogPath {
             get {
-                return ((string)(this["CamstarString"]));
+                return ((string)(this["strLogPath"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("180")]
-        public string StartTimerSeconds {
+        [global::System.Configuration.DefaultSettingValueAttribute("CamstarMESDLL_")]
+        public string strLogFilePrefix {
             get {
-                return ((string)(this["StartTimerSeconds"]));
+                return ((string)(this["strLogFilePrefix"]));
             }
         }
     }

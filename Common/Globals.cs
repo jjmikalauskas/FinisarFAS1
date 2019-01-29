@@ -49,10 +49,10 @@ namespace Common
 
         static public async void fakeDelay(int delayTime)
         {
-            int i = 0;
+            //int i = 0;
             Task wait = Task.Delay(delayTime); 
             await wait;
-            i = 99; 
+            //i = 99; 
         }
     }
 }
