@@ -3,14 +3,14 @@ using Serilog;
 
 namespace ToolService
 {
-    public abstract class Tool
+    public abstract class Tool2
     {
         // Common properties
         public string Name { get; set; }
         public string Id { get; set; }
         public List<Port> Ports { get; set; }
 
-        protected Tool()
+        protected Tool2()
         {
             // Setup Serilog
             Log.Logger = new LoggerConfiguration()

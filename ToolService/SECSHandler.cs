@@ -7,7 +7,7 @@ using SECSInterface;
 
 namespace ToolService
 {
-    public class SECSHandler<T> : ISECSHandler<T> where T : Tool
+    public class SECSHandler<T> : ISECSHandler<T> where T : Tool2
     {
         private T _tool;
         public SECSHandler(T tool)

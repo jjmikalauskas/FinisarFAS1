@@ -208,9 +208,9 @@
       <Project>{E58DFEBE-5129-4361-B952-4FF8516795D1}</Project>
       <Name>MESCommunications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tests\Tests.csproj">
-      <Project>{F50F5F04-154D-4A97-92C4-9D1C4A9471F0}</Project>
-      <Name>Tests</Name>
+    <ProjectReference Include="..\ToolService\ToolService.csproj">
+      <Project>{49d1823d-3bc3-4118-96e1-f60f2e50e970}</Project>
+      <Name>ToolService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

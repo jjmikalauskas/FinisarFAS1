@@ -20,10 +20,11 @@ namespace FinisarFAS1.ViewModel
             EmailBody = "Lorem ipsum dolor amet typewriter deep v plaid lo-fi. Bicycle rights af mlkshk church-key prism PBR&B vinyl. Wolf heirloom four dollar toast, poke ennui brunch ramps mixtape vice humblebrag artisan. Retro ramps snackwave shaman church-key beard vape wayfarers shoreditch. ";
         }
 
-        public EmailViewModel(string sendTo, string subject)
+        public EmailViewModel(string sendTo, string subject, string body)
         {
             SendTo = sendTo;
             Subject = subject;
+            EmailBody = body;
         }
 
         private string _sendTo;

@@ -6,15 +6,19 @@ namespace Common
     {
         bool Initialize(string resourceName);
 
+        // Per the MESDLL document from ZH
+        string ValidateEmployee(string strEmployeeName);
+
+        bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack );
+
+        DataTable GetContainerStatus(string resourceName);
+
         Operator GetOperator(string operatorName);
         Tool GetTool(string toolName);
         Lot GetLot(string lotName);
 
         string GetToolStatusFromCamstar(string toolName); 
         DataTable GetLotStatus(string lotId);
-        string LotMoveInCamstar(string lot);
-
-        DataTable GetResourceStatus(string resourceName, string dbServerName);
     }
 
     // Seem to need to do this for Moq'ing

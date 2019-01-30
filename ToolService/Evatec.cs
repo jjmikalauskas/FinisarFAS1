@@ -6,7 +6,7 @@ using Serilog;
 
 namespace ToolService
 {
-    public class Evatec : Tool
+    public class Evatec : Tool2
     {
         //public override string Name { get; set; } = "Evatec";
 

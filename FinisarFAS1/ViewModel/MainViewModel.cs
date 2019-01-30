@@ -17,7 +17,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Tests.MoqTests;
+using ToolService;
 
 namespace FinisarFAS1.ViewModel
 {
@@ -36,7 +36,7 @@ namespace FinisarFAS1.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IDialogService2 dialogService;
-        private IMESService _mesService;
+        private MESService _mesService;
 
         private Tool currentTool;
      
@@ -70,8 +70,7 @@ namespace FinisarFAS1.ViewModel
             //
             // DI the MESService, for now use the Moq
             //
-            //_mesService = new MoqMESService(); <--- does not allow for easy testing...
-            _mesService = new MESService(new MoqMESService()); 
+            _mesService = new MESService(new MoqMESService()); ; 
             //_mesService = MESService.GetInstance(new MoqMESService());
 
             InitializeSystem();               
@@ -102,10 +101,11 @@ namespace FinisarFAS1.ViewModel
             Port1Wafers = CreateEmptyPortRows();
         }
 
+        private string thisTool = "6-6-EVAP-002"; 
+
         private void GetCurrentStatuses()
         {
-            var q = _mesService.Initialize("6-6=EVAP-001");
-
+            var q = _mesService.Initialize(thisTool);
             DataTable dtCamstar = _mesService.GetResourceStatus("Camstar-DEV", "Server IP:1.1.1.1");
 
             // Update CamStar first 
@@ -116,9 +116,14 @@ namespace FinisarFAS1.ViewModel
             var equipStatus = "Offline";
             if (equip.AreYouThere(null))
                 equipStatus = "Online:Remote";
-
             currentTool = equip.SetupToolEnvironment();
             Messenger.Default.Send(currentTool);
+
+            // Get Tool status #2 with the ToolService project
+            string eqsvr = "_eqSvr";
+            int timeout = 15; 
+            var equip2 = new Evatec(thisTool);
+            equip2.Initialize(eqsvr, timeout);
             
             UpdateEquipmentStatusHandler(new EquipmentStatusMessage(equipStatus));
 
@@ -982,11 +987,15 @@ namespace FinisarFAS1.ViewModel
         }
 
         private void emailViewHandler(string eventText)
-        {    
-            var vm = new EmailViewModel("ZahirHague@FinisarCorp.com", eventText);
+        {
+            string bodyText = $"{DateTime.Now.ToString()} EVENT VALUES: Operator:{Operator.OperatorName} Tool:{Tool}" + Environment.NewLine;
+            bodyText += $"Lot1:{Port1Lot1}";
+            if (!string.IsNullOrEmpty(Port1Lot2)) bodyText += $" Lot2:{Port1Lot2}";
+            var vm = new EmailViewModel("ZahirHague@FinisarCorp.com", eventText, bodyText);
             var view = new EmailView() { DataContext = vm, WindowStartupLocation = WindowStartupLocation.CenterScreen };
             view.ShowDialog();
         }
+
 
         private void CloseEmailResponseMsgHandler(CloseEmailWindowMessage msg)
         {

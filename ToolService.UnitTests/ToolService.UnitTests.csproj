@@ -42,9 +42,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoShellMessaging, Version=1.1.113.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Finisar_Dev3.10.3_1210\ACTInterface\SECSInterface\bin\Debug\AutoShellMessaging.dll</HintPath>
+    <Reference Include="AutoShellMessaging">
+      <HintPath>..\packages\AutoShell.3.10.0\AutoShellMessaging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -58,7 +57,7 @@
     </Reference>
     <Reference Include="SECSInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Finisar_Dev3.10.3_1210\ACTInterface\SECSInterface\bin\Debug\SECSInterface.dll</HintPath>
+      <HintPath>..\packages\AutoShell.3.10.0\SECSInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
