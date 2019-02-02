@@ -21,8 +21,8 @@
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="15,10" />
                 <Setter Property="FontSize" Value="28" />
-                <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="140"/>
+                <Setter Property="Height" Value="55" />
+                <Setter Property="Width" Value="150"/>
             </Style>
 
             <Style TargetType="TextBox">
@@ -40,8 +40,8 @@
                  MouseMove="OnMouseMove" Orientation="Horizontal" >-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1210" />
-                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="1200" />
+                <ColumnDefinition Width="185"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid x:Name="_maindgPort1" 
@@ -227,13 +227,13 @@
                             <StackPanel Margin="0,5,0,0" Orientation="Vertical" >
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
                                     <Label Margin="0,0" FontSize="18" Content="Lot 1:" HorizontalAlignment="Center" />
-                                    <TextBlock Margin="0,0" FontSize="18" Background="Yellow" Padding="5,0"
+                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Padding="5,0"
                                                Text="{Binding Path=Port1Lot1}" HorizontalAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  >
                                     <Label FontSize="18" Content="Lot 2:" HorizontalAlignment="Center" 
                                            Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
-                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Background="Yellow" Padding="5,0"
+                                    <TextBlock Margin="0,-3,0,0" FontSize="18" Padding="5,0"
                                                Text="{Binding Path=Port1Lot2}" HorizontalAlignment="Center" 
                                                Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" />
                                 </StackPanel>

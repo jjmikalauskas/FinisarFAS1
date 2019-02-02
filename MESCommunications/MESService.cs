@@ -22,11 +22,6 @@ namespace MESCommunications
         {
             return _mesService.Initialize(resourceName);
         }        
-      
-        public string GetToolStatusFromCamstar(string toolName)
-        {
-            return _mesService.GetToolStatusFromCamstar(toolName);
-        }
 
         public bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack)
         {
@@ -46,6 +41,11 @@ namespace MESCommunications
         public DataTable GetContainerStatus(string resourceName)
         {
             return _mesService.GetContainerStatus(resourceName);
+        }
+
+        public DataTable GetResourceStatus(string resourceName)
+        {
+            return _mesService.GetResourceStatus(resourceName);
         }
 
         public Tool GetTool(string toolName)

@@ -111,6 +111,23 @@ namespace MESCommunications
             return dt; 
         }
 
+        public DataTable GetResourceStatus(string resourceName)
+        {
+            DataSet dts;
+            DataTable dt = null;
+            string result;
+            try
+            {
+                dts = new ShermanMes.IMESActions().GetResourceStatus(resourceName, "");
+                dt = dts.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                result = $"GetContainerStatus():Exception-" + ex.Message;
+            }
+            return dt;
+        }
+
         public Tool GetTool(string toolName)
         {
             var tool = new Tool();

@@ -44,6 +44,9 @@ namespace FinisarFAS1.ViewModel
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
+        // Test data
+        private string thisTool = "6-6-EVAP-002";
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -78,6 +81,8 @@ namespace FinisarFAS1.ViewModel
 
         private void InitializeSystem()
         {
+            GetConfigurationValues(); 
+
             RegisterForMessages();
 
             // Default settings
@@ -101,14 +106,21 @@ namespace FinisarFAS1.ViewModel
             Port1Wafers = CreateEmptyPortRows();
         }
 
-        private string thisTool = "6-6-EVAP-002"; 
+        private bool showConfirmButtonBox = false; 
+        private bool allowEmailBody = false; 
+        private bool showStartMessage = false; 
+
+        private void GetConfigurationValues()
+        {
+
+        }       
 
         private void GetCurrentStatuses()
         {
             var q = _mesService.Initialize(thisTool);
-            DataTable dtCamstar = _mesService.GetResourceStatus("Camstar-DEV", "Server IP:1.1.1.1");
 
-            // Update CamStar first 
+            // Update CamStar first       
+            DataTable dtCamstar = _mesService.GetResourceStatus(thisTool);
             UpdateCamstarStatusHandler(new CamstarStatusMessage(dtCamstar));
 
             // Get Tool status 
@@ -119,12 +131,13 @@ namespace FinisarFAS1.ViewModel
             currentTool = equip.SetupToolEnvironment();
             Messenger.Default.Send(currentTool);
 
+#if RELEASE
             // Get Tool status #2 with the ToolService project
             string eqsvr = "_eqSvr";
             int timeout = 15; 
             var equip2 = new Evatec(thisTool);
             equip2.Initialize(eqsvr, timeout);
-            
+#endif 
             UpdateEquipmentStatusHandler(new EquipmentStatusMessage(equipStatus));
 
             ProcessState = "Idle";
@@ -137,11 +150,8 @@ namespace FinisarFAS1.ViewModel
 
             if (msg != null)
             {
-                tempStatus = msg.Availability;
-                if (msg.Availability.Contains("On"))
-                    tempColor = "Lime";
-                else
-                    tempColor = "Yellow";
+                tempColor = msg.IsAvailable ? "Lime" : "Yellow" ;
+                tempStatus = msg.ResourceStateName;
             }
             else
             {
@@ -233,7 +243,7 @@ namespace FinisarFAS1.ViewModel
             return tempList;
         }
 
-        #region UI BINDINGS
+#region UI BINDINGS
 
         private ObservableCollection<Wafer> port1Wafers;
         public ObservableCollection<Wafer> Port1Wafers {
@@ -468,8 +478,11 @@ namespace FinisarFAS1.ViewModel
             get { return _tool; }
             set {
                 _tool = value;
-                var tool1 = _mesService.GetLot(value);
-                ToolStatus = tool1 == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                bool goodTool;
+                if (value == thisTool) goodTool = true;
+                else
+                    goodTool = false; 
+                ToolStatus = !goodTool ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
                 RaisePropertyChanged(nameof(Tool));
             }
         }
@@ -578,7 +591,7 @@ namespace FinisarFAS1.ViewModel
         public LogViewModel LogVM => new LogViewModel(); 
 
 
-        #region GRID MANIPULATION
+#region GRID MANIPULATION
         //  GRID MANIPULATION
         private void AddWafersToTopGrid(List<Wafer> wafers)
         {
@@ -776,7 +789,7 @@ namespace FinisarFAS1.ViewModel
             });            
         }
 
-        #endregion
+#endregion
 
         // PORT 1 CMDS
         public ICommand ConfirmPort1Cmd => new RelayCommand(confirmPort1CmdHandler);
@@ -793,15 +806,15 @@ namespace FinisarFAS1.ViewModel
 
         public ICommand GoLocalCmd => new RelayCommand(goLocalCmdHandler);
         public ICommand GoRemoteCmd => new RelayCommand(goRemoteCmdHandler);
-        public ICommand ResetHostCmd => new RelayCommand(resetHostCmdHandler);
 
+        public ICommand CloseAlarmCmd => new RelayCommand(closeAlarmCmdHandler);
         public ICommand AlarmListingCmd => new RelayCommand(alarmListingCmdHandler);
         public ICommand LogListingCmd => new RelayCommand(logListingCmdHandler);
 
-        public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
         public ICommand CamstarCmd => new RelayCommand(camstarCmdHandler);
-        public ICommand CloseAlarmCmd => new RelayCommand(closeAlarmCmdHandler);
-
+        public ICommand ResetHostCmd => new RelayCommand(resetHostCmdHandler);
+        public ICommand ExitHostCmd => new RelayCommand(exitHostCmdHandler);
+     
         private int startTimerLeft;
 
         private string _startTimerLeft = "";
@@ -973,17 +986,17 @@ namespace FinisarFAS1.ViewModel
 
         private void resetHostCmdHandler()
         {
-            //var vm = new DialogViewModel("Are you sure you want to Reset Host?", "Yes", "No");
-            //bool? result = dialogService.ShowDialog(vm);
-            //if (result.HasValue && result.GetValueOrDefault() == true)
-            //{
+            var vm = new DialogViewModel("Are you sure you want to Reset Host?", "Yes", "No");
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
                 emailViewHandler("Resetting Host"); 
                 ReInitializeSystem();
-            //}
-            //else
-            //{
+            }
+            else
+            {
 
-            //}
+            }
         }
 
         private void emailViewHandler(string eventText)
@@ -991,6 +1004,7 @@ namespace FinisarFAS1.ViewModel
             string bodyText = $"{DateTime.Now.ToString()} EVENT VALUES: Operator:{Operator.OperatorName} Tool:{Tool}" + Environment.NewLine;
             bodyText += $"Lot1:{Port1Lot1}";
             if (!string.IsNullOrEmpty(Port1Lot2)) bodyText += $" Lot2:{Port1Lot2}";
+
             var vm = new EmailViewModel("ZahirHague@FinisarCorp.com", eventText, bodyText);
             var view = new EmailView() { DataContext = vm, WindowStartupLocation = WindowStartupLocation.CenterScreen };
             view.ShowDialog();
@@ -1031,6 +1045,17 @@ namespace FinisarFAS1.ViewModel
 
         private void exitHostCmdHandler()
         {
+            var vm = new DialogViewModel("Are you sure you want to Exit Host?", "Yes", "No");
+            bool? result = dialogService.ShowDialog(vm);
+            if (result.HasValue && result.GetValueOrDefault() == true)
+            {
+                emailViewHandler("Resetting Host");
+                // Exit application 
+            }
+            else
+            {
+
+            }
         }
 
         private void camstarCmdHandler()
@@ -1038,7 +1063,7 @@ namespace FinisarFAS1.ViewModel
 
         }
 
-        #endregion
+#endregion
 
         private void Wait(double seconds)
         {

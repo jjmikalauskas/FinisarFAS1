@@ -109,7 +109,10 @@ namespace FinisarFAS1.View
     {
         public string Availability { get; private set; } = "Offline";
         public string ResourceName { get; private set; } = "Error";
+        public string ResourceStateName { get; private set; } = "Error";
         public string ResourceSubStateName { get; private set; } = "Error";
+
+        public bool IsAvailable => Availability == "1"; 
 
         public CamstarStatusMessage(string availability, string resourceName, string resourceSubstateName)
         {
@@ -124,6 +127,7 @@ namespace FinisarFAS1.View
             {
                 Availability = dtCamstar.Rows[0]["Availability"].ToString();
                 ResourceName = dtCamstar.Rows[0]["ResourceName"].ToString();
+                ResourceStateName = dtCamstar.Rows[0]["ResourceStateName"].ToString();
                 ResourceSubStateName = dtCamstar.Rows[0]["ResourceSubStateName"].ToString();
             } 
             catch

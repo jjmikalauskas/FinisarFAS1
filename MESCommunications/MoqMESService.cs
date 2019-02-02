@@ -136,15 +136,6 @@ namespace MESCommunications
             return op;
         }
 
-        public Tool GetTool(string toolName)
-        {
-            var tool = new Tool();
-            tool.Id = GetNextRandom(toolName);
-            if (tool.Id < 100)
-                tool = null;
-            return tool;
-        }
-
         public Lot GetLot(string lotName)
         {
             var lot = new Lot();
@@ -154,9 +145,15 @@ namespace MESCommunications
             return lot;
         }
 
-        public string GetToolStatusFromCamstar(string toolName)
+        public DataTable GetResourceStatus(string toolName)
         {
-            throw new NotImplementedException();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Availability");
+            dt.Columns.Add("ResourceName");
+            dt.Columns.Add("ResourceStateName");
+            dt.Columns.Add("ResourceSubStateName");
+            dt.Rows.Add(new object[] { "1", toolName, "Standby", "Standby" });
+            return dt;
         }
 
         public DataTable GetLotStatus(string lotId)

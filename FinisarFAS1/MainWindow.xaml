@@ -109,7 +109,8 @@
         <!--MouseLeftButtonUp="OnMouseLeftButtonUp"
             MouseMove="OnMouseMove">-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -118,9 +119,45 @@
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
-            Margin="0,0,0,0" Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
+        <!--STATUS PANEL-->
+        <StackPanel Grid.Row="0" Grid.Column="0" 
+                    Margin="10,0,10,0" 
+                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
+            <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
+            <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
+            <Grid Margin="0,15,10,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
 
+                <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="{Binding CamstarStatusText}" VerticalAlignment="Center"  />
+                <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <!--<TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="Binding CamstarStatus}" VerticalAlignment="Center" />-->
+                <!--</StackPanel>-->
+                <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
+                <TextBlock Grid.Row="2" Grid.Column="0" FontSize="22" Text="Equipment" VerticalAlignment="Center" />
+                <Border Grid.Row="2" Grid.Column="1" Background="{Binding EquipmentStatusColor}" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" FontSize="22" Text="{Binding EquipmentStatus}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" FontSize="22" Text="Binding EquipmentStatus}" VerticalAlignment="Center" />-->
+                <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
+                <!--</StackPanel>-->
+            </Grid>
+        </StackPanel>
+
+
+        <!--OPERATOR TOOL ENTRY PANEL-->
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+            Margin="0,0,0,0" Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" >
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Operator:" VerticalAlignment="Center" />
@@ -142,16 +179,16 @@
                            VerticalAlignment="Center" />
                 </StackPanel>
 
-                <StackPanel Margin="15,5,0,0" Orientation="Vertical" 
+                <StackPanel Margin="10,5,0,0" Orientation="Vertical" 
                             Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                     <StackPanel Orientation="Horizontal" >
                         <Label FontSize="18" Content="Lot 1:" />
-                        <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
+                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0"
                                    Text="{Binding Path=Port1Lot1}" VerticalAlignment="Center" />
                         <Label Margin="15,0,0,0" FontSize="18" Content="Lot 2:"
                                Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
                                />
-                        <TextBlock Margin="3,0,0,0" FontSize="18" Background="Yellow" Padding="5,0"
+                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0"
                                    Text="{Binding Path=Port1Lot2}" VerticalAlignment="Center" 
                                    Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
                                    />
@@ -167,62 +204,27 @@
                                Text="{Binding OperatorLevel}" HorizontalAlignment="Left"
                                Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
                                />
-                <TextBlock Margin="88,0,0,0" FontSize="14" FontWeight="Bold"
-                           Text="{Binding ProcessState}"  />
+                
             </StackPanel>
 
-            <StackPanel>
-                <StackPanel Margin="2,5,0,15" Orientation="Horizontal" >
+            <StackPanel Height="63">
+                <StackPanel Margin="2,0,0,0" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Recipe:" VerticalAlignment="Center" />
                     <TextBox x:Name="RecipeField" 
-                             Margin="21,5,0,5" Width="250" KeyboardNavigation.TabIndex="2" 
+                             Margin="21,5,0,5" Width="330" KeyboardNavigation.TabIndex="2" 
                              Text="{Binding Path=CurrentRecipe, UpdateSourceTrigger=LostFocus}" 
                              IsEnabled="{Binding IsRecipeOverridable}"
                              VerticalAlignment="Center" />
                 </StackPanel>
-                <!--<TextBlock Margin="8,2,10,15" TextWrapping="WrapWithOverflow" 
-                       FontSize="18"
-                       Text="{Binding CurrentRecipe}" />-->
+                <TextBlock Margin="220,0,0,0" FontSize="16" FontWeight="Bold"
+                           Text="{Binding ProcessState}"  />                
             </StackPanel>
 
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="1" 
-                    Margin="0,0,0,0" VerticalAlignment="Bottom"
-                    Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical" Height="132" >
-                <!--Margin="0,0" Background="Transparent" Orientation="Vertical" >-->
-                <!--<TextBlock Foreground="White">Statuses</TextBlock>-->
-                <Grid Margin="0,25,10,10" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-
-                    <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="22" Text="{Binding CamstarStatusText}" VerticalAlignment="Center"  />
-                    <Border Grid.Row="0" Grid.Column="1" Background="{Binding CamstarStatusColor}" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="{Binding CamstarStatus}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <!--<TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontSize="22" Text="Binding CamstarStatus}" VerticalAlignment="Center" />-->
-                    <!--</StackPanel>-->
-                    <!--<StackPanel Margin="5,5" Orientation="Horizontal">-->
-                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="22" Text="Equipment" VerticalAlignment="Center" />
-                    <Border Grid.Row="2" Grid.Column="1" Background="{Binding EquipmentStatusColor}" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" FontSize="22" Text="{Binding EquipmentStatus}" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" FontSize="22" Text="Binding EquipmentStatus}" VerticalAlignment="Center" />-->
-                    <!--</TextBlock>Foreground="{DynamicResource ResourceKey=GreenGlassText}" />-->
-                    <!--</StackPanel>-->
-                </Grid>
-            </StackPanel>
-
+       
         <!-- MAIN TABS-->
         
-        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" >            
+        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" >            
             <TabItem Width="Auto" >
                 <TabItem.Header>
                         <TextBlock Padding="10,5,0,0"  Text="{Binding LoadPortNames[0]}" />
@@ -242,20 +244,22 @@
 
         </TabControl>
 
-        <StackPanel Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="2"
+        <StackPanel Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="3"
                     Margin="0,0,0,0" 
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
                 <Label DockPanel.Dock="Left" Margin="5,10,0,5" FontSize="18"  Content="Alarm:" />
-                <TextBlock Margin="0,10,5,5" 
+                <DockPanel LastChildFill="True" Background="Red" >
+                <TextBlock Margin="0,10,5,5"  Width="Auto"
                            FontSize="18" Height="28" Background="Red" Padding="8,0,30,0"
                            Foreground="White" 
                            Visibility="{Binding CurrentAlarm, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
                            Text="{Binding CurrentAlarm}" />
                 <Button Margin="-27,10,5,5" Command="{Binding CloseAlarmCmd}"
-                        FontSize="10" Height="20" Width="15" Foreground="Black"
+                        FontSize="15" Height="25" Width="17" Foreground="Black"
                         Visibility="{Binding CurrentAlarm, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
                         Background="Pink"  >X</Button>
+                </DockPanel>
             </StackPanel>
 
             <!--Visibility="Collapsed"-->
@@ -270,14 +274,16 @@
                                     Content="Logs"  />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"                    
-                            Margin="0,5,0,0" >
-                    
+                            Margin="0,5,0,0" >                    
                     <Button ToolTip="Open up Camstar internal website" Width="160"
                                         Command="{Binding Path=CamstarCmd}"
                                         Content="Camstar"  />
                     <Button ToolTip="Reset FAS program" Width="160"
                                     Command="{Binding Path=ResetHostCmd}"
                                     Content="Reset Host"  />
+                    <Button ToolTip="Exit FAS program" Width="160"
+                                    Command="{Binding Path=ExitHostCmd}"
+                                    Content="Exit Host"  />
                 </StackPanel>
             </DockPanel>
         </StackPanel>

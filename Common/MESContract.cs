@@ -14,11 +14,11 @@ namespace Common
         DataTable GetContainerStatus(string resourceName);
 
         Operator GetOperator(string operatorName);
-        Tool GetTool(string toolName);
         Lot GetLot(string lotName);
 
-        string GetToolStatusFromCamstar(string toolName); 
         DataTable GetLotStatus(string lotId);
+
+        DataTable GetResourceStatus(string toolName);
     }
 
     // Seem to need to do this for Moq'ing
