@@ -4,29 +4,32 @@ namespace Common
 {
     public interface IMESService
     {
-        bool Initialize(string resourceName);
+        bool Initialize(string configFile, string hostName);
 
         // Per the MESDLL document from ZH
-        string ValidateEmployee(string strEmployeeName);
+        AuthorizationLevel ValidateEmployee(string employee);
 
-        bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack );
+        DataTable GetContainerStatus(string container);
 
-        DataTable GetContainerStatus(string resourceName);
+        DataTable GetResourceStatus(string resourceName);
 
-        Operator GetOperator(string operatorName);
-        Lot GetLot(string lotName);
+        bool MoveIn(string container, string errorMsg, bool somebool,
+                            string employee, string comment, string resourceName, string factoryName);
 
-        DataTable GetLotStatus(string lotId);
+        bool MoveOut(string container, string errorMsg, bool somebool,
+                            string employee, string comment);
 
-        DataTable GetResourceStatus(string toolName);
+        bool Hold(string container, string errorMsg,
+             string employee, string comment, string resourceName,
+             string factory, string holdReason);
+
+        //bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack);
     }
-
-    // Seem to need to do this for Moq'ing
 
     public interface IOperatorRepository
     {
-        Operator GetOperator(string operatorName);
-        DataTable GetLotStatus(string lotId); 
+        // Operator GetOperator(string operatorName);
+        //DataTable GetLotStatus(string lotId); 
     }
 
 }

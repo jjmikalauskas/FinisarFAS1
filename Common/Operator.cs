@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Common
 {
     public class Operator
@@ -11,7 +6,7 @@ namespace Common
         public Operator()
         {
             Id = 0;
-            AuthLevel = AuthorizationLevel.Operator;
+            AuthLevel = AuthorizationLevel.InvalidUser;
             OperatorName = "";
             OperatorInfo = "";
         }
@@ -24,9 +19,10 @@ namespace Common
 
     public enum AuthorizationLevel
     {
+        InvalidUser,
         Operator, 
         Engineer, 
-        Admin
+        Administrator
     }
 
 }

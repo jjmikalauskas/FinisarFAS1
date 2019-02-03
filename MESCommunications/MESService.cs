@@ -1,11 +1,5 @@
 ﻿using Common;
-using ShermanMes;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MESCommunications
 {
@@ -13,34 +7,38 @@ namespace MESCommunications
     { 
         private IMESService _mesService;
 
-        public MESService(IMESService mesService)
+        public MESService()
         {
-            _mesService = mesService; 
+            _mesService = new MESDLL(); 
         }
 
-        public bool Initialize(string resourceName)
+        public MESService(IMESService service)
         {
-            return _mesService.Initialize(resourceName);
-        }        
-
-        public bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack)
-        {
-            return _mesService.LotMoveInCamstar(lot, employee, comments, errorMsgBack);
-        }      
-
-        public Operator GetOperator(string operatorName)
-        {
-            return _mesService.GetOperator(operatorName);
+            _mesService = service; 
         }
 
-        public DataTable GetLotStatus(string lotId)
+        public bool Initialize(string configFile, string hostName)
         {
-            return _mesService.GetLotStatus(lotId);
+            return _mesService.Initialize(configFile, hostName);
         }
 
-        public DataTable GetContainerStatus(string resourceName)
+        // MoveIn(string container, string errorMsg, bool somebool,
+        // string employee, string comment, string resourceName, string factoryName);
+        public bool MoveIn( string container, string errorMsg, bool somebool,
+                            string employee, string comment, string resourceName, string factoryName)
         {
-            return _mesService.GetContainerStatus(resourceName);
+            return _mesService.MoveIn(container, errorMsg, somebool, employee, comment, resourceName, factoryName);
+        }
+
+        public bool MoveOut(string container, string errorMsg, bool somebool,
+                            string employee, string comment)
+        {
+            return _mesService.MoveOut(container, errorMsg, somebool, employee, comment);
+        }
+
+        public DataTable GetContainerStatus(string container)
+        {
+            return _mesService.GetContainerStatus(container);
         }
 
         public DataTable GetResourceStatus(string resourceName)
@@ -48,23 +46,11 @@ namespace MESCommunications
             return _mesService.GetResourceStatus(resourceName);
         }
 
-        public Tool GetTool(string toolName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lot GetLot(string lotName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ValidateEmployee(string empName)
+        public AuthorizationLevel ValidateEmployee(string empName)
         {
             return _mesService.ValidateEmployee(empName); 
         }
 
     }
-
-
   
 }

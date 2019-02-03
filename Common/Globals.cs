@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-        public class Globals
+        public static class Globals
         {
         //    public static bool IsLive;
         //    public static string FusionEnvironment;
@@ -54,5 +54,12 @@ namespace Common
             await wait;
             //i = 99; 
         }
+
+        public const string VALIDUSER = "Valid User";
+
+        public const string xmlDirectory = @"E:\Data\";
+        public const string MESConfigDir = @"E:\Data\";
+        public const string MESConfigFile = @"MESConfig.ini";
+
     }
 }

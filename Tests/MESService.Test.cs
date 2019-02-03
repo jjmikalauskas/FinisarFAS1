@@ -10,13 +10,14 @@ namespace Camstar.UnitTests
     {
         private MESService _mesService;
         private readonly string testToolName = "6-6-EVAP-01";
+        private readonly string thisHostName = "SHM-L10015894";  // "TEX-L10015200"
         private readonly string strDBServerName = "tex-cs613db-uat.texas.ads.finisar.com";
 
 
         [SetUp]
         public void SetUp()
         {
-            _mesService = new MESService(new RealMESService());
+            _mesService = new MESService(new MESDLL());
         }
 
         [TearDown]
@@ -28,13 +29,13 @@ namespace Camstar.UnitTests
         [Test]
         public void Initialize_False()
         {
-            Assert.That(() => _mesService.Initialize(testToolName + "123") == false);
+            Assert.That(() => _mesService.Initialize(Globals.MESConfigDir + Globals.MESConfigFile, thisHostName+"X") == false);
         }
 
         [Test]
         public void Initialize_True()
         {
-            var ret = _mesService.Initialize(testToolName);
+            var ret = _mesService.Initialize(Globals.MESConfigDir + Globals.MESConfigFile, thisHostName);
             Assert.IsTrue(ret); 
         }
 

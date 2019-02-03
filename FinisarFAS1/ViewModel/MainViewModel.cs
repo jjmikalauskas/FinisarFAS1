@@ -46,11 +46,16 @@ namespace FinisarFAS1.ViewModel
 
         // Test data
         private string thisTool = "6-6-EVAP-002";
+        private string thisHostName = "SHM-L10015894";  // "TEX-L10015200"
+
+        private bool showConfirmButtonBox = false;
+        private bool allowEmailBody = false;
+        private bool showStartMessage = false;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel() // IDialogService2 dialogService)
+        public MainViewModel()
         {
             if (IsInDesignMode)
             {
@@ -70,11 +75,8 @@ namespace FinisarFAS1.ViewModel
             dialogService1.Register<DialogViewModel, DialogWindow>();
 
             this.dialogService = dialogService1;
-            //
-            // DI the MESService, for now use the Moq
-            //
-            _mesService = new MESService(new MoqMESService()); ; 
-            //_mesService = MESService.GetInstance(new MoqMESService());
+          
+            _mesService = new MESService(); 
 
             InitializeSystem();               
         }
@@ -105,19 +107,20 @@ namespace FinisarFAS1.ViewModel
 
             Port1Wafers = CreateEmptyPortRows();
         }
-
-        private bool showConfirmButtonBox = false; 
-        private bool allowEmailBody = false; 
-        private bool showStartMessage = false; 
-
+        
         private void GetConfigurationValues()
         {
+            var tc = Common.XMLHelper.ReadToolConfigXml("ToolConfigSample.xml");
 
+            SystemConfig sc = Common.XMLHelper.ReadSysConfigXml("SystemConfigExample.xml");
+            showConfirmButtonBox = sc.Dialogs.ShowConfirmationBox;
+            allowEmailBody = sc.Dialogs.ShowEmailBox;
+            showStartMessage = sc.Dialogs.ShowStartMessageBox;
         }       
 
         private void GetCurrentStatuses()
         {
-            var q = _mesService.Initialize(thisTool);
+            var q = _mesService.Initialize(Globals.MESConfigDir + Globals.MESConfigFile,  thisHostName);
 
             // Update CamStar first       
             DataTable dtCamstar = _mesService.GetResourceStatus(thisTool);
@@ -332,7 +335,7 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (!string.IsNullOrEmpty(value) && _port1Lot1 != value)
                 {
-                    var dtWafers = _mesService.GetLotStatus(value);
+                    var dtWafers = _mesService.GetContainerStatus(value);
                     if (dtWafers != null)
                     {
                         var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers);
@@ -351,7 +354,7 @@ namespace FinisarFAS1.ViewModel
             set {
                 if (!string.IsNullOrEmpty(value) && _port1Lot2 != value)
                 {
-                    var dtWafers = _mesService.GetLotStatus(value);
+                    var dtWafers = _mesService.GetContainerStatus(value);
                     if (dtWafers != null)
                     {
                         var wafers = DataHelpers.MakeDataTableIntoWaferList(dtWafers);
@@ -421,41 +424,42 @@ namespace FinisarFAS1.ViewModel
             }
         }
      
-        private Operator Operator = null;
+        // private Operator Operator = null;
 
         private string _operatorID;
         public string OperatorID {
             get { return _operatorID; }
             set {
                 _operatorID = value;
-                var op = _mesService.GetOperator(value);
+                AuthorizationLevel authLevel = _mesService.ValidateEmployee(value);
                 // Set check box 
-                OperatorStatus = op == null ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
-                Operator = op;
-                if (Operator.AuthLevel != AuthorizationLevel.Operator)
+                OperatorStatus = authLevel != AuthorizationLevel.InvalidUser ? "../Images/CheckBoxRed.png" : "../Images/CheckBoxGreen.png";
+                //if (Operator.AuthLevel != AuthorizationLevel.Operator)
                     IsRecipeOverridable = true;
-                else
-                    IsRecipeOverridable = false;
+                // else IsRecipeOverridable = false;
+                OperatorLevel = authLevel.ToString(); 
                 RaisePropertyChanged(nameof(OperatorID));
                 RaisePropertyChanged(nameof(OperatorLevel));
                 RaisePropertyChanged(nameof(OperatorColor));
             }
         }
 
-        //private string _opLevel;
-        public string OperatorLevel {
+        private string _opLevel;
+        public string OperatorLevel { 
             get {
-                if (Operator?.AuthLevel == AuthorizationLevel.Engineer)
-                    return "Engineer";
-                else
-                    if (Operator?.AuthLevel == AuthorizationLevel.Admin)
-                    return "Administator";
-                return "Operator";
+                //if (Operator?.AuthLevel == AuthorizationLevel.Engineer)
+                //    return "Engineer";
+                //else
+                //    if (Operator?.AuthLevel == AuthorizationLevel.Admin)
+                //    return "Administator";
+                return _opLevel;
             }
-            //set { _opLevel = value;
-            //    RaisePropertyChanged(nameof(OperatorLevel));
-            //}
+            set {
+                _opLevel = value;
+                RaisePropertyChanged(nameof(OperatorLevel));
+            }
         }
+
 
         //private string _opColor;
         public string OperatorColor {
@@ -464,12 +468,7 @@ namespace FinisarFAS1.ViewModel
                     return "red";
                 else
                     return "lime";
-            }
-            //set
-            //{
-            //    _opColor = value;
-            //    RaisePropertyChanged(nameof(OperatorColor));
-            //}
+            }            
         }
 
 
@@ -842,9 +841,15 @@ namespace FinisarFAS1.ViewModel
 
         private void confirmPort1CmdHandler()
         {
-            var vm = new DialogViewModel("Are you sure you want to Confirm these lots?", "Yes", "No");
-
-            bool? result = dialogService.ShowDialog(vm);
+            bool? result;
+            if (showConfirmButtonBox)
+            {
+                var vm = new DialogViewModel("Are you sure you want to Confirm these lots?", "Yes", "No");
+                result = dialogService.ShowDialog(vm);
+            }
+            else
+                result = true; 
+            
             if (result.HasValue && result.GetValueOrDefault() == true)
             {
                 SetAllWafersToMovedIn();
@@ -1001,7 +1006,7 @@ namespace FinisarFAS1.ViewModel
 
         private void emailViewHandler(string eventText)
         {
-            string bodyText = $"{DateTime.Now.ToString()} EVENT VALUES: Operator:{Operator.OperatorName} Tool:{Tool}" + Environment.NewLine;
+            string bodyText = $"{DateTime.Now.ToString()} EVENT VALUES: Operator:{OperatorID} Tool:{Tool}" + Environment.NewLine;
             bodyText += $"Lot1:{Port1Lot1}";
             if (!string.IsNullOrEmpty(Port1Lot2)) bodyText += $" Lot2:{Port1Lot2}";
 

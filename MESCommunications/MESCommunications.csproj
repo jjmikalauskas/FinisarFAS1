@@ -30,14 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Camstar.Util">
-      <HintPath>.\Camstar.Util.DLL</HintPath>
+    <Reference Include="Camstar.Util, Version=4.5.0.534, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Test MES DLL\Dlls\Camstar.Util.dll</HintPath>
     </Reference>
-    <Reference Include="Camstar.Utility">
-      <HintPath>.\Camstar.Utility.DLL</HintPath>
+    <Reference Include="Camstar.Utility, Version=4.5.0.534, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Test MES DLL\Dlls\Camstar.Utility.dll</HintPath>
     </Reference>
-    <Reference Include="CamstarMES">
-      <HintPath>.\CamstarMES.dll</HintPath>
+    <Reference Include="MESdll">
+      <HintPath>..\..\Test MES DLL\Dlls\MESdll.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>

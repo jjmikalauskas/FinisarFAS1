@@ -15,11 +15,11 @@ namespace MESCommunications
         readonly string lot2 = "61851-002";
         // readonly string lot3 = "61851-003";
 
-        public bool Initialize(string resname)
+        public bool Initialize(string configFile, string hostName)
         {
             try
             {
-                var match = Regex.Match(resname, @"^\d+\-\d+\-[A-Za-z]+\-\d{2}$");
+                var match = Regex.Match(hostName, @"^\d+\-\d+\-[A-Za-z]+\-\d{2}$");
                 if (match.Success)
                     return true;
             }
@@ -114,65 +114,30 @@ namespace MESCommunications
         private Mock<IMESService> CreateOperatorRepository()
         {
             var repo = new Mock<IMESService>(MockBehavior.Strict);
-            repo.Setup(r => r.GetOperator(It.IsAny<string>())).Returns((string s) => new Operator() { Id = 999, OperatorName = s });
-            repo.Setup(r => r.GetOperator(It.Is<string>(s => s.Contains("ohn")))).Returns(new Operator() { Id = 101, OperatorName = "John Doe", AuthLevel = AuthorizationLevel.Operator });
-            repo.Setup(r => r.GetOperator("cindy")).Returns(new Operator() { Id = 202, OperatorName = "Cindy Doe", AuthLevel = AuthorizationLevel.Engineer });
-            repo.Setup(r => r.GetOperator("Mike")).Returns(new Operator() { Id = 303, OperatorName = "Bobby", AuthLevel = AuthorizationLevel.Admin });
-            //repo.Setup(r => r.ValidateUserFromCamstar("bobby")).Returns(false); 
-            //repo.Setup(r => r.ValidateUserFromCamstar("")).Returns(false);
-            //repo.Setup(r => r.GetLotStatus(It.IsAny<string>())).Returns(new DataTable()); 
+            repo.Setup(r => r.ValidateEmployee(It.IsAny<string>())).Returns(AuthorizationLevel.InvalidUser);
+            repo.Setup(r => r.ValidateEmployee(It.Is<string>(s => s.Contains("ohn")))).Returns(AuthorizationLevel.Engineer);
+            repo.Setup(r => r.ValidateEmployee("cindy")).Returns(AuthorizationLevel.Operator);
+            repo.Setup(r => r.ValidateEmployee("Mike")).Returns(AuthorizationLevel.Administrator);
             return repo;
         }
 
-        #region PUBLIC METHODS
+        #region PUBLIC METHODS       
 
-        public Operator GetOperator(string operatorName)
-        {
-            var repo = CreateOperatorRepository();
-
-            var op = repo.Object.GetOperator(operatorName);
-            if (op.Id < 100)
-                op = null;
-            return op;
-        }
-
-        public Lot GetLot(string lotName)
-        {
-            var lot = new Lot();
-            lot.Id = GetNextRandom(lotName);
-            if (lot.Id < 100)
-                lot = null;
-            return lot;
-        }
-
-        public DataTable GetResourceStatus(string toolName)
+        public DataTable GetResourceStatus(string resourceName)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Availability");
             dt.Columns.Add("ResourceName");
             dt.Columns.Add("ResourceStateName");
             dt.Columns.Add("ResourceSubStateName");
-            dt.Rows.Add(new object[] { "1", toolName, "Standby", "Standby" });
+            dt.Rows.Add(new object[] { "1", resourceName, "Standby", "Standby" });
             return dt;
         }
 
-        public DataTable GetLotStatus(string lotId)
+        public DataTable GetContainerStatus(string lotId)
         {
-            //var repo = CreateOperatorRepository();
-            // var lot = repo.Object.GetLotStatus(lotId); 
-            var lot = GetCurrentWaferConfigurationSetup(lotId);
-            var dt = DataHelpers.MakeWaferListIntoDataTable(lot);
-            return dt;
-        }
-
-        public DataTable GetContainerStatus(string resourceName)
-        {
-            // var camstar = new Camstar() { Availability = "Online", ResourceName = "Camstar MES-DEV", ResourceSubStateName = "V 6.3" };
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Availability");
-            dt.Columns.Add("ResourceName");
-            dt.Columns.Add("ResourceSubStateName");
-            dt.Rows.Add(new object[] { "Online", "Camstar MES-DEV", "V 6.3" });
+            var wafers = GetCurrentWaferConfigurationSetup(lotId);
+            var dt = DataHelpers.MakeWaferListIntoDataTable(wafers);
             return dt;
         }       
 
@@ -186,27 +151,35 @@ namespace MESCommunications
 
             await Task.Delay(delayTime);
         }
+      
 
-        private int GetNextRandom(string s)
+        public AuthorizationLevel ValidateEmployee(string strEmployeeName)
         {
-            int seed = 0;
-            foreach (char c in s)
-            {
-                seed += (int)c;
-            }
-            Random r = new Random(seed);
-            return r.Next(999);
+            return AuthorizationLevel.Engineer; 
         }
 
-        public string ValidateEmployee(string strEmployeeName)
+        public bool MoveIn(string container, string errorMsg, bool somebool,
+                            string employee, string comment, string resourceName, string factoryName)
         {
-            throw new NotImplementedException();
+            return true; 
         }
 
-        public bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack)
+
+        public bool MoveOut(string container, string errorMsg, bool somebool,
+                            string employee, string comment)
         {
-            throw new NotImplementedException();
+            return true;
         }
+
+        public bool Hold(string container, string errorMsg,
+             string employee, string comment, string resourceName,
+             string factory, string holdReason)
+        {
+            return true; 
+        }
+
+
+
     }
 
 }

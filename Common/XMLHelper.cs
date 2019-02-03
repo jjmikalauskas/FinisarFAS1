@@ -12,11 +12,13 @@ namespace Common
 {
     public class XMLHelper
     {
+        private const string xmlDirectory = @"E:\Data\";
+
         public static ToolConfig ReadToolConfigXml(string filename) 
         {
             XmlSerializer ser = new XmlSerializer(typeof(ToolConfig));
 
-            ToolConfig myTool = ser.Deserialize(new FileStream(filename, FileMode.Open)) as ToolConfig;
+            ToolConfig myTool = ser.Deserialize(new FileStream(xmlDirectory + filename, FileMode.Open)) as ToolConfig;
 
             if (myTool != null)
             {
@@ -29,13 +31,24 @@ namespace Common
         {
             XmlSerializer ser = new XmlSerializer(typeof(SystemConfig));
             SystemConfig mysys2 = new SystemConfig();
-
-            SystemConfig mysys = ser.Deserialize(new FileStream(filename, FileMode.Open)) as SystemConfig;
-
-            if (mysys != null)
+            SystemConfig mysys = null; 
+            
+            try
             {
-                // do whatever you want with your "tool"
+                FileStream fs = new FileStream(xmlDirectory + filename, FileMode.Open);
+
+                mysys = ser.Deserialize(fs) as SystemConfig;
+
+                if (mysys != null)
+                {
+                    // do whatever you want with your "tool"
+                }
             }
+            catch (Exception ex)
+            {
+                string exp = $"{ex.Message}";
+            }
+
             return mysys;
         }
     }

@@ -32,6 +32,8 @@ namespace Common
 
         private SystemConfigCamstarConfig camstarConfigField;
 
+        private SystemConfigDialog dialogField;
+
         /// <remarks/>
         public string EmailServer
         {
@@ -68,6 +70,15 @@ namespace Common
             set
             {
                 this.camstarConfigField = value;
+            }
+        }
+
+        public SystemConfigDialog Dialogs {
+            get {
+                return this.dialogField;
+            }
+            set {
+                this.dialogField = value;
             }
         }
     }
@@ -231,4 +242,50 @@ namespace Common
             }
         }
     }
+
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class SystemConfigDialog
+    {
+
+        private bool showConfirmationBox;
+
+        private bool showStartMessageBoxField;
+
+        private bool showEmailBoxField;
+
+        /// <remarks/>
+        public bool ShowConfirmationBox {
+            get {
+                return this.showConfirmationBox;
+            }
+            set {
+                this.showConfirmationBox = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool ShowStartMessageBox {
+            get {
+                return this.showStartMessageBoxField;
+            }
+            set {
+                this.showStartMessageBoxField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool ShowEmailBox {
+            get {
+                return this.showEmailBoxField;
+            }
+            set {
+                this.showEmailBoxField = value;
+            }
+        }
+    }
+
 }
