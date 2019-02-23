@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToolConfig xmlns="http://rudolphtech.com/ToolConfigXMLSchema.xsd">
+  <ToolType>ToolType1</ToolType>
+  <Toolid>Toolid1</Toolid>
+  <CommunicationTimeout>30</CommunicationTimeout>
+  <LoadLock>0</LoadLock>
+  <Loadports>
+    <LoadPortName>LoadPortName1</LoadPortName>
+    <LoadPortName>LoadPortName2</LoadPortName>
+  </Loadports> 
+  <SlotColumnName>SlotColumnName1</SlotColumnName>
+  <CamstarString>CamstarString1</CamstarString>
+  <StartTimerSeconds>0</StartTimerSeconds>
+  <TimeoutBeforeStartFlag>true</TimeoutBeforeStartFlag>
+  <TimeoutBeforeStartSeconds>0</TimeoutBeforeStartSeconds>
+  <EnableAllEvents>true</EnableAllEvents>
+  <EnableAllAlarms>true</EnableAllAlarms>
+  <EnableDefinedEventsAtAppStart>true</EnableDefinedEventsAtAppStart>
+  <DefineEventsAtAppStart>true</DefineEventsAtAppStart>
+  <ControlStateSVID>0</ControlStateSVID>
+  <ProcessStateSVID>0</ProcessStateSVID>
+  <EmailOnAlarmsFlag>true</EmailOnAlarmsFlag>
+  <PrimaryEmailAddressees>
+    <Addressee>Addressee1</Addressee>
+    <Addressee>Addressee2</Addressee>
+    <Addressee>Addressee3</Addressee>
+  </PrimaryEmailAddressees>
+  <EmailAddresseesForAlarms>
+    <Addressee>Addressee1</Addressee>
+    <Addressee>Addressee2</Addressee>
+    <Addressee>Addressee3</Addressee>
+  </EmailAddresseesForAlarms>
+  <EmailOnAppShutdownFlag>true</EmailOnAppShutdownFlag>
+  <EmailAddresseesForAppshutdown>
+    <Addressee>Addressee1</Addressee>
+    <Addressee>Addressee2</Addressee>
+    <Addressee>Addressee3</Addressee>
+  </EmailAddresseesForAppshutdown>
+  <TraceLogFilesPath>TraceLogFilesPath1</TraceLogFilesPath>
+  <LogFilesPath>LogFilesPath1</LogFilesPath>
+  <OperatorWaferTableFields>
+    <Field Name="Name1" />
+    <Field Name="Name2" />
+    <Field Name="Name3" />
+  </OperatorWaferTableFields>
+  <EngineerWaferTableFields>
+    <Field Name="Name1" />
+    <Field Name="Name2" />
+    <Field Name="Name3" />
+  </EngineerWaferTableFields>
+  <EqConstValList>
+    <EqConst>
+      <val>0</val>
+      <name>name1</name>
+    </EqConst>
+    <EqConst>
+      <val>65535</val>
+      <name>name2</name>
+    </EqConst>
+    <EqConst>
+      <val>1</val>
+      <name>name3</name>
+    </EqConst>
+  </EqConstValList>
+  <EqConstList>
+    <EqConst>
+      <val>0</val>
+      <name>name1</name>
+    </EqConst>
+    <EqConst>
+      <val>65535</val>
+      <name>name2</name>
+    </EqConst>
+    <EqConst>
+      <val>1</val>
+      <name>name3</name>
+    </EqConst>
+  </EqConstList>
+  <SVidList>
+    <Svid>
+      <name>name1</name>
+      <id>0</id>
+    </Svid>
+    <Svid>
+      <name>name2</name>
+      <id>255</id>
+    </Svid>
+    <Svid>
+      <name>name3</name>
+      <id>1</id>
+    </Svid>
+  </SVidList>
+  <AlarmList>
+    <alarm>
+      <name>name1</name>
+      <id>0</id>
+    </alarm>
+    <alarm>
+      <name>name2</name>
+      <id>65535</id>
+    </alarm>
+    <alarm>
+      <name>name3</name>
+      <id>1</id>
+    </alarm>
+  </AlarmList>
+  <TraceReports>
+    <Report id="0">
+      <vids>
+        <vid name="name1">0</vid>
+        <vid name="name2">255</vid>
+        <vid name="name3">1</vid>
+      </vids>
+      <dsper>0</dsper>
+      <totsmp>0</totsmp>
+    </Report>
+    <Report id="255">
+      <vids>
+        <vid name="name4">254</vid>
+        <vid name="name5">2</vid>
+        <vid name="name6">253</vid>
+      </vids>
+      <dsper>65535</dsper>
+      <totsmp>65535</totsmp>
+    </Report>
+    <Report id="1">
+      <vids>
+        <vid name="name7">3</vid>
+        <vid name="name8">252</vid>
+        <vid name="name9">4</vid>
+      </vids>
+      <dsper>1</dsper>
+      <totsmp>1</totsmp>
+    </Report>
+  </TraceReports>
+  <eventReports>
+    <report id="0">
+      <vids>
+        <vid name="name1">0</vid>
+        <vid name="name2">65535</vid>
+        <vid name="name3">1</vid>
+      </vids>
+      <events>
+        <ceid name="name1">0</ceid>
+        <ceid name="name2">65535</ceid>
+        <ceid name="name3">1</ceid>
+      </events>
+    </report>
+    <report id="65535">
+      <vids>
+        <vid name="name4">65534</vid>
+        <vid name="name5">2</vid>
+        <vid name="name6">65533</vid>
+      </vids>
+      <events>
+        <ceid name="name4">65534</ceid>
+        <ceid name="name5">2</ceid>
+        <ceid name="name6">65533</ceid>
+      </events>
+    </report>
+    <report id="1">
+      <vids>
+        <vid name="name7">3</vid>
+        <vid name="name8">65532</vid>
+        <vid name="name9">4</vid>
+      </vids>
+      <events>
+        <ceid name="name7">3</ceid>
+        <ceid name="name8">65532</ceid>
+        <ceid name="name9">4</ceid>
+      </events>
+    </report>
+  </eventReports>
+  <Dialogs>
+    <ShowConfirmationBox>true</ShowConfirmationBox>
+    <PostStartmessage>PostStartmessage1</PostStartmessage>
+    <ShowEmailBox>true</ShowEmailBox>
+  </Dialogs>
+</ToolConfig>

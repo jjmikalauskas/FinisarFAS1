@@ -63,10 +63,10 @@
                  TextWrapping="WrapWithOverflow" />
 
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button Margin="10,5,10,7" Width="160" ToolTip="Cancel Send"
+            <!--<Button Margin="10,5,10,7" Width="160" ToolTip="Cancel Send"
                     Background="{StaticResource ResourceKey=RedGlass}"
                     Content="Cancel" IsCancel="True"
-                    Command="{Binding Path=CancelCmd}" />
+                    Command="{Binding Path=CancelCmd}" />-->
             <Button Margin="10,5,10,7" Width="160" ToolTip="Send Email"
                     Background="{StaticResource ResourceKey=LimeGlass}"
                     Content="Send Email" IsDefault="True"

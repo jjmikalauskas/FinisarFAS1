@@ -23,14 +23,14 @@
     <Setting Name="InsiteUser" Type="System.String" Scope="Application">
       <Value Profile="(Default)">InsiteAdmin</Value>
     </Setting>
-    <Setting Name="InsitePwd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Nf4bUeDWqjspbkXXIw8AIQ==</Value>
-    </Setting>
     <Setting Name="strLogPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\MESDLL\Log\</Value>
     </Setting>
     <Setting Name="strLogFilePrefix" Type="System.String" Scope="Application">
       <Value Profile="(Default)">CamstarMESDLL_</Value>
+    </Setting>
+    <Setting Name="InsitePwd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Nf4bUeDWqjspbkXXIw8AIQ==</Value>
     </Setting>
   </Settings>
 </SettingsFile>

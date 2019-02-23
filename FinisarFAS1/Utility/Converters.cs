@@ -32,7 +32,7 @@ namespace FinisarFAS1.Converters
         }
         #endregion
     }
-   
+
     public class YesNoConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -64,18 +64,6 @@ namespace FinisarFAS1.Converters
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return null;
-        }       
-    }
-
-    public class StringToOppositeVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return string.IsNullOrEmpty(value as string) ? Visibility.Visible : Visibility.Collapsed;
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return null;
         }
     }
 
@@ -84,6 +72,18 @@ namespace FinisarFAS1.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return string.IsNullOrEmpty(value as string) ? Visibility.Hidden : Visibility.Visible;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public class StringToOppositeVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return string.IsNullOrEmpty(value as string) ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -202,7 +202,7 @@ namespace FinisarFAS1.Converters
         {
             // Added 12/19/2013 MIK 
             if (value == null)
-                return Visibility.Collapsed; 
+                return Visibility.Collapsed;
             if ((value is bool) && targetType == typeof(Visibility))
             {
                 bool visible = (bool)value;
@@ -243,7 +243,7 @@ namespace FinisarFAS1.Converters
         {
             throw new NotImplementedException();
         }
-    }      
+    }
 
     class PanelMarginConverter : IValueConverter
     {
@@ -263,7 +263,7 @@ namespace FinisarFAS1.Converters
             throw new NotImplementedException();
         }
     }
-   
+
     class PanelDimensionsConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)

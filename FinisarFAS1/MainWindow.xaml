@@ -14,7 +14,7 @@
         FocusManager.FocusedElement="{Binding ElementName=OperatorField}"
         Title="{Binding Title}"
         ResizeMode="NoResize"
-        MaxWidth="2000" Width="1400" Height="960" >
+        MaxWidth="2000" Width="1700" Height="1010" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -22,23 +22,23 @@
                 <ResourceDictionary Source="View/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:StringToVisibleConverter x:Key="NullVisibilityConverter" />
-            <converters:StringNullOrEmptyToHiddenConverter x:Key="NullHiddenConverter" />            
+            <converters:StringNullOrEmptyToHiddenConverter x:Key="NullHiddenConverter" />
             <converters:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
             <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
             <converters:OppositeBooleanToCollapsedConverter x:Key="OppositeBooleanToCollapsedConverter" />
 
             <Storyboard x:Key="expandAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.1"
+                    <DoubleAnimation Duration="0:0:0.01"
                                      From="0"
                                      Storyboard.TargetName="alarmPanel"
-                                     To="1385" />
+                                     To="1685" />
                 </Storyboard>
             </Storyboard>
             <Storyboard x:Key="collapseAlarm">
                 <Storyboard TargetProperty="RenderTransform.(TranslateTransform.X)">
-                    <DoubleAnimation Duration="0:0:0.1"
-                                     From="1385"
+                    <DoubleAnimation Duration="0:0:0.01"
+                                     From="1685"
                                      Storyboard.TargetName="alarmPanel"
                                      To="0" />
                 </Storyboard>
@@ -60,14 +60,7 @@
                                      To="0" />
                 </Storyboard>
             </Storyboard>-->
-
-            <Style TargetType="Button">
-                <Setter Property="Margin" Value="15,10" />
-                <Setter Property="FontSize" Value="28" />
-                <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="140"/>
-            </Style>
-
+            
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Height" Value="25" />
@@ -85,6 +78,52 @@
                     <TextBlock Text="{Binding Path=Description}" />
                 </StackPanel>
             </DataTemplate>
+
+
+            <Style x:Key="TabItemFocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="3,3,3,1" SnapsToDevicePixels="true"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>           
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource TabItemFocusVisual}"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Padding" Value="6,1,6,1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter x:Name="Content" 
+                                      HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" 
+                                      VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" ContentSource="Header" RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Panel.ZIndex" Value="1"/>
+                                    <Setter Property="Background" TargetName="Bd" Value="{Binding Path=Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="Bd" Value="Green"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="Blue"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
 
         </ResourceDictionary>
     </Window.Resources>
@@ -115,7 +154,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
-            <RowDefinition Height="16*" />
+            <RowDefinition Height="704" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
@@ -163,19 +202,32 @@
                     <Label FontSize="18" Content="Operator:" VerticalAlignment="Center" />
                     <!--<Label Margin="2,0,5,0" FontSize="22" Content="{Binding Path=Operator}" MaxWidth="250" />-->
                     <TextBox x:Name="OperatorField" Width="250" KeyboardNavigation.TabIndex="0" 
-                             Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}"                              
+                             Text="{Binding Path=OperatorID, UpdateSourceTrigger=LostFocus}" 
+                             GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              VerticalAlignment="Center" />
-                    <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
-                           Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
-                           VerticalAlignment="Center" />
+                    <!--<progress:CircularProgressBar Visibility="{Binding IsBusy, Converter={StaticResource ResourceKey=NullHiddenConverter}}" Loaded="CircularProgressBar_Loaded"/>-->
+                    <StackPanel Margin="0,5,0,0"
+                        Visibility="{Binding BusyOp, Converter={StaticResource ResourceKey=OppositeBooleanToCollapsedConverter}}"
+                        >
+                        <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=OperatorStatus}" 
+                               Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
+                               VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Viewbox Height="30" Width="33"  Margin="0,4,0,0"
+                             Visibility="{Binding BusyOp, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
+                        <progress:CircularProgressBar 
+                            Visibility="{Binding BusyOp, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}"/>
+                    </Viewbox>
+                    
                 </StackPanel>
                 <StackPanel Margin="2,5" Orientation="Horizontal" >
                     <Label FontSize="18" Content="Tool:" VerticalAlignment="Center" />
                     <TextBox Width="180" KeyboardNavigation.TabIndex="1" 
-                             Text="{Binding Path=Tool, UpdateSourceTrigger=LostFocus}"                              
+                             Text="{Binding Path=ToolID, UpdateSourceTrigger=LostFocus}" 
+                             GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              VerticalAlignment="Center" />
                     <Image Margin="3,5,10,0" Width="20" Source="{Binding Path=ToolStatus}" 
-                           Visibility="{Binding Tool, Converter={StaticResource ResourceKey=NullHiddenConverter}}"
+                           Visibility="{Binding ToolID, Converter={StaticResource ResourceKey=NullHiddenConverter}}"
                            VerticalAlignment="Center" />
                 </StackPanel>
 
@@ -183,12 +235,12 @@
                             Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >
                     <StackPanel Orientation="Horizontal" >
                         <Label FontSize="18" Content="Lot 1:" />
-                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0"
+                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0"  Background="{Binding LotStatusColor}"
                                    Text="{Binding Path=Port1Lot1}" VerticalAlignment="Center" />
                         <Label Margin="15,0,0,0" FontSize="18" Content="Lot 2:"
                                Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
                                />
-                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0"
+                        <TextBlock Margin="3,0,0,0" FontSize="18" Padding="5,0" Background="{Binding LotStatusColor}"
                                    Text="{Binding Path=Port1Lot2}" VerticalAlignment="Center" 
                                    Visibility="{Binding Port1Lot2, Converter={StaticResource ResourceKey=NullVisibilityConverter}}" 
                                    />
@@ -200,34 +252,55 @@
                 </StackPanel>-->
             </StackPanel>
             <StackPanel Margin="0,-7,0,0" Orientation="Horizontal" >
-                <TextBlock Margin="90,0,0,0" Width="250" Padding="3,0" FontSize="14" FontWeight="Bold"
+                <TextBlock Margin="90,0,0,0" Width="250" FontSize="14" FontWeight="Bold"
                                Text="{Binding OperatorLevel}" HorizontalAlignment="Left"
                                Visibility="{Binding OperatorID, Converter={StaticResource ResourceKey=NullHiddenConverter}}" 
                                />
-                
             </StackPanel>
 
             <StackPanel Height="63">
-                <StackPanel Margin="2,0,0,0" Orientation="Horizontal" >
+                <StackPanel Margin="2,0,0,0" Orientation="Horizontal"  >
                     <Label FontSize="18" Content="Recipe:" VerticalAlignment="Center" />
                     <TextBox x:Name="RecipeField" 
                              Margin="21,5,0,5" Width="330" KeyboardNavigation.TabIndex="2" 
                              Text="{Binding Path=CurrentRecipe, UpdateSourceTrigger=LostFocus}" 
+                             GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              IsEnabled="{Binding IsRecipeOverridable}"
                              VerticalAlignment="Center" />
                 </StackPanel>
-                <TextBlock Margin="220,0,0,0" FontSize="16" FontWeight="Bold"
-                           Text="{Binding ProcessState}"  />                
+                <TextBlock Margin="220,2,0,0" FontSize="16" FontWeight="DemiBold" Width="Auto" Padding="10,2"
+                           HorizontalAlignment="Left"  
+                           Text="{Binding ProcessState}" Background="{Binding ProcessStateColor}" />
+                <!--<TextBlock Name="statusText" Text="{Binding Path=SecMsgOperation, NotifyOnTargetUpdated=True}">
+                <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>-->
             </StackPanel>
 
         </StackPanel>
-       
+
         <!-- MAIN TABS-->
-        
-        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" >            
-            <TabItem Width="Auto" >
-                <TabItem.Header>
-                        <TextBlock Padding="10,5,0,0"  Text="{Binding LoadPortNames[0]}" />
+        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" 
+                    Background="{Binding LotStatusColor}" Height="706" >
+            <!--<TabControl.Resources>
+                <Style TargetType="{x:Type TabPanel}">
+                    <Setter Property="Background" Value="Red"></Setter>
+                </Style>
+            </TabControl.Resources>-->
+            <TabItem Width="160" >
+                <TabItem.Header >
+                    <TextBlock Padding="5,5,5,5" FontSize="22" FontWeight="SemiBold"
+                               Text="{Binding LoadPortNames[0]}" Background="{Binding LotStatusColor}" />
                 </TabItem.Header>
                 <view:WaferGrid />
             </TabItem>
@@ -247,75 +320,82 @@
         <StackPanel Grid.Column="0"  Grid.Row="2" Grid.ColumnSpan="3"
                     Margin="0,0,0,0" 
                     Background="{DynamicResource ResourceKey=BlueGlass}" Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" >
-                <Label DockPanel.Dock="Left" Margin="5,10,0,5" FontSize="18"  Content="Alarm:" />
-                <DockPanel LastChildFill="True" Background="Red" >
-                <TextBlock Margin="0,10,5,5"  Width="Auto"
-                           FontSize="18" Height="28" Background="Red" Padding="8,0,30,0"
-                           Foreground="White" 
+            <DockPanel>
+                <Label DockPanel.Dock="Left" Margin="5,0,0,0" FontSize="18"  Content="Alarm:"  VerticalAlignment="Center" />
+                <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Width="1400" FontSize="18" Background="Red" Padding="5,3,5,3"
+                           Foreground="White" MouseUp="TextBlock_MouseUp"
                            Visibility="{Binding CurrentAlarm, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
-                           Text="{Binding CurrentAlarm}" />
-                <Button Margin="-27,10,5,5" Command="{Binding CloseAlarmCmd}"
+                           ToolTip="Click to clear"
+                           Text="{Binding CurrentAlarm, NotifyOnTargetUpdated=True}" >
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+                    <!--<Button Margin="-27,10,5,5" Command="{Binding CloseAlarmCmd}"
                         FontSize="15" Height="25" Width="17" Foreground="Black"
                         Visibility="{Binding CurrentAlarm, Converter={StaticResource ResourceKey=NullVisibilityConverter}}"
-                        Background="Pink"  >X</Button>
-                </DockPanel>
-            </StackPanel>
+                        Background="Pink"  >X</Button>-->
+            </DockPanel>
 
             <!--Visibility="Collapsed"-->
-            <DockPanel Margin="0,5,0,0"  >
+            <DockPanel Margin="0,0,0,0"  >
                 <StackPanel Orientation="Horizontal"  >
                     <!--Visibility="{Binding TimeToStart, Converter={StaticResource ResourceKey=BooleanToCollapsedConverter}}" >-->
-                    <Button ToolTip="Alarm listing during current run"
+                    <Button ToolTip="Alarm listing during current run" Margin="5,5,20,5"
                                     Command="{Binding Path=AlarmListingCmd}"
                                     Content="Alarms"  />
-                    <Button ToolTip="Log during current run"
+                    <Button ToolTip="Log during current run" Margin="20,5"
                                     Command="{Binding Path=LogListingCmd}"
                                     Content="Logs"  />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"                    
-                            Margin="0,5,0,0" >                    
-                    <Button ToolTip="Open up Camstar internal website" Width="160"
+                            Margin="0,5,0,0" >
+                    <Button ToolTip="Open up Camstar internal website" Width="160" Margin="20,5"
                                         Command="{Binding Path=CamstarCmd}"
                                         Content="Camstar"  />
-                    <Button ToolTip="Reset FAS program" Width="160"
+                    <Button ToolTip="Reset FAS program" Width="160" Margin="20,5"
                                     Command="{Binding Path=ResetHostCmd}"
                                     Content="Reset Host"  />
-                    <Button ToolTip="Exit FAS program" Width="160"
+                    <Button ToolTip="Exit FAS program" Width="160" Margin="20,5"
                                     Command="{Binding Path=ExitHostCmd}"
                                     Content="Exit Host"  />
                 </StackPanel>
             </DockPanel>
         </StackPanel>
-      
+
         <StackPanel x:Name="alarmPanel" 
                     Grid.Row="0" Grid.RowSpan="3"
                     Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="-1385,0,0,0"
+                    Margin="-1685,123,0,0"
                     HorizontalAlignment="Left">
             <StackPanel.RenderTransform>
                 <TranslateTransform />
             </StackPanel.RenderTransform>
             <view:AlarmLogView x:Name="alarmView"
-                                    Width="1385" Height="800" />
+                                    Width="1685" Height="715" />
         </StackPanel>
 
         <StackPanel x:Name="logPanel" Visibility="Collapsed"
                     Grid.Row="0" Grid.RowSpan="3"
-                    Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="0,0" >
+                    Grid.Column="0" Grid.ColumnSpan="3"
+                    Margin="0,123,0,0" >
             <StackPanel.RenderTransform>
                 <TranslateTransform />
             </StackPanel.RenderTransform>
             <view:LogView x:Name="logView"
-                                    Width="1385" Height="800" />
-        </StackPanel>
+                                    Width="1685" Height="715" />
+        </StackPanel>      
 
-        <!--<Viewbox Width="60" 
-                             Margin="-380,35,0,0" >
-            <progress:CircularProgressBar Visibility="{Binding IsRetrieveBusy, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}" />
-        </Viewbox>-->
-      
     </Grid>
 
 </Window>

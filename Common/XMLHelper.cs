@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -12,44 +13,26 @@ namespace Common
 {
     public class XMLHelper
     {
-        private const string xmlDirectory = @"E:\Data\";
+        private const string pathToolConfigs = @"\Common\ToolConfigs\";
+        private readonly static string currentDir = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName;
+        private readonly static string xmlDirectory = currentDir + pathToolConfigs;
 
-        public static ToolConfig ReadToolConfigXml(string filename) 
+        public static T ReadXmlConfig<T>(string filename)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(ToolConfig));
-
-            ToolConfig myTool = ser.Deserialize(new FileStream(xmlDirectory + filename, FileMode.Open)) as ToolConfig;
-
-            if (myTool != null)
-            {
-                // do whatever you want with your "tool"
-            }
-            return myTool;
-        }
-
-        public static SystemConfig ReadSysConfigXml(string filename)
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(SystemConfig));
-            SystemConfig mysys2 = new SystemConfig();
-            SystemConfig mysys = null; 
+            T config = default(T);
+            XmlSerializer ser = new XmlSerializer(typeof(T));
             
             try
             {
-                FileStream fs = new FileStream(xmlDirectory + filename, FileMode.Open);
-
-                mysys = ser.Deserialize(fs) as SystemConfig;
-
-                if (mysys != null)
-                {
-                    // do whatever you want with your "tool"
-                }
+                config = (T)ser.Deserialize(new FileStream(xmlDirectory + filename, FileMode.Open, FileAccess.Read));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                string exp = $"{ex.Message}";
+                Console.WriteLine(e.Message);
             }
 
-            return mysys;
+            return config;
         }
+
     }
 }

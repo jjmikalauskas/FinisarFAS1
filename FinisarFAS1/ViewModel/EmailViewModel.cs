@@ -1,4 +1,5 @@
-﻿using FinisarFAS1.View;
+﻿using Common;
+using FinisarFAS1.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -24,8 +25,9 @@ namespace FinisarFAS1.ViewModel
         {
             SendTo = sendTo;
             Subject = subject;
-            EmailBody = body;
+            EmailBody = body; 
         }
+
 
         private string _sendTo;
         public string SendTo {
@@ -60,12 +62,12 @@ namespace FinisarFAS1.ViewModel
         private void cancelHandler()
         {
             SendTo = Subject = EmailBody = ""; 
-            Messenger.Default.Send(new CloseEmailWindowMessage(SendTo, Subject, EmailBody));
+            Messenger.Default.Send(new CloseAndSendEmailMessage(SendTo, Subject, EmailBody));
         }
 
         private void sendEmailHandler()
         {
-            Messenger.Default.Send(new CloseEmailWindowMessage(SendTo, Subject, EmailBody));
+            Messenger.Default.Send(new CloseAndSendEmailMessage(SendTo, Subject, EmailBody));
         }
     }
 }

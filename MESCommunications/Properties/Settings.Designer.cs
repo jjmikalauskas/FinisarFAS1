@@ -86,18 +86,6 @@ namespace MESCommunications.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Nf4bUeDWqjspbkXXIw8AIQ==")]
-        public string InsitePwd {
-            get {
-                return ((string)(this["InsitePwd"]));
-            }
-            set {
-                this["InsitePwd"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\MESDLL\\Log\\")]
@@ -113,6 +101,18 @@ namespace MESCommunications.Properties {
         public string strLogFilePrefix {
             get {
                 return ((string)(this["strLogFilePrefix"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Nf4bUeDWqjspbkXXIw8AIQ==")]
+        public string InsitePwd {
+            get {
+                return ((string)(this["InsitePwd"]));
+            }
+            set {
+                this["InsitePwd"] = value;
             }
         }
     }

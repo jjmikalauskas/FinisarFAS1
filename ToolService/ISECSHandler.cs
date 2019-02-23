@@ -9,6 +9,9 @@ namespace ToolService
 {
     public interface ISECSHandler<T>
     {
-        void InitializeTool(string eqSvr, int timeout);
+        bool InitializeTool();
+        void StartProcessing(string Port, string[] LotIds, string Recipe);
+
+
     }
 }

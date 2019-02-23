@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Common;
+using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Threading;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinisarFAS1.View
 {
@@ -19,10 +13,29 @@ namespace FinisarFAS1.View
     /// Interaction logic for LogView.xaml
     /// </summary>
     public partial class LogView : UserControl
-    {
+    {      
+        public ObservableCollection<LogEntry> LogEntries { get; set; }
+
         public LogView()
         {
-            InitializeComponent();
+            InitializeComponent();          
+
+            DataContext = LogEntries = new ObservableCollection<LogEntry>();          
+
+            Messenger.Default.Register<EventMessage>(this, AddLogEntry);
+        }
+
+        private void AddLogEntry(EventMessage msg)
+        {
+            LogEntry logEntry = new LogEntry() { EventDateTime = msg.MsgDateTime, Message = msg.Message };
+            if (msg.MsgType == "A")
+                logEntry.Message = "ALARM:" + logEntry.Message;
+            Dispatcher.BeginInvoke((Action)(() => LogEntries.Add(logEntry)));
+        }
+
+        private void CloseLog_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Messenger.Default.Send(new ToggleLogViewMessage(false));
         }
     }
 }

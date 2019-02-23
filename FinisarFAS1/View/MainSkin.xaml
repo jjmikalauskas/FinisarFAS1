@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+                    >
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="10,5,10,5" />
@@ -115,10 +115,10 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="Margin" Value="5,5" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Width" Value="120" />
+        <Setter Property="Margin" Value="5,10" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Height" Value="75" />
+        <Setter Property="Width" Value="180" />
     </Style>
 
     <Style TargetType="RadioButton">
@@ -153,12 +153,7 @@
     <LinearGradientBrush x:Key="MainBackgroundBrushG" StartPoint="0.7,0" EndPoint="0.7,1">
         <GradientStop Offset="0" Color="SlateGray" />
         <GradientStop Offset="1" Color="#FFefefef" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="MainBackgroundBrush2013" StartPoint="0.7,0" EndPoint="0.7,1">
-        <GradientStop Offset="0" Color="SlateGray" />
-        <GradientStop Offset="1" Color="#FFefefef" />
-    </LinearGradientBrush>
+    </LinearGradientBrush>   
 
     <LinearGradientBrush x:Key="MainImportViewsBrush" Opacity="0.9">
         <GradientStop Offset="0.0" Color="LightYellow" />
@@ -293,6 +288,11 @@
         <GradientStop Offset="0.12" Color="Black" />
         <GradientStop Offset="0.6" Color="#a0a0a0a0" />
         <GradientStop Offset="0.88" Color="Black" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BlackGlass5" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#08FFFFFF" Offset="0"/>
+        <GradientStop Color="#88FFFFFF" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="GreenGlass3" Opacity="0.9">

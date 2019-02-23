@@ -1,0 +1,756 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SECSInterface</name>
+    </assembly>
+    <members>
+        <member name="T:SECSInterface.S2F15">
+            <summary>
+            Equipment constant set (S1F15)
+            </summary>
+            <remarks>Change one or more equipment constants. Note that unlike other messages that accept a list of items, is common for the equiment constant 
+            values to have different DataTypes. Most other message will use the same Data Type for all items in the list.</remarks>
+        </member>
+        <member name="M:SECSInterface.S2F15.addECID(System.String,SECSInterface.DataType,System.String,SECSInterface.DataType)">
+            <summary>
+            Add a equipment constant ID and its desired value to the request.  
+            </summary>
+            <param name="ECID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+        </member>
+        <member name="T:SECSInterface.S2F13">
+            <summary>
+            Build and Send the Equipment Constant Request (S2F13)
+            </summary>
+            <remarks>A request to the equipment to report selected values of its equipment constants.</remarks>
+        </member>
+        <member name="M:SECSInterface.S2F13.addECID(System.String,SECSInterface.DataType)">
+            <summary>
+            Add a equipment constant ID to the request.  The name name will default to "ECV".
+            </summary>
+            <param name="ECID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+        </member>
+        <member name="M:SECSInterface.S2F13.addECID(System.String,SECSInterface.DataType,System.Object)">
+            <summary>
+            Add a equipment constant ID to the request. to the request with a user-specified variable name. This name will be available
+            when the reply has been received and decoded into SECSData objects.
+            </summary>
+            <param name="ECID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <param name="ECIDName">A String or a list of strings that will be returned in the SECSData items created when the reply is recieved.</param>
+            <remarks>
+            The use of ECIDName can simplify the caller code's handling of the reply message. The reply message will
+            contain a list of SECSData objects. Each object has a Name() accessor which will reflect the ECIDName parameter
+            that was supplied in this method.  If no name was supplied, the Name() access will return the default name, "ECV".<br/>
+            The ECIDName can also be supplied as a List of String for ECID that return a list of values. In that case
+            each of the variables in the sublist will be created with the Name() access from the list. <br/>
+            If ECIDName is NOT a list, but the S1F4 reply from the tool contains a sublist, then the sublist names will be 
+            the same as the ECIDName (or "ECV" by default.)
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F13.addECID(System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType})">
+            <summary>
+            Add a list of equipment constant IDs and types to the request. The two lists must be of the same size or the 
+            method will return an exception.
+            </summary>
+            <param name="ECID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F13.addECID(System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType},System.Collections.Generic.List{System.Object})">
+            <summary>
+            Add a list of equipment constant IDs, types, and ECID names to the request. The three lists must be of the same size or the 
+            method will return an exception.
+            </summary>
+            <param name="ECID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <param name="ECIDName">A list of Strings or a list of lists of strings that will be returned in the SECSData items created when the S1F4 reply is recieved.</param>
+            <remarks>
+            The use of ECIDName can simplify the caller code's handling of the reply message. The reply message will
+            contain a list of SECSData objects. Each object has a Name() accessor which will reflect the ECIDName parameter
+            that was supplied in this method.  If no name was supplied, the Name() access will return the default name, "ECV".<br/><br/>
+            The ECIDName can also be supplied as a List of String for ECID that return a list of values. In that case
+            each of the variables in the sublist will be created with the Name() access from the list. <br/>
+            If ECIDName is NOT a list, but the reply from the tool contains a sublist, then the sublist names will be 
+            the same as the ECIDName (or "ECV" by default.)
+            </remarks>
+        </member>
+        <member name="P:SECSInterface.S2F13.ECV">
+            <summary>
+            Get the equipment constant values from the message
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SECSInterface.S2F49">
+            <summary>
+            Build and Send the enhanced remote command for 'PP-SELECT'.  There are other enhanced remote command with different parameters;
+            they may be needed at some point.
+            </summary>
+            <remarks>The Host requests the Equipment perform the specified enanced remote command with the associated parameters. </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F49.setOBJSPEC(System.String,SECSInterface.DataType)">
+            <summary>
+            Remote command code or string. 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F49.HCACK">
+            <summary>
+            Host Command Parameter Acknowledge Code, 1 byte
+            </summary>
+            <remarks>
+            0 = Acknowledge, command has been performed <br/>
+            1 = Command does not exist  <br/>
+            2 = Cannot perform now  <br/>
+            3 = At least one parameter is invalid  <br/>
+            4 = Acknowledge, command will be performed with completion signaled later by an event <br/> 
+            5 = Rejected, Already in Desired Condition  <br/>
+            6 = No such object exists  <br/>
+            7-63 Reserved  <br/>
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F49.addRecipeAndSlotmap(System.String,SECSInterface.DataType,System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType})">
+            <summary>
+            Add a command parameter name/value pair to the remote command
+            </summary>
+            <param name="CPNAME">Command Parameter Name</param>
+            <param name="CPVAL">Command Parameter Value</param>
+        </member>
+        <member name="T:SECSInterface.S7F19">
+            <summary>
+            Build and Send the Selected Equipment Status Request (S1F3)
+            </summary>
+            <remarks>A request to the equipment to list the directory of process programs, returning the process program IDs.</remarks>
+        </member>
+        <member name="P:SECSInterface.S7F19.PPID">
+            <summary>
+            Get the EPPD (recipe ID list) values from the reply message
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SECSInterface.S16F15" -->
+        <!-- Badly formed XML comment ignored for member "T:SECSInterface.S14F9" -->
+        <member name="T:SECSInterface.DataType">
+            <summary>
+            Defines the Semi Standard SECS data types.
+            </summary>
+            <remarks>
+            Use of this class in messages sent to the autoshell equipment server enforces that
+            only the correct mnemonics will be used for the types. Supports both the autoshell
+            style names (eg "UI1", "ASC") and the industry standard names (eg "U1", "A"...)
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.DataType.ToString">
+            <summary>
+            Returns the typical data type names supported by FDC: String, Number, Binary or Boolean.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.DataType.AshlString">
+            <summary>
+            Returns the autoshell data type names for use by an AutoShell equipment server.
+            </summary>
+            <remarks>Same as ToString()</remarks>
+        </member>
+        <member name="P:SECSInterface.DataType.SemiString">
+            <summary>
+            Returns the commonly used data type name mnemonics, such as "A" for ascii, U4 for unsigned integer 4.
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S1F1">
+            <summary>
+            Build and send the Are You There Request (S1F1).
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S1F1.MDLN">
+            <summary>
+            Returns the equipment model type.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S1F1.SOFTREV">
+            <summary>
+            Returns the software revision code.
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S1F13">
+            <summary>
+            Establish Communications Request (CR) (S1F13)
+            </summary>
+            <remarks>Initializes communications both on power-up and following a break in communication.</remarks>
+        </member>
+        <member name="P:SECSInterface.S1F13.COMMACK">
+            <summary>
+            Establish Communications Acknowledge Code, 1 byte.
+            0 = Accepted
+            1 = Denied, try again
+            2-63 = Reserved
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S1F13.MDLN">
+            <summary>
+            Returns the equipment model type.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S1F13.SOFTREV">
+            <summary>
+            Returns the software revision code.
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S1F3">
+            <summary>
+            Build and Send the Selected Equipment Status Request (S1F3)
+            </summary>
+            <remarks>A request to the equipment to report selected values of its status variables.</remarks>
+        </member>
+        <member name="M:SECSInterface.S1F3.addSVID(System.String,SECSInterface.DataType)">
+            <summary>
+            Add a status variable ID to the request.  The variable name will default to "SV".
+            </summary>
+            <param name="SVID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+        </member>
+        <member name="M:SECSInterface.S1F3.addSVID(System.String,SECSInterface.DataType,System.Object)">
+            <summary>
+            Add a status variable ID to the request with a user-specified variable name. This name will be available
+            when the reply has been received and decoded into SECSData objects.
+            </summary>
+            <param name="SVID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <param name="svidName">A String or a list of strings that will be returned in the SECSData items created when the S1F4 reply is recieved.</param>
+            <remarks>
+            The use of svidName can simplify the caller code's handling of the reply message. The reply message will
+            contain a list of SECSData objects. Each object has a Name() accessor which will reflect the svidName parameter
+            that was supplied in this method.  If no name was supplied, the Name() access will return the default name, "SV".<br/>
+            The svidName can also be supplied as a List of String for SVID that return a list of values. In that case
+            each of the variables in the sublist will be created with the Name() access from the list. <br/>
+            If svidName is NOT a list, but the S1F4 reply from the tool contains a sublist, then the sublist names will be 
+            the same as the svidName (or "SV" by default.)
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S1F3.addSVID(System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType})">
+            <summary>
+            Add a list of status variable IDs and types to the request. The two lists must be of the same size or the 
+            method will return an exception.
+            </summary>
+            <param name="SVID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S1F3.addSVID(System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType},System.Collections.Generic.List{System.Object})">
+            <summary>
+            Add a list of status variable IDs, types, a SVID names to the request. The three lists must be of the same size or the 
+            method will return an exception.
+            </summary>
+            <param name="SVID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+            <param name="SVIDName">A list of Strings or a list of lists of strings that will be returned in the SECSData items created when the S1F4 reply is recieved.</param>
+            <remarks>
+            The use of svidName can simplify the caller code's handling of the reply message. The reply message will
+            contain a list of SECSData objects. Each object has a Name() accessor which will reflect the svidName parameter
+            that was supplied in this method.  If no name was supplied, the Name() access will return the default name, "SV".<br/><br/>
+            The svidName can also be supplied as a List of String for SVID that return a list of values. In that case
+            each of the variables in the sublist will be created with the Name() access from the list. <br/>
+            If svidName is NOT a list, but the S1F4 reply from the tool contains a sublist, then the sublist names will be 
+            the same as the svidName (or "SV" by default.)
+            </remarks>
+        </member>
+        <member name="P:SECSInterface.S1F3.SV">
+            <summary>
+            Get the status variable values from the message
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SECSInterface.S2F17">
+            <summary>
+            Build and send the Date And Time Request (DTR) S1F17
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F17.TIME">
+            <summary>
+            Returns the equipment timein 12-byte, 16-byte, or Extended format. 
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S2F21">
+            <summary>
+            Build and send the Remote Command Send (RCS) 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F21.RCMD">
+            <summary>
+            Remote command code or string. 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F21.CMDA">
+            <summary>
+            Returns the equipment reply
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S2F23">
+            <summary>
+            Build and send the Trace Initialize Send (TIS) stream
+            </summary>
+            <remarks>
+            Status variables exist at all times. This function provides a way to sample a subset of those status variables as a function of
+             time. The trace data is returned on S6,F1 and is related to the original request by the TRID Multiple trace requests may be made to 
+            that equipment allowing it. If equipment receives S2,F23 with the same TRID as a trace function that is currently in progress, 
+            the equipment should terminate the old trace and then initiate the new trace. A trace function currently in progress may be 
+            terminated by S2,F23 with TRID of that trace and TOTSMP = 0. </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F23.SetTRID(System.String,SECSInterface.DataType)">
+            <summary>
+            Trace request ID
+            </summary>
+            <param name="TRID"></param>
+            <param name="TYPE"></param>
+        </member>
+        <member name="M:SECSInterface.S2F23.SetDSPER(System.String,SECSInterface.DataType)">
+            <summary>
+            Data sample period. DSPER has two allowable formats: <br/>
+            Format 1: hhmmss, 6 bytes <br/>
+            Format 2: hhmmsscc, 8 bytes 
+            </summary>
+            <param name="DSPER"></param>
+            <param name="TYPE"></param>
+        </member>
+        <member name="M:SECSInterface.S2F23.SetTOTSMP(System.String,SECSInterface.DataType)">
+            <summary>
+            Total samples to be made. 
+            </summary>
+            <param name="TOTSMP"></param>
+            <param name="TYPE"></param>
+        </member>
+        <member name="M:SECSInterface.S2F23.SetREPGSZ(System.String,SECSInterface.DataType)">
+            <summary>
+            Reporting group size.
+            </summary>
+            <param name="REPGSZ"></param>
+            <param name="TYPE"></param>
+        </member>
+        <member name="M:SECSInterface.S2F23.addSVID(System.String,SECSInterface.DataType)">
+            <summary>
+            Add a status variable ID to the request
+            </summary>
+            <param name="SVID"></param>
+            <param name="dataType">Data type names from the AutoShell standard, not the semi standard type names.</param>
+        </member>
+        <member name="P:SECSInterface.S2F23.TIAACK">
+            <summary>
+            Equipment acknowledgement code, 1 byte. 
+            </summary>
+            <remarks>
+            0 = Everything correct <br/>
+            1 = Too many SVIDs  <br/>
+            2 = No more traces allowed  <br/>
+            3 = Invalid period  <br/>
+            4 = Unknown SVID specified  <br/>
+            5 = Invalid REPGSZ  <br/>
+            6-63 Reserved  <br/>
+            >63 Equipment specified error 
+            </remarks>
+        </member>
+        <member name="T:SECSInterface.S2F27">
+            <summary>
+            Build and send the Initiate Processing Request (IPR)
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F27.LOC">
+            <summary>
+            Machine material location code, 1 byte. 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F27.PPID">
+            <summary>
+            Process program ID. 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F27.CMDA">
+            <summary>
+            Returns the equipment reply
+            </summary>
+        </member>
+        <member name="M:SECSInterface.S2F27.addMID(System.String,SECSInterface.DataType)">
+            <summary>
+            Add a  Material ID.
+            </summary>
+            <param name="MID"></param>
+        </member>
+        <member name="M:SECSInterface.S2F27.addMID(System.Collections.Generic.List{System.String},System.Collections.Generic.List{SECSInterface.DataType})">
+            <summary>
+            Add a  List of material ID
+            </summary>
+            <param name="MID"></param>
+        </member>
+        <member name="T:SECSInterface.S2F33">
+            <summary>
+            Build and send the Define Report (DR) S2F33 request
+            </summary>
+            <remarks>The purpose of this message is for the host to define a group of reports for the equipment. </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F33.setDATAID(System.String,SECSInterface.DataType)">
+            <summary>
+            Data ID
+            </summary>
+            <param name="DATAID">Data ID</param>
+            <param name="dataidType"></param>
+        </member>
+        <member name="M:SECSInterface.S2F33.addReport(System.String,SECSInterface.DataType,System.Collections.Generic.List{System.String},SECSInterface.DataType)">
+            <summary>
+            Add a report definition to the request.
+            </summary>
+            <param name="RPTID">ReportID</param>
+            <param name="rptidType"></param>
+            <param name="VID">List of variable ID</param>
+            <param name="vidType"></param>
+        </member>
+        <member name="P:SECSInterface.S2F33.DRACK">
+            <summary>
+            Define Report  Acknowledge Code, 1 byte
+            </summary>
+            <remarks>
+            0 = Accepted <br/>
+            1 = Denied. Insufficient space. <br/>
+            2 = Denied. Invalid format. <br/>
+            3 = Denied. At least one RPTID already defined. <br/>
+            4 = Denied. At least VID does not exist. <br/>
+            >4 = Other errors <br/>
+            5-63 Reserved 
+            </remarks>
+        </member>
+        <member name="T:SECSInterface.S2F35">
+             <summary>
+             Build and send the Link event Report (LER) request
+             </summary>
+             <remarks>The purpose of this message is for the host to link n reports to an event (CEID). These linked event reports will default to 
+             ‘disabled’ upon linking. That is, the occurrence of an event would not cause the report to be sent until enabled. 
+             See S2,F37 for enabling reports. 
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F35.setDATAID(System.String,SECSInterface.DataType)">
+            <summary>
+            Data ID
+            </summary>
+            <param name="DATAID">Data ID</param>
+            <param name="dataidType"></param>
+        </member>
+        <member name="M:SECSInterface.S2F35.addCEID(System.String,SECSInterface.DataType,System.Collections.Generic.List{System.String},SECSInterface.DataType)">
+            <summary>
+            Add a collection event ID and a list of reports for it
+            </summary>
+            <param name="CEID">Collection event ID</param>
+            <param name="ceidType"></param>
+            <param name="RPTID">List of report IDs</param>
+            <param name="rptidType"></param>
+        </member>
+        <member name="P:SECSInterface.S2F35.LRACK">
+            <summary>
+            Link Report Acknowledge Code, 1 byte. 
+            </summary>
+            <remarks>
+            0 = Accepted <br/>
+            1 = Denied. Insufficient space <br/>
+            2 = Denied. Invalid format <br/>
+            3 = Denied. At least one CEID link already defined <br/>
+            4 = Denied. At least one CEID does not exist <br/>
+            5 = Denied. At least one RPTID does not exist <br/>
+            >5 = Other errors <br/>
+            6-63 Reserved <br/>
+            </remarks>
+        </member>
+        <member name="T:SECSInterface.S2F37">
+            <summary>
+            Build and send the Enable/Disable Event Report (EDER) message.
+            </summary>
+            <remarks>The purpose of this message is for the host to enable or disable reporting for a group of events (CEIDs).  </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F37.setCEED(System.String,SECSInterface.DataType)">
+            <summary>
+            Collection event or trace enable/disable code, 1 byte. 
+            </summary>
+            <param name="CEED">FALSE = Disable ; TRUE = Enable </param>
+            <param name="ceedType"></param>
+        </member>
+        <member name="M:SECSInterface.S2F37.addCEID(System.String,SECSInterface.DataType)">
+            <summary>
+            Add a collection event ID to the message
+            </summary>
+            <param name="CEID">Collection event ID</param>
+            <param name="ceidType"></param>
+        </member>
+        <member name="P:SECSInterface.S2F37.ERACK">
+            <summary>
+            Enable/Disable Event Report. Acknowledge Code, 1 byte
+            </summary>
+            <remarks>
+            0 = Accepted <br/>
+            1 = Denied. At least one CEID does not exist <br/>
+            >1 = Other Errors <br/>
+            2-63 Reserved <br/>
+            </remarks>
+        </member>
+        <member name="T:SECSInterface.S2F41">
+            <summary>
+            Build and Send the Host Command Send (HCS)
+            </summary>
+            <remarks>The Host requests the Equipment perform the specified remote command with the associated parameters. </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F41.SetRCMD(System.String,SECSInterface.DataType)">
+            <summary>
+            Remote command code or string. 
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S2F41.HCACK">
+            <summary>
+            Host Command Parameter Acknowledge Code, 1 byte
+            </summary>
+            <remarks>
+            0 = Acknowledge, command has been performed <br/>
+            1 = Command does not exist  <br/>
+            2 = Cannot perform now  <br/>
+            3 = At least one parameter is invalid  <br/>
+            4 = Acknowledge, command will be performed with completion signaled later by an event <br/> 
+            5 = Rejected, Already in Desired Condition  <br/>
+            6 = No such object exists  <br/>
+            7-63 Reserved  <br/>
+            </remarks>
+        </member>
+        <member name="M:SECSInterface.S2F41.addCp(System.String,SECSInterface.DataType,System.String,SECSInterface.DataType)">
+            <summary>
+            Add a command parameter name/value pair to the remote command
+            </summary>
+            <param name="CPNAME">Command Parameter Name</param>
+            <param name="CPVAL">Command Parameter Value</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SECSInterface.S3F17" -->
+        <member name="M:SECSInterface.S3F17.setDATAID(System.String,SECSInterface.DataType)">
+            <summary>
+            DATAID
+            </summary>
+            <param name="DATAID"></param>
+            <param name="dataidType"></param>
+        </member>
+        <member name="M:SECSInterface.S3F17.setCARRIERACTION(System.String,SECSInterface.DataType)">
+            <summary>
+            The action to perform. Cannot be blank.
+            </summary>
+        </member>
+        <member name="M:SECSInterface.S3F17.setCARRIERSPEC(System.String,SECSInterface.DataType)">
+            <summary>
+            The Carrier Spec. If missing, an empty string will be sent with data type ASCII.
+            </summary>
+        </member>
+        <member name="M:SECSInterface.S3F17.setPTN(System.String,SECSInterface.DataType)">
+            <summary>
+            
+            </summary>
+            <param name="PTN"></param>
+            <param name="ptnType"></param>
+        </member>
+        <member name="T:SECSInterface.S5F1">
+             <summary>
+             Decode the Alarm Report Send (ARS) function from the equipment.
+             </summary>
+             <remarks>This message reports a change in or presence of an alarm condition. One message will be issued when the alarm is set and one 
+             message will be issued when the alarm is cleared. Irrecoverable errors and attention flags may not have a corresponding clear 
+            message. </remarks>
+        </member>
+        <member name="P:SECSInterface.S5F1.ALCD">
+            <summary>
+            Alarm code byte
+            </summary>
+            <remarks>
+            bit 8 = 1 means alarm set <br/>
+            bit 8 = 0 means alarm cleared <br/>
+            bit 7-1 is alarm category <br/>
+            0 = Not used <br/>
+            1 = Personal safety <br/>
+            2 = Equipment safety <br/>
+            3 = Parameter control warning <br/>
+            4 = Parameter control error <br/>
+            5 = Irrecoverable error <br/>
+            6 = Equipment status warning <br/>
+            7 = Attention flags <br/>
+            8 = Data integrity <br/>
+            >8 = Other categories <br/>
+            9-63 = Reserved <br/>
+            </remarks>
+        </member>
+        <member name="P:SECSInterface.S5F1.ALID">
+            <summary>
+            Alarm identification.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S5F1.ALTX">
+            <summary>
+            Alarm text limited to 120 characters. 
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S5F3">
+            <summary>
+            Build and send the Enable/Disable Alarm Send (EAS) message
+            </summary>
+            <remarks>This message will change the state of the enable bit in the equipment. The enable bit determines if the alarm will be 
+            sent to the host. Alarms which are not controllable in this way are unaffected by this message. </remarks>
+        </member>
+        <member name="P:SECSInterface.S5F3.ACKC5">
+            <summary>
+            Acknowledge code, 1 byte. <br/>
+            0 = Accepted >0 = Error, not accepted 
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S6F1">
+            <summary>
+            Decode the Trace Data Send (TDS) message from the equipment.
+            </summary>
+            <remarks>The equipment uses this function to send samples to the host according to the trace setup done by S2,F23. 
+            Trace is a time-driven form of equipment status. </remarks>
+        </member>
+        <member name="P:SECSInterface.S6F1.TRID">
+            <summary>
+            Trace Request ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F1.SMPLN">
+            <summary>
+            Sample number
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F1.STIME">
+            <summary>
+            Sample time, 12, 16 bytes, or Extended format as specified by the TimeFormat equipment constant value setting. 
+            </summary>
+            <remarks>
+            12-byte format YYMMDDhhmmss <br/>
+            16-byte format YYYYMMDDhhmmsscc <br/>
+            Extended (max 32 byte) format YYYY-MM-DDThh:mm:ss.sTZD (see SEMI E148) <br/>
+            </remarks>
+        </member>
+        <member name="P:SECSInterface.S6F1.SV">
+            <summary>
+            Status Variable Value
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S6F11">
+            <summary>
+            Decode the Event Report Send (ERS) message received from the equipment
+            </summary>
+            <remarks>The equipment uses this message to send a defined, linked, and enabled group of reports to the host upon the occurrence of an event (CEID).</remarks>
+        </member>
+        <member name="P:SECSInterface.S6F11.DATAID">
+            <summary>
+            Data ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F11.CEID">
+            <summary>
+            Collection event ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F11.Reports">
+            <summary>
+            Dictionary of Report ID to a list of variable values for each the report
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S6F3">
+            <summary>
+            Decode the Discrete Variable Data Send (DVS message received from the equipment
+            </summary>
+            <remarks>ny data report which is initiated by an event, such as the completion of a measurement, rather than passage of time is called 
+            a discrete variable. Some equipment may have several possible events on which to send the data. S2,F15 is used to select the 
+            desired reporting events.</remarks>
+        </member>
+        <member name="P:SECSInterface.S6F3.DATAID">
+            <summary>
+            Data ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F3.CEID">
+            <summary>
+            Collection event ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F3.DataSets">
+            <summary>
+            Dictionary of DataSet ID to a list of data set values
+            </summary>
+        </member>
+        <member name="T:SECSInterface.S6F9">
+            <summary>
+            Decode the Formatted Variable Send (FVS) message received from the equipment
+            </summary>
+            <remarks>The same function as S6,F3 except that the DVNAMEs are supplied from a predefined form
+            that is known to the host. Thus, the data are more compact..</remarks>
+        </member>
+        <member name="P:SECSInterface.S6F9.PFCD">
+            <summary>
+             
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F9.DATAID">
+            <summary>
+            Data ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F9.CEID">
+            <summary>
+            Collection event ID
+            </summary>
+        </member>
+        <member name="P:SECSInterface.S6F9.DataSets">
+            <summary>
+            Dictionary of DataSet ID to a list of data set values
+            </summary>
+        </member>
+        <member name="P:SECSInterface.SECSData.Name">
+            <summary>
+            Name is an optional value which can be set at time of creation of the SECS message class, such as 
+            in S1F3 with the 'svidName' option, or can be set after the object has been created, such as the S1F6 class
+            setSVIDNames method or the S6F11 class setVIDNames method.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.SECSData.Type">
+            <summary>
+            The SECS-II data type.  The ToString() method of the DataType class will return Numbers, String, Boolean
+            or Binary for convenience.  DataType also has AshlString() and SemiString() methods to return the 
+            AutoShell abbreviation fo the data types (UI1, SI1, ASC...) or the industry standard abbreviations (U1, S1, A...)
+            </summary>
+        </member>
+        <member name="P:SECSInterface.SECSData.Size">
+            <summary>
+            If the data is a list, return the list size. All other data types return "1" but if array support is 
+            added in future releases, this will return the array size.
+            </summary>
+        </member>
+        <member name="P:SECSInterface.SECSData.Value">
+            <summary>
+            SECS data variable value as a string
+            </summary>
+        </member>
+        <member name="P:SECSInterface.SECSData.Sublist">
+            <summary>
+            If the current position in the secs message holds a list, return the items in the list.  If not returns null.
+            </summary>
+        </member>
+        <member name="M:SECSInterface.SECSData.ToString">
+            <summary>
+            For debugging purposes--return a formatted string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SECSInterface.SECSData.addNames(System.Collections.Generic.List{SECSInterface.SECSData},System.Collections.Generic.List{System.Object})">
+            <summary>
+            This is a convenience function used for handling incoming messages with lists of data.
+            </summary>
+            <param name="secsData"></param>
+            <param name="names"></param>
+        </member>
+        <member name="P:SECSInterface.SECSMessageOut.Eq">
+            <summary>
+            Tool name for equipment server
+            </summary>
+            <remarks>
+            Allows Equipment server to identify device ID
+            </remarks>
+        </member>
+    </members>
+</doc>

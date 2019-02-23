@@ -1,0 +1,2650 @@
+02/11/19: 12:02:24.099: an_initialize: starting
+02/11/19: 12:02:24.383: an_S1F1_prereply: starting
+02/11/19: 12:02:24.387: checkGlobalFlags: starting
+02/11/19: 12:02:24.390: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 12:02:24.394: checkGlobalFlags: returning true
+02/11/19: 12:02:24.396: an_S1F1_prereply: ending
+02/11/19: 13:23:14.518: an_S1F13_prereply: starting
+02/11/19: 13:23:14.524: checkGlobalFlags: starting
+02/11/19: 13:23:14.531: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:23:14.535: checkGlobalFlags: returning true
+02/11/19: 13:23:14.539: an_S1F13_prereply: ending
+02/11/19: 13:23:15.894: an_S1F1_prereply: starting
+02/11/19: 13:23:15.898: checkGlobalFlags: starting
+02/11/19: 13:23:15.907: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:23:15.918: checkGlobalFlags: returning true
+02/11/19: 13:23:15.930: an_S1F1_prereply: ending
+02/11/19: 13:23:17.088: an_S1F3_prereply: starting
+02/11/19: 13:23:17.099: checkGlobalFlags: starting
+02/11/19: 13:23:17.110: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:23:17.125: checkGlobalFlags: returning true
+02/11/19: 13:23:17.144: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 13:23:17.154: getValAndType: starting svid=13
+02/11/19: 13:23:17.168: looking at 13
+02/11/19: 13:23:17.175: getValAndType: 13 returning ControlState 5
+02/11/19: 13:23:17.182: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 13:23:17.194: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 13:23:17.199: getValAndType: starting svid=16
+02/11/19: 13:23:17.209: looking at 13
+02/11/19: 13:23:17.217: getValAndType: 16 returning ProcessState 2
+02/11/19: 13:23:17.221: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 13:23:17.231: an_S1F3_prereply: ending
+02/11/19: 13:23:17.944: putAckInNcparms: starting
+02/11/19: 13:23:17.953: putAckInNcparms: sf is S5F3
+02/11/19: 13:57:42.617: an_S1F13_prereply: starting
+02/11/19: 13:57:42.625: checkGlobalFlags: starting
+02/11/19: 13:57:42.629: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:57:42.648: checkGlobalFlags: returning true
+02/11/19: 13:57:42.652: an_S1F13_prereply: ending
+02/11/19: 13:57:42.772: an_S1F1_prereply: starting
+02/11/19: 13:57:42.776: checkGlobalFlags: starting
+02/11/19: 13:57:42.777: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:57:42.779: checkGlobalFlags: returning true
+02/11/19: 13:57:42.782: an_S1F1_prereply: ending
+02/11/19: 13:57:42.858: an_S1F3_prereply: starting
+02/11/19: 13:57:42.860: checkGlobalFlags: starting
+02/11/19: 13:57:42.861: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 13:57:42.863: checkGlobalFlags: returning true
+02/11/19: 13:57:42.869: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 13:57:42.871: getValAndType: starting svid=13
+02/11/19: 13:57:42.874: looking at 13
+02/11/19: 13:57:42.876: getValAndType: 13 returning ControlState 5
+02/11/19: 13:57:42.877: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 13:57:42.880: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 13:57:42.882: getValAndType: starting svid=16
+02/11/19: 13:57:42.885: looking at 13
+02/11/19: 13:57:42.886: getValAndType: 16 returning ProcessState 2
+02/11/19: 13:57:42.890: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 13:57:42.893: an_S1F3_prereply: ending
+02/11/19: 13:57:42.972: putAckInNcparms: starting
+02/11/19: 13:57:42.974: putAckInNcparms: sf is S5F3
+02/11/19: 14:10:33.537: an_S1F13_prereply: starting
+02/11/19: 14:10:33.540: checkGlobalFlags: starting
+02/11/19: 14:10:33.543: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:10:33.545: checkGlobalFlags: returning true
+02/11/19: 14:10:33.547: an_S1F13_prereply: ending
+02/11/19: 14:10:33.672: an_S1F1_prereply: starting
+02/11/19: 14:10:33.676: checkGlobalFlags: starting
+02/11/19: 14:10:33.678: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:10:33.679: checkGlobalFlags: returning true
+02/11/19: 14:10:33.681: an_S1F1_prereply: ending
+02/11/19: 14:10:33.762: an_S1F3_prereply: starting
+02/11/19: 14:10:33.764: checkGlobalFlags: starting
+02/11/19: 14:10:33.765: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:10:33.767: checkGlobalFlags: returning true
+02/11/19: 14:10:33.770: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 14:10:33.771: getValAndType: starting svid=13
+02/11/19: 14:10:33.777: looking at 13
+02/11/19: 14:10:33.778: getValAndType: 13 returning ControlState 5
+02/11/19: 14:10:33.780: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 14:10:33.783: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 14:10:33.784: getValAndType: starting svid=16
+02/11/19: 14:10:33.787: looking at 13
+02/11/19: 14:10:33.789: getValAndType: 16 returning ProcessState 2
+02/11/19: 14:10:33.791: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 14:10:33.798: an_S1F3_prereply: ending
+02/11/19: 14:10:33.894: putAckInNcparms: starting
+02/11/19: 14:10:33.899: putAckInNcparms: sf is S5F3
+02/11/19: 14:17:52.511: an_S1F13_prereply: starting
+02/11/19: 14:17:52.519: checkGlobalFlags: starting
+02/11/19: 14:17:52.523: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:17:52.527: checkGlobalFlags: returning true
+02/11/19: 14:17:52.531: an_S1F13_prereply: ending
+02/11/19: 14:17:52.675: an_S1F1_prereply: starting
+02/11/19: 14:17:52.682: checkGlobalFlags: starting
+02/11/19: 14:17:52.686: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:17:52.690: checkGlobalFlags: returning true
+02/11/19: 14:17:52.693: an_S1F1_prereply: ending
+02/11/19: 14:17:52.808: an_S1F3_prereply: starting
+02/11/19: 14:17:52.812: checkGlobalFlags: starting
+02/11/19: 14:17:52.816: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:17:52.820: checkGlobalFlags: returning true
+02/11/19: 14:17:52.827: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 14:17:52.831: getValAndType: starting svid=13
+02/11/19: 14:17:52.840: looking at 13
+02/11/19: 14:17:52.844: getValAndType: 13 returning ControlState 5
+02/11/19: 14:17:52.848: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 14:17:52.860: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 14:17:52.861: getValAndType: starting svid=16
+02/11/19: 14:17:52.865: looking at 13
+02/11/19: 14:17:52.866: getValAndType: 16 returning ProcessState 2
+02/11/19: 14:17:52.868: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 14:17:52.870: an_S1F3_prereply: ending
+02/11/19: 14:18:02.623: putAckInNcparms: starting
+02/11/19: 14:18:02.626: putAckInNcparms: sf is S5F3
+02/11/19: 14:30:58.754: an_S1F13_prereply: starting
+02/11/19: 14:30:58.757: checkGlobalFlags: starting
+02/11/19: 14:30:58.759: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:30:58.760: checkGlobalFlags: returning true
+02/11/19: 14:30:58.762: an_S1F13_prereply: ending
+02/11/19: 14:30:58.900: an_S1F1_prereply: starting
+02/11/19: 14:30:58.904: checkGlobalFlags: starting
+02/11/19: 14:30:58.905: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:30:58.907: checkGlobalFlags: returning true
+02/11/19: 14:30:58.908: an_S1F1_prereply: ending
+02/11/19: 14:30:58.983: an_S1F3_prereply: starting
+02/11/19: 14:30:58.985: checkGlobalFlags: starting
+02/11/19: 14:30:58.986: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:30:58.988: checkGlobalFlags: returning true
+02/11/19: 14:30:58.991: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 14:30:58.992: getValAndType: starting svid=13
+02/11/19: 14:30:58.995: looking at 13
+02/11/19: 14:30:58.997: getValAndType: 13 returning ControlState 5
+02/11/19: 14:30:59.000: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 14:30:59.003: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 14:30:59.005: getValAndType: starting svid=16
+02/11/19: 14:30:59.008: looking at 13
+02/11/19: 14:30:59.009: getValAndType: 16 returning ProcessState 2
+02/11/19: 14:30:59.011: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 14:30:59.014: an_S1F3_prereply: ending
+02/11/19: 14:30:59.110: putAckInNcparms: starting
+02/11/19: 14:30:59.112: putAckInNcparms: sf is S5F3
+02/11/19: 14:53:43.109: an_setControlState: starting
+02/11/19: 14:53:43.114: an_setControlState: returning 0
+02/11/19: 14:54:03.349: an_S1F13_prereply: starting
+02/11/19: 14:54:03.353: checkGlobalFlags: starting
+02/11/19: 14:54:03.356: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:54:03.358: checkGlobalFlags: returning true
+02/11/19: 14:54:03.362: an_S1F13_prereply: ending
+02/11/19: 14:54:03.490: an_S1F1_prereply: starting
+02/11/19: 14:54:03.493: checkGlobalFlags: starting
+02/11/19: 14:54:03.500: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:54:03.503: checkGlobalFlags: returning true
+02/11/19: 14:54:03.509: an_S1F1_prereply: ending
+02/11/19: 14:54:03.596: an_S1F3_prereply: starting
+02/11/19: 14:54:03.600: checkGlobalFlags: starting
+02/11/19: 14:54:03.603: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:54:03.609: checkGlobalFlags: returning true
+02/11/19: 14:54:03.616: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 14:54:03.620: getValAndType: starting svid=13
+02/11/19: 14:54:03.628: looking at 13
+02/11/19: 14:54:03.631: getValAndType: 13 returning ControlState 1
+02/11/19: 14:54:03.635: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/11/19: 14:54:03.642: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 14:54:03.646: getValAndType: starting svid=16
+02/11/19: 14:54:03.656: looking at 13
+02/11/19: 14:54:03.660: getValAndType: 16 returning ProcessState 2
+02/11/19: 14:54:03.663: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 14:54:03.671: an_S1F3_prereply: ending
+02/11/19: 14:54:03.779: putAckInNcparms: starting
+02/11/19: 14:54:03.785: putAckInNcparms: sf is S5F3
+02/11/19: 14:54:32.180: an_setControlState: starting
+02/11/19: 14:54:32.184: an_setControlState: returning 0
+02/11/19: 14:55:02.385: an_S1F13_prereply: starting
+02/11/19: 14:55:02.390: checkGlobalFlags: starting
+02/11/19: 14:55:02.393: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:55:02.395: checkGlobalFlags: returning true
+02/11/19: 14:55:02.397: an_S1F13_prereply: ending
+02/11/19: 14:55:02.526: an_S1F1_prereply: starting
+02/11/19: 14:55:02.530: checkGlobalFlags: starting
+02/11/19: 14:55:02.531: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:55:02.533: checkGlobalFlags: returning true
+02/11/19: 14:55:02.534: an_S1F1_prereply: ending
+02/11/19: 14:55:02.611: an_S1F3_prereply: starting
+02/11/19: 14:55:02.614: checkGlobalFlags: starting
+02/11/19: 14:55:02.617: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 14:55:02.618: checkGlobalFlags: returning true
+02/11/19: 14:55:02.622: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 14:55:02.623: getValAndType: starting svid=13
+02/11/19: 14:55:02.629: looking at 13
+02/11/19: 14:55:02.630: getValAndType: 13 returning ControlState 5
+02/11/19: 14:55:02.632: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 14:55:02.635: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 14:55:02.636: getValAndType: starting svid=16
+02/11/19: 14:55:02.640: looking at 13
+02/11/19: 14:55:02.641: getValAndType: 16 returning ProcessState 2
+02/11/19: 14:55:02.643: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 14:55:02.646: an_S1F3_prereply: ending
+02/11/19: 14:55:02.742: putAckInNcparms: starting
+02/11/19: 14:55:02.744: putAckInNcparms: sf is S5F3
+02/11/19: 15:02:19.636: an_S1F13_prereply: starting
+02/11/19: 15:02:19.640: checkGlobalFlags: starting
+02/11/19: 15:02:19.641: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 15:02:19.643: checkGlobalFlags: returning true
+02/11/19: 15:02:19.644: an_S1F13_prereply: ending
+02/11/19: 15:02:19.766: an_S1F1_prereply: starting
+02/11/19: 15:02:19.770: checkGlobalFlags: starting
+02/11/19: 15:02:19.772: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 15:02:19.774: checkGlobalFlags: returning true
+02/11/19: 15:02:19.776: an_S1F1_prereply: ending
+02/11/19: 15:02:19.857: an_S1F3_prereply: starting
+02/11/19: 15:02:19.859: checkGlobalFlags: starting
+02/11/19: 15:02:19.860: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 15:02:19.862: checkGlobalFlags: returning true
+02/11/19: 15:02:19.865: an_S1F3_prereply Index 1 SVID 13 svPtrList 275527024
+02/11/19: 15:02:19.866: getValAndType: starting svid=13
+02/11/19: 15:02:19.870: looking at 13
+02/11/19: 15:02:19.871: getValAndType: 13 returning ControlState 5
+02/11/19: 15:02:19.878: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 15:02:19.887: an_S1F3_prereply Index 2 SVID 16 svPtrList 275526912
+02/11/19: 15:02:19.891: getValAndType: starting svid=16
+02/11/19: 15:02:19.899: looking at 13
+02/11/19: 15:02:19.903: getValAndType: 16 returning ProcessState 2
+02/11/19: 15:02:19.906: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 15:02:19.914: an_S1F3_prereply: ending
+02/11/19: 15:02:20.027: putAckInNcparms: starting
+02/11/19: 15:02:20.031: putAckInNcparms: sf is S5F3
+02/11/19: 17:13:28.131: an_initialize: starting
+02/11/19: 17:13:28.382: an_S1F1_prereply: starting
+02/11/19: 17:13:28.385: checkGlobalFlags: starting
+02/11/19: 17:13:28.387: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:13:28.397: checkGlobalFlags: returning true
+02/11/19: 17:13:28.403: an_S1F1_prereply: ending
+02/11/19: 17:32:26.535: an_S1F13_prereply: starting
+02/11/19: 17:32:26.544: checkGlobalFlags: starting
+02/11/19: 17:32:26.551: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:32:26.555: checkGlobalFlags: returning true
+02/11/19: 17:32:26.559: an_S1F13_prereply: ending
+02/11/19: 17:32:29.962: an_S1F1_prereply: starting
+02/11/19: 17:32:29.970: checkGlobalFlags: starting
+02/11/19: 17:32:29.976: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:32:29.979: checkGlobalFlags: returning true
+02/11/19: 17:32:29.984: an_S1F1_prereply: ending
+02/11/19: 17:32:31.570: an_S1F3_prereply: starting
+02/11/19: 17:32:31.573: checkGlobalFlags: starting
+02/11/19: 17:32:31.577: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:32:31.583: checkGlobalFlags: returning true
+02/11/19: 17:32:31.591: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/11/19: 17:32:31.596: getValAndType: starting svid=13
+02/11/19: 17:32:31.604: looking at 13
+02/11/19: 17:32:31.608: getValAndType: 13 returning ControlState 5
+02/11/19: 17:32:31.612: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 17:32:31.619: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/11/19: 17:32:31.624: getValAndType: starting svid=16
+02/11/19: 17:32:31.640: looking at 13
+02/11/19: 17:32:31.643: getValAndType: 16 returning ProcessState 2
+02/11/19: 17:32:31.645: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 17:32:31.648: an_S1F3_prereply: ending
+02/11/19: 17:32:32.712: putAckInNcparms: starting
+02/11/19: 17:32:32.716: putAckInNcparms: sf is S5F3
+02/11/19: 17:41:55.099: an_S1F13_prereply: starting
+02/11/19: 17:41:55.102: checkGlobalFlags: starting
+02/11/19: 17:41:55.104: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:41:55.105: checkGlobalFlags: returning true
+02/11/19: 17:41:55.111: an_S1F13_prereply: ending
+02/11/19: 17:41:55.234: an_S1F1_prereply: starting
+02/11/19: 17:41:55.237: checkGlobalFlags: starting
+02/11/19: 17:41:55.239: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:41:55.240: checkGlobalFlags: returning true
+02/11/19: 17:41:55.244: an_S1F1_prereply: ending
+02/11/19: 17:41:55.332: an_S1F3_prereply: starting
+02/11/19: 17:41:55.334: checkGlobalFlags: starting
+02/11/19: 17:41:55.337: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:41:55.339: checkGlobalFlags: returning true
+02/11/19: 17:41:55.345: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/11/19: 17:41:55.347: getValAndType: starting svid=13
+02/11/19: 17:41:55.350: looking at 13
+02/11/19: 17:41:55.352: getValAndType: 13 returning ControlState 5
+02/11/19: 17:41:55.354: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 17:41:55.357: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/11/19: 17:41:55.358: getValAndType: starting svid=16
+02/11/19: 17:41:55.362: looking at 13
+02/11/19: 17:41:55.363: getValAndType: 16 returning ProcessState 2
+02/11/19: 17:41:55.367: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 17:41:55.370: an_S1F3_prereply: ending
+02/11/19: 17:41:55.475: putAckInNcparms: starting
+02/11/19: 17:41:55.476: putAckInNcparms: sf is S5F3
+02/11/19: 17:55:12.702: an_S1F13_prereply: starting
+02/11/19: 17:55:12.706: checkGlobalFlags: starting
+02/11/19: 17:55:12.708: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:55:12.710: checkGlobalFlags: returning true
+02/11/19: 17:55:12.712: an_S1F13_prereply: ending
+02/11/19: 17:55:12.853: an_S1F1_prereply: starting
+02/11/19: 17:55:12.859: checkGlobalFlags: starting
+02/11/19: 17:55:12.861: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:55:12.864: checkGlobalFlags: returning true
+02/11/19: 17:55:12.865: an_S1F1_prereply: ending
+02/11/19: 17:55:12.970: an_S1F3_prereply: starting
+02/11/19: 17:55:12.976: checkGlobalFlags: starting
+02/11/19: 17:55:12.979: checkGlobalFlags: checking TransactionAbort=""
+02/11/19: 17:55:12.983: checkGlobalFlags: returning true
+02/11/19: 17:55:12.992: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/11/19: 17:55:12.996: getValAndType: starting svid=13
+02/11/19: 17:55:13.007: looking at 13
+02/11/19: 17:55:13.010: getValAndType: 13 returning ControlState 5
+02/11/19: 17:55:13.014: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/11/19: 17:55:13.022: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/11/19: 17:55:13.026: getValAndType: starting svid=16
+02/11/19: 17:55:13.034: looking at 13
+02/11/19: 17:55:13.038: getValAndType: 16 returning ProcessState 2
+02/11/19: 17:55:13.042: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/11/19: 17:55:13.051: an_S1F3_prereply: ending
+02/11/19: 17:55:13.166: putAckInNcparms: starting
+02/11/19: 17:55:13.170: putAckInNcparms: sf is S5F3
+02/12/19: 06:54:02.754: an_S1F13_prereply: starting
+02/12/19: 06:54:02.763: checkGlobalFlags: starting
+02/12/19: 06:54:02.768: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:02.772: checkGlobalFlags: returning true
+02/12/19: 06:54:02.776: an_S1F13_prereply: ending
+02/12/19: 06:54:02.910: an_S1F1_prereply: starting
+02/12/19: 06:54:02.914: checkGlobalFlags: starting
+02/12/19: 06:54:02.915: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:02.917: checkGlobalFlags: returning true
+02/12/19: 06:54:02.918: an_S1F1_prereply: ending
+02/12/19: 06:54:03.003: an_S1F3_prereply: starting
+02/12/19: 06:54:03.005: checkGlobalFlags: starting
+02/12/19: 06:54:03.006: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:03.008: checkGlobalFlags: returning true
+02/12/19: 06:54:03.011: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 06:54:03.012: getValAndType: starting svid=13
+02/12/19: 06:54:03.018: looking at 13
+02/12/19: 06:54:03.020: getValAndType: 13 returning ControlState 5
+02/12/19: 06:54:03.022: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 06:54:03.024: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 06:54:03.026: getValAndType: starting svid=16
+02/12/19: 06:54:03.029: looking at 13
+02/12/19: 06:54:03.031: getValAndType: 16 returning ProcessState 2
+02/12/19: 06:54:03.032: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 06:54:03.035: an_S1F3_prereply: ending
+02/12/19: 06:54:03.139: putAckInNcparms: starting
+02/12/19: 06:54:03.142: putAckInNcparms: sf is S5F3
+02/12/19: 06:54:35.341: an_S1F13_prereply: starting
+02/12/19: 06:54:35.345: checkGlobalFlags: starting
+02/12/19: 06:54:35.346: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:35.348: checkGlobalFlags: returning true
+02/12/19: 06:54:35.349: an_S1F13_prereply: ending
+02/12/19: 06:54:35.462: an_S1F1_prereply: starting
+02/12/19: 06:54:35.466: checkGlobalFlags: starting
+02/12/19: 06:54:35.468: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:35.470: checkGlobalFlags: returning true
+02/12/19: 06:54:35.471: an_S1F1_prereply: ending
+02/12/19: 06:54:35.550: an_S1F3_prereply: starting
+02/12/19: 06:54:35.552: checkGlobalFlags: starting
+02/12/19: 06:54:35.553: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 06:54:35.555: checkGlobalFlags: returning true
+02/12/19: 06:54:35.558: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 06:54:35.559: getValAndType: starting svid=13
+02/12/19: 06:54:35.563: looking at 13
+02/12/19: 06:54:35.564: getValAndType: 13 returning ControlState 5
+02/12/19: 06:54:35.569: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 06:54:35.572: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 06:54:35.573: getValAndType: starting svid=16
+02/12/19: 06:54:35.577: looking at 13
+02/12/19: 06:54:35.578: getValAndType: 16 returning ProcessState 2
+02/12/19: 06:54:35.580: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 06:54:35.583: an_S1F3_prereply: ending
+02/12/19: 06:54:35.697: putAckInNcparms: starting
+02/12/19: 06:54:35.702: putAckInNcparms: sf is S5F3
+02/12/19: 07:15:37.232: an_S1F13_prereply: starting
+02/12/19: 07:15:37.244: checkGlobalFlags: starting
+02/12/19: 07:15:37.249: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:15:37.254: checkGlobalFlags: returning true
+02/12/19: 07:15:37.261: an_S1F13_prereply: ending
+02/12/19: 07:15:37.434: an_S1F1_prereply: starting
+02/12/19: 07:15:37.452: checkGlobalFlags: starting
+02/12/19: 07:15:37.458: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:15:37.464: checkGlobalFlags: returning true
+02/12/19: 07:15:37.472: an_S1F1_prereply: ending
+02/12/19: 07:15:37.576: an_S1F3_prereply: starting
+02/12/19: 07:15:37.581: checkGlobalFlags: starting
+02/12/19: 07:15:37.584: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:15:37.588: checkGlobalFlags: returning true
+02/12/19: 07:15:37.596: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 07:15:37.600: getValAndType: starting svid=13
+02/12/19: 07:15:37.609: looking at 13
+02/12/19: 07:15:37.613: getValAndType: 13 returning ControlState 5
+02/12/19: 07:15:37.617: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 07:15:37.636: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 07:15:37.638: getValAndType: starting svid=16
+02/12/19: 07:15:37.642: looking at 13
+02/12/19: 07:15:37.644: getValAndType: 16 returning ProcessState 2
+02/12/19: 07:15:37.645: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 07:15:37.648: an_S1F3_prereply: ending
+02/12/19: 07:15:37.759: putAckInNcparms: starting
+02/12/19: 07:15:37.761: putAckInNcparms: sf is S5F3
+02/12/19: 07:54:56.154: an_S1F13_prereply: starting
+02/12/19: 07:54:56.162: checkGlobalFlags: starting
+02/12/19: 07:54:56.164: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:54:56.165: checkGlobalFlags: returning true
+02/12/19: 07:54:56.167: an_S1F13_prereply: ending
+02/12/19: 07:54:56.291: an_S1F1_prereply: starting
+02/12/19: 07:54:56.297: checkGlobalFlags: starting
+02/12/19: 07:54:56.299: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:54:56.300: checkGlobalFlags: returning true
+02/12/19: 07:54:56.302: an_S1F1_prereply: ending
+02/12/19: 07:54:56.379: an_S1F3_prereply: starting
+02/12/19: 07:54:56.383: checkGlobalFlags: starting
+02/12/19: 07:54:56.385: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 07:54:56.386: checkGlobalFlags: returning true
+02/12/19: 07:54:56.389: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 07:54:56.391: getValAndType: starting svid=13
+02/12/19: 07:54:56.395: looking at 13
+02/12/19: 07:54:56.396: getValAndType: 13 returning ControlState 5
+02/12/19: 07:54:56.398: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 07:54:56.400: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 07:54:56.402: getValAndType: starting svid=16
+02/12/19: 07:54:56.407: looking at 13
+02/12/19: 07:54:56.409: getValAndType: 16 returning ProcessState 2
+02/12/19: 07:54:56.410: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 07:54:56.413: an_S1F3_prereply: ending
+02/12/19: 07:54:56.509: putAckInNcparms: starting
+02/12/19: 07:54:56.511: putAckInNcparms: sf is S5F3
+02/12/19: 07:56:16.533: an_setTimeoutAll: starting
+02/12/19: 07:56:43.884: an_setControlState: starting
+02/12/19: 07:56:43.891: an_setControlState: returning 0
+02/12/19: 07:57:05.248: an_sendAlarm: starting
+02/12/19: 08:06:00.680: an_S1F13_prereply: starting
+02/12/19: 08:06:00.694: checkGlobalFlags: starting
+02/12/19: 08:06:00.699: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:06:00.705: checkGlobalFlags: returning true
+02/12/19: 08:06:00.710: an_S1F13_prereply: ending
+02/12/19: 08:06:00.876: an_S1F1_prereply: starting
+02/12/19: 08:06:00.888: checkGlobalFlags: starting
+02/12/19: 08:06:00.892: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:06:00.898: checkGlobalFlags: returning true
+02/12/19: 08:06:00.904: an_S1F1_prereply: ending
+02/12/19: 08:06:01.011: an_S1F3_prereply: starting
+02/12/19: 08:06:01.019: checkGlobalFlags: starting
+02/12/19: 08:06:01.023: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:06:01.029: checkGlobalFlags: returning true
+02/12/19: 08:06:01.037: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 08:06:01.041: getValAndType: starting svid=13
+02/12/19: 08:06:01.051: looking at 13
+02/12/19: 08:06:01.056: getValAndType: 13 returning ControlState 5
+02/12/19: 08:06:01.063: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 08:06:01.072: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 08:06:01.077: getValAndType: starting svid=16
+02/12/19: 08:06:01.099: looking at 13
+02/12/19: 08:06:01.100: getValAndType: 16 returning ProcessState 2
+02/12/19: 08:06:01.102: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 08:06:01.105: an_S1F3_prereply: ending
+02/12/19: 08:06:01.216: putAckInNcparms: starting
+02/12/19: 08:06:01.218: putAckInNcparms: sf is S5F3
+02/12/19: 08:06:06.862: an_S2F33_prereply: starting
+02/12/19: 08:06:06.864: putAckInNcparms: starting
+02/12/19: 08:06:06.865: putAckInNcparms: sf is S2F33
+02/12/19: 08:07:04.169: an_S1F13_prereply: starting
+02/12/19: 08:07:04.172: checkGlobalFlags: starting
+02/12/19: 08:07:04.174: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:07:04.175: checkGlobalFlags: returning true
+02/12/19: 08:07:04.177: an_S1F13_prereply: ending
+02/12/19: 08:07:04.303: an_S1F1_prereply: starting
+02/12/19: 08:07:04.307: checkGlobalFlags: starting
+02/12/19: 08:07:04.309: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:07:04.312: checkGlobalFlags: returning true
+02/12/19: 08:07:04.313: an_S1F1_prereply: ending
+02/12/19: 08:07:04.393: an_S1F3_prereply: starting
+02/12/19: 08:07:04.395: checkGlobalFlags: starting
+02/12/19: 08:07:04.397: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:07:04.398: checkGlobalFlags: returning true
+02/12/19: 08:07:04.401: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 08:07:04.405: getValAndType: starting svid=13
+02/12/19: 08:07:04.408: looking at 13
+02/12/19: 08:07:04.410: getValAndType: 13 returning ControlState 5
+02/12/19: 08:07:04.416: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 08:07:04.419: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 08:07:04.421: getValAndType: starting svid=16
+02/12/19: 08:07:04.424: looking at 13
+02/12/19: 08:07:04.426: getValAndType: 16 returning ProcessState 2
+02/12/19: 08:07:04.428: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 08:07:04.433: an_S1F3_prereply: ending
+02/12/19: 08:07:04.525: putAckInNcparms: starting
+02/12/19: 08:07:04.527: putAckInNcparms: sf is S5F3
+02/12/19: 08:07:09.939: an_S2F33_prereply: starting
+02/12/19: 08:07:09.941: putAckInNcparms: starting
+02/12/19: 08:07:09.943: putAckInNcparms: sf is S2F33
+02/12/19: 08:07:23.314: an_sendAlarm: starting
+02/12/19: 08:07:25.622: an_setControlState: starting
+02/12/19: 08:07:25.628: an_setControlState: returning 0
+02/12/19: 08:10:51.210: an_S1F13_prereply: starting
+02/12/19: 08:10:51.218: checkGlobalFlags: starting
+02/12/19: 08:10:51.222: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:10:51.231: checkGlobalFlags: returning true
+02/12/19: 08:10:51.236: an_S1F13_prereply: ending
+02/12/19: 08:10:51.348: an_S1F1_prereply: starting
+02/12/19: 08:10:51.356: checkGlobalFlags: starting
+02/12/19: 08:10:51.360: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:10:51.366: checkGlobalFlags: returning true
+02/12/19: 08:10:51.370: an_S1F1_prereply: ending
+02/12/19: 08:10:51.466: an_S1F3_prereply: starting
+02/12/19: 08:10:51.470: checkGlobalFlags: starting
+02/12/19: 08:10:51.475: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:10:51.479: checkGlobalFlags: returning true
+02/12/19: 08:10:51.489: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 08:10:51.495: getValAndType: starting svid=13
+02/12/19: 08:10:51.511: looking at 13
+02/12/19: 08:10:51.512: getValAndType: 13 returning ControlState 5
+02/12/19: 08:10:51.514: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 08:10:51.516: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 08:10:51.518: getValAndType: starting svid=16
+02/12/19: 08:10:51.521: looking at 13
+02/12/19: 08:10:51.525: getValAndType: 16 returning ProcessState 2
+02/12/19: 08:10:51.526: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 08:10:51.530: an_S1F3_prereply: ending
+02/12/19: 08:10:51.630: putAckInNcparms: starting
+02/12/19: 08:10:51.631: putAckInNcparms: sf is S5F3
+02/12/19: 08:10:57.029: an_S2F33_prereply: starting
+02/12/19: 08:10:57.031: putAckInNcparms: starting
+02/12/19: 08:10:57.034: putAckInNcparms: sf is S2F33
+02/12/19: 08:11:17.189: an_setControlState: starting
+02/12/19: 08:11:17.191: an_setControlState: returning 0
+02/12/19: 08:11:28.937: an_setControlState: starting
+02/12/19: 08:11:28.942: an_setControlState: returning 0
+02/12/19: 08:11:33.677: an_setControlState: starting
+02/12/19: 08:11:33.680: an_setControlState: returning 0
+02/12/19: 08:11:55.073: an_S1F13_prereply: starting
+02/12/19: 08:11:55.077: checkGlobalFlags: starting
+02/12/19: 08:11:55.078: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:11:55.080: checkGlobalFlags: returning true
+02/12/19: 08:11:55.082: an_S1F13_prereply: ending
+02/12/19: 08:11:55.178: an_S1F1_prereply: starting
+02/12/19: 08:11:55.182: checkGlobalFlags: starting
+02/12/19: 08:11:55.184: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:11:55.185: checkGlobalFlags: returning true
+02/12/19: 08:11:55.187: an_S1F1_prereply: ending
+02/12/19: 08:11:55.262: an_S1F3_prereply: starting
+02/12/19: 08:11:55.263: checkGlobalFlags: starting
+02/12/19: 08:11:55.265: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:11:55.266: checkGlobalFlags: returning true
+02/12/19: 08:11:55.269: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 08:11:55.273: getValAndType: starting svid=13
+02/12/19: 08:11:55.277: looking at 13
+02/12/19: 08:11:55.278: getValAndType: 13 returning ControlState 1
+02/12/19: 08:11:55.280: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/12/19: 08:11:55.283: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 08:11:55.284: getValAndType: starting svid=16
+02/12/19: 08:11:55.288: looking at 13
+02/12/19: 08:11:55.289: getValAndType: 16 returning ProcessState 2
+02/12/19: 08:11:55.291: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 08:11:55.299: an_S1F3_prereply: ending
+02/12/19: 08:11:55.409: putAckInNcparms: starting
+02/12/19: 08:11:55.413: putAckInNcparms: sf is S5F3
+02/12/19: 08:11:55.517: an_S2F33_prereply: starting
+02/12/19: 08:11:55.520: putAckInNcparms: starting
+02/12/19: 08:11:55.525: putAckInNcparms: sf is S2F33
+02/12/19: 08:12:12.082: an_setControlState: starting
+02/12/19: 08:12:12.086: an_setControlState: returning 0
+02/12/19: 08:12:25.412: an_S1F13_prereply: starting
+02/12/19: 08:12:25.422: checkGlobalFlags: starting
+02/12/19: 08:12:25.426: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:12:25.430: checkGlobalFlags: returning true
+02/12/19: 08:12:25.433: an_S1F13_prereply: ending
+02/12/19: 08:12:25.546: an_S1F1_prereply: starting
+02/12/19: 08:12:25.555: checkGlobalFlags: starting
+02/12/19: 08:12:25.562: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:12:25.567: checkGlobalFlags: returning true
+02/12/19: 08:12:25.571: an_S1F1_prereply: ending
+02/12/19: 08:12:25.660: an_S1F3_prereply: starting
+02/12/19: 08:12:25.662: checkGlobalFlags: starting
+02/12/19: 08:12:25.666: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 08:12:25.667: checkGlobalFlags: returning true
+02/12/19: 08:12:25.670: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 08:12:25.672: getValAndType: starting svid=13
+02/12/19: 08:12:25.675: looking at 13
+02/12/19: 08:12:25.678: getValAndType: 13 returning ControlState 4
+02/12/19: 08:12:25.680: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/12/19: 08:12:25.683: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 08:12:25.684: getValAndType: starting svid=16
+02/12/19: 08:12:25.689: looking at 13
+02/12/19: 08:12:25.691: getValAndType: 16 returning ProcessState 2
+02/12/19: 08:12:25.693: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 08:12:25.695: an_S1F3_prereply: ending
+02/12/19: 08:12:25.793: putAckInNcparms: starting
+02/12/19: 08:12:25.795: putAckInNcparms: sf is S5F3
+02/12/19: 08:12:25.866: an_S2F33_prereply: starting
+02/12/19: 08:12:25.868: putAckInNcparms: starting
+02/12/19: 08:12:25.869: putAckInNcparms: sf is S2F33
+02/12/19: 11:26:31.933: an_setControlState: starting
+02/12/19: 11:26:31.934: an_setControlState: returning 0
+02/12/19: 11:27:22.150: an_S1F13_prereply: starting
+02/12/19: 11:27:22.154: checkGlobalFlags: starting
+02/12/19: 11:27:22.155: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:27:22.157: checkGlobalFlags: returning true
+02/12/19: 11:27:22.158: an_S1F13_prereply: ending
+02/12/19: 11:27:22.261: an_S1F1_prereply: starting
+02/12/19: 11:27:22.264: checkGlobalFlags: starting
+02/12/19: 11:27:22.265: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:27:22.267: checkGlobalFlags: returning true
+02/12/19: 11:27:22.269: an_S1F1_prereply: ending
+02/12/19: 11:27:22.347: an_S1F3_prereply: starting
+02/12/19: 11:27:22.349: checkGlobalFlags: starting
+02/12/19: 11:27:22.350: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:27:22.352: checkGlobalFlags: returning true
+02/12/19: 11:27:22.355: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:27:22.357: getValAndType: starting svid=13
+02/12/19: 11:27:22.360: looking at 13
+02/12/19: 11:27:22.362: getValAndType: 13 returning ControlState 5
+02/12/19: 11:27:22.365: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:27:22.368: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:27:22.370: getValAndType: starting svid=16
+02/12/19: 11:27:22.373: looking at 13
+02/12/19: 11:27:22.375: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:27:22.376: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:27:22.379: an_S1F3_prereply: ending
+02/12/19: 11:27:22.486: putAckInNcparms: starting
+02/12/19: 11:27:22.490: putAckInNcparms: sf is S5F3
+02/12/19: 11:27:22.582: an_S2F33_prereply: starting
+02/12/19: 11:27:22.586: putAckInNcparms: starting
+02/12/19: 11:27:22.591: putAckInNcparms: sf is S2F33
+02/12/19: 11:36:52.984: an_S1F13_prereply: starting
+02/12/19: 11:36:52.996: checkGlobalFlags: starting
+02/12/19: 11:36:53.000: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:36:53.004: checkGlobalFlags: returning true
+02/12/19: 11:36:53.008: an_S1F13_prereply: ending
+02/12/19: 11:36:53.142: an_S1F1_prereply: starting
+02/12/19: 11:36:53.153: checkGlobalFlags: starting
+02/12/19: 11:36:53.157: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:36:53.160: checkGlobalFlags: returning true
+02/12/19: 11:36:53.164: an_S1F1_prereply: ending
+02/12/19: 11:36:53.292: an_S1F3_prereply: starting
+02/12/19: 11:36:53.295: checkGlobalFlags: starting
+02/12/19: 11:36:53.301: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:36:53.305: checkGlobalFlags: returning true
+02/12/19: 11:36:53.312: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:36:53.326: getValAndType: starting svid=13
+02/12/19: 11:36:53.329: looking at 13
+02/12/19: 11:36:53.331: getValAndType: 13 returning ControlState 5
+02/12/19: 11:36:53.332: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:36:53.335: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:36:53.336: getValAndType: starting svid=16
+02/12/19: 11:36:53.342: looking at 13
+02/12/19: 11:36:53.344: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:36:53.345: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:36:53.348: an_S1F3_prereply: ending
+02/12/19: 11:36:53.450: putAckInNcparms: starting
+02/12/19: 11:36:53.452: putAckInNcparms: sf is S5F3
+02/12/19: 11:36:53.521: an_S2F33_prereply: starting
+02/12/19: 11:36:53.523: putAckInNcparms: starting
+02/12/19: 11:36:53.524: putAckInNcparms: sf is S2F33
+02/12/19: 11:43:42.116: an_S1F13_prereply: starting
+02/12/19: 11:43:42.120: checkGlobalFlags: starting
+02/12/19: 11:43:42.122: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:43:42.123: checkGlobalFlags: returning true
+02/12/19: 11:43:42.125: an_S1F13_prereply: ending
+02/12/19: 11:43:42.227: an_S1F1_prereply: starting
+02/12/19: 11:43:42.230: checkGlobalFlags: starting
+02/12/19: 11:43:42.232: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:43:42.233: checkGlobalFlags: returning true
+02/12/19: 11:43:42.235: an_S1F1_prereply: ending
+02/12/19: 11:43:42.318: an_S1F3_prereply: starting
+02/12/19: 11:43:42.319: checkGlobalFlags: starting
+02/12/19: 11:43:42.321: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:43:42.322: checkGlobalFlags: returning true
+02/12/19: 11:43:42.325: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:43:42.329: getValAndType: starting svid=13
+02/12/19: 11:43:42.332: looking at 13
+02/12/19: 11:43:42.334: getValAndType: 13 returning ControlState 5
+02/12/19: 11:43:42.335: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:43:42.338: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:43:42.340: getValAndType: starting svid=16
+02/12/19: 11:43:42.343: looking at 13
+02/12/19: 11:43:42.345: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:43:42.346: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:43:42.352: an_S1F3_prereply: ending
+02/12/19: 11:43:42.473: putAckInNcparms: starting
+02/12/19: 11:43:42.474: putAckInNcparms: sf is S5F3
+02/12/19: 11:43:42.547: an_S2F33_prereply: starting
+02/12/19: 11:43:42.549: putAckInNcparms: starting
+02/12/19: 11:43:42.550: putAckInNcparms: sf is S2F33
+02/12/19: 11:47:02.730: an_S1F13_prereply: starting
+02/12/19: 11:47:02.741: checkGlobalFlags: starting
+02/12/19: 11:47:02.747: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:47:02.752: checkGlobalFlags: returning true
+02/12/19: 11:47:02.756: an_S1F13_prereply: ending
+02/12/19: 11:47:02.867: an_S1F1_prereply: starting
+02/12/19: 11:47:02.876: checkGlobalFlags: starting
+02/12/19: 11:47:02.881: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:47:02.885: checkGlobalFlags: returning true
+02/12/19: 11:47:02.888: an_S1F1_prereply: ending
+02/12/19: 11:47:02.979: an_S1F3_prereply: starting
+02/12/19: 11:47:02.983: checkGlobalFlags: starting
+02/12/19: 11:47:02.987: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:47:02.991: checkGlobalFlags: returning true
+02/12/19: 11:47:02.998: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:47:03.002: getValAndType: starting svid=13
+02/12/19: 11:47:03.010: looking at 13
+02/12/19: 11:47:03.014: getValAndType: 13 returning ControlState 5
+02/12/19: 11:47:03.018: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:47:03.026: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:47:03.030: getValAndType: starting svid=16
+02/12/19: 11:47:03.038: looking at 13
+02/12/19: 11:47:03.042: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:47:03.046: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:47:03.063: an_S1F3_prereply: ending
+02/12/19: 11:47:03.161: putAckInNcparms: starting
+02/12/19: 11:47:03.162: putAckInNcparms: sf is S5F3
+02/12/19: 11:47:03.235: an_S2F33_prereply: starting
+02/12/19: 11:47:03.237: putAckInNcparms: starting
+02/12/19: 11:47:03.239: putAckInNcparms: sf is S2F33
+02/12/19: 11:56:10.042: an_S1F13_prereply: starting
+02/12/19: 11:56:10.046: checkGlobalFlags: starting
+02/12/19: 11:56:10.052: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:56:10.054: checkGlobalFlags: returning true
+02/12/19: 11:56:10.056: an_S1F13_prereply: ending
+02/12/19: 11:56:10.159: an_S1F1_prereply: starting
+02/12/19: 11:56:10.162: checkGlobalFlags: starting
+02/12/19: 11:56:10.166: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:56:10.167: checkGlobalFlags: returning true
+02/12/19: 11:56:10.169: an_S1F1_prereply: ending
+02/12/19: 11:56:10.260: an_S1F3_prereply: starting
+02/12/19: 11:56:10.262: checkGlobalFlags: starting
+02/12/19: 11:56:10.263: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:56:10.267: checkGlobalFlags: returning true
+02/12/19: 11:56:10.271: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:56:10.275: getValAndType: starting svid=13
+02/12/19: 11:56:10.279: looking at 13
+02/12/19: 11:56:10.280: getValAndType: 13 returning ControlState 5
+02/12/19: 11:56:10.282: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:56:10.286: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:56:10.288: getValAndType: starting svid=16
+02/12/19: 11:56:10.294: looking at 13
+02/12/19: 11:56:10.296: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:56:10.297: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:56:10.300: an_S1F3_prereply: ending
+02/12/19: 11:56:10.400: putAckInNcparms: starting
+02/12/19: 11:56:10.404: putAckInNcparms: sf is S5F3
+02/12/19: 11:56:10.484: an_S2F33_prereply: starting
+02/12/19: 11:56:10.486: putAckInNcparms: starting
+02/12/19: 11:56:10.488: putAckInNcparms: sf is S2F33
+02/12/19: 11:58:37.501: an_S1F13_prereply: starting
+02/12/19: 11:58:37.506: checkGlobalFlags: starting
+02/12/19: 11:58:37.508: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:58:37.509: checkGlobalFlags: returning true
+02/12/19: 11:58:37.511: an_S1F13_prereply: ending
+02/12/19: 11:58:37.606: an_S1F1_prereply: starting
+02/12/19: 11:58:37.611: checkGlobalFlags: starting
+02/12/19: 11:58:37.613: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:58:37.616: checkGlobalFlags: returning true
+02/12/19: 11:58:37.618: an_S1F1_prereply: ending
+02/12/19: 11:58:37.716: an_S1F3_prereply: starting
+02/12/19: 11:58:37.721: checkGlobalFlags: starting
+02/12/19: 11:58:37.725: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:58:37.729: checkGlobalFlags: returning true
+02/12/19: 11:58:37.737: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:58:37.744: getValAndType: starting svid=13
+02/12/19: 11:58:37.759: looking at 13
+02/12/19: 11:58:37.763: getValAndType: 13 returning ControlState 5
+02/12/19: 11:58:37.768: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:58:37.776: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:58:37.780: getValAndType: starting svid=16
+02/12/19: 11:58:37.788: looking at 13
+02/12/19: 11:58:37.792: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:58:37.796: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:58:37.803: an_S1F3_prereply: ending
+02/12/19: 11:58:37.914: putAckInNcparms: starting
+02/12/19: 11:58:37.918: putAckInNcparms: sf is S5F3
+02/12/19: 11:58:38.006: an_S2F33_prereply: starting
+02/12/19: 11:58:38.009: putAckInNcparms: starting
+02/12/19: 11:58:38.013: putAckInNcparms: sf is S2F33
+02/12/19: 11:59:56.252: an_S1F13_prereply: starting
+02/12/19: 11:59:56.255: checkGlobalFlags: starting
+02/12/19: 11:59:56.257: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:59:56.259: checkGlobalFlags: returning true
+02/12/19: 11:59:56.260: an_S1F13_prereply: ending
+02/12/19: 11:59:56.363: an_S1F1_prereply: starting
+02/12/19: 11:59:56.367: checkGlobalFlags: starting
+02/12/19: 11:59:56.369: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:59:56.371: checkGlobalFlags: returning true
+02/12/19: 11:59:56.372: an_S1F1_prereply: ending
+02/12/19: 11:59:56.458: an_S1F3_prereply: starting
+02/12/19: 11:59:56.461: checkGlobalFlags: starting
+02/12/19: 11:59:56.463: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 11:59:56.465: checkGlobalFlags: returning true
+02/12/19: 11:59:56.468: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 11:59:56.469: getValAndType: starting svid=13
+02/12/19: 11:59:56.473: looking at 13
+02/12/19: 11:59:56.475: getValAndType: 13 returning ControlState 5
+02/12/19: 11:59:56.477: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 11:59:56.483: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 11:59:56.485: getValAndType: starting svid=16
+02/12/19: 11:59:56.488: looking at 13
+02/12/19: 11:59:56.490: getValAndType: 16 returning ProcessState 2
+02/12/19: 11:59:56.491: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 11:59:56.494: an_S1F3_prereply: ending
+02/12/19: 11:59:56.606: putAckInNcparms: starting
+02/12/19: 11:59:56.608: putAckInNcparms: sf is S5F3
+02/12/19: 11:59:56.681: an_S2F33_prereply: starting
+02/12/19: 11:59:56.685: putAckInNcparms: starting
+02/12/19: 11:59:56.686: putAckInNcparms: sf is S2F33
+02/12/19: 12:05:41.943: an_S1F13_prereply: starting
+02/12/19: 12:05:41.947: checkGlobalFlags: starting
+02/12/19: 12:05:41.948: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:05:41.954: checkGlobalFlags: returning true
+02/12/19: 12:05:41.955: an_S1F13_prereply: ending
+02/12/19: 12:05:42.070: an_S1F1_prereply: starting
+02/12/19: 12:05:42.074: checkGlobalFlags: starting
+02/12/19: 12:05:42.075: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:05:42.080: checkGlobalFlags: returning true
+02/12/19: 12:05:42.082: an_S1F1_prereply: ending
+02/12/19: 12:05:42.161: an_S1F3_prereply: starting
+02/12/19: 12:05:42.162: checkGlobalFlags: starting
+02/12/19: 12:05:42.165: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:05:42.166: checkGlobalFlags: returning true
+02/12/19: 12:05:42.172: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:05:42.173: getValAndType: starting svid=13
+02/12/19: 12:05:42.178: looking at 13
+02/12/19: 12:05:42.180: getValAndType: 13 returning ControlState 5
+02/12/19: 12:05:42.182: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:05:42.186: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:05:42.188: getValAndType: starting svid=16
+02/12/19: 12:05:42.192: looking at 13
+02/12/19: 12:05:42.198: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:05:42.203: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:05:42.214: an_S1F3_prereply: ending
+02/12/19: 12:05:42.336: putAckInNcparms: starting
+02/12/19: 12:05:42.340: putAckInNcparms: sf is S5F3
+02/12/19: 12:05:42.454: an_S2F33_prereply: starting
+02/12/19: 12:05:42.459: putAckInNcparms: starting
+02/12/19: 12:05:42.464: putAckInNcparms: sf is S2F33
+02/12/19: 12:09:15.728: an_S1F13_prereply: starting
+02/12/19: 12:09:15.737: checkGlobalFlags: starting
+02/12/19: 12:09:15.741: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:09:15.746: checkGlobalFlags: returning true
+02/12/19: 12:09:15.750: an_S1F13_prereply: ending
+02/12/19: 12:09:15.880: an_S1F1_prereply: starting
+02/12/19: 12:09:15.892: checkGlobalFlags: starting
+02/12/19: 12:09:15.897: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:09:15.901: checkGlobalFlags: returning true
+02/12/19: 12:09:15.904: an_S1F1_prereply: ending
+02/12/19: 12:09:16.012: an_S1F3_prereply: starting
+02/12/19: 12:09:16.024: checkGlobalFlags: starting
+02/12/19: 12:09:16.026: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:09:16.028: checkGlobalFlags: returning true
+02/12/19: 12:09:16.031: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:09:16.032: getValAndType: starting svid=13
+02/12/19: 12:09:16.038: looking at 13
+02/12/19: 12:09:16.039: getValAndType: 13 returning ControlState 5
+02/12/19: 12:09:16.041: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:09:16.044: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:09:16.047: getValAndType: starting svid=16
+02/12/19: 12:09:16.050: looking at 13
+02/12/19: 12:09:16.052: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:09:16.053: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:09:16.056: an_S1F3_prereply: ending
+02/12/19: 12:09:16.161: putAckInNcparms: starting
+02/12/19: 12:09:16.163: putAckInNcparms: sf is S5F3
+02/12/19: 12:09:16.240: an_S2F33_prereply: starting
+02/12/19: 12:09:16.242: putAckInNcparms: starting
+02/12/19: 12:09:16.243: putAckInNcparms: sf is S2F33
+02/12/19: 12:10:47.316: an_S1F13_prereply: starting
+02/12/19: 12:10:47.323: checkGlobalFlags: starting
+02/12/19: 12:10:47.324: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:10:47.326: checkGlobalFlags: returning true
+02/12/19: 12:10:47.328: an_S1F13_prereply: ending
+02/12/19: 12:10:47.425: an_S1F1_prereply: starting
+02/12/19: 12:10:47.431: checkGlobalFlags: starting
+02/12/19: 12:10:47.432: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:10:47.434: checkGlobalFlags: returning true
+02/12/19: 12:10:47.437: an_S1F1_prereply: ending
+02/12/19: 12:10:47.560: an_S1F3_prereply: starting
+02/12/19: 12:10:47.563: checkGlobalFlags: starting
+02/12/19: 12:10:47.565: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:10:47.566: checkGlobalFlags: returning true
+02/12/19: 12:10:47.570: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:10:47.574: getValAndType: starting svid=13
+02/12/19: 12:10:47.577: looking at 13
+02/12/19: 12:10:47.579: getValAndType: 13 returning ControlState 5
+02/12/19: 12:10:47.580: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:10:47.583: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:10:47.587: getValAndType: starting svid=16
+02/12/19: 12:10:47.591: looking at 13
+02/12/19: 12:10:47.592: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:10:47.595: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:10:47.599: an_S1F3_prereply: ending
+02/12/19: 12:10:47.811: putAckInNcparms: starting
+02/12/19: 12:10:47.814: putAckInNcparms: sf is S5F3
+02/12/19: 12:10:47.979: an_S2F33_prereply: starting
+02/12/19: 12:10:47.981: putAckInNcparms: starting
+02/12/19: 12:10:47.987: putAckInNcparms: sf is S2F33
+02/12/19: 12:13:06.226: an_S1F13_prereply: starting
+02/12/19: 12:13:06.234: checkGlobalFlags: starting
+02/12/19: 12:13:06.238: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:13:06.242: checkGlobalFlags: returning true
+02/12/19: 12:13:06.250: an_S1F13_prereply: ending
+02/12/19: 12:13:06.454: an_S1F1_prereply: starting
+02/12/19: 12:13:06.464: checkGlobalFlags: starting
+02/12/19: 12:13:06.468: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:13:06.471: checkGlobalFlags: returning true
+02/12/19: 12:13:06.478: an_S1F1_prereply: ending
+02/12/19: 12:13:06.709: an_S1F3_prereply: starting
+02/12/19: 12:13:06.713: checkGlobalFlags: starting
+02/12/19: 12:13:06.717: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:13:06.721: checkGlobalFlags: returning true
+02/12/19: 12:13:06.731: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:13:06.736: getValAndType: starting svid=13
+02/12/19: 12:13:06.746: looking at 13
+02/12/19: 12:13:06.750: getValAndType: 13 returning ControlState 5
+02/12/19: 12:13:06.754: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:13:06.762: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:13:06.766: getValAndType: starting svid=16
+02/12/19: 12:13:06.776: looking at 13
+02/12/19: 12:13:06.796: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:13:06.800: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:13:06.804: an_S1F3_prereply: ending
+02/12/19: 12:13:07.001: putAckInNcparms: starting
+02/12/19: 12:13:07.003: putAckInNcparms: sf is S5F3
+02/12/19: 12:13:07.168: an_S2F33_prereply: starting
+02/12/19: 12:13:07.170: putAckInNcparms: starting
+02/12/19: 12:13:07.172: putAckInNcparms: sf is S2F33
+02/12/19: 12:15:51.439: an_S1F13_prereply: starting
+02/12/19: 12:15:51.444: checkGlobalFlags: starting
+02/12/19: 12:15:51.446: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:15:51.448: checkGlobalFlags: returning true
+02/12/19: 12:15:51.451: an_S1F13_prereply: ending
+02/12/19: 12:15:51.653: an_S1F1_prereply: starting
+02/12/19: 12:15:51.657: checkGlobalFlags: starting
+02/12/19: 12:15:51.658: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:15:51.660: checkGlobalFlags: returning true
+02/12/19: 12:15:51.662: an_S1F1_prereply: ending
+02/12/19: 12:15:51.869: an_S1F3_prereply: starting
+02/12/19: 12:15:51.871: checkGlobalFlags: starting
+02/12/19: 12:15:51.872: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:15:51.874: checkGlobalFlags: returning true
+02/12/19: 12:15:51.877: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:15:51.878: getValAndType: starting svid=13
+02/12/19: 12:15:51.882: looking at 13
+02/12/19: 12:15:51.886: getValAndType: 13 returning ControlState 5
+02/12/19: 12:15:51.888: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:15:51.891: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:15:51.893: getValAndType: starting svid=16
+02/12/19: 12:15:51.896: looking at 13
+02/12/19: 12:15:51.897: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:15:51.899: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:15:51.903: an_S1F3_prereply: ending
+02/12/19: 12:15:52.130: putAckInNcparms: starting
+02/12/19: 12:15:52.132: putAckInNcparms: sf is S5F3
+02/12/19: 12:15:52.291: an_S2F33_prereply: starting
+02/12/19: 12:15:52.293: putAckInNcparms: starting
+02/12/19: 12:15:52.295: putAckInNcparms: sf is S2F33
+02/12/19: 12:17:40.712: an_S1F13_prereply: starting
+02/12/19: 12:17:40.720: checkGlobalFlags: starting
+02/12/19: 12:17:40.722: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:17:40.723: checkGlobalFlags: returning true
+02/12/19: 12:17:40.725: an_S1F13_prereply: ending
+02/12/19: 12:17:40.905: an_S1F1_prereply: starting
+02/12/19: 12:17:40.917: checkGlobalFlags: starting
+02/12/19: 12:17:40.923: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:17:40.927: checkGlobalFlags: returning true
+02/12/19: 12:17:40.931: an_S1F1_prereply: ending
+02/12/19: 12:17:41.139: an_S1F3_prereply: starting
+02/12/19: 12:17:41.145: checkGlobalFlags: starting
+02/12/19: 12:17:41.151: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:17:41.155: checkGlobalFlags: returning true
+02/12/19: 12:17:41.163: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:17:41.167: getValAndType: starting svid=13
+02/12/19: 12:17:41.176: looking at 13
+02/12/19: 12:17:41.182: getValAndType: 13 returning ControlState 5
+02/12/19: 12:17:41.186: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:17:41.194: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:17:41.198: getValAndType: starting svid=16
+02/12/19: 12:17:41.209: looking at 13
+02/12/19: 12:17:41.212: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:17:41.217: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:17:41.225: an_S1F3_prereply: ending
+02/12/19: 12:17:41.455: putAckInNcparms: starting
+02/12/19: 12:17:41.458: putAckInNcparms: sf is S5F3
+02/12/19: 12:17:41.634: an_S2F33_prereply: starting
+02/12/19: 12:17:41.638: putAckInNcparms: starting
+02/12/19: 12:17:41.651: putAckInNcparms: sf is S2F33
+02/12/19: 12:19:22.343: an_S1F13_prereply: starting
+02/12/19: 12:19:22.348: checkGlobalFlags: starting
+02/12/19: 12:19:22.350: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:19:22.351: checkGlobalFlags: returning true
+02/12/19: 12:19:22.354: an_S1F13_prereply: ending
+02/12/19: 12:19:22.559: an_S1F1_prereply: starting
+02/12/19: 12:19:22.564: checkGlobalFlags: starting
+02/12/19: 12:19:22.566: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:19:22.569: checkGlobalFlags: returning true
+02/12/19: 12:19:22.570: an_S1F1_prereply: ending
+02/12/19: 12:19:22.768: an_S1F3_prereply: starting
+02/12/19: 12:19:22.770: checkGlobalFlags: starting
+02/12/19: 12:19:22.773: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:19:22.775: checkGlobalFlags: returning true
+02/12/19: 12:19:22.778: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:19:22.781: getValAndType: starting svid=13
+02/12/19: 12:19:22.785: looking at 13
+02/12/19: 12:19:22.787: getValAndType: 13 returning ControlState 5
+02/12/19: 12:19:22.789: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:19:22.792: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:19:22.793: getValAndType: starting svid=16
+02/12/19: 12:19:22.796: looking at 13
+02/12/19: 12:19:22.798: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:19:22.800: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:19:22.804: an_S1F3_prereply: ending
+02/12/19: 12:19:22.994: putAckInNcparms: starting
+02/12/19: 12:19:22.996: putAckInNcparms: sf is S5F3
+02/12/19: 12:19:23.155: an_S2F33_prereply: starting
+02/12/19: 12:19:23.157: putAckInNcparms: starting
+02/12/19: 12:19:23.159: putAckInNcparms: sf is S2F33
+02/12/19: 12:50:39.757: an_S1F13_prereply: starting
+02/12/19: 12:50:39.762: checkGlobalFlags: starting
+02/12/19: 12:50:39.764: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:50:39.766: checkGlobalFlags: returning true
+02/12/19: 12:50:39.769: an_S1F13_prereply: ending
+02/12/19: 12:50:39.968: an_S1F1_prereply: starting
+02/12/19: 12:50:39.974: checkGlobalFlags: starting
+02/12/19: 12:50:39.976: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:50:39.978: checkGlobalFlags: returning true
+02/12/19: 12:50:39.980: an_S1F1_prereply: ending
+02/12/19: 12:50:40.185: an_S1F3_prereply: starting
+02/12/19: 12:50:40.187: checkGlobalFlags: starting
+02/12/19: 12:50:40.189: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 12:50:40.191: checkGlobalFlags: returning true
+02/12/19: 12:50:40.195: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 12:50:40.199: getValAndType: starting svid=13
+02/12/19: 12:50:40.203: looking at 13
+02/12/19: 12:50:40.205: getValAndType: 13 returning ControlState 5
+02/12/19: 12:50:40.211: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 12:50:40.223: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 12:50:40.228: getValAndType: starting svid=16
+02/12/19: 12:50:40.237: looking at 13
+02/12/19: 12:50:40.241: getValAndType: 16 returning ProcessState 2
+02/12/19: 12:50:40.245: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 12:50:40.252: an_S1F3_prereply: ending
+02/12/19: 12:50:40.499: putAckInNcparms: starting
+02/12/19: 12:50:40.503: putAckInNcparms: sf is S5F3
+02/12/19: 12:50:40.713: an_S2F33_prereply: starting
+02/12/19: 12:50:40.717: putAckInNcparms: starting
+02/12/19: 12:50:40.721: putAckInNcparms: sf is S2F33
+02/12/19: 13:19:56.823: an_S1F13_prereply: starting
+02/12/19: 13:19:56.838: checkGlobalFlags: starting
+02/12/19: 13:19:56.851: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:19:56.858: checkGlobalFlags: returning true
+02/12/19: 13:19:56.867: an_S1F13_prereply: ending
+02/12/19: 13:19:57.246: an_S1F1_prereply: starting
+02/12/19: 13:19:57.261: checkGlobalFlags: starting
+02/12/19: 13:19:57.273: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:19:57.297: checkGlobalFlags: returning true
+02/12/19: 13:19:57.301: an_S1F1_prereply: ending
+02/12/19: 13:19:57.667: an_S1F3_prereply: starting
+02/12/19: 13:19:57.671: checkGlobalFlags: starting
+02/12/19: 13:19:57.679: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:19:57.682: checkGlobalFlags: returning true
+02/12/19: 13:19:57.688: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:19:57.692: getValAndType: starting svid=13
+02/12/19: 13:19:57.698: looking at 13
+02/12/19: 13:19:57.700: getValAndType: 13 returning ControlState 5
+02/12/19: 13:19:57.703: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 13:19:57.709: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:19:57.712: getValAndType: starting svid=16
+02/12/19: 13:19:57.720: looking at 13
+02/12/19: 13:19:57.724: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:19:57.727: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:19:57.732: an_S1F3_prereply: ending
+02/12/19: 13:19:58.081: putAckInNcparms: starting
+02/12/19: 13:19:58.089: putAckInNcparms: sf is S5F3
+02/12/19: 13:19:58.378: an_S2F33_prereply: starting
+02/12/19: 13:19:58.382: putAckInNcparms: starting
+02/12/19: 13:19:58.385: putAckInNcparms: sf is S2F33
+02/12/19: 13:21:05.749: an_S1F13_prereply: starting
+02/12/19: 13:21:05.757: checkGlobalFlags: starting
+02/12/19: 13:21:05.761: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:21:05.765: checkGlobalFlags: returning true
+02/12/19: 13:21:05.769: an_S1F13_prereply: ending
+02/12/19: 13:21:06.063: an_S1F1_prereply: starting
+02/12/19: 13:21:06.071: checkGlobalFlags: starting
+02/12/19: 13:21:06.074: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:21:06.077: checkGlobalFlags: returning true
+02/12/19: 13:21:06.079: an_S1F1_prereply: ending
+02/12/19: 13:21:06.372: an_S1F3_prereply: starting
+02/12/19: 13:21:06.374: checkGlobalFlags: starting
+02/12/19: 13:21:06.378: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:21:06.380: checkGlobalFlags: returning true
+02/12/19: 13:21:06.386: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:21:06.388: getValAndType: starting svid=13
+02/12/19: 13:21:06.396: looking at 13
+02/12/19: 13:21:06.399: getValAndType: 13 returning ControlState 5
+02/12/19: 13:21:06.401: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 13:21:06.406: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:21:06.408: getValAndType: starting svid=16
+02/12/19: 13:21:06.414: looking at 13
+02/12/19: 13:21:06.417: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:21:06.419: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:21:06.430: an_S1F3_prereply: ending
+02/12/19: 13:21:06.809: putAckInNcparms: starting
+02/12/19: 13:21:06.815: putAckInNcparms: sf is S5F3
+02/12/19: 13:21:07.111: an_S2F33_prereply: starting
+02/12/19: 13:21:07.119: putAckInNcparms: starting
+02/12/19: 13:21:07.125: putAckInNcparms: sf is S2F33
+02/12/19: 13:22:01.310: an_S1F13_prereply: starting
+02/12/19: 13:22:01.321: checkGlobalFlags: starting
+02/12/19: 13:22:01.326: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:22:01.330: checkGlobalFlags: returning true
+02/12/19: 13:22:01.334: an_S1F13_prereply: ending
+02/12/19: 13:22:01.566: an_S1F1_prereply: starting
+02/12/19: 13:22:01.576: checkGlobalFlags: starting
+02/12/19: 13:22:01.581: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:22:01.586: checkGlobalFlags: returning true
+02/12/19: 13:22:01.591: an_S1F1_prereply: ending
+02/12/19: 13:22:01.841: an_S1F3_prereply: starting
+02/12/19: 13:22:01.846: checkGlobalFlags: starting
+02/12/19: 13:22:01.851: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:22:01.857: checkGlobalFlags: returning true
+02/12/19: 13:22:01.875: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:22:01.877: getValAndType: starting svid=13
+02/12/19: 13:22:01.882: looking at 13
+02/12/19: 13:22:01.884: getValAndType: 13 returning ControlState 5
+02/12/19: 13:22:01.886: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 13:22:01.893: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:22:01.895: getValAndType: starting svid=16
+02/12/19: 13:22:01.900: looking at 13
+02/12/19: 13:22:01.902: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:22:01.904: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:22:01.907: an_S1F3_prereply: ending
+02/12/19: 13:22:02.184: putAckInNcparms: starting
+02/12/19: 13:22:02.187: putAckInNcparms: sf is S5F3
+02/12/19: 13:22:02.399: an_S2F33_prereply: starting
+02/12/19: 13:22:02.404: putAckInNcparms: starting
+02/12/19: 13:22:02.407: putAckInNcparms: sf is S2F33
+02/12/19: 13:29:29.556: an_S1F13_prereply: starting
+02/12/19: 13:29:29.560: checkGlobalFlags: starting
+02/12/19: 13:29:29.563: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:29:29.570: checkGlobalFlags: returning true
+02/12/19: 13:29:29.573: an_S1F13_prereply: ending
+02/12/19: 13:29:29.768: an_S1F1_prereply: starting
+02/12/19: 13:29:29.773: checkGlobalFlags: starting
+02/12/19: 13:29:29.776: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:29:29.780: checkGlobalFlags: returning true
+02/12/19: 13:29:29.781: an_S1F1_prereply: ending
+02/12/19: 13:29:29.976: an_S1F3_prereply: starting
+02/12/19: 13:29:29.978: checkGlobalFlags: starting
+02/12/19: 13:29:29.980: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:29:29.984: checkGlobalFlags: returning true
+02/12/19: 13:29:29.987: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:29:29.989: getValAndType: starting svid=13
+02/12/19: 13:29:29.994: looking at 13
+02/12/19: 13:29:29.996: getValAndType: 13 returning ControlState 5
+02/12/19: 13:29:29.997: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 13:29:30.000: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:29:30.002: getValAndType: starting svid=16
+02/12/19: 13:29:30.006: looking at 13
+02/12/19: 13:29:30.010: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:29:30.012: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:29:30.015: an_S1F3_prereply: ending
+02/12/19: 13:29:30.224: putAckInNcparms: starting
+02/12/19: 13:29:30.226: putAckInNcparms: sf is S5F3
+02/12/19: 13:29:30.415: an_S2F33_prereply: starting
+02/12/19: 13:29:30.417: putAckInNcparms: starting
+02/12/19: 13:29:30.418: putAckInNcparms: sf is S2F33
+02/12/19: 13:33:27.961: an_setControlState: starting
+02/12/19: 13:33:27.965: an_setControlState: returning 0
+02/12/19: 13:33:40.198: an_S1F13_prereply: starting
+02/12/19: 13:33:40.207: checkGlobalFlags: starting
+02/12/19: 13:33:40.212: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:33:40.218: checkGlobalFlags: returning true
+02/12/19: 13:33:40.223: an_S1F13_prereply: ending
+02/12/19: 13:33:40.359: an_S1F1_prereply: starting
+02/12/19: 13:33:40.368: checkGlobalFlags: starting
+02/12/19: 13:33:40.372: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:33:40.376: checkGlobalFlags: returning true
+02/12/19: 13:33:40.381: an_S1F1_prereply: ending
+02/12/19: 13:33:40.484: an_S1F3_prereply: starting
+02/12/19: 13:33:40.488: checkGlobalFlags: starting
+02/12/19: 13:33:40.492: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:33:40.502: checkGlobalFlags: returning true
+02/12/19: 13:33:40.512: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:33:40.517: getValAndType: starting svid=13
+02/12/19: 13:33:40.525: looking at 13
+02/12/19: 13:33:40.529: getValAndType: 13 returning ControlState 1
+02/12/19: 13:33:40.534: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/12/19: 13:33:40.553: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:33:40.554: getValAndType: starting svid=16
+02/12/19: 13:33:40.557: looking at 13
+02/12/19: 13:33:40.559: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:33:40.561: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:33:40.564: an_S1F3_prereply: ending
+02/12/19: 13:33:40.673: putAckInNcparms: starting
+02/12/19: 13:33:40.674: putAckInNcparms: sf is S5F3
+02/12/19: 13:33:40.747: an_S2F33_prereply: starting
+02/12/19: 13:33:40.751: putAckInNcparms: starting
+02/12/19: 13:33:40.753: putAckInNcparms: sf is S2F33
+02/12/19: 13:54:35.643: an_S1F13_prereply: starting
+02/12/19: 13:54:35.650: checkGlobalFlags: starting
+02/12/19: 13:54:35.653: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:35.662: checkGlobalFlags: returning true
+02/12/19: 13:54:35.665: an_S1F13_prereply: ending
+02/12/19: 13:54:35.852: an_S1F1_prereply: starting
+02/12/19: 13:54:35.858: checkGlobalFlags: starting
+02/12/19: 13:54:35.861: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:35.866: checkGlobalFlags: returning true
+02/12/19: 13:54:35.869: an_S1F1_prereply: ending
+02/12/19: 13:54:36.018: an_S1F3_prereply: starting
+02/12/19: 13:54:36.021: checkGlobalFlags: starting
+02/12/19: 13:54:36.024: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:36.030: checkGlobalFlags: returning true
+02/12/19: 13:54:36.036: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:54:36.039: getValAndType: starting svid=13
+02/12/19: 13:54:36.044: looking at 13
+02/12/19: 13:54:36.047: getValAndType: 13 returning ControlState 1
+02/12/19: 13:54:36.050: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/12/19: 13:54:36.055: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:54:36.058: getValAndType: starting svid=16
+02/12/19: 13:54:36.065: looking at 13
+02/12/19: 13:54:36.071: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:54:36.074: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:54:36.079: an_S1F3_prereply: ending
+02/12/19: 13:54:49.200: an_S1F13_prereply: starting
+02/12/19: 13:54:49.213: checkGlobalFlags: starting
+02/12/19: 13:54:49.217: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:49.222: checkGlobalFlags: returning true
+02/12/19: 13:54:49.226: an_S1F13_prereply: ending
+02/12/19: 13:54:49.442: an_S1F1_prereply: starting
+02/12/19: 13:54:49.455: checkGlobalFlags: starting
+02/12/19: 13:54:49.459: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:49.473: checkGlobalFlags: returning true
+02/12/19: 13:54:49.476: an_S1F1_prereply: ending
+02/12/19: 13:54:49.666: an_S1F3_prereply: starting
+02/12/19: 13:54:49.685: checkGlobalFlags: starting
+02/12/19: 13:54:49.696: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:54:49.707: checkGlobalFlags: returning true
+02/12/19: 13:54:49.726: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:54:49.737: getValAndType: starting svid=13
+02/12/19: 13:54:49.768: looking at 13
+02/12/19: 13:54:49.777: getValAndType: 13 returning ControlState 1
+02/12/19: 13:54:49.785: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/12/19: 13:54:49.803: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:54:49.811: getValAndType: starting svid=16
+02/12/19: 13:54:49.829: looking at 13
+02/12/19: 13:54:49.837: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:54:49.845: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:54:49.861: an_S1F3_prereply: ending
+02/12/19: 13:54:55.872: putAckInNcparms: starting
+02/12/19: 13:54:55.878: putAckInNcparms: sf is S5F3
+02/12/19: 13:54:56.007: an_S2F33_prereply: starting
+02/12/19: 13:54:56.014: putAckInNcparms: starting
+02/12/19: 13:54:56.020: putAckInNcparms: sf is S2F33
+02/12/19: 13:55:09.404: an_S1F13_prereply: starting
+02/12/19: 13:55:09.421: checkGlobalFlags: starting
+02/12/19: 13:55:09.429: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:09.436: checkGlobalFlags: returning true
+02/12/19: 13:55:09.458: an_S1F13_prereply: ending
+02/12/19: 13:55:09.640: an_S1F1_prereply: starting
+02/12/19: 13:55:09.647: checkGlobalFlags: starting
+02/12/19: 13:55:09.650: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:09.652: checkGlobalFlags: returning true
+02/12/19: 13:55:09.656: an_S1F1_prereply: ending
+02/12/19: 13:55:09.812: an_S1F3_prereply: starting
+02/12/19: 13:55:09.817: checkGlobalFlags: starting
+02/12/19: 13:55:09.820: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:09.824: checkGlobalFlags: returning true
+02/12/19: 13:55:09.832: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:55:09.839: getValAndType: starting svid=13
+02/12/19: 13:55:09.846: looking at 13
+02/12/19: 13:55:09.850: getValAndType: 13 returning ControlState 1
+02/12/19: 13:55:09.854: an_S1F3_prereply: valAndType=1 UI4 lindex=1
+02/12/19: 13:55:09.861: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:55:09.865: getValAndType: starting svid=16
+02/12/19: 13:55:09.871: looking at 13
+02/12/19: 13:55:09.874: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:55:09.878: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:55:09.887: an_S1F3_prereply: ending
+02/12/19: 13:55:24.290: putAckInNcparms: starting
+02/12/19: 13:55:24.291: putAckInNcparms: sf is S5F3
+02/12/19: 13:55:24.375: an_S2F33_prereply: starting
+02/12/19: 13:55:24.379: putAckInNcparms: starting
+02/12/19: 13:55:24.381: putAckInNcparms: sf is S2F33
+02/12/19: 13:55:39.817: an_setControlState: starting
+02/12/19: 13:55:39.818: an_setControlState: returning 0
+02/12/19: 13:55:48.656: an_S1F13_prereply: starting
+02/12/19: 13:55:48.668: checkGlobalFlags: starting
+02/12/19: 13:55:48.672: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:48.676: checkGlobalFlags: returning true
+02/12/19: 13:55:48.679: an_S1F13_prereply: ending
+02/12/19: 13:55:48.845: an_S1F1_prereply: starting
+02/12/19: 13:55:48.855: checkGlobalFlags: starting
+02/12/19: 13:55:48.858: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:48.861: checkGlobalFlags: returning true
+02/12/19: 13:55:48.864: an_S1F1_prereply: ending
+02/12/19: 13:55:49.002: an_S1F3_prereply: starting
+02/12/19: 13:55:49.007: checkGlobalFlags: starting
+02/12/19: 13:55:49.010: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 13:55:49.013: checkGlobalFlags: returning true
+02/12/19: 13:55:49.017: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 13:55:49.020: getValAndType: starting svid=13
+02/12/19: 13:55:49.026: looking at 13
+02/12/19: 13:55:49.028: getValAndType: 13 returning ControlState 4
+02/12/19: 13:55:49.031: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/12/19: 13:55:49.037: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 13:55:49.041: getValAndType: starting svid=16
+02/12/19: 13:55:49.063: looking at 13
+02/12/19: 13:55:49.072: getValAndType: 16 returning ProcessState 2
+02/12/19: 13:55:49.078: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 13:55:49.091: an_S1F3_prereply: ending
+02/12/19: 13:55:53.955: putAckInNcparms: starting
+02/12/19: 13:55:53.959: putAckInNcparms: sf is S5F3
+02/12/19: 13:55:54.047: an_S2F33_prereply: starting
+02/12/19: 13:55:54.051: putAckInNcparms: starting
+02/12/19: 13:55:54.055: putAckInNcparms: sf is S2F33
+02/12/19: 14:22:44.823: an_S1F13_prereply: starting
+02/12/19: 14:22:44.831: checkGlobalFlags: starting
+02/12/19: 14:22:44.834: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:22:44.839: checkGlobalFlags: returning true
+02/12/19: 14:22:44.843: an_S1F13_prereply: ending
+02/12/19: 14:24:11.854: an_S1F13_prereply: starting
+02/12/19: 14:24:11.863: checkGlobalFlags: starting
+02/12/19: 14:24:11.866: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:24:11.870: checkGlobalFlags: returning true
+02/12/19: 14:24:11.874: an_S1F13_prereply: ending
+02/12/19: 14:25:10.798: an_sendAlarm: starting
+02/12/19: 14:29:29.215: an_S1F13_prereply: starting
+02/12/19: 14:29:29.219: checkGlobalFlags: starting
+02/12/19: 14:29:29.221: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:29:29.223: checkGlobalFlags: returning true
+02/12/19: 14:29:29.225: an_S1F13_prereply: ending
+02/12/19: 14:29:29.319: an_S1F1_prereply: starting
+02/12/19: 14:29:29.326: checkGlobalFlags: starting
+02/12/19: 14:29:29.327: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:29:29.329: checkGlobalFlags: returning true
+02/12/19: 14:29:29.330: an_S1F1_prereply: ending
+02/12/19: 14:29:29.423: an_S1F3_prereply: starting
+02/12/19: 14:29:29.425: checkGlobalFlags: starting
+02/12/19: 14:29:29.427: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:29:29.428: checkGlobalFlags: returning true
+02/12/19: 14:29:29.431: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 14:29:29.433: getValAndType: starting svid=13
+02/12/19: 14:29:29.439: looking at 13
+02/12/19: 14:29:29.441: getValAndType: 13 returning ControlState 4
+02/12/19: 14:29:29.443: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/12/19: 14:29:29.445: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 14:29:29.447: getValAndType: starting svid=16
+02/12/19: 14:29:29.451: looking at 13
+02/12/19: 14:29:29.452: getValAndType: 16 returning ProcessState 2
+02/12/19: 14:29:29.454: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 14:29:29.457: an_S1F3_prereply: ending
+02/12/19: 14:29:33.799: putAckInNcparms: starting
+02/12/19: 14:29:33.801: putAckInNcparms: sf is S5F3
+02/12/19: 14:29:47.513: an_sendAlarm: starting
+02/12/19: 14:32:29.329: an_setControlState: starting
+02/12/19: 14:32:29.330: an_setControlState: returning 0
+02/12/19: 14:32:40.779: an_S1F13_prereply: starting
+02/12/19: 14:32:40.782: checkGlobalFlags: starting
+02/12/19: 14:32:40.784: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:32:40.791: checkGlobalFlags: returning true
+02/12/19: 14:32:40.797: an_S1F13_prereply: ending
+02/12/19: 14:32:40.887: an_S1F1_prereply: starting
+02/12/19: 14:32:40.895: checkGlobalFlags: starting
+02/12/19: 14:32:40.899: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:32:40.905: checkGlobalFlags: returning true
+02/12/19: 14:32:40.909: an_S1F1_prereply: ending
+02/12/19: 14:32:41.003: an_S1F3_prereply: starting
+02/12/19: 14:32:41.006: checkGlobalFlags: starting
+02/12/19: 14:32:41.010: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:32:41.014: checkGlobalFlags: returning true
+02/12/19: 14:32:41.023: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 14:32:41.027: getValAndType: starting svid=13
+02/12/19: 14:32:41.034: looking at 13
+02/12/19: 14:32:41.038: getValAndType: 13 returning ControlState 5
+02/12/19: 14:32:41.042: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 14:32:41.049: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 14:32:41.053: getValAndType: starting svid=16
+02/12/19: 14:32:41.062: looking at 13
+02/12/19: 14:32:41.068: getValAndType: 16 returning ProcessState 2
+02/12/19: 14:32:41.072: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 14:32:41.080: an_S1F3_prereply: ending
+02/12/19: 14:32:41.200: putAckInNcparms: starting
+02/12/19: 14:32:41.202: putAckInNcparms: sf is S5F3
+02/12/19: 14:45:15.179: an_S1F13_prereply: starting
+02/12/19: 14:45:15.183: checkGlobalFlags: starting
+02/12/19: 14:45:15.184: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:45:15.186: checkGlobalFlags: returning true
+02/12/19: 14:45:15.187: an_S1F13_prereply: ending
+02/12/19: 14:45:15.267: an_S1F1_prereply: starting
+02/12/19: 14:45:15.271: checkGlobalFlags: starting
+02/12/19: 14:45:15.273: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:45:15.274: checkGlobalFlags: returning true
+02/12/19: 14:45:15.276: an_S1F1_prereply: ending
+02/12/19: 14:45:15.352: an_S1F3_prereply: starting
+02/12/19: 14:45:15.354: checkGlobalFlags: starting
+02/12/19: 14:45:15.355: checkGlobalFlags: checking TransactionAbort=""
+02/12/19: 14:45:15.357: checkGlobalFlags: returning true
+02/12/19: 14:45:15.362: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/12/19: 14:45:15.363: getValAndType: starting svid=13
+02/12/19: 14:45:15.367: looking at 13
+02/12/19: 14:45:15.368: getValAndType: 13 returning ControlState 5
+02/12/19: 14:45:15.370: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/12/19: 14:45:15.373: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/12/19: 14:45:15.375: getValAndType: starting svid=16
+02/12/19: 14:45:15.378: looking at 13
+02/12/19: 14:45:15.380: getValAndType: 16 returning ProcessState 2
+02/12/19: 14:45:15.382: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/12/19: 14:45:15.386: an_S1F3_prereply: ending
+02/12/19: 14:45:15.481: putAckInNcparms: starting
+02/12/19: 14:45:15.483: putAckInNcparms: sf is S5F3
+02/13/19: 05:34:56.759: an_S1F13_prereply: starting
+02/13/19: 05:34:56.764: checkGlobalFlags: starting
+02/13/19: 05:34:56.765: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 05:34:56.767: checkGlobalFlags: returning true
+02/13/19: 05:34:56.769: an_S1F13_prereply: ending
+02/13/19: 05:37:02.382: an_S1F13_prereply: starting
+02/13/19: 05:37:02.386: checkGlobalFlags: starting
+02/13/19: 05:37:02.387: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 05:37:02.389: checkGlobalFlags: returning true
+02/13/19: 05:37:02.390: an_S1F13_prereply: ending
+02/13/19: 05:37:02.471: an_S1F1_prereply: starting
+02/13/19: 05:37:02.475: checkGlobalFlags: starting
+02/13/19: 05:37:02.476: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 05:37:02.479: checkGlobalFlags: returning true
+02/13/19: 05:37:02.481: an_S1F1_prereply: ending
+02/13/19: 05:37:02.595: an_S1F3_prereply: starting
+02/13/19: 05:37:02.600: checkGlobalFlags: starting
+02/13/19: 05:37:02.604: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 05:37:02.608: checkGlobalFlags: returning true
+02/13/19: 05:37:02.616: an_S1F3_prereply Index 1 SVID 13 svPtrList 235479744
+02/13/19: 05:37:02.620: getValAndType: starting svid=13
+02/13/19: 05:37:02.639: looking at 13
+02/13/19: 05:37:02.643: getValAndType: 13 returning ControlState 5
+02/13/19: 05:37:02.647: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 05:37:02.655: an_S1F3_prereply Index 2 SVID 16 svPtrList 235479632
+02/13/19: 05:37:02.659: getValAndType: starting svid=16
+02/13/19: 05:37:02.667: looking at 13
+02/13/19: 05:37:02.671: getValAndType: 16 returning ProcessState 2
+02/13/19: 05:37:02.675: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 05:37:02.685: an_S1F3_prereply: ending
+02/13/19: 05:37:02.813: putAckInNcparms: starting
+02/13/19: 05:37:02.818: putAckInNcparms: sf is S5F3
+02/13/19: 09:12:47.733: an_S1F13_prereply: starting
+02/13/19: 09:12:47.742: checkGlobalFlags: starting
+02/13/19: 09:12:47.746: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 09:12:47.750: checkGlobalFlags: returning true
+02/13/19: 09:12:47.754: an_S1F13_prereply: ending
+02/13/19: 10:46:56.078: an_initialize: starting
+02/13/19: 10:46:56.354: an_S1F1_prereply: starting
+02/13/19: 10:46:56.362: checkGlobalFlags: starting
+02/13/19: 10:46:56.365: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:46:56.371: checkGlobalFlags: returning true
+02/13/19: 10:46:56.375: an_S1F1_prereply: ending
+02/13/19: 10:48:20.243: an_S1F13_prereply: starting
+02/13/19: 10:48:20.253: checkGlobalFlags: starting
+02/13/19: 10:48:20.260: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:48:20.264: checkGlobalFlags: returning true
+02/13/19: 10:48:20.270: an_S1F13_prereply: ending
+02/13/19: 10:48:20.364: an_S1F1_prereply: starting
+02/13/19: 10:48:20.372: checkGlobalFlags: starting
+02/13/19: 10:48:20.378: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:48:20.381: checkGlobalFlags: returning true
+02/13/19: 10:48:20.385: an_S1F1_prereply: ending
+02/13/19: 10:48:20.483: an_S1F3_prereply: starting
+02/13/19: 10:48:20.485: checkGlobalFlags: starting
+02/13/19: 10:48:20.486: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:48:20.490: checkGlobalFlags: returning true
+02/13/19: 10:48:20.493: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 10:48:20.494: getValAndType: starting svid=13
+02/13/19: 10:48:20.498: looking at 13
+02/13/19: 10:48:20.499: getValAndType: 13 returning ControlState 5
+02/13/19: 10:48:20.501: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 10:48:20.504: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 10:48:20.506: getValAndType: starting svid=16
+02/13/19: 10:48:20.509: looking at 13
+02/13/19: 10:48:20.512: getValAndType: 16 returning ProcessState 2
+02/13/19: 10:48:20.514: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 10:48:20.517: an_S1F3_prereply: ending
+02/13/19: 10:48:20.616: putAckInNcparms: starting
+02/13/19: 10:48:20.620: putAckInNcparms: sf is S5F3
+02/13/19: 10:55:00.202: an_S1F13_prereply: starting
+02/13/19: 10:55:00.206: checkGlobalFlags: starting
+02/13/19: 10:55:00.208: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:55:00.210: checkGlobalFlags: returning true
+02/13/19: 10:55:00.214: an_S1F13_prereply: ending
+02/13/19: 10:55:00.287: an_S1F1_prereply: starting
+02/13/19: 10:55:00.290: checkGlobalFlags: starting
+02/13/19: 10:55:00.292: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:55:00.295: checkGlobalFlags: returning true
+02/13/19: 10:55:00.298: an_S1F1_prereply: ending
+02/13/19: 10:55:00.374: an_S1F3_prereply: starting
+02/13/19: 10:55:00.376: checkGlobalFlags: starting
+02/13/19: 10:55:00.377: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 10:55:00.379: checkGlobalFlags: returning true
+02/13/19: 10:55:00.385: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 10:55:00.387: getValAndType: starting svid=13
+02/13/19: 10:55:00.390: looking at 13
+02/13/19: 10:55:00.392: getValAndType: 13 returning ControlState 5
+02/13/19: 10:55:00.393: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 10:55:00.396: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 10:55:00.398: getValAndType: starting svid=16
+02/13/19: 10:55:00.401: looking at 13
+02/13/19: 10:55:00.402: getValAndType: 16 returning ProcessState 2
+02/13/19: 10:55:00.406: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 10:55:00.409: an_S1F3_prereply: ending
+02/13/19: 10:55:00.503: putAckInNcparms: starting
+02/13/19: 10:55:00.505: putAckInNcparms: sf is S5F3
+02/13/19: 10:59:08.244: an_setProcessState: starting
+02/13/19: 10:59:08.246: an_setProcessState: returning 0
+02/13/19: 10:59:55.743: an_sendAlarm: starting
+02/13/19: 11:02:45.349: an_S1F13_prereply: starting
+02/13/19: 11:02:45.361: checkGlobalFlags: starting
+02/13/19: 11:02:45.365: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:02:45.369: checkGlobalFlags: returning true
+02/13/19: 11:02:45.375: an_S1F13_prereply: ending
+02/13/19: 11:02:45.466: an_S1F1_prereply: starting
+02/13/19: 11:02:45.477: checkGlobalFlags: starting
+02/13/19: 11:02:45.481: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:02:45.485: checkGlobalFlags: returning true
+02/13/19: 11:02:45.489: an_S1F1_prereply: ending
+02/13/19: 11:02:52.102: an_S1F3_prereply: starting
+02/13/19: 11:02:52.105: checkGlobalFlags: starting
+02/13/19: 11:02:52.109: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:02:52.113: checkGlobalFlags: returning true
+02/13/19: 11:02:52.120: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:02:52.131: getValAndType: starting svid=13
+02/13/19: 11:02:52.134: looking at 13
+02/13/19: 11:02:52.136: getValAndType: 13 returning ControlState 5
+02/13/19: 11:02:52.137: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:02:52.140: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:02:52.144: getValAndType: starting svid=16
+02/13/19: 11:02:52.147: looking at 13
+02/13/19: 11:02:52.149: getValAndType: 16 returning ProcessState 2
+02/13/19: 11:02:52.150: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 11:02:52.153: an_S1F3_prereply: ending
+02/13/19: 11:03:20.250: putAckInNcparms: starting
+02/13/19: 11:03:20.251: putAckInNcparms: sf is S5F3
+02/13/19: 11:05:22.773: an_S1F13_prereply: starting
+02/13/19: 11:05:22.783: checkGlobalFlags: starting
+02/13/19: 11:05:22.785: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:22.787: checkGlobalFlags: returning true
+02/13/19: 11:05:22.791: an_S1F13_prereply: ending
+02/13/19: 11:05:22.907: an_S1F1_prereply: starting
+02/13/19: 11:05:22.915: checkGlobalFlags: starting
+02/13/19: 11:05:22.924: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:22.927: checkGlobalFlags: returning true
+02/13/19: 11:05:22.930: an_S1F1_prereply: ending
+02/13/19: 11:05:24.959: an_S1F3_prereply: starting
+02/13/19: 11:05:24.961: checkGlobalFlags: starting
+02/13/19: 11:05:24.965: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:24.967: checkGlobalFlags: returning true
+02/13/19: 11:05:24.969: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:05:24.971: getValAndType: starting svid=13
+02/13/19: 11:05:24.975: looking at 13
+02/13/19: 11:05:24.976: getValAndType: 13 returning ControlState 5
+02/13/19: 11:05:24.978: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:05:24.981: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:05:24.982: getValAndType: starting svid=16
+02/13/19: 11:05:24.987: looking at 13
+02/13/19: 11:05:24.989: getValAndType: 16 returning ProcessState 2
+02/13/19: 11:05:24.991: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 11:05:24.994: an_S1F3_prereply: ending
+02/13/19: 11:05:25.101: putAckInNcparms: starting
+02/13/19: 11:05:25.102: putAckInNcparms: sf is S5F3
+02/13/19: 11:05:46.576: an_S1F13_prereply: starting
+02/13/19: 11:05:46.582: checkGlobalFlags: starting
+02/13/19: 11:05:46.584: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:46.588: checkGlobalFlags: returning true
+02/13/19: 11:05:46.591: an_S1F13_prereply: ending
+02/13/19: 11:05:46.674: an_S1F1_prereply: starting
+02/13/19: 11:05:46.677: checkGlobalFlags: starting
+02/13/19: 11:05:46.680: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:46.685: checkGlobalFlags: returning true
+02/13/19: 11:05:46.689: an_S1F1_prereply: ending
+02/13/19: 11:05:49.571: an_S1F3_prereply: starting
+02/13/19: 11:05:49.575: checkGlobalFlags: starting
+02/13/19: 11:05:49.579: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:05:49.582: checkGlobalFlags: returning true
+02/13/19: 11:05:49.592: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:05:49.596: getValAndType: starting svid=13
+02/13/19: 11:05:49.603: looking at 13
+02/13/19: 11:05:49.607: getValAndType: 13 returning ControlState 5
+02/13/19: 11:05:49.611: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:05:49.618: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:05:49.622: getValAndType: starting svid=16
+02/13/19: 11:05:49.629: looking at 13
+02/13/19: 11:05:49.635: getValAndType: 16 returning ProcessState 2
+02/13/19: 11:05:49.638: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 11:05:49.645: an_S1F3_prereply: ending
+02/13/19: 11:05:49.760: putAckInNcparms: starting
+02/13/19: 11:05:49.764: putAckInNcparms: sf is S5F3
+02/13/19: 11:06:32.922: an_S1F13_prereply: starting
+02/13/19: 11:06:32.932: checkGlobalFlags: starting
+02/13/19: 11:06:32.936: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:06:32.952: checkGlobalFlags: returning true
+02/13/19: 11:06:32.954: an_S1F13_prereply: ending
+02/13/19: 11:06:33.035: an_S1F1_prereply: starting
+02/13/19: 11:06:33.038: checkGlobalFlags: starting
+02/13/19: 11:06:33.041: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:06:33.042: checkGlobalFlags: returning true
+02/13/19: 11:06:33.044: an_S1F1_prereply: ending
+02/13/19: 11:06:34.462: an_S1F3_prereply: starting
+02/13/19: 11:06:34.463: checkGlobalFlags: starting
+02/13/19: 11:06:34.465: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:06:34.467: checkGlobalFlags: returning true
+02/13/19: 11:06:34.470: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:06:34.473: getValAndType: starting svid=13
+02/13/19: 11:06:34.477: looking at 13
+02/13/19: 11:06:34.478: getValAndType: 13 returning ControlState 5
+02/13/19: 11:06:34.480: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:06:34.483: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:06:34.484: getValAndType: starting svid=16
+02/13/19: 11:06:34.488: looking at 13
+02/13/19: 11:06:34.493: getValAndType: 16 returning ProcessState 2
+02/13/19: 11:06:34.495: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/13/19: 11:06:34.500: an_S1F3_prereply: ending
+02/13/19: 11:06:34.604: putAckInNcparms: starting
+02/13/19: 11:06:34.606: putAckInNcparms: sf is S5F3
+02/13/19: 11:09:24.482: an_setProcessState: starting
+02/13/19: 11:09:24.483: an_setProcessState: returning 0
+02/13/19: 11:09:46.225: an_S1F13_prereply: starting
+02/13/19: 11:09:46.230: checkGlobalFlags: starting
+02/13/19: 11:09:46.232: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:09:46.235: checkGlobalFlags: returning true
+02/13/19: 11:09:46.237: an_S1F13_prereply: ending
+02/13/19: 11:09:46.348: an_S1F1_prereply: starting
+02/13/19: 11:09:46.352: checkGlobalFlags: starting
+02/13/19: 11:09:46.354: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:09:46.356: checkGlobalFlags: returning true
+02/13/19: 11:09:46.358: an_S1F1_prereply: ending
+02/13/19: 11:09:49.697: an_S1F3_prereply: starting
+02/13/19: 11:09:49.699: checkGlobalFlags: starting
+02/13/19: 11:09:49.700: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:09:49.702: checkGlobalFlags: returning true
+02/13/19: 11:09:49.705: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:09:49.706: getValAndType: starting svid=13
+02/13/19: 11:09:49.710: looking at 13
+02/13/19: 11:09:49.711: getValAndType: 13 returning ControlState 5
+02/13/19: 11:09:49.713: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:09:49.724: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:09:49.728: getValAndType: starting svid=16
+02/13/19: 11:09:49.735: looking at 13
+02/13/19: 11:09:49.739: getValAndType: 16 returning ProcessState 4
+02/13/19: 11:09:49.743: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/13/19: 11:09:49.755: an_S1F3_prereply: ending
+02/13/19: 11:09:49.868: putAckInNcparms: starting
+02/13/19: 11:09:49.872: putAckInNcparms: sf is S5F3
+02/13/19: 11:26:08.768: an_S1F13_prereply: starting
+02/13/19: 11:26:08.778: checkGlobalFlags: starting
+02/13/19: 11:26:08.783: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:26:08.787: checkGlobalFlags: returning true
+02/13/19: 11:26:08.791: an_S1F13_prereply: ending
+02/13/19: 11:26:08.891: an_S1F1_prereply: starting
+02/13/19: 11:26:08.900: checkGlobalFlags: starting
+02/13/19: 11:26:08.904: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:26:08.908: checkGlobalFlags: returning true
+02/13/19: 11:26:08.912: an_S1F1_prereply: ending
+02/13/19: 11:26:09.019: an_S1F3_prereply: starting
+02/13/19: 11:26:09.023: checkGlobalFlags: starting
+02/13/19: 11:26:09.035: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:26:09.036: checkGlobalFlags: returning true
+02/13/19: 11:26:09.039: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:26:09.040: getValAndType: starting svid=13
+02/13/19: 11:26:09.044: looking at 13
+02/13/19: 11:26:09.045: getValAndType: 13 returning ControlState 5
+02/13/19: 11:26:09.047: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:26:09.050: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:26:09.054: getValAndType: starting svid=16
+02/13/19: 11:26:09.057: looking at 13
+02/13/19: 11:26:09.058: getValAndType: 16 returning ProcessState 4
+02/13/19: 11:26:09.060: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/13/19: 11:26:09.063: an_S1F3_prereply: ending
+02/13/19: 11:26:09.168: putAckInNcparms: starting
+02/13/19: 11:26:09.170: putAckInNcparms: sf is S5F3
+02/13/19: 11:45:33.376: an_S1F13_prereply: starting
+02/13/19: 11:45:33.385: checkGlobalFlags: starting
+02/13/19: 11:45:33.387: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:45:33.389: checkGlobalFlags: returning true
+02/13/19: 11:45:33.390: an_S1F13_prereply: ending
+02/13/19: 11:45:33.463: an_S1F1_prereply: starting
+02/13/19: 11:45:33.469: checkGlobalFlags: starting
+02/13/19: 11:45:33.471: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:45:33.472: checkGlobalFlags: returning true
+02/13/19: 11:45:33.474: an_S1F1_prereply: ending
+02/13/19: 11:45:33.554: an_S1F3_prereply: starting
+02/13/19: 11:45:33.556: checkGlobalFlags: starting
+02/13/19: 11:45:33.559: checkGlobalFlags: checking TransactionAbort=""
+02/13/19: 11:45:33.561: checkGlobalFlags: returning true
+02/13/19: 11:45:33.564: an_S1F3_prereply Index 1 SVID 13 svPtrList 269694288
+02/13/19: 11:45:33.565: getValAndType: starting svid=13
+02/13/19: 11:45:33.569: looking at 13
+02/13/19: 11:45:33.571: getValAndType: 13 returning ControlState 5
+02/13/19: 11:45:33.572: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/13/19: 11:45:33.576: an_S1F3_prereply Index 2 SVID 16 svPtrList 269694176
+02/13/19: 11:45:33.579: getValAndType: starting svid=16
+02/13/19: 11:45:33.584: looking at 13
+02/13/19: 11:45:33.586: getValAndType: 16 returning ProcessState 4
+02/13/19: 11:45:33.587: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/13/19: 11:45:33.590: an_S1F3_prereply: ending
+02/13/19: 11:45:33.691: putAckInNcparms: starting
+02/13/19: 11:45:33.693: putAckInNcparms: sf is S5F3
+02/14/19: 11:09:04.145: an_initialize: starting
+02/14/19: 11:09:04.533: an_S1F1_prereply: starting
+02/14/19: 11:09:04.556: checkGlobalFlags: starting
+02/14/19: 11:09:04.567: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:09:04.580: checkGlobalFlags: returning true
+02/14/19: 11:09:04.594: an_S1F1_prereply: ending
+02/14/19: 11:09:54.917: an_sendAlarm: starting
+02/14/19: 11:13:34.390: an_S1F13_prereply: starting
+02/14/19: 11:13:34.414: checkGlobalFlags: starting
+02/14/19: 11:13:34.425: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:13:34.438: checkGlobalFlags: returning true
+02/14/19: 11:13:34.450: an_S1F13_prereply: ending
+02/14/19: 11:13:35.918: an_S1F1_prereply: starting
+02/14/19: 11:13:35.944: checkGlobalFlags: starting
+02/14/19: 11:13:35.956: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:13:35.968: checkGlobalFlags: returning true
+02/14/19: 11:13:35.981: an_S1F1_prereply: ending
+02/14/19: 11:13:37.485: an_S1F3_prereply: starting
+02/14/19: 11:13:37.499: checkGlobalFlags: starting
+02/14/19: 11:13:37.512: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:13:37.524: checkGlobalFlags: returning true
+02/14/19: 11:13:37.547: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 11:13:37.558: getValAndType: starting svid=13
+02/14/19: 11:13:37.580: looking at 13
+02/14/19: 11:13:37.592: getValAndType: 13 returning ControlState 5
+02/14/19: 11:13:37.604: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 11:13:37.628: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 11:13:37.639: getValAndType: starting svid=16
+02/14/19: 11:13:37.663: looking at 13
+02/14/19: 11:13:37.675: getValAndType: 16 returning ProcessState 2
+02/14/19: 11:13:37.687: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 11:13:37.712: an_S1F3_prereply: ending
+02/14/19: 11:13:53.699: putAckInNcparms: starting
+02/14/19: 11:13:53.713: putAckInNcparms: sf is S5F3
+02/14/19: 11:31:33.629: an_S1F13_prereply: starting
+02/14/19: 11:31:33.655: checkGlobalFlags: starting
+02/14/19: 11:31:33.669: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:31:33.680: checkGlobalFlags: returning true
+02/14/19: 11:31:33.693: an_S1F13_prereply: ending
+02/14/19: 11:31:33.849: an_S1F1_prereply: starting
+02/14/19: 11:31:33.875: checkGlobalFlags: starting
+02/14/19: 11:31:33.889: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:31:33.901: checkGlobalFlags: returning true
+02/14/19: 11:31:33.912: an_S1F1_prereply: ending
+02/14/19: 11:31:34.064: an_S1F3_prereply: starting
+02/14/19: 11:31:34.077: checkGlobalFlags: starting
+02/14/19: 11:31:34.089: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:31:34.103: checkGlobalFlags: returning true
+02/14/19: 11:31:34.125: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 11:31:34.138: getValAndType: starting svid=13
+02/14/19: 11:31:34.163: looking at 13
+02/14/19: 11:31:34.176: getValAndType: 13 returning ControlState 5
+02/14/19: 11:31:34.189: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 11:31:34.211: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 11:31:34.222: getValAndType: starting svid=16
+02/14/19: 11:31:34.244: looking at 13
+02/14/19: 11:31:34.256: getValAndType: 16 returning ProcessState 2
+02/14/19: 11:31:34.270: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 11:31:34.291: an_S1F3_prereply: ending
+02/14/19: 11:31:36.048: putAckInNcparms: starting
+02/14/19: 11:31:36.061: putAckInNcparms: sf is S5F3
+02/14/19: 11:40:38.927: an_S1F13_prereply: starting
+02/14/19: 11:40:38.953: checkGlobalFlags: starting
+02/14/19: 11:40:38.966: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:40:38.979: checkGlobalFlags: returning true
+02/14/19: 11:40:38.991: an_S1F13_prereply: ending
+02/14/19: 11:50:32.100: an_S1F13_prereply: starting
+02/14/19: 11:50:32.125: checkGlobalFlags: starting
+02/14/19: 11:50:32.137: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:50:32.150: checkGlobalFlags: returning true
+02/14/19: 11:50:32.162: an_S1F13_prereply: ending
+02/14/19: 11:50:32.403: an_S1F1_prereply: starting
+02/14/19: 11:50:32.427: checkGlobalFlags: starting
+02/14/19: 11:50:32.438: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:50:32.450: checkGlobalFlags: returning true
+02/14/19: 11:50:32.463: an_S1F1_prereply: ending
+02/14/19: 11:50:44.473: an_S1F3_prereply: starting
+02/14/19: 11:50:44.488: checkGlobalFlags: starting
+02/14/19: 11:50:44.501: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:50:44.515: checkGlobalFlags: returning true
+02/14/19: 11:50:44.543: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 11:50:44.557: getValAndType: starting svid=13
+02/14/19: 11:50:44.582: looking at 13
+02/14/19: 11:50:44.593: getValAndType: 13 returning ControlState 5
+02/14/19: 11:50:44.604: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 11:50:44.626: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 11:50:44.638: getValAndType: starting svid=16
+02/14/19: 11:50:44.662: looking at 13
+02/14/19: 11:50:44.675: getValAndType: 16 returning ProcessState 2
+02/14/19: 11:50:44.688: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 11:50:44.711: an_S1F3_prereply: ending
+02/14/19: 11:51:30.181: putAckInNcparms: starting
+02/14/19: 11:51:30.193: putAckInNcparms: sf is S5F3
+02/14/19: 11:53:28.863: an_sendAlarm: starting
+02/14/19: 11:58:20.637: an_S1F13_prereply: starting
+02/14/19: 11:58:20.662: checkGlobalFlags: starting
+02/14/19: 11:58:20.674: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:58:20.688: checkGlobalFlags: returning true
+02/14/19: 11:58:20.702: an_S1F13_prereply: ending
+02/14/19: 11:58:20.937: an_S1F1_prereply: starting
+02/14/19: 11:58:20.962: checkGlobalFlags: starting
+02/14/19: 11:58:20.975: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:58:20.986: checkGlobalFlags: returning true
+02/14/19: 11:58:20.997: an_S1F1_prereply: ending
+02/14/19: 11:58:23.795: an_S1F3_prereply: starting
+02/14/19: 11:58:23.807: checkGlobalFlags: starting
+02/14/19: 11:58:23.819: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 11:58:23.832: checkGlobalFlags: returning true
+02/14/19: 11:58:23.863: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 11:58:23.875: getValAndType: starting svid=13
+02/14/19: 11:58:23.900: looking at 13
+02/14/19: 11:58:23.911: getValAndType: 13 returning ControlState 5
+02/14/19: 11:58:23.922: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 11:58:23.945: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 11:58:23.956: getValAndType: starting svid=16
+02/14/19: 11:58:23.980: looking at 13
+02/14/19: 11:58:23.992: getValAndType: 16 returning ProcessState 2
+02/14/19: 11:58:24.003: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 11:58:24.026: an_S1F3_prereply: ending
+02/14/19: 11:58:32.500: putAckInNcparms: starting
+02/14/19: 11:58:32.514: putAckInNcparms: sf is S5F3
+02/14/19: 12:18:08.177: an_S1F13_prereply: starting
+02/14/19: 12:18:08.200: checkGlobalFlags: starting
+02/14/19: 12:18:08.215: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 12:18:08.233: checkGlobalFlags: returning true
+02/14/19: 12:18:08.249: an_S1F13_prereply: ending
+02/14/19: 12:18:08.480: an_S1F1_prereply: starting
+02/14/19: 12:18:08.511: checkGlobalFlags: starting
+02/14/19: 12:18:08.525: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 12:18:08.537: checkGlobalFlags: returning true
+02/14/19: 12:18:08.549: an_S1F1_prereply: ending
+02/14/19: 12:18:10.952: an_S1F3_prereply: starting
+02/14/19: 12:18:10.965: checkGlobalFlags: starting
+02/14/19: 12:18:10.979: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 12:18:10.993: checkGlobalFlags: returning true
+02/14/19: 12:18:11.020: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 12:18:11.035: getValAndType: starting svid=13
+02/14/19: 12:18:11.061: looking at 13
+02/14/19: 12:18:11.073: getValAndType: 13 returning ControlState 5
+02/14/19: 12:18:11.085: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 12:18:11.111: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 12:18:11.124: getValAndType: starting svid=16
+02/14/19: 12:18:11.149: looking at 13
+02/14/19: 12:18:11.161: getValAndType: 16 returning ProcessState 2
+02/14/19: 12:18:11.172: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 12:18:11.198: an_S1F3_prereply: ending
+02/14/19: 12:18:13.853: putAckInNcparms: starting
+02/14/19: 12:18:13.867: putAckInNcparms: sf is S5F3
+02/14/19: 14:45:56.845: an_S1F13_prereply: starting
+02/14/19: 14:45:56.885: checkGlobalFlags: starting
+02/14/19: 14:45:56.906: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:45:56.925: checkGlobalFlags: returning true
+02/14/19: 14:45:56.942: an_S1F13_prereply: ending
+02/14/19: 14:45:57.347: an_S1F1_prereply: starting
+02/14/19: 14:45:57.393: checkGlobalFlags: starting
+02/14/19: 14:45:57.414: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:45:57.434: checkGlobalFlags: returning true
+02/14/19: 14:45:57.457: an_S1F1_prereply: ending
+02/14/19: 14:46:23.574: an_S1F3_prereply: starting
+02/14/19: 14:46:23.586: checkGlobalFlags: starting
+02/14/19: 14:46:23.599: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:46:23.616: checkGlobalFlags: returning true
+02/14/19: 14:46:23.651: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 14:46:23.666: getValAndType: starting svid=13
+02/14/19: 14:46:23.692: looking at 13
+02/14/19: 14:46:23.705: getValAndType: 13 returning ControlState 5
+02/14/19: 14:46:23.718: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 14:46:23.742: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 14:46:23.755: getValAndType: starting svid=16
+02/14/19: 14:46:23.781: looking at 13
+02/14/19: 14:46:23.794: getValAndType: 16 returning ProcessState 2
+02/14/19: 14:46:23.806: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 14:46:23.834: an_S1F3_prereply: ending
+02/14/19: 14:46:32.329: putAckInNcparms: starting
+02/14/19: 14:46:32.346: putAckInNcparms: sf is S5F3
+02/14/19: 14:50:58.418: an_S1F13_prereply: starting
+02/14/19: 14:50:58.457: checkGlobalFlags: starting
+02/14/19: 14:50:58.481: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:50:58.499: checkGlobalFlags: returning true
+02/14/19: 14:50:58.516: an_S1F13_prereply: ending
+02/14/19: 14:50:58.887: an_S1F1_prereply: starting
+02/14/19: 14:50:58.926: checkGlobalFlags: starting
+02/14/19: 14:50:58.942: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:50:58.959: checkGlobalFlags: returning true
+02/14/19: 14:50:58.978: an_S1F1_prereply: ending
+02/14/19: 14:53:21.417: an_S1F3_prereply: starting
+02/14/19: 14:53:21.434: checkGlobalFlags: starting
+02/14/19: 14:53:21.451: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:53:21.468: checkGlobalFlags: returning true
+02/14/19: 14:53:21.498: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 14:53:21.513: getValAndType: starting svid=13
+02/14/19: 14:53:21.544: looking at 13
+02/14/19: 14:53:21.561: getValAndType: 13 returning ControlState 5
+02/14/19: 14:53:21.580: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 14:53:21.613: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 14:53:21.627: getValAndType: starting svid=16
+02/14/19: 14:53:21.664: looking at 13
+02/14/19: 14:53:21.682: getValAndType: 16 returning ProcessState 2
+02/14/19: 14:53:21.697: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 14:53:21.726: an_S1F3_prereply: ending
+02/14/19: 14:53:23.900: putAckInNcparms: starting
+02/14/19: 14:53:23.915: putAckInNcparms: sf is S5F3
+02/14/19: 14:56:04.137: an_S1F13_prereply: starting
+02/14/19: 14:56:04.184: checkGlobalFlags: starting
+02/14/19: 14:56:04.209: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:56:04.228: checkGlobalFlags: returning true
+02/14/19: 14:56:04.251: an_S1F13_prereply: ending
+02/14/19: 14:56:04.680: an_S1F1_prereply: starting
+02/14/19: 14:56:04.720: checkGlobalFlags: starting
+02/14/19: 14:56:04.737: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:56:04.755: checkGlobalFlags: returning true
+02/14/19: 14:56:04.775: an_S1F1_prereply: ending
+02/14/19: 14:56:08.701: an_S1F3_prereply: starting
+02/14/19: 14:56:08.715: checkGlobalFlags: starting
+02/14/19: 14:56:08.727: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:56:08.741: checkGlobalFlags: returning true
+02/14/19: 14:56:08.770: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 14:56:08.785: getValAndType: starting svid=13
+02/14/19: 14:56:08.810: looking at 13
+02/14/19: 14:56:08.823: getValAndType: 13 returning ControlState 5
+02/14/19: 14:56:08.837: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 14:56:08.863: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 14:56:08.877: getValAndType: starting svid=16
+02/14/19: 14:56:08.905: looking at 13
+02/14/19: 14:56:08.919: getValAndType: 16 returning ProcessState 2
+02/14/19: 14:56:08.933: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 14:56:08.961: an_S1F3_prereply: ending
+02/14/19: 14:56:09.307: putAckInNcparms: starting
+02/14/19: 14:56:09.325: putAckInNcparms: sf is S5F3
+02/14/19: 14:57:01.490: an_S1F13_prereply: starting
+02/14/19: 14:57:01.543: checkGlobalFlags: starting
+02/14/19: 14:57:01.568: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:57:01.588: checkGlobalFlags: returning true
+02/14/19: 14:57:01.608: an_S1F13_prereply: ending
+02/14/19: 14:57:01.976: an_S1F1_prereply: starting
+02/14/19: 14:57:02.009: checkGlobalFlags: starting
+02/14/19: 14:57:02.027: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:57:02.043: checkGlobalFlags: returning true
+02/14/19: 14:57:02.062: an_S1F1_prereply: ending
+02/14/19: 14:57:05.548: an_S1F3_prereply: starting
+02/14/19: 14:57:05.566: checkGlobalFlags: starting
+02/14/19: 14:57:05.580: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 14:57:05.597: checkGlobalFlags: returning true
+02/14/19: 14:57:05.636: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 14:57:05.652: getValAndType: starting svid=13
+02/14/19: 14:57:05.686: looking at 13
+02/14/19: 14:57:05.701: getValAndType: 13 returning ControlState 5
+02/14/19: 14:57:05.716: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 14:57:05.745: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 14:57:05.760: getValAndType: starting svid=16
+02/14/19: 14:57:05.792: looking at 13
+02/14/19: 14:57:05.806: getValAndType: 16 returning ProcessState 2
+02/14/19: 14:57:05.823: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 14:57:05.853: an_S1F3_prereply: ending
+02/14/19: 14:57:26.725: putAckInNcparms: starting
+02/14/19: 14:57:26.738: putAckInNcparms: sf is S5F3
+02/14/19: 15:03:04.461: an_S1F13_prereply: starting
+02/14/19: 15:03:04.501: checkGlobalFlags: starting
+02/14/19: 15:03:04.520: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:03:04.543: checkGlobalFlags: returning true
+02/14/19: 15:03:04.566: an_S1F13_prereply: ending
+02/14/19: 15:03:04.958: an_S1F1_prereply: starting
+02/14/19: 15:03:04.994: checkGlobalFlags: starting
+02/14/19: 15:03:05.013: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:03:05.033: checkGlobalFlags: returning true
+02/14/19: 15:03:05.061: an_S1F1_prereply: ending
+02/14/19: 15:03:05.540: an_S1F3_prereply: starting
+02/14/19: 15:03:05.561: checkGlobalFlags: starting
+02/14/19: 15:03:05.581: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:03:05.601: checkGlobalFlags: returning true
+02/14/19: 15:03:05.642: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 15:03:05.660: getValAndType: starting svid=13
+02/14/19: 15:03:05.716: looking at 13
+02/14/19: 15:03:05.738: getValAndType: 13 returning ControlState 5
+02/14/19: 15:03:05.757: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 15:03:05.792: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 15:03:05.812: getValAndType: starting svid=16
+02/14/19: 15:03:05.848: looking at 13
+02/14/19: 15:03:05.867: getValAndType: 16 returning ProcessState 2
+02/14/19: 15:03:05.891: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 15:03:05.938: an_S1F3_prereply: ending
+02/14/19: 15:03:11.041: putAckInNcparms: starting
+02/14/19: 15:03:11.058: putAckInNcparms: sf is S5F3
+02/14/19: 15:11:34.365: an_S1F13_prereply: starting
+02/14/19: 15:11:34.412: checkGlobalFlags: starting
+02/14/19: 15:11:34.436: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:11:34.458: checkGlobalFlags: returning true
+02/14/19: 15:11:34.475: an_S1F13_prereply: ending
+02/14/19: 15:11:34.837: an_S1F1_prereply: starting
+02/14/19: 15:11:34.869: checkGlobalFlags: starting
+02/14/19: 15:11:34.886: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:11:34.902: checkGlobalFlags: returning true
+02/14/19: 15:11:34.920: an_S1F1_prereply: ending
+02/14/19: 15:11:35.344: an_S1F3_prereply: starting
+02/14/19: 15:11:35.360: checkGlobalFlags: starting
+02/14/19: 15:11:35.377: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 15:11:35.394: checkGlobalFlags: returning true
+02/14/19: 15:11:35.431: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 15:11:35.447: getValAndType: starting svid=13
+02/14/19: 15:11:35.481: looking at 13
+02/14/19: 15:11:35.501: getValAndType: 13 returning ControlState 5
+02/14/19: 15:11:35.520: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 15:11:35.555: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 15:11:35.571: getValAndType: starting svid=16
+02/14/19: 15:11:35.608: looking at 13
+02/14/19: 15:11:35.628: getValAndType: 16 returning ProcessState 2
+02/14/19: 15:11:35.648: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 15:11:35.680: an_S1F3_prereply: ending
+02/14/19: 15:11:36.089: putAckInNcparms: starting
+02/14/19: 15:11:36.106: putAckInNcparms: sf is S5F3
+02/14/19: 18:03:38.930: an_S1F13_prereply: starting
+02/14/19: 18:03:38.956: checkGlobalFlags: starting
+02/14/19: 18:03:38.968: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 18:03:38.980: checkGlobalFlags: returning true
+02/14/19: 18:03:38.993: an_S1F13_prereply: ending
+02/14/19: 18:03:39.240: an_S1F1_prereply: starting
+02/14/19: 18:03:39.266: checkGlobalFlags: starting
+02/14/19: 18:03:39.279: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 18:03:39.292: checkGlobalFlags: returning true
+02/14/19: 18:03:39.304: an_S1F1_prereply: ending
+02/14/19: 18:03:39.575: an_S1F3_prereply: starting
+02/14/19: 18:03:39.589: checkGlobalFlags: starting
+02/14/19: 18:03:39.603: checkGlobalFlags: checking TransactionAbort=""
+02/14/19: 18:03:39.619: checkGlobalFlags: returning true
+02/14/19: 18:03:39.647: an_S1F3_prereply Index 1 SVID 13 svPtrList 240530384
+02/14/19: 18:03:39.660: getValAndType: starting svid=13
+02/14/19: 18:03:39.684: looking at 13
+02/14/19: 18:03:39.697: getValAndType: 13 returning ControlState 5
+02/14/19: 18:03:39.710: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/14/19: 18:03:39.734: an_S1F3_prereply Index 2 SVID 16 svPtrList 240530272
+02/14/19: 18:03:39.746: getValAndType: starting svid=16
+02/14/19: 18:03:39.772: looking at 13
+02/14/19: 18:03:39.785: getValAndType: 16 returning ProcessState 2
+02/14/19: 18:03:39.798: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/14/19: 18:03:39.824: an_S1F3_prereply: ending
+02/14/19: 18:03:40.139: putAckInNcparms: starting
+02/14/19: 18:03:40.152: putAckInNcparms: sf is S5F3
+02/16/19: 11:45:26.602: an_initialize: starting
+02/16/19: 11:45:26.779: an_S1F1_prereply: starting
+02/16/19: 11:45:26.782: checkGlobalFlags: starting
+02/16/19: 11:45:26.783: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:45:26.784: checkGlobalFlags: returning true
+02/16/19: 11:45:26.786: an_S1F1_prereply: ending
+02/16/19: 11:46:57.103: an_S1F13_prereply: starting
+02/16/19: 11:46:57.106: checkGlobalFlags: starting
+02/16/19: 11:46:57.108: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:46:57.109: checkGlobalFlags: returning true
+02/16/19: 11:46:57.110: an_S1F13_prereply: ending
+02/16/19: 11:46:58.421: an_S1F1_prereply: starting
+02/16/19: 11:46:58.423: checkGlobalFlags: starting
+02/16/19: 11:46:58.424: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:46:58.425: checkGlobalFlags: returning true
+02/16/19: 11:46:58.426: an_S1F1_prereply: ending
+02/16/19: 11:46:59.317: an_S1F3_prereply: starting
+02/16/19: 11:46:59.318: checkGlobalFlags: starting
+02/16/19: 11:46:59.318: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:46:59.318: checkGlobalFlags: returning true
+02/16/19: 11:46:59.319: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 11:46:59.320: getValAndType: starting svid=13
+02/16/19: 11:46:59.321: looking at 13
+02/16/19: 11:46:59.321: getValAndType: 13 returning ControlState 5
+02/16/19: 11:46:59.321: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 11:46:59.322: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 11:46:59.323: getValAndType: starting svid=16
+02/16/19: 11:46:59.324: looking at 13
+02/16/19: 11:46:59.325: getValAndType: 16 returning ProcessState 2
+02/16/19: 11:46:59.325: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 11:46:59.326: an_S1F3_prereply: ending
+02/16/19: 11:47:00.431: putAckInNcparms: starting
+02/16/19: 11:47:00.431: putAckInNcparms: sf is S5F3
+02/16/19: 11:52:05.770: an_S1F13_prereply: starting
+02/16/19: 11:52:05.773: checkGlobalFlags: starting
+02/16/19: 11:52:05.774: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:52:05.774: checkGlobalFlags: returning true
+02/16/19: 11:52:05.774: an_S1F13_prereply: ending
+02/16/19: 11:52:05.794: an_S1F1_prereply: starting
+02/16/19: 11:52:05.795: checkGlobalFlags: starting
+02/16/19: 11:52:05.796: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:52:05.796: checkGlobalFlags: returning true
+02/16/19: 11:52:05.796: an_S1F1_prereply: ending
+02/16/19: 11:52:05.822: an_S1F3_prereply: starting
+02/16/19: 11:52:05.822: checkGlobalFlags: starting
+02/16/19: 11:52:05.823: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:52:05.824: checkGlobalFlags: returning true
+02/16/19: 11:52:05.828: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 11:52:05.829: getValAndType: starting svid=13
+02/16/19: 11:52:05.830: looking at 13
+02/16/19: 11:52:05.830: getValAndType: 13 returning ControlState 5
+02/16/19: 11:52:05.831: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 11:52:05.831: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 11:52:05.832: getValAndType: starting svid=16
+02/16/19: 11:52:05.833: looking at 13
+02/16/19: 11:52:05.834: getValAndType: 16 returning ProcessState 2
+02/16/19: 11:52:05.834: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 11:52:05.835: an_S1F3_prereply: ending
+02/16/19: 11:52:05.864: putAckInNcparms: starting
+02/16/19: 11:52:05.864: putAckInNcparms: sf is S5F3
+02/16/19: 11:56:53.117: an_S1F13_prereply: starting
+02/16/19: 11:56:53.118: checkGlobalFlags: starting
+02/16/19: 11:56:53.119: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:56:53.121: checkGlobalFlags: returning true
+02/16/19: 11:56:53.123: an_S1F13_prereply: ending
+02/16/19: 11:56:53.149: an_S1F1_prereply: starting
+02/16/19: 11:56:53.152: checkGlobalFlags: starting
+02/16/19: 11:56:53.154: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:56:53.155: checkGlobalFlags: returning true
+02/16/19: 11:56:53.157: an_S1F1_prereply: ending
+02/16/19: 11:56:53.189: an_S1F3_prereply: starting
+02/16/19: 11:56:53.191: checkGlobalFlags: starting
+02/16/19: 11:56:53.192: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 11:56:53.194: checkGlobalFlags: returning true
+02/16/19: 11:56:53.198: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 11:56:53.199: getValAndType: starting svid=13
+02/16/19: 11:56:53.202: looking at 13
+02/16/19: 11:56:53.203: getValAndType: 13 returning ControlState 5
+02/16/19: 11:56:53.204: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 11:56:53.207: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 11:56:53.208: getValAndType: starting svid=16
+02/16/19: 11:56:53.211: looking at 13
+02/16/19: 11:56:53.213: getValAndType: 16 returning ProcessState 2
+02/16/19: 11:56:53.214: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 11:56:53.217: an_S1F3_prereply: ending
+02/16/19: 11:56:53.254: putAckInNcparms: starting
+02/16/19: 11:56:53.255: putAckInNcparms: sf is S5F3
+02/16/19: 13:09:16.021: an_S1F13_prereply: starting
+02/16/19: 13:09:16.023: checkGlobalFlags: starting
+02/16/19: 13:09:16.023: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:09:16.024: checkGlobalFlags: returning true
+02/16/19: 13:09:16.024: an_S1F13_prereply: ending
+02/16/19: 13:09:16.051: an_S1F1_prereply: starting
+02/16/19: 13:09:16.052: checkGlobalFlags: starting
+02/16/19: 13:09:16.052: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:09:16.053: checkGlobalFlags: returning true
+02/16/19: 13:09:16.053: an_S1F1_prereply: ending
+02/16/19: 13:09:16.080: an_S1F3_prereply: starting
+02/16/19: 13:09:16.080: checkGlobalFlags: starting
+02/16/19: 13:09:16.081: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:09:16.081: checkGlobalFlags: returning true
+02/16/19: 13:09:16.083: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:09:16.084: getValAndType: starting svid=13
+02/16/19: 13:09:16.084: looking at 13
+02/16/19: 13:09:16.085: getValAndType: 13 returning ControlState 5
+02/16/19: 13:09:16.085: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:09:16.086: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:09:16.086: getValAndType: starting svid=16
+02/16/19: 13:09:16.087: looking at 13
+02/16/19: 13:09:16.087: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:09:16.088: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:09:16.089: an_S1F3_prereply: ending
+02/16/19: 13:09:16.121: putAckInNcparms: starting
+02/16/19: 13:09:16.121: putAckInNcparms: sf is S5F3
+02/16/19: 13:09:53.631: an_sendAlarm: starting
+02/16/19: 13:09:58.623: an_sendAlarm: starting
+02/16/19: 13:10:31.331: an_setProcessState: starting
+02/16/19: 13:10:31.331: an_setProcessState: sending event 10
+02/16/19: 13:10:31.336: an_sendEvent: starting
+02/16/19: 13:10:31.339: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:10:31.340: addReports: starting
+02/16/19: 13:10:31.344: an_setProcessState: returning 0
+02/16/19: 13:10:31.401: an_S1F3_prereply: starting
+02/16/19: 13:10:31.402: checkGlobalFlags: starting
+02/16/19: 13:10:31.403: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:10:31.404: checkGlobalFlags: returning true
+02/16/19: 13:10:31.406: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:10:31.408: getValAndType: starting svid=13
+02/16/19: 13:10:31.412: looking at 13
+02/16/19: 13:10:31.413: getValAndType: 13 returning ControlState 5
+02/16/19: 13:10:31.414: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:10:31.416: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:10:31.417: getValAndType: starting svid=16
+02/16/19: 13:10:31.419: looking at 13
+02/16/19: 13:10:31.420: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:10:31.421: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:10:31.426: an_S1F3_prereply: ending
+02/16/19: 13:10:36.436: an_setProcessState: starting
+02/16/19: 13:10:36.436: an_setProcessState: sending event 10
+02/16/19: 13:10:36.437: an_sendEvent: starting
+02/16/19: 13:10:36.439: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:10:36.440: addReports: starting
+02/16/19: 13:10:36.441: an_setProcessState: returning 0
+02/16/19: 13:10:36.474: an_S1F3_prereply: starting
+02/16/19: 13:10:36.475: checkGlobalFlags: starting
+02/16/19: 13:10:36.475: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:10:36.475: checkGlobalFlags: returning true
+02/16/19: 13:10:36.477: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:10:36.478: getValAndType: starting svid=13
+02/16/19: 13:10:36.479: looking at 13
+02/16/19: 13:10:36.480: getValAndType: 13 returning ControlState 5
+02/16/19: 13:10:36.481: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:10:36.482: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:10:36.482: getValAndType: starting svid=16
+02/16/19: 13:10:36.483: looking at 13
+02/16/19: 13:10:36.483: getValAndType: 16 returning ProcessState 4
+02/16/19: 13:10:36.483: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:10:36.484: an_S1F3_prereply: ending
+02/16/19: 13:10:42.061: an_setProcessState: starting
+02/16/19: 13:10:42.062: an_setProcessState: sending event 10
+02/16/19: 13:10:42.062: an_sendEvent: starting
+02/16/19: 13:10:42.063: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:10:42.064: addReports: starting
+02/16/19: 13:10:42.066: an_setProcessState: returning 0
+02/16/19: 13:10:42.110: an_S1F3_prereply: starting
+02/16/19: 13:10:42.112: checkGlobalFlags: starting
+02/16/19: 13:10:42.113: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:10:42.113: checkGlobalFlags: returning true
+02/16/19: 13:10:42.114: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:10:42.115: getValAndType: starting svid=13
+02/16/19: 13:10:42.116: looking at 13
+02/16/19: 13:10:42.116: getValAndType: 13 returning ControlState 5
+02/16/19: 13:10:42.117: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:10:42.118: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:10:42.120: getValAndType: starting svid=16
+02/16/19: 13:10:42.122: looking at 13
+02/16/19: 13:10:42.123: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:10:42.125: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:10:42.127: an_S1F3_prereply: ending
+02/16/19: 13:10:47.750: an_setProcessState: starting
+02/16/19: 13:10:47.752: an_setProcessState: sending event 10
+02/16/19: 13:10:47.756: an_sendEvent: starting
+02/16/19: 13:10:47.759: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:10:47.760: addReports: starting
+02/16/19: 13:10:47.764: an_setProcessState: returning 0
+02/16/19: 13:10:47.818: an_S1F3_prereply: starting
+02/16/19: 13:10:47.819: checkGlobalFlags: starting
+02/16/19: 13:10:47.821: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:10:47.822: checkGlobalFlags: returning true
+02/16/19: 13:10:47.826: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:10:47.828: getValAndType: starting svid=13
+02/16/19: 13:10:47.832: looking at 13
+02/16/19: 13:10:47.832: getValAndType: 13 returning ControlState 5
+02/16/19: 13:10:47.833: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:10:47.833: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:10:47.834: getValAndType: starting svid=16
+02/16/19: 13:10:47.835: looking at 13
+02/16/19: 13:10:47.836: getValAndType: 16 returning ProcessState 4
+02/16/19: 13:10:47.837: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:10:47.839: an_S1F3_prereply: ending
+02/16/19: 13:11:00.005: an_setControlState: starting
+02/16/19: 13:11:00.005: an_setControlState: event is 1
+02/16/19: 13:11:00.006: an_sendEvent: starting
+02/16/19: 13:11:00.009: an_sendEvent: sendEvent with ceid 1
+02/16/19: 13:11:00.010: addReports: starting
+02/16/19: 13:11:00.012: an_setControlState: returning 0
+02/16/19: 13:12:20.925: an_setControlState: starting
+02/16/19: 13:12:20.925: an_setControlState: event is 2
+02/16/19: 13:12:20.926: an_sendEvent: starting
+02/16/19: 13:12:20.928: an_sendEvent: sendEvent with ceid 2
+02/16/19: 13:12:20.928: addReports: starting
+02/16/19: 13:12:20.931: an_setControlState: returning 0
+02/16/19: 13:12:25.948: an_setControlState: starting
+02/16/19: 13:12:25.948: an_setControlState: event is 3
+02/16/19: 13:12:25.950: an_sendEvent: starting
+02/16/19: 13:12:25.951: an_sendEvent: sendEvent with ceid 3
+02/16/19: 13:12:25.952: addReports: starting
+02/16/19: 13:12:25.953: an_setControlState: returning 0
+02/16/19: 13:12:40.230: an_setProcessState: starting
+02/16/19: 13:12:40.230: an_setProcessState: sending event 10
+02/16/19: 13:12:40.231: an_sendEvent: starting
+02/16/19: 13:12:40.232: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:12:40.232: addReports: starting
+02/16/19: 13:12:40.238: an_setProcessState: returning 0
+02/16/19: 13:12:40.298: an_S1F3_prereply: starting
+02/16/19: 13:12:40.299: checkGlobalFlags: starting
+02/16/19: 13:12:40.300: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:12:40.302: checkGlobalFlags: returning true
+02/16/19: 13:12:40.304: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:12:40.306: getValAndType: starting svid=13
+02/16/19: 13:12:40.309: looking at 13
+02/16/19: 13:12:40.311: getValAndType: 13 returning ControlState 5
+02/16/19: 13:12:40.313: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:12:40.316: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:12:40.317: getValAndType: starting svid=16
+02/16/19: 13:12:40.320: looking at 13
+02/16/19: 13:12:40.321: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:12:40.323: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:12:40.325: an_S1F3_prereply: ending
+02/16/19: 13:17:27.589: an_S1F13_prereply: starting
+02/16/19: 13:17:27.590: checkGlobalFlags: starting
+02/16/19: 13:17:27.590: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:17:27.591: checkGlobalFlags: returning true
+02/16/19: 13:17:27.591: an_S1F13_prereply: ending
+02/16/19: 13:17:27.612: an_S1F1_prereply: starting
+02/16/19: 13:17:27.613: checkGlobalFlags: starting
+02/16/19: 13:17:27.614: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:17:27.615: checkGlobalFlags: returning true
+02/16/19: 13:17:27.616: an_S1F1_prereply: ending
+02/16/19: 13:17:27.647: an_S1F3_prereply: starting
+02/16/19: 13:17:27.647: checkGlobalFlags: starting
+02/16/19: 13:17:27.647: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:17:27.648: checkGlobalFlags: returning true
+02/16/19: 13:17:27.648: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:17:27.649: getValAndType: starting svid=13
+02/16/19: 13:17:27.650: looking at 13
+02/16/19: 13:17:27.650: getValAndType: 13 returning ControlState 5
+02/16/19: 13:17:27.651: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:17:27.652: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:17:27.652: getValAndType: starting svid=16
+02/16/19: 13:17:27.653: looking at 13
+02/16/19: 13:17:27.653: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:17:27.654: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:17:27.654: an_S1F3_prereply: ending
+02/16/19: 13:17:27.684: putAckInNcparms: starting
+02/16/19: 13:17:27.684: putAckInNcparms: sf is S5F3
+02/16/19: 13:17:37.939: an_setProcessState: starting
+02/16/19: 13:17:37.940: an_setProcessState: sending event 10
+02/16/19: 13:17:37.943: an_sendEvent: starting
+02/16/19: 13:17:37.944: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:17:37.944: addReports: starting
+02/16/19: 13:17:37.945: an_setProcessState: returning 0
+02/16/19: 13:17:37.985: an_S1F3_prereply: starting
+02/16/19: 13:17:37.985: checkGlobalFlags: starting
+02/16/19: 13:17:37.986: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:17:37.986: checkGlobalFlags: returning true
+02/16/19: 13:17:37.988: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:17:37.988: getValAndType: starting svid=13
+02/16/19: 13:17:37.989: looking at 13
+02/16/19: 13:17:37.990: getValAndType: 13 returning ControlState 5
+02/16/19: 13:17:37.990: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:17:37.991: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:17:37.991: getValAndType: starting svid=16
+02/16/19: 13:17:37.992: looking at 13
+02/16/19: 13:17:37.992: getValAndType: 16 returning ProcessState 4
+02/16/19: 13:17:37.993: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:17:37.996: an_S1F3_prereply: ending
+02/16/19: 13:17:43.554: an_setControlState: starting
+02/16/19: 13:17:43.556: an_setControlState: event is 1
+02/16/19: 13:17:43.558: an_sendEvent: starting
+02/16/19: 13:17:43.561: an_sendEvent: sendEvent with ceid 1
+02/16/19: 13:17:43.562: addReports: starting
+02/16/19: 13:17:43.566: an_setControlState: returning 0
+02/16/19: 13:17:53.535: an_setControlState: starting
+02/16/19: 13:17:53.536: an_setControlState: event is 2
+02/16/19: 13:17:53.539: an_sendEvent: starting
+02/16/19: 13:17:53.542: an_sendEvent: sendEvent with ceid 2
+02/16/19: 13:17:53.547: addReports: starting
+02/16/19: 13:17:53.551: an_setControlState: returning 0
+02/16/19: 13:18:04.378: an_sendAlarm: starting
+02/16/19: 13:20:18.123: an_S1F13_prereply: starting
+02/16/19: 13:20:18.124: checkGlobalFlags: starting
+02/16/19: 13:20:18.124: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:20:18.124: checkGlobalFlags: returning true
+02/16/19: 13:20:18.127: an_S1F13_prereply: ending
+02/16/19: 13:20:18.147: an_S1F1_prereply: starting
+02/16/19: 13:20:18.148: checkGlobalFlags: starting
+02/16/19: 13:20:18.148: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:20:18.148: checkGlobalFlags: returning true
+02/16/19: 13:20:18.150: an_S1F1_prereply: ending
+02/16/19: 13:20:18.176: an_S1F3_prereply: starting
+02/16/19: 13:20:18.176: checkGlobalFlags: starting
+02/16/19: 13:20:18.177: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:20:18.177: checkGlobalFlags: returning true
+02/16/19: 13:20:18.179: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:20:18.180: getValAndType: starting svid=13
+02/16/19: 13:20:18.181: looking at 13
+02/16/19: 13:20:18.181: getValAndType: 13 returning ControlState 4
+02/16/19: 13:20:18.182: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:20:18.183: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:20:18.183: getValAndType: starting svid=16
+02/16/19: 13:20:18.184: looking at 13
+02/16/19: 13:20:18.184: getValAndType: 16 returning ProcessState 4
+02/16/19: 13:20:18.185: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:20:18.186: an_S1F3_prereply: ending
+02/16/19: 13:20:18.214: putAckInNcparms: starting
+02/16/19: 13:20:18.214: putAckInNcparms: sf is S5F3
+02/16/19: 13:20:28.761: an_setProcessState: starting
+02/16/19: 13:20:28.761: an_setProcessState: sending event 10
+02/16/19: 13:20:28.762: an_sendEvent: starting
+02/16/19: 13:20:28.763: an_sendEvent: sendEvent with ceid 10
+02/16/19: 13:20:28.763: addReports: starting
+02/16/19: 13:20:28.765: an_setProcessState: returning 0
+02/16/19: 13:20:28.804: an_S1F3_prereply: starting
+02/16/19: 13:20:28.805: checkGlobalFlags: starting
+02/16/19: 13:20:28.806: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:20:28.807: checkGlobalFlags: returning true
+02/16/19: 13:20:28.811: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:20:28.813: getValAndType: starting svid=13
+02/16/19: 13:20:28.816: looking at 13
+02/16/19: 13:20:28.817: getValAndType: 13 returning ControlState 4
+02/16/19: 13:20:28.818: an_S1F3_prereply: valAndType=4 UI4 lindex=4
+02/16/19: 13:20:28.822: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:20:28.823: getValAndType: starting svid=16
+02/16/19: 13:20:28.825: looking at 13
+02/16/19: 13:20:28.826: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:20:28.827: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:20:28.830: an_S1F3_prereply: ending
+02/16/19: 13:20:32.072: an_setControlState: starting
+02/16/19: 13:20:32.073: an_setControlState: event is 3
+02/16/19: 13:20:32.077: an_sendEvent: starting
+02/16/19: 13:20:32.079: an_sendEvent: sendEvent with ceid 3
+02/16/19: 13:20:32.081: addReports: starting
+02/16/19: 13:20:32.088: an_setControlState: returning 0
+02/16/19: 13:21:35.162: an_sendEvent: starting
+02/16/19: 13:21:35.163: an_sendEvent: sendEvent with ceid ProcessStarted
+02/16/19: 13:21:35.163: addReports: starting
+02/16/19: 13:23:08.732: an_sendEvent: starting
+02/16/19: 13:23:08.735: an_sendEvent: sendEvent with ceid ProcessStarted
+02/16/19: 13:23:08.736: addReports: starting
+02/16/19: 13:24:28.058: an_sendEvent: starting
+02/16/19: 13:24:28.062: an_sendEvent: sendEvent with ceid 101
+02/16/19: 13:24:28.062: addReports: starting
+02/16/19: 13:31:48.814: an_S1F13_prereply: starting
+02/16/19: 13:31:48.815: checkGlobalFlags: starting
+02/16/19: 13:31:48.816: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:31:48.816: checkGlobalFlags: returning true
+02/16/19: 13:31:48.816: an_S1F13_prereply: ending
+02/16/19: 13:31:50.496: an_S1F1_prereply: starting
+02/16/19: 13:31:50.498: checkGlobalFlags: starting
+02/16/19: 13:31:50.498: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:31:50.499: checkGlobalFlags: returning true
+02/16/19: 13:31:50.499: an_S1F1_prereply: ending
+02/16/19: 13:31:51.134: an_S1F3_prereply: starting
+02/16/19: 13:31:51.136: checkGlobalFlags: starting
+02/16/19: 13:31:51.137: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 13:31:51.138: checkGlobalFlags: returning true
+02/16/19: 13:31:51.140: an_S1F3_prereply Index 1 SVID 13 svPtrList 236080992
+02/16/19: 13:31:51.141: getValAndType: starting svid=13
+02/16/19: 13:31:51.143: looking at 13
+02/16/19: 13:31:51.145: getValAndType: 13 returning ControlState 5
+02/16/19: 13:31:51.146: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 13:31:51.149: an_S1F3_prereply Index 2 SVID 16 svPtrList 236080880
+02/16/19: 13:31:51.150: getValAndType: starting svid=16
+02/16/19: 13:31:51.152: looking at 13
+02/16/19: 13:31:51.153: getValAndType: 16 returning ProcessState 2
+02/16/19: 13:31:51.155: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 13:31:51.157: an_S1F3_prereply: ending
+02/16/19: 13:31:51.709: putAckInNcparms: starting
+02/16/19: 13:31:51.711: putAckInNcparms: sf is S5F3
+02/16/19: 13:32:27.902: an_sendEvent: starting
+02/16/19: 13:32:27.904: an_sendEvent: sendEvent with ceid ProcessStarted
+02/16/19: 13:32:27.907: addReports: starting
+02/16/19: 13:33:01.763: an_sendEvent: starting
+02/16/19: 13:33:01.764: an_sendEvent: sendEvent with ceid 101
+02/16/19: 13:33:01.767: addReports: starting
+02/16/19: 13:33:59.469: putAckInNcparms: starting
+02/16/19: 13:33:59.475: putAckInNcparms: sf is S2F23
+02/16/19: 13:33:59.477: an_S2F23_postreply: starting
+02/16/19: 13:33:59.478: an_S2F23_postreply: removing timer id=0
+02/16/19: 13:33:59.479: an_S2F23_postreply: cancelled timer id=0
+02/16/19: 13:33:59.480: an_S2F23_postreply: totsmp is 0
+02/16/19: 13:35:37.636: an_sendAlarm: starting
+02/16/19: 20:39:18.627: an_initialize: starting
+02/16/19: 20:39:18.760: an_S1F1_prereply: starting
+02/16/19: 20:39:18.762: checkGlobalFlags: starting
+02/16/19: 20:39:18.762: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:39:18.763: checkGlobalFlags: returning true
+02/16/19: 20:39:18.763: an_S1F1_prereply: ending
+02/16/19: 20:44:39.585: an_S1F13_prereply: starting
+02/16/19: 20:44:39.586: checkGlobalFlags: starting
+02/16/19: 20:44:39.587: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:44:39.587: checkGlobalFlags: returning true
+02/16/19: 20:44:39.588: an_S1F13_prereply: ending
+02/16/19: 20:44:39.610: an_S1F1_prereply: starting
+02/16/19: 20:44:39.611: checkGlobalFlags: starting
+02/16/19: 20:44:39.612: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:44:39.612: checkGlobalFlags: returning true
+02/16/19: 20:44:39.612: an_S1F1_prereply: ending
+02/16/19: 20:44:39.638: an_S1F3_prereply: starting
+02/16/19: 20:44:39.639: checkGlobalFlags: starting
+02/16/19: 20:44:39.639: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:44:39.639: checkGlobalFlags: returning true
+02/16/19: 20:44:39.640: an_S1F3_prereply Index 1 SVID 13 svPtrList 235622240
+02/16/19: 20:44:39.641: getValAndType: starting svid=13
+02/16/19: 20:44:39.641: looking at 13
+02/16/19: 20:44:39.642: getValAndType: 13 returning ControlState 5
+02/16/19: 20:44:39.642: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 20:44:39.643: an_S1F3_prereply Index 2 SVID 16 svPtrList 235622128
+02/16/19: 20:44:39.644: getValAndType: starting svid=16
+02/16/19: 20:44:39.645: looking at 13
+02/16/19: 20:44:39.646: getValAndType: 16 returning ProcessState 2
+02/16/19: 20:44:39.646: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 20:44:39.647: an_S1F3_prereply: ending
+02/16/19: 20:44:39.674: putAckInNcparms: starting
+02/16/19: 20:44:39.674: putAckInNcparms: sf is S5F3
+02/16/19: 20:50:28.720: an_S1F13_prereply: starting
+02/16/19: 20:50:28.725: checkGlobalFlags: starting
+02/16/19: 20:50:28.727: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:50:28.728: checkGlobalFlags: returning true
+02/16/19: 20:50:28.730: an_S1F13_prereply: ending
+02/16/19: 20:50:28.757: an_S1F1_prereply: starting
+02/16/19: 20:50:28.760: checkGlobalFlags: starting
+02/16/19: 20:50:28.761: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:50:28.762: checkGlobalFlags: returning true
+02/16/19: 20:50:28.764: an_S1F1_prereply: ending
+02/16/19: 20:50:28.801: an_S1F3_prereply: starting
+02/16/19: 20:50:28.802: checkGlobalFlags: starting
+02/16/19: 20:50:28.805: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:50:28.807: checkGlobalFlags: returning true
+02/16/19: 20:50:28.816: an_S1F3_prereply Index 1 SVID 13 svPtrList 235622240
+02/16/19: 20:50:28.817: getValAndType: starting svid=13
+02/16/19: 20:50:28.821: looking at 13
+02/16/19: 20:50:28.823: getValAndType: 13 returning ControlState 5
+02/16/19: 20:50:28.825: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 20:50:28.829: an_S1F3_prereply Index 2 SVID 16 svPtrList 235622128
+02/16/19: 20:50:28.831: getValAndType: starting svid=16
+02/16/19: 20:50:28.836: looking at 13
+02/16/19: 20:50:28.838: getValAndType: 16 returning ProcessState 2
+02/16/19: 20:50:28.840: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 20:50:28.843: an_S1F3_prereply: ending
+02/16/19: 20:50:28.883: putAckInNcparms: starting
+02/16/19: 20:50:28.884: putAckInNcparms: sf is S5F3
+02/16/19: 20:53:06.287: an_S1F13_prereply: starting
+02/16/19: 20:53:06.288: checkGlobalFlags: starting
+02/16/19: 20:53:06.288: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:53:06.290: checkGlobalFlags: returning true
+02/16/19: 20:53:06.291: an_S1F13_prereply: ending
+02/16/19: 20:53:06.310: an_S1F1_prereply: starting
+02/16/19: 20:53:06.311: checkGlobalFlags: starting
+02/16/19: 20:53:06.311: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:53:06.312: checkGlobalFlags: returning true
+02/16/19: 20:53:06.312: an_S1F1_prereply: ending
+02/16/19: 20:53:06.336: an_S1F3_prereply: starting
+02/16/19: 20:53:06.337: checkGlobalFlags: starting
+02/16/19: 20:53:06.337: checkGlobalFlags: checking TransactionAbort=""
+02/16/19: 20:53:06.337: checkGlobalFlags: returning true
+02/16/19: 20:53:06.339: an_S1F3_prereply Index 1 SVID 13 svPtrList 235622240
+02/16/19: 20:53:06.339: getValAndType: starting svid=13
+02/16/19: 20:53:06.340: looking at 13
+02/16/19: 20:53:06.340: getValAndType: 13 returning ControlState 5
+02/16/19: 20:53:06.341: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/16/19: 20:53:06.342: an_S1F3_prereply Index 2 SVID 16 svPtrList 235622128
+02/16/19: 20:53:06.342: getValAndType: starting svid=16
+02/16/19: 20:53:06.343: looking at 13
+02/16/19: 20:53:06.344: getValAndType: 16 returning ProcessState 2
+02/16/19: 20:53:06.344: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/16/19: 20:53:06.345: an_S1F3_prereply: ending
+02/16/19: 20:53:06.372: putAckInNcparms: starting
+02/16/19: 20:53:06.372: putAckInNcparms: sf is S5F3
+02/17/19: 11:14:50.597: an_initialize: starting
+02/17/19: 11:14:50.736: an_S1F1_prereply: starting
+02/17/19: 11:14:50.738: checkGlobalFlags: starting
+02/17/19: 11:14:50.739: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:14:50.739: checkGlobalFlags: returning true
+02/17/19: 11:14:50.739: an_S1F1_prereply: ending
+02/17/19: 11:15:19.302: an_S1F13_prereply: starting
+02/17/19: 11:15:19.304: checkGlobalFlags: starting
+02/17/19: 11:15:19.304: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:15:19.305: checkGlobalFlags: returning true
+02/17/19: 11:15:19.306: an_S1F13_prereply: ending
+02/17/19: 11:15:19.332: an_S1F1_prereply: starting
+02/17/19: 11:15:19.333: checkGlobalFlags: starting
+02/17/19: 11:15:19.333: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:15:19.334: checkGlobalFlags: returning true
+02/17/19: 11:15:19.334: an_S1F1_prereply: ending
+02/17/19: 11:15:19.362: an_S1F3_prereply: starting
+02/17/19: 11:15:19.363: checkGlobalFlags: starting
+02/17/19: 11:15:19.363: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:15:19.364: checkGlobalFlags: returning true
+02/17/19: 11:15:19.365: an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880
+02/17/19: 11:15:19.365: getValAndType: starting svid=13
+02/17/19: 11:15:19.366: looking at 13
+02/17/19: 11:15:19.366: getValAndType: 13 returning ControlState 5
+02/17/19: 11:15:19.367: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/17/19: 11:15:19.367: an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768
+02/17/19: 11:15:19.369: getValAndType: starting svid=16
+02/17/19: 11:15:19.370: looking at 13
+02/17/19: 11:15:19.370: getValAndType: 16 returning ProcessState 2
+02/17/19: 11:15:19.370: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/17/19: 11:15:19.371: an_S1F3_prereply: ending
+02/17/19: 11:15:19.404: putAckInNcparms: starting
+02/17/19: 11:15:19.406: putAckInNcparms: sf is S5F3
+02/17/19: 11:15:33.402: an_sendAlarm: starting
+02/17/19: 11:16:03.320: an_setProcessState: starting
+02/17/19: 11:16:03.321: an_setProcessState: sending event 10
+02/17/19: 11:16:03.324: an_sendEvent: starting
+02/17/19: 11:16:03.327: an_sendEvent: sendEvent with ceid 10
+02/17/19: 11:16:03.329: addReports: starting
+02/17/19: 11:16:03.333: an_setProcessState: returning 0
+02/17/19: 11:16:03.389: an_S1F3_prereply: starting
+02/17/19: 11:16:03.389: checkGlobalFlags: starting
+02/17/19: 11:16:03.389: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:16:03.390: checkGlobalFlags: returning true
+02/17/19: 11:16:03.391: an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880
+02/17/19: 11:16:03.391: getValAndType: starting svid=13
+02/17/19: 11:16:03.392: looking at 13
+02/17/19: 11:16:03.395: getValAndType: 13 returning ControlState 5
+02/17/19: 11:16:03.397: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/17/19: 11:16:03.398: an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768
+02/17/19: 11:16:03.398: getValAndType: starting svid=16
+02/17/19: 11:16:03.399: looking at 13
+02/17/19: 11:16:03.399: getValAndType: 16 returning ProcessState 0
+02/17/19: 11:16:03.400: an_S1F3_prereply: valAndType=0 UI4 lindex=0
+02/17/19: 11:16:03.400: an_S1F3_prereply: ending
+02/17/19: 11:16:17.539: an_setProcessState: starting
+02/17/19: 11:16:17.539: an_setProcessState: sending event 10
+02/17/19: 11:16:17.540: an_sendEvent: starting
+02/17/19: 11:16:17.541: an_sendEvent: sendEvent with ceid 10
+02/17/19: 11:16:17.541: addReports: starting
+02/17/19: 11:16:17.544: an_setProcessState: returning 0
+02/17/19: 11:16:17.597: an_S1F3_prereply: starting
+02/17/19: 11:16:17.598: checkGlobalFlags: starting
+02/17/19: 11:16:17.599: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:16:17.600: checkGlobalFlags: returning true
+02/17/19: 11:16:17.601: an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880
+02/17/19: 11:16:17.602: getValAndType: starting svid=13
+02/17/19: 11:16:17.603: looking at 13
+02/17/19: 11:16:17.603: getValAndType: 13 returning ControlState 5
+02/17/19: 11:16:17.604: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/17/19: 11:16:17.605: an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768
+02/17/19: 11:16:17.605: getValAndType: starting svid=16
+02/17/19: 11:16:17.607: looking at 13
+02/17/19: 11:16:17.608: getValAndType: 16 returning ProcessState 2
+02/17/19: 11:16:17.608: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/17/19: 11:16:17.609: an_S1F3_prereply: ending
+02/17/19: 11:17:27.167: an_setProcessState: starting
+02/17/19: 11:17:27.168: an_setProcessState: sending event 10
+02/17/19: 11:17:27.172: an_sendEvent: starting
+02/17/19: 11:17:27.173: an_sendEvent: sendEvent with ceid 10
+02/17/19: 11:17:27.174: addReports: starting
+02/17/19: 11:17:27.176: an_setProcessState: returning 0
+02/17/19: 11:17:27.240: an_S1F3_prereply: starting
+02/17/19: 11:17:27.241: checkGlobalFlags: starting
+02/17/19: 11:17:27.242: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:17:27.243: checkGlobalFlags: returning true
+02/17/19: 11:17:27.246: an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880
+02/17/19: 11:17:27.248: getValAndType: starting svid=13
+02/17/19: 11:17:27.250: looking at 13
+02/17/19: 11:17:27.252: getValAndType: 13 returning ControlState 5
+02/17/19: 11:17:27.253: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/17/19: 11:17:27.256: an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768
+02/17/19: 11:17:27.257: getValAndType: starting svid=16
+02/17/19: 11:17:27.260: looking at 13
+02/17/19: 11:17:27.261: getValAndType: 16 returning ProcessState 2
+02/17/19: 11:17:27.262: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/17/19: 11:17:27.265: an_S1F3_prereply: ending
+02/17/19: 11:17:52.282: an_setProcessState: starting
+02/17/19: 11:17:52.283: an_setProcessState: sending event 10
+02/17/19: 11:17:52.287: an_sendEvent: starting
+02/17/19: 11:17:52.294: an_sendEvent: sendEvent with ceid 10
+02/17/19: 11:17:52.294: addReports: starting
+02/17/19: 11:17:52.296: an_setProcessState: returning 0
+02/17/19: 11:17:52.343: an_S1F3_prereply: starting
+02/17/19: 11:17:52.343: checkGlobalFlags: starting
+02/17/19: 11:17:52.344: checkGlobalFlags: checking TransactionAbort=""
+02/17/19: 11:17:52.344: checkGlobalFlags: returning true
+02/17/19: 11:17:52.345: an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880
+02/17/19: 11:17:52.345: getValAndType: starting svid=13
+02/17/19: 11:17:52.346: looking at 13
+02/17/19: 11:17:52.347: getValAndType: 13 returning ControlState 5
+02/17/19: 11:17:52.347: an_S1F3_prereply: valAndType=5 UI4 lindex=5
+02/17/19: 11:17:52.348: an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768
+02/17/19: 11:17:52.349: getValAndType: starting svid=16
+02/17/19: 11:17:52.349: looking at 13
+02/17/19: 11:17:52.350: getValAndType: 16 returning ProcessState 2
+02/17/19: 11:17:52.350: an_S1F3_prereply: valAndType=2 UI4 lindex=2
+02/17/19: 11:17:52.352: an_S1F3_prereply: ending
+02/17/19: 11:17:53.531: an_sendEvent: starting
+02/17/19: 11:17:53.532: an_sendEvent: sendEvent with ceid 555
+02/17/19: 11:17:53.532: addReports: starting
+02/17/19: 11:18:07.728: an_sendEvent: starting
+02/17/19: 11:18:07.729: an_sendEvent: sendEvent with ceid 101
+02/17/19: 11:18:07.729: addReports: starting
+02/17/19: 11:18:12.186: putAckInNcparms: starting
+02/17/19: 11:18:12.186: putAckInNcparms: sf is S2F23
+02/17/19: 11:18:12.191: an_S2F23_postreply: starting
+02/17/19: 11:18:12.192: an_S2F23_postreply: removing timer id=0
+02/17/19: 11:18:12.197: an_S2F23_postreply: cancelled timer id=0
+02/17/19: 11:18:12.198: an_S2F23_postreply: totsmp is 0

@@ -1,24 +1,13 @@
 ﻿using Common;
-using FinisarFAS1.View;
 using FinisarFAS1.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
-using MESCommunications;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinisarFAS1
 {
@@ -26,7 +15,16 @@ namespace FinisarFAS1
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {   
+    {
+        //Found this code on internet to remove the Windows title bar close button.
+        //Uses System.Windows.Interop and System.Runtime.Interopservices
+        //Another call is made in Window_Loaded()
+        private const int GWL_STYLE = -16;
+        private const int WS_SYSMENU = 0x80000;
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         public MainWindow()
         {
@@ -37,8 +35,15 @@ namespace FinisarFAS1
 
             Messenger.Default.Register<ToggleAlarmViewMessage>(this, ShowAlarmViewMsg);
             Messenger.Default.Register<ToggleLogViewMessage>(this, ShowLogViewMsg);
-        } 
-        
+            Messenger.Default.Register<SecMsgOperationMessage>(this, UpdateSecMsg);
+            //SecMsgOperation = "Testing startup";
+        }
+
+        private void UpdateSecMsg(SecMsgOperationMessage msg)
+        {
+           //SecMsgOperation = msg.newText; 
+        }
+
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
             var uie = e.OriginalSource as UIElement;
@@ -46,8 +51,15 @@ namespace FinisarFAS1
             if (e.Key == Key.Enter)
             {
                 e.Handled = true;
-                uie.MoveFocus( new TraversalRequest( FocusNavigationDirection.Next));
+                uie.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+        }
+
+        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            var box = sender as TextBox;
+            if (box != null)
+                box.SelectAll();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -61,6 +73,10 @@ namespace FinisarFAS1
             //this.BeginStoryboard((Storyboard)this.Resources["collapseLog"]);
             //this.BeginStoryboard((Storyboard)this.Resources["expandWafer"]);
 
+
+            //Found this code on internet to remove the Windows title bar close button.
+            var hwnd = new WindowInteropHelper(this).Handle;
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -69,17 +85,17 @@ namespace FinisarFAS1
         }
 
         static bool alarmOut = false;
-        static bool logOut = false; 
+        static bool logOut = false;
 
         private void ShowAlarmViewMsg(ToggleAlarmViewMessage msg)
         {
-            alarmOut = !alarmOut; 
+            alarmOut = !alarmOut;
             //if (msg.bVisible)
             if (alarmOut)
             {
                 if (logPanel.Visibility == Visibility.Visible)
                     ShowLogViewMsg(new ToggleLogViewMessage(false));
-                this.BeginStoryboard((Storyboard)this.Resources["expandAlarm"]);                
+                this.BeginStoryboard((Storyboard)this.Resources["expandAlarm"]);
             }
             else
             {
@@ -95,7 +111,7 @@ namespace FinisarFAS1
             if (logOut)
             {
                 if (alarmOut)
-                    ShowAlarmViewMsg(new ToggleAlarmViewMessage(false)); 
+                    ShowAlarmViewMsg(new ToggleAlarmViewMessage(false));
                 logPanel.Visibility = Visibility.Visible;
                 //this.BeginStoryboard((Storyboard)this.Resources["expandLog"]);
             }
@@ -106,6 +122,29 @@ namespace FinisarFAS1
             }
         }
 
+        private void TextBlock_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            FrameworkElement fe = sender as FrameworkElement;
+            ((MainViewModel)fe.DataContext).closeAlarmCmdHandler();
+        }
+
+        private void CircularProgressBar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+             
+
+        //public string SecMsgOperation
+        //{
+        //    get { return (string)GetValue(SecMsgOperationProperty); }
+        //    set { SetValue(SecMsgOperationProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for StatusBarText.  
+        //// This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty SecMsgOperationProperty =
+        //    DependencyProperty.Register("SecMsgOperation", typeof(string), 
+        //        typeof(MainWindow), new UIPropertyMetadata(null));
 
     }
 }

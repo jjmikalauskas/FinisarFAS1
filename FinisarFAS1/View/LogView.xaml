@@ -4,25 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinisarFAS1.View"
+             xmlns:lcl="clr-namespace:Common;assembly=Common"             
              mc:Ignorable="d" DataContext="{Binding LogVM}"
+             Height="800" Width="1685"
              >
 
-    <UserControl.Resources> 
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type lcl:LogEntry}">
+            <Grid IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Date" Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding EventDateTime}" Grid.Column="0"
+                       FontWeight="SemiBold" Margin="5,0,5,0"/>
+                <TextBlock Text="{Binding Message}" Grid.Column="2"
+                       TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Width" Value="120" />
             <Setter Property="Margin" Value="0,0" />
         </Style>
     </UserControl.Resources>
-    
-    <Grid Background="Azure" >
-        <TextBox Margin="10,10" Padding="5,5" 
-                 Width="Auto"  Height="Auto" 
-                 HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Stretch"
-                 Text="{Binding LogText}"
-                 TextWrapping="WrapWithOverflow" />        
-    </Grid>
+
+    <DockPanel Background="White" >
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Grid.Row="0"  Margin="10,0,0,0" Text="Log" FontSize="32" FontWeight="SemiBold"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <Button Grid.Row="0" Margin="0,5,10,5" HorizontalAlignment="Right"
+                Width="170" Height="65"
+                ToolTip="Close Log Listing" FontSize="32"
+                Click="CloseLog_Click"
+                Content="Close" />
+        </Grid>
+        <ItemsControl DockPanel.Dock="Bottom" ItemsSource="{Binding}" Height="700" >
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <ScrollViewer CanContentScroll="True">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DockPanel>
 </UserControl>
 

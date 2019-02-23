@@ -1,0 +1,1882 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoShellMessaging</name>
+    </assembly>
+    <members>
+        <member name="M:AutoShellMessaging.AciAgent.send(System.String,System.String,System.Boolean)">
+            send: Looks for a PeerConnection for the destination.  If one is found,
+            tells it to send the message.  If one is not found, creates it and
+            adds the message to it.
+        </member>
+        <member name="M:AutoShellMessaging.AciAgent.addToPeerConnections(System.String,AutoShellMessaging.PeerConnection)">
+            This method is sent from my PeerConnection children, to tell me
+            they have a name and to get any messages that might have been queued
+            up for this name.
+        </member>
+        <member name="M:AutoShellMessaging.AciAgent.makeNewPeerConnection(System.String)">
+            	     * makeNewPeerConnection 
+            	     * PeerConnections are made in two ways.   By a server accept, in
+                     * which all we need to do is read our connection info from the socket,
+            	     * and by this mechanism, which talks to the nameserver to get the peer's
+            	     * socket addresss and talk to it.
+        </member>
+        <member name="T:AutoShellMessaging.ACIMessage">
+            ACIMessage creates the low-level message structure and extracts data from
+            it.   It call be used to create the structure from an incoming unformatted
+            bunch of bytes, and it can be used to create the outgoing message from
+            a message type and a bunch of bytes.
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.#ctor(System.Int32,System.Byte[])">
+            Constructor for incoming messages : decode the message 
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.#ctor(System.Int32,System.UInt32,System.String,System.Byte[])">
+            constructor for outgoing messages.
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.#ctor(System.Byte[])">
+            Constructor for an outgoing ACI connection info message.  It has
+            a different format from a normal ACI message.
+        </member>
+        <member name="P:AutoShellMessaging.ACIMessage.Size">
+            Get the size out of an incoming ACI message.
+        </member>
+        <member name="P:AutoShellMessaging.ACIMessage.MsgType">
+            Get the message type out of an incoming ACI message.
+        </member>
+        <member name="P:AutoShellMessaging.ACIMessage.Serial">
+            Get the serial number out of an incoming ACI message.
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.msg">
+            Get a printable string version of an incoming ACI message.
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.bytes">
+            Get the entire contents of an ACI message, for sending it out.
+        </member>
+        <member name="M:AutoShellMessaging.ACIMessage.msgBytes">
+            Get the message bytes of an incoming ACI message.
+        </member>
+        <member name="M:AutoShellMessaging.AciUtils.fixNetworkByteOrder(System.Byte[])">
+            <summary>
+            Nameserver communications are always in network byte order, bigendian.
+            If this platform is littleendian, correct 2, 4 and 8-byte data arrays.
+            There is no protection for bad data.
+            </summary>
+            <param name="inBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AutoShellMessaging.AshlMessage">
+            <summary>
+            Class used to exchange messages with an Adventa application via ACI.
+            </summary>
+            <remarks>
+            The AshlMessage class is constructed when an application needs to query or send data
+            to a remote application that implements an AutoShell interface.  ProcessWORKS, TrackWORKS,
+            and Artist all include an AutoShell interface.  The underlying
+            transport is ACI, a reliable messaging protocol utilizing TCP/IP sockets.<br/><br/>
+            
+            AshlMessage includes methods to send a message, wait for a reply or timeout, and determine if 
+            the reply is one of the common error replies sent from  Adventa applications.  It also 
+            includes a send method which does not expect a reply.
+            <br/><br/>
+            Once constructed, it is immutable outside of the Adventa.AutoShellMessaging namespace.
+            Threads constructed inside the AutoShellMessaging class can update the message's status,
+            attach a reply, and notify it of a timeout expiration.
+            <br/><br/>
+            Throws System.Configuration.ConfigurationErrorsException
+            if an unrecoverable error is caught while reading the app.config file.  You should run the class constructors in an
+            try-catch block and examine the inner exception message for details.
+            </remarks>
+            <threadsafety static="true" instance="true"/>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">Throws System.Configuration.ConfigurationErrorsException
+            if an unrecoverable error is caught while reading the app.config file.  You should run the class constructors in an
+            try-catch block and examine the inner exception message for details.
+            </exception>
+        </member>
+        <member name="T:AutoShellMessaging.AshlMessage.SendState">
+            <summary>
+            Enumeration of the states in which an AshlMessage will be placed by
+            the internal AshlServer which sends the message.
+            </summary>
+            <remarks>
+            This field can be queried using 
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstance(System.String,System.String,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <overloads>
+            <summary>
+            Create a new instance of AshlMessage, providing various flags to indicate if the message expects
+            a reply, and/or should be retried if it times out.
+            </summary>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  This parameter can be supplied as a string
+            in Autonet format or an EncodedMsg instance.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <param name="waitReply">Boolean value indicating whether or not to set up reply message
+            handling.  If true, you can query the message after some interval to see if a reply has
+            been received.</param>
+            <param name="timeout">Integer seconds to wait for a reply before flagging the message as
+            timed out.  If you do not wish to wait for a reply at all, use: 
+            newInstanceReplyOrData.</param>
+            <param name="autoRetryCount">Number of times to automatically attempt to resend the message
+            on a timed interval.  Zero or negative numbers indicate that you do not wish to have
+            automatic resend.<br/><br/>
+            If waitReply == true and autoRetryCount > 0, the automatic resend will occur under two
+            conditions: a transmission error occurs or an error reply is returned.<br/>
+            If waitReply == false and autoRetry == true, the the automatic resend will occur only
+            if a transmission error occurs.
+            </param>
+            <param name="autoRetryInterval">
+            Specifies how long to delay before attempting to resend a message.  This value is used
+            only if waitReply == true and autoRetryCount > 0.  There is no default value.  If it is set 
+            to zero or a negative number, retry will occur immediately.
+            </param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            When this method is used to create an AshlMessage, the library will check to see if an AshlServer
+            instance exists and is running.  If one is not found, a new instance is created and various
+            threads are started.  The server
+            will attempt to open two sockets and contact the ACI nameserver (a name lookup process 
+            on the network).  If this fails, no exception is thrown but the message state will be set 
+            to "error" and an error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.<br/><br/>
+            The parameters used to create the AshlServer instance can be provided by either of two 
+            methods.  Either by making a previous call to <see cref="M:AutoShellMessaging.AshlServerLite.getInstanceUsingParameters(AutoShellMessaging.MessagingSettings)">
+            AshlServer.getInstanceUsingParameters</see>, or by 
+            defining them in an application configuration file.  
+            A sample App.config file is distributed with this library.  It must at a minimum contain 
+            values for serverName and aciConf to allow ACI communications to proceed.  It is highly
+            recommended that you also set checkDuplicateRegistration="true" so that conflicts between
+            your serverName and other ACI processes will be detected.<br/><br/>
+            
+            The interdependencies between the different flags are described in the table below.<br/>
+            <table>
+            <tr><td>waitReply</td><td>timeout</td><td>autoRetryCount</td><td>interval</td><td>behavior</td></tr>
+            <tr><td>false</td>    <td>unused</td> <td>0</td>              <td>unused</td> <td>No reply handling, no retry</td></tr>
+            <tr><td>false</td>    <td>unused</td> <td>n</td>              <td>m</td>      <td>On send error, retry n times, m seconds apart.</td></tr>
+            <tr><td>true</td>     <td>t</td>      <td>0</td>              <td>unused</td> <td>Timeout after t seconds, no retry.</td></tr>
+            <tr><td>true</td>     <td>t</td>      <td>n</td>              <td>m</td>      <td>Timeout after t seconds.  Retry n times or until timeout occurs.</td></tr>
+            </table>
+            </remarks>
+            </overloads>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstance(AutoShellMessaging.AshlServerLite,System.String,System.String,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Create a new instance of AshlMessage using the specified AshlServerLite instance.
+            </summary>
+            <param name="ashlServer">The AshlServerLite instance to use in transmitting the message.</param>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  This parameter can be supplied as a string
+            in Autonet format or an EncodedMsg instance.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <param name="waitReply">Boolean value indicating whether or not to set up reply message
+            handling.  If true, you can query the message after some interval to see if a reply has
+            been received.</param>
+            <param name="timeout">Integer seconds to wait for a reply before flagging the message as
+            timed out.  If you do not wish to wait for a reply at all, use: 
+            newInstanceReplyOrData.</param>
+            <param name="autoRetryCount">Number of times to automatically attempt to resend the message
+            on a timed interval.  Zero or negative numbers indicate that you do not wish to have
+            automatic resend.<br/><br/>
+            If waitReply == true and autoRetryCount > 0, the automatic resend will occur under two
+            conditions: a transmission error occurs or an error reply is returned.<br/>
+            If waitReply == false and autoRetry == true, the the automatic resend will occur only
+            if a transmission error occurs.
+            </param>
+            <param name="autoRetryInterval">
+            Specifies how long to delay before attempting to resend a message.  This value is used
+            only if waitReply == true and autoRetryCount > 0.  There is no default value.  If it is set 
+            to zero or a negative number, retry will occur immediately.
+            </param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            If the AshlServerLite instance has not been able to register with the ACI Nameserver, 
+            the AshlMessage.send() method will return immediately, with the message state set 
+            to "error".  An error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.<br/><br/>
+            The interdependencies between the different flags are described in the table below.<br/>
+            <table>
+            <tr><td>waitReply</td><td>timeout</td><td>autoRetryCount</td><td>interval</td><td>behavior</td></tr>
+            <tr><td>false</td>    <td>unused</td> <td>0</td>              <td>unused</td> <td>No reply handling, no retry</td></tr>
+            <tr><td>false</td>    <td>unused</td> <td>n</td>              <td>m</td>      <td>On send error, retry n times, m seconds apart.</td></tr>
+            <tr><td>true</td>     <td>t</td>      <td>0</td>              <td>unused</td> <td>Timeout after t seconds, no retry.</td></tr>
+            <tr><td>true</td>     <td>t</td>      <td>n</td>              <td>m</td>      <td>Timeout after t seconds.  Retry n times or until timeout occurs.</td></tr>
+            </table>
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstance(System.String,AutoShellMessaging.EncodedMsg,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Alternate version of the AshlMessage newInstance method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <param name="waitReply">See definition under AshlMessage.newInstance.</param>
+            <param name="timeout">See definition under AshlMessage.newInstance.</param>
+            <param name="autoRetryCount">See definition under AshlMessage.newInstance.</param>
+            <param name="autoRetryInterval">See definition under AshlMessage.newInstance.</param>
+            <remarks>See remarks under AshlMessage.newInstance.</remarks>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstance(AutoShellMessaging.AshlServerLite,System.String,AutoShellMessaging.EncodedMsg,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Alternate version of the AshlMessage newInstance method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="ashlServer">See definition under AshlMessage.newInstance</param>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <param name="waitReply">See definition under AshlMessage.newInstance.</param>
+            <param name="timeout">See definition under AshlMessage.newInstance.</param>
+            <param name="autoRetryCount">See definition under AshlMessage.newInstance.</param>
+            <param name="autoRetryInterval">See definition under AshlMessage.newInstance.</param>
+            <remarks>See remarks under AshlMessage.newInstance.</remarks>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceCommand(System.String,System.String,System.Int32)">
+            <overloads>
+            <summary>
+            Create a new instance of AshlMessage which expects a reply.
+            </summary>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  This parameter can be supplied as a string
+            in Autonet format or as an instance of EncodedMsg.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <param name="timeout">Integer seconds to wait for a reply before flagging the message as
+            timed out.  If you do not wish to wait for a reply at all, use: 
+            newInstanceReplyOrData.</param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            When this method is used to create an AshlMessage, the library will check to see if an AshlServer
+            instance exists and is running.  If one is not found, a new instance is created and various
+            threads are started.  The server
+            will attempt to open two sockets and contact the ACI nameserver (a name lookup process 
+            on the network).  If this fails, no exception is thrown but the message state will be set 
+            to "error" and an error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.<br/><br/>
+            The parameters used to create the AshlServer instance can be provided by either of two 
+            methods.  Either by making a previous call to <see cref="M:AutoShellMessaging.AshlServerLite.getInstanceUsingParameters(AutoShellMessaging.MessagingSettings)">
+            AshlServer.getInstanceUsingParameters</see>, or by 
+            defining them in an application configuration file.  
+            A sample App.config file is distributed with this library.  It must at a minimum contain 
+            values for serverName and aciConf to allow ACI communications to proceed.  It is highly
+            recommended that you also set checkDuplicateRegistration="true" so that conflicts between
+            your serverName and other ACI processes will be detected.<br/><br/>
+            </remarks>
+            </overloads>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceCommand(AutoShellMessaging.AshlServerLite,System.String,System.String,System.Int32)">
+            <summary>
+            Create a new instance of AshlMessage.  Message will expect a 
+            reply within <b>timeout</b> seconds and set an error if one is not received.
+            </summary>
+            <param name="ashlServer">The AshlServerLite instance who will send the message.</param>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  This parameter can be supplied as a string
+            in Autonet format or as an instance of EncodedMsg.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <param name="timeout">Integer seconds to wait for a reply before flagging the message as
+            timed out.  If you do not wish to wait for a reply at all, use: 
+            newInstanceReplyOrData.</param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            
+            If the AshlServer instance has been unable to register with the ACI nameserver, all
+            AshlMessage.send() methods will fail.  No exception is thrown but the message state will be set 
+            to "error" and an error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceCommand(System.String,AutoShellMessaging.EncodedMsg,System.Int32)">
+            <summary>
+            Alternate version of the AshlMessage newInstanceCommand method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <param name="timeout">See definition under AshlMessage.newInstance.</param>
+            <remarks>See returns under AshlMessage.newInstance.</remarks>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceCommand(AutoShellMessaging.AshlServerLite,System.String,AutoShellMessaging.EncodedMsg,System.Int32)">
+            <summary>
+            Alternate version of the AshlMessage newInstanceCommand method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="ashlServer">See definition under AshlMessage.newInstance.</param>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <param name="timeout">See definition under AshlMessage.newInstance.</param>
+            <remarks>See returns under AshlMessage.newInstance.</remarks>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceReplyOrData(System.String,System.String)">
+            <overloads>
+            <summary>
+            Create a new instance of AshlMessage for "send-only" use.   No reply handling will
+            be defined; any replies that are returned will be ignored.
+            </summary>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            When this method is used to create an AshlMessage, the library will check to see if an AshlServer
+            instance exists and is running.  If one is not found, a new instance is created and various
+            threads are started.  The server
+            will attempt to open two sockets and contact the ACI nameserver (a name lookup process 
+            on the network).  If this fails, no exception is thrown but the message state will be set 
+            to "error" and an error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.<br/><br/>
+            The parameters used to create the AshlServer instance can be provided by either of two 
+            methods.  Either by making a previous call to <see cref="M:AutoShellMessaging.AshlServerLite.getInstanceUsingParameters(AutoShellMessaging.MessagingSettings)">
+            AshlServer.getInstanceUsingParameters</see>, or by 
+            defining them in an application configuration file.  
+            A sample App.config file is distributed with this library.  It must at a minimum contain 
+            values for serverName and aciConf to allow ACI communications to proceed.  It is highly
+            recommended that you also set checkDuplicateRegistration="true" so that conflicts between
+            your serverName and other ACI processes will be detected.<br/><br/>
+            </remarks>
+            </overloads>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceReplyOrData(AutoShellMessaging.AshlServerLite,System.String,System.String)">
+            <overloads>
+            <summary>
+            Create a new instance of AshlMessage.  No reply handling will
+            be defined; any replies that are returned will be ignored.
+            </summary>
+            <param name="ashlServer">The AshlServerLite instance who will send the message.</param>
+            <param name="destination">The ACI name of the destination server.<br/>
+            This library does not currently support the automatic prefixing of "ashl." to construct
+            of ACI names.  If your destination server requires the "ashl." prefix, then you should
+            consult techical support for the library.</param>
+            <param name="message">The message to be sent.  If the message does not contain fr= and
+            to= tags, they will be added using values in the App.config file and the value of the
+            destination parameter.<br/><br/>
+            A do= tag will never be automatically added to your message.  If your message requires one
+            you must supply it.<br/><br/>
+            If this is a request message, you should never include the ctxt= tag -- it will be added
+            by the underlying AshlServer.
+            </param>
+            <returns>Initialized instance of AshlMessage.</returns>
+            <remarks>
+            
+            If the AshlServer instance has been unable to register with the ACI Nameserver, all 
+            AshlMessage.send() methods will fail.  No exception is thrown but the message state will be set 
+            to "error" and an error message will be available.  See 
+            <see cref="M:AutoShellMessaging.AshlMessage.isError"/> and <see cref="P:AutoShellMessaging.AshlMessage.ErrorMsg"/>.
+            </remarks>
+            </overloads>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceReplyOrData(System.String,AutoShellMessaging.EncodedMsg)">
+            <summary>
+            Alternate version of the AshlMessage newInstanceReplyOrData method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.newInstanceReplyOrData(AutoShellMessaging.AshlServerLite,System.String,AutoShellMessaging.EncodedMsg)">
+            <summary>
+            Alternate version of the AshlMessage newInstanceReplyOrData method which allows the message data to be sent in an EncodedMsg object.
+            </summary>
+            <param name="ashlServer">See definition under AshlMessage.newInstance.</param>
+            <param name="destination">See definition under AshlMessage.newInstance.</param>
+            <param name="message">The message to be sent in an <see>EncodedMsg </see>structure.</param>
+            <returns>See returns under AshlMessage.newInstance.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.send">
+            <summary>
+            Sends the message and optionally sets up handling for a reply or timeout.
+            </summary>
+            <remarks>
+            The AshlServer matches replies to requests by appending the tag ctxt= is appended to your message string, where the value of ctxt is a unique
+            integer managed within the AshlServer thread.  If  your message already contained a ctxt=
+            tag, then the reply may not be correctly detected.<br/><br/>
+            If an error occurs during sending, isError() will return true and ErrorMessage will contain
+            the detailed error message.<br/><br/>
+            After this method returns, you can use the <see cref="M:AutoShellMessaging.AshlMessage.waitUntilReady">waitUntilReady()</see> method to pause your current
+            thread until a reply is received or the timeout expires.  Or, if you prefer, you can perform
+            other processing and check the message state later.<br/><br/>
+            Also see <see cref="M:AutoShellMessaging.AshlMessage.isReady"></see>, <see cref="M:AutoShellMessaging.AshlMessage.isError"></see> and <see cref="M:AutoShellMessaging.AshlMessage.isTimedOut"/>.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.waitUntilReady">
+            <summary>
+            Wait until the message has received a reply, timed out, or reported an error.
+            </summary>
+            <remarks>
+            Wait until ready blocks the calling thread indefinitely.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.isReady">
+            <summary>
+            Test to see if a reply has been received or a timeout has occurred.
+            </summary>
+            <returns>true if a reply was received or a timeout has occurred, else false.</returns>
+            <remarks>You can also use the isGoodReply, isError, or isTimedOut queries to 
+            see if the message is complete.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.isGoodReply">
+            <summary>
+            Test to see if a reply of zero has been received for this message.
+            </summary>
+            <returns>true if a reply=0 tag was received matching this message's auto-generated ctxt.</returns>
+            <remarks>
+            Accepted AutoShell practice is to return reply=0 for success.  This is not required by the
+            standard but is used commonly in Adventa applications.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.isError">
+            <summary>
+            Test to see if an error reply as been received for this message or if a communications error has occurred.
+            </summary>
+            <returns>true if a non-zero reply tag was received matching this message's auto-generated ctxt.  This
+            method also returns true if a fatal communications error has occurred which prevents the AshlServer
+            instance from communicating with the ACI nameserver.</returns>
+            <remarks>
+            Accepted AutoShell practice is to return reply=0 for success.  This is not required by the
+            standard but is used commonly in Adventa applications.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.isTimedOut">
+            <summary>
+            Test to see if the timeout has expired before a reply was received.
+            </summary>
+            <returns>true if a timeout has occurred</returns>
+            <remarks>
+            After a timeout has occurred, even if a reply is received it will not be attached to the message.
+            The message is no longer in the "waiting list" of the server.  Any unexpected reply messages will
+            be routed to the <see cref="T:AutoShellMessaging.AshlMessageHandler">unsolicited message handler </see>if it exists.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.AshlMessage.ErrorMsg">
+            <summary>
+            If an error has occurred or an error reply was received, returns the error description as a string.
+            </summary>
+            <returns>string containing the error description, or null</returns>
+            <remarks>
+            According to the AutoNet standard, the comment= field is returned to describe the error codes
+            that can be returned.  However, it is common practice in Adventa applications to further refine
+            the error description in optional fields such as "errorMsg" and "twerr".   This method will check
+            each of these three fields ("errorMsg", "twerr", and "comment") in order and return the first one which is nonempty.
+            
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.AshlMessage.ReplyCode">
+            <summary>
+            Return the value of the reply= tag if a reply has been received.
+            </summary>
+            <returns>int representation of the reply= tag value.</returns>
+            <remarks>
+            If the message has not been sent or if a reply has not been received, this field will contain -1.
+            You should check the message state with isReady() before making use of the data in this field.
+            
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.AshlMessage.Reply">
+            <summary>
+            Return the reply message if a reply has been received.
+            </summary>
+            <returns>The reply message decoded into a <see cref="T:AutoShellMessaging.DecodedMsg"/> object.</returns>
+            <remarks>
+            If the message has not been sent or if a reply has not been received, this field will contain null.
+            You should check the message state with isReady() before making use of the data in this field.
+            
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.TimerCallback(System.Object)">
+            <summary>
+            This method is not intended to be called by the end user.  It is public only to satisfy the
+            requirements of a TimerCallback object.
+            </summary>
+            <param name="stateInfo"></param>
+            <remarks>n/a</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessage.RetryTimerCallback(System.Object)">
+            <summary>
+            This method is not intended to be called by the end user.  It is public only to satisfy the
+            requirements of a TimerCallback object.
+            </summary>
+            <param name="stateInfo"></param>
+            <remarks>n/a</remarks>
+        </member>
+        <member name="T:AutoShellMessaging.AshlMessageHandler">
+            <summary>
+            Interface which can be implemented by user code to hook into an AshlServer's message receive loop.
+            </summary>
+            <remarks>
+            The AutoShellMessaging library can be used in several ways.  Most commonly it will be used to allow your
+            application code to request data from an AutoShell server.  Your application builds a request, sends the request
+            through the library, and waits for the reply.<br/><br/>
+            However, the library can also be used is "listen" mode -- to listen for requests from AutoShell processes
+            and invoke the appropriate code in your application to handle those requests.  To use the library in this way,
+            you must create a class
+            that implements this "AshlMessageHandler" interface and then register an instance of that class with with an AutoShell server.<br/>
+            An example of doing this is shown below.  First, create the class:<br/><br/>
+                   class MyHandler : AshlMessageHandler { 
+                         ...implement the 3 methods 
+                   }<br/><br/>
+                   
+            Then in your application code, register the handler:<br/><br/>
+                   MyHandler myHandler = new MyHandler();
+                   AshlServerLite ashlServer = AshlServerLite.getInstanceUsingAppConfig();<br/>
+                   ashlServer.registerHandler(myHandler);<br/><br/>
+            An AshlServer receives three types of messages:  commands (those with a do= tag), 
+             replies (messages with a "reply=" tag  and data messages (those with no "do=" or "reply=" tag.)
+            If you have registered a handler for these messages, then the AshlServer will run a
+            separate thread for each incoming message to invoke the appropriate method in your
+            code.  If the incoming message is a command, then you may optionally return a reply
+            string which will be sent back to the caller when your method returns.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessageHandler.handleCommandMessage(AutoShellMessaging.DecodedMsg)">
+            <summary>
+            Provide an implementation of this method if you wish to be notified of incoming command
+            messages.
+            </summary>
+            <param name="message">The incoming command in a <see cref="T:AutoShellMessaging.DecodedMsg"/> object.</param>
+            <returns>String containing a reply message or null if you do not wish to send a reply.</returns>
+            <remarks>
+            The reply message does not need to contain fr= or to= tags because they will be automatically
+            inserted by the AshlServer.  It does need to contain reply=, command= and comment= tags with values--this
+            is required by the AutoNet standard.  It is also required to contain a ctxt= tag with a value
+            matching the incoming request's ctxt= tag.<br/><br/>
+            For example, a reply to the incoming command: fr=a to=b do=help ctxt=3<br/>
+            Might be either: fr=b to=a reply=0 command=help comment=Success HERE IS YOUR HELP ctxt=3<br/>
+            or simply: reply=0 command=help comment=Success HERE IS YOUR HELP ctxt=3<br/><br/>
+            <b>Note:</b> If the messages are being enchanged with a Unix host via the ACI Gateway, the message
+            should not contain fr= and to= tags.   In that case the server will correctly build the message
+            with to= the Unix queue name.  If you do chose to insert fr= and to= tags, be sure that to= reflects 
+            the Unix queue name, not the sender's 'real' name (it is acigw.hostname).
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessageHandler.handleDataMessage(AutoShellMessaging.DecodedMsg)">
+            <summary>
+            Provide an implementation of this method if you wish to be notified of incoming data
+            messages.
+            </summary>
+            <param name="message">The incoming message in a <see cref="T:AutoShellMessaging.DecodedMsg"/> object.</param>
+            <remarks>Typically this handler is needed if you will request data from a server but the
+            data is returned in one or messages over a period of time.  For example, if you send the
+            'monitor' command to an AutoShell equipment server, monitored data is sent as a data message.
+            No reply is expected to data messages.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlMessageHandler.handleUnsolicitedReplyMessage(AutoShellMessaging.DecodedMsg)">
+            <summary>
+            Provide an implementation of this method to handle replies which do not match a ctxt
+            currently active in your waiting list.
+            </summary>
+            <param name="message">The incoming command in a <see cref="T:AutoShellMessaging.DecodedMsg"/> object.</param>
+            <remarks>
+            This method can be used to log or otherwise handle replies which are received
+            after your original request has timed out. 
+            
+            </remarks>
+        </member>
+        <member name="T:AutoShellMessaging.AshlServerLite">
+            <summary>
+            Handles the communications details of AutoShell messaging.
+            </summary>
+            <remarks>
+            The AshlServerLite class coordinates the classes that perform low-level transport of AutoShell messages
+            over ACI.  It also performs request/reply matching and can optionally be set up to invoke user
+            code on receipt of unsolicited AutoShell messages. <br/><br/>
+            
+            To send AutoShell requests and receive replies, it is not required to explicitly create an
+            instance of AshlServerLite--the AshlMessage class will create an instance when needed provided you
+            have defined the creation parameters in an application configuration file.  It is only
+            necessary to create one when you wish to either (a) pass the creation parameters explicitly or
+            (b) define a handler for unsolicited messages. See <see cref="T:AutoShellMessaging.AshlMessageHandler"/> 
+            for more details.
+            <br/><br/>
+            There is typically only one instance of an AshlServerLite created for a given running process, even if the
+            process is multithreaded.  At startup time the server instance creates several threads to listen on a server socket,
+            communicate with the ACI nameserver, and clean up old connections.  Because of the time it takes to start
+            a server instance, the instance is created only once and reused.   If you do need to terminate the
+            AshlServer instance, the <see cref="M:AutoShellMessaging.AshlServerLite.requestStop"></see> or <see cref="M:AutoShellMessaging.AshlServerLite.requestStopAndJoin"/> methods can
+            be used to request a clean shutdown of the server instance. These methods will allow the network connections to 
+            be closed gracefully.
+            If you do need to create more than one instance of an AshlServerLite, you will need to create them explicitly
+            using the AshlServerLite.newInstanceUsingParameters method.  The servers are required to have unique names (if 
+            not, they will conflict with each other in the ACI nameserver address space. 
+            </remarks>
+            <threadsafety static="true" instance="true"/>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.getInstanceUsingAppConfig">
+            <summary>
+            Get an instance of AshlServerLite using settings in an App.config file.
+            </summary>
+            <returns>AshlServerLite which has been initialized and registered with the ACI nameserver.
+            If an error occurs during this startup, the <see cref="M:AutoShellMessaging.AshlServerLite.isActive">isActive()</see>
+            query will return false.</returns>
+            <remarks>
+            An example App.config is distributed with this library.  It contains an example
+            of turning on diagnostic logging and setting the logging level.  The diagnostic logging
+            is invaluable in debugging startup problems and should be set to TraceLevelSwitch=4 during
+            initial use of the library.  The TraceLevelSwitch can then be removed or set to lower levels.
+            <br/><br/>
+            Other required elements in configuration are the <b>serverName</b> - the ACI name of this
+            AshlServerLite instance, the <b>aciConf</b> - the nameserver address, and the <b>checkDuplicateRegistration</b>
+            flag.  checkDuplicateRegistration should be set to true to validate that two servers are not
+            started with the same ACI name.
+              </remarks>
+            <exception cref="T:AutoShellMessaging.ConfigurationException">
+            Throws configuration exception if the app config does not contain a definition for the server name or the
+            aciConf string.
+            </exception>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.getInstanceUsingParameters(System.String,System.String,System.Boolean)">
+            <summary>
+            Get an instance of AshlServerLite for the given name and ACI_CONF string.
+            </summary>
+            <returns>AshlServerLite which has been initialized and registered with the ACI nameserver.
+            If an error occurs during this startup, the <see cref="M:AutoShellMessaging.AshlServerLite.isActive">isActive()</see>
+            query will return false.</returns>
+            <remarks>
+            There can be a few second delay while this server initializes, registers with the nameserver,
+            and starts threads for 'accept' and 'send'.
+            <br/><br/>
+            If log4net logging is enabled in an application configuration file, detailed logging will
+            be written to diagnose connection errors and settings.
+            <br/><br/>
+            ACI names must be unique for a given nameserver.   The 'checkDuplicateRegistration' flag will 
+            attempt to determine if a process is already using the specified ACI name and if so, set the
+            server status to 'inactive' and return an error on any subsequent AshlMessage.send call.
+            <br/>If the flag is set to false, any previous ACI program using the name will be replaced 
+            in the nameserver's registry.  It still may be running, which can result in erratic failures
+            of communication if it is communicating with the same destinations as this instance.
+            </remarks>
+            <param name="name">The ACI name which this server will register with the ACI nameserver.  This
+            represents the ACI endpoint on which this server is listening.</param>
+            <param name="aciConf">
+            The ACI nameserver host and port number(s).  See the AutoShell reference manual for more information
+            about ACI messaging.  The format for the string is host1:port1  or host1:port1;host2:port2;...
+            </param>
+            <param name="checkDuplicateRegistration">Boolean value indicating whether or not to check that
+            the given ACI name is unique on the ACI nameserver's network.
+            </param>
+            <exception cref="T:AutoShellMessaging.ConfigurationException">
+            Throws configuration exception if either of the server name or the
+            aciConf string are null or empty.
+            </exception>
+            <returns>Either a newly created instance of AshlServerLite or an existing instance, if one
+            has previously been created with the same name.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.getInstanceUsingParameters(AutoShellMessaging.MessagingSettings)">
+            <summary>
+            Get an instance of AshlServerLite using settings in a MessagingSettings object.
+            </summary>
+            <returns>AshlServerLite which has been initialized and registered with the ACI nameserver.
+            If an error occurs during this startup, the <see cref="M:AutoShellMessaging.AshlServerLite.isActive">isActive()</see>
+            query will return false.</returns>
+            <remarks>
+            For details of the settings which are stored in MessagingSettings, see that class.
+            This constructor allows specification of several optional parameters -- interface selection method,
+            interface name, and "Use dash for backward compatible ACI names."
+            <br/><br/>
+              </remarks>
+            <param name="messagingSettings">An instance of MessagingSettings which has been
+            populated with the server name, ACI nameserver address, and other ACI messaging options.</param>
+            <exception cref="T:AutoShellMessaging.ConfigurationException">
+            Throws configuration exception if the server name or the
+            aciConf string is null or empty.
+            </exception>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.getInstance(System.String)">
+            <summary>
+            Gets the previously-created instance of AshlServerLite for the given name.
+            </summary>
+            <remarks>
+            Returns the last instance created for the given name, using the methods
+            AshlServerLite.getInstanceUsingAppConfig or AshlServerLite.getInstanceUsingParameters.
+            </remarks>
+            <param name="name">string ACI name of the instance</param>
+            <returns>An AshlServerLite or null if none was created by that name.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.send(AutoShellMessaging.AshlMessage)">
+            <summary>
+            Send an AshlMessage and set up a waiting list entry for handling the reply.
+            </summary>
+            <remarks>The waiting list
+            is a dictionary mapping the auto-generated string ctxt to the input AshlMessage object.  When a
+            reply is received matching the ctxt, the AshlMessage is notified via the AshlMessage.setReply() method.
+            <br/><br/>
+            Typically you should use the AshlMessage.send method instead of invoking this method on the 
+            AshlServer class.
+            </remarks>
+            <param name="msg">An AshlMessage instance.</param>
+            <returns>Unique ctxt appended to the message, for reply message routing.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.sendNoWaitReply(AutoShellMessaging.AshlMessage)">
+            <summary>
+            Sends the given AshlMessage without adding a ctxt tag and without setting up a waiting list for
+            handling of a possible reply message.
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.registerHandler(AutoShellMessaging.AshlMessageHandler)">
+            <summary>
+            Register a handler which implements the AshlMessageHandler interface.
+            </summary>
+            <remarks>
+            This handler will be notified on receipt of any command messages, data messages, or reply messages
+            which were unsolicited: i.e., any reply messages that did not contain a ctxt which was added to 
+            this server's waiting list (using the send() method.)
+            Only one handler is allowed per server instance at this time.  If a handler is already registered
+            with this server, executing this method will replace it.
+            </remarks>
+            <param name="handler">An instance of a class which implements the AshlMessageHandler interface.</param>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.unregisterHandler">
+            <summary>
+            Removes a handler who will be notified of unsolicited messages coming into this server.
+            </summary>
+            <remarks>
+            After this method returns, your handler code will not be automatically invoked when an
+            incoming message is received.  Replies to messages that you send will still be received,
+            but any incoming unsolicited messages are discarded.  If debug-level logging is enabled in
+            the App.config file, the discarded messages are logged.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.requestStop">
+            <summary>
+            Signal this server's message receive loop to stop waiting for messages, and cause the
+            server to remove its registration from the ACI nameserver.
+            </summary>
+            <remarks>This method
+            will cause the server to deregister with the ACI nameserver and close all listening sockets.
+            This method may block for up to three seconds while handshaking with the ACI nameserver.
+            This is a "polite" kill which signals all threads in the process to terminate, so there may
+            be a brief delay before all sockets are closed and the threads join. Use: <see cref="M:AutoShellMessaging.AshlServerLite.requestStopAndJoin"/>
+            to send request stop and then wait until these thread have joined the parent.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.requestStopAndJoin">
+            <summary>
+            Signal this server's message receive loop to stop waiting for messages, and cause the
+            server to remove its registration from the ACI nameserver.  Wait until the server's threads are stopped.
+            </summary>
+            <remarks>This method
+            will cause the server to deregister with the ACI nameserver and close all listening sockets.
+            This method may block for up to three seconds while handshaking with the ACI nameserver.
+            This is a "polite" kill which signals all threads in the process to terminate, so there may
+            be a brief delay before all sockets are closed and the threads join. 
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.AshlServerLite.isActive">
+            <summary>
+            Query this server to see if the messaging interface has been sucessfully initialized and is
+            waiting for incoming messages.
+            </summary>
+            <returns>true/false</returns>
+            <remarks>If isActive() == false, then no messages can be sent using this server instance.
+            The AshlMessage.send method will immediately set the message state to ERROR.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.AshlServerLite.Name">
+            <summary>
+            Return the ACI name of the AshlServerLite instance.
+            </summary>
+            <returns>string ACI name.  The maximum size is 256 characters.</returns>
+            <remarks>The ACI name is defined with the instance is created and cannot be changed thereafter.<br/><br/>
+            It is not a null-terminated string inside the C# code, although null termination will be
+            added when it is sent to the ACI nameserver or another peer.  The name should not contain 
+            embedded spaces because it will be used in the "fr=" tag on outgoing messages.</remarks>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessage">
+            <summary>
+            (Mostly) abstract class defining required behavior for all  messaging. 
+            Instead of extending this class, you should extend one of the two classes: 
+            <see cref="T:AutoShellMessaging.BoundMessageNoReply"/> <see cref="T:AutoShellMessaging.BoundMessageWithReply"/>
+            </summary>
+            <remarks>
+            Using this class as the superclass for all queries to Rudolph applications standardizes
+            the "call" mechanism and allows the developer to focus on the ingoing and outgoing data
+            rather than the send/recieve behavior..
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.BoundMessage._debug">
+            <summary>
+            Settings for unit testing.
+            </summary>
+            <remarks>Set debug using the setter Debug, during unit testing to prevent any real network access from taking place.
+            <see>Debug</see></remarks>
+        </member>
+        <member name="F:AutoShellMessaging.BoundMessage._debugReply">
+            <summary>
+            Settings for unit testing.
+            </summary>
+            <remarks>Set debugReply using the setter Debug, during unit testing to force a given reply.
+            <see>DebugReply</see></remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessage.validateMessage">
+            <summary>
+            Implemented by the developer of an ACTMessage to validate that all required parameters are set.
+            </summary>
+            <remarks>
+            This method is called during the send() method to validate the message before sending.  A developer
+            should implement this message to detect missing or invalid parameters which would cause
+            the outgoing message to be rejected or misinterpreted by its destination server.  If the message is
+            incorrect, the developer should throw the BoundMessageEncodeException with details about the error.
+            </remarks>
+            <exception cref="T:AutoShellMessaging.BoundMessageEncodeException"/>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessage.buildMessage">
+            <summary>
+            Implemented by the developer of an ACTMessage to build the outgoing Autonet message.
+            </summary>
+            <remarks>
+            The EncodedMsg class is defined in the AutoShellMessaging library (ashlmsg.dll).  It allows the
+            message to be constructed by adding tag/value pairs or lists in user code.
+            </remarks>
+            <returns>EncodedMsg object containing the outgoing message.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessage.isEmptyOrNull(System.Object)">
+            <summary>
+            Tests an object to see if it is a non-null string.
+            </summary>
+            <remarks>
+            Not sure what use is made of this method; it is not used in the ACTBoundMessageNamespace.
+            </remarks>
+            <param name="obj">The object to test</param>
+            <returns>boolean true if the object is a string not equal to the empty string.
+            Returns false if the is null or an empty string.</returns>
+            <exception>Probably throws an exception if the object is not a string or null.</exception>
+        </member>
+        <member name="P:AutoShellMessaging.BoundMessage.Debug">
+            <summary>
+            Set debug mode for unittest.
+            </summary>
+            <remarks>When set to true, the send() method is a noop.  This mode can be used for testing a 
+            subclass using the ACTBoundMessage framework.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.BoundMessage.DebugReply">
+            <summary>
+            Set debug reply string for unittest.
+            </summary>
+            <remarks>When Debug is set to true, this string will be the reply to an ACTBoundMessageWithReply.send() method.
+             This mode can be used for testing a 
+            subclass using the ACTBoundMessage framework.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessage.ToString">
+            <summary>
+            Returns the ACI message generated by this object.
+            </summary>
+            <returns>ACI message string</returns>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageEncodeException">
+            <summary>
+            Exception thrown when a BoundMessage cannot be encoded for sending.
+            </summary>
+            <remarks>
+            This exception will be automatically generated by the subclasses of BoundMessage.  It returns the 
+            message which has been generated during the user code for validateMessage().
+            <para>
+            Typically this exception indicates that the message is missing required data.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageEncodeException.#ctor(System.String)">
+            <summary>
+            Create a BoundMessageEncodeException from a string explanation.
+            </summary>
+            <remarks>
+            Create a BoundMessageEncodeException from a string explanation.  This error should not be caught at runtime
+            because it usually reflects an error in the user code that is encoding the message into AutoNet format.
+            </remarks>
+            <param name="ex">The string which will become the exception's method.   The user's subclass of ACTBoundMessage
+            should supply a descriptive string containing the reason for encoding has failed.</param>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageNoReply">
+            <summary>
+            (Mostly) abstract superclass for all messages traveling to Adventa applications as send-only or data messages.
+            </summary>
+            <remarks>To use this class, extend it and provide implementations for validateMessage() and buildMessage().
+            Your class will then inherit the behavior to send itself via AutoNet messaging and throw an exception
+            if the message could not be sent.
+            <br/><br/>
+            The class constructor will throw a System.Configuration.ConfigurationErrorsException if there are
+            unrecoverable errors reading the app.config file.  You should construct this class in a try/catch block
+            and examine the inner exception details to diagnose problems.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageNoReply.send(System.String)">
+            <summary>
+            Validate and send the message.
+            </summary>
+            <remarks>Sends the message using the AshlMessage class defined in the AutoShellMessaging DLL.  This method
+            will throw an exception if the message fails validation or if there is a setup or communications error returned
+            from the DLL.
+            </remarks>
+            <param name="destination">The ACI name of the destination server, for example, rtSrvTOOL01.</param>
+            <exception cref="T:AutoShellMessaging.BoundMessageEncodeException">Required data was missing while building a message to be sent.</exception>
+            <exception cref="T:AutoShellMessaging.BoundMessageSendException">Fatal error occurred during sending a message.  This exception indicates that your own (sending) ACI Endpoint could not be established.</exception>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageReplySyntaxException">
+            <summary>
+            Exception thrown when a BoundMessage reply is has syntax errors.
+            </summary>
+            <remarks>
+            This exception will be automatically generated by the subclasses of BoundMessage.  It returns the 
+            message which has been generated during the user code for validateReply().
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageReplySyntaxException.#ctor(System.String)">
+            <summary>
+            Create a BoundMessageReplySyntaxException from a string explanation.
+            </summary>
+            <remarks>
+            This error is usually seen when the user code has not fully anticipated all of the possible replies from 
+            the external Adventa application.  The user code should be corrected if this possibly reply is useful.
+            </remarks>
+            <param name="ex">The string which will become the exception's method.   The user's subclass of ACTBoundMessage
+            should supply a descriptive string containing the reason for decoding has failed.</param>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageSendException">
+            <summary>
+            Exception thrown when a BoundMessageWithReply or a BoundMessageNoReply has experienced an error in sending.
+            </summary>
+            <remarks>
+            This exception will be automatically generated by the subclasses of BoundMessage.  It indicates the message
+            could not be sent due to a server misconfiguration or a destination endpoint lookup failure.
+            Possibly ACI communications failed to start; the ACI nameserver was not reachable; the 
+            Artist real-time server is not running or is on a node which cannot be reached from this system.
+            <para>
+            When the condition causing this exception has been corrected, if it was external to this process 
+            (such as real-time server not running), the 'send' can be retried without needing to restart 
+            this process.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageSendException.#ctor(System.String)">
+            <summary>
+            Construct with a string exception.
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageTimeoutException">
+            <summary>
+            Exception thrown when a BoundMessageWithReply has not received a reply within its defined timeout.
+            </summary>
+            <remarks>
+            This exception will be automatically generated by the BoundMessageWithReply class.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageTimeoutException.#ctor(System.String)">
+            <summary>
+            Construct an instance of this exception.
+            </summary>
+            <param name="ex">A description of the problem</param>
+        </member>
+        <member name="T:AutoShellMessaging.BoundMessageWithReply">
+            <summary>
+            (Mostly) abstract class which provides the framework to validate the outgoing message, send it, 
+            detect errors and decode the reply.
+            </summary>
+            <remarks>
+            The application message classes should extend this class and provide concrete implementations for
+            the methods validateMessage(), buildMessage(), syntaxCheckReply() and handleReply().
+            <br/><br/>
+            The class constructor will throw a System.Configuration.ConfigurationErrorsException if there are
+            unrecoverable errors reading the app.config file.  You should construct this class in a try/catch block
+            and examine the inner exception details to diagnose problems.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageWithReply.handleReply(AutoShellMessaging.DecodedMsg)">
+            <summary>
+            Implemented by the developer of an ACTMessage to extract all data from the reply and store
+            it in meaningful variables.
+            </summary>
+            <remarks>The reply is available as a DecodedMsg object as documented in the AutoShellMessaging DLL.  
+            Your implementation should extract all necessary data from the incoming reply and store the data in
+            variables which have meaningful names to the user of your implementation.
+            </remarks>
+            <param name="reply">The DecodedMsg which holds the reply or error resulting from a send() call.</param>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageWithReply.syntaxCheckReply(AutoShellMessaging.DecodedMsg)">
+            <summary>
+            Implemented by the developer of an ACTMessage to validate that expected data is found in the reply.
+            </summary>
+            <remarks>Implement this class to throw an exception if the reply is of incorrect structure or is
+            missing required data which would cause your application class to malfunction.  For example, an empty
+            reply might be correct for some messages, such as a query for lots, but invalid for other messages,
+            such as a command to create a run.
+            </remarks>
+            <exception cref="T:AutoShellMessaging.BoundMessageReplySyntaxException"/>
+            <param name="reply">The DecodedMsg which holds the reply or error resulting from a send() call.</param>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageWithReply.send(System.String,System.Int32)">
+            <summary>
+            Syntax check and send the message, delay until a reply is received or the timeout expires.
+            </summary>
+            <remarks>
+            This method should not be overridden by user code.  It calls the following methods, in order: validateMessage(),
+            buildMessage(), syntaxCheckReply(), and handleReply().
+            </remarks>
+            <param name="destination">The ACI name of the intended recipient of this message.</param>
+            <param name="timeout">The amount of time to wait for a reply before returning a timeout error.</param>
+            <exception cref="T:AutoShellMessaging.BoundMessageEncodeException">Required data was missing while building a message to be sent.</exception>
+            <exception cref="T:AutoShellMessaging.BoundMessageTimeoutException">Timeout waiting for a reply to an ACT message</exception>
+            <exception cref="T:AutoShellMessaging.BoundMessageSendException">Error occurred during sending a message or an error reply was returned
+            from the destination.  The detailed error message is in Exception.Message.</exception>
+        </member>
+        <member name="M:AutoShellMessaging.BoundMessageWithReply.send(System.String)">
+            <summary>
+            Validate and send the message without expecting a reply or setting a timeout
+            </summary>
+            <remarks>Sends the message using the AshlMessage class defined in the AutoShellMessaging DLL.  This method
+            will throw an exception if the message fails validation or if there is a setup or communications error returned
+            from the DLL.</remarks>
+            <param name="destination">The ACI name of the destination server, for example, rtSrvTOOL01.</param>
+            <exception cref="T:AutoShellMessaging.BoundMessageEncodeException">Required data was missing while building a message to be sent.</exception>
+            <exception cref="T:AutoShellMessaging.BoundMessageSendException">Fatal error occurred during sending a message.  This exception
+            indicates that your own (sending) ACI Endpoint could not be established.</exception>
+        </member>
+        <member name="T:AutoShellMessaging.Configuration">
+            <summary>
+            Required configuration for this server, in app.config:
+                <appSettings>
+                  <add key="serverName" value="cyn" />
+                  <add key="aciConf" value="bertha:1512" />
+                  <add key="checkDuplicateRegistration" value="true" />
+                </appSettings>
+            </summary>
+        </member>
+        <member name="T:AutoShellMessaging.DecodedMsg">
+            <summary>
+            DecodedMsg holds an AutoShell message decoded according to the AutoNet standard.
+            </summary>
+            <remarks>
+            AutoNet is the specification for messages used in AutoShell communications.
+            It defines the encoding of ascii strings to represent requests to AutoShell servers,
+            replies to these requests, and unsolicited data messages.<br/><br/>
+            The only positional parameter in an AutoNet messages is "fr=" which must occur at the beginning of
+            the message.  All other parameters are separated by whitespace.  Tag/value pairs are separated by
+            the '=' character.  Enumerations are specified by the presence of the '.' character in a tag.<br/><br/>
+            An AutoNet message can contain tagged parameters (do=help), untagged parameters or flags 
+            (chamber1AlarmOccurred), and list structures (lot.1=11111 lot.2=2222).  DecodedMsg contains 
+            various methods for accessing the message data in its decoded form.<br/><br/>
+            DecodedMsg supports queries for tag names, tag values, and list traversal.
+            It supports a limited version of wildcarding consistent with the AutoNet standard--values
+            from a list structure can be retrieved as a list using a syntax such as getAllValues("lot.*").
+            Other methods provide ways to iterate through the components of the message as a tree structure.<br/><br/>
+            Currently the DecodedMsg object is only used for storage of reply messages and incoming 
+            unsolicited messages.    You will not typically construct this object yourself.  It can be treated
+            as immutable in your application code.<br/><br/>
+            In later versions of the AutoShellMessaging library methods will be provided that will
+            allow you to construct a DecodedMsg for outgoing messages.<br/><br/>
+            Here are some examples of DecodedMsg properties and methods you may use:<br/><br/>
+            Type 	-- 	Get message type.    Returns DecodedMsg.COMMAND_MSG, DecodedMsg.REPLY_MSG or DecodedMsg.DATA_MSG.<br/>
+            ReplyCode	--	Get the value of the "reply=" parameter<br/>
+            Command	--	Get the value of the "do=" paramter<br/>
+            Get("atagname")	--	Get the value of the given tagged parameter.<br/>
+            MsgString	--	Get the entire message contents as a string
+            
+            </remarks>
+        </member>
+        <member name="T:AutoShellMessaging.DecodedMsg.MESSAGE_TYPES">
+            <summary>
+            Valid message types according to the AutoNet standard.
+            </summary>
+            <remarks>
+            The message type is a suggestion to an AutoShell server about how the message should
+            be handled.  Typically commands are sent by a client to request the server to perform an
+            action and return the results.  Reply messages are only sent in response to requests.  <br/><br/>
+            Data messages are usually sent in response to an AutoShell server's
+            request for data which is not present at the time of the request.  One or more data messages are
+            sent when the data is available, and the server must have defined a "handler" for processing them.  
+            <seealso cref="T:AutoShellMessaging.AshlMessageHandler"/>
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.DecodedMsg.MESSAGE_TYPES.COMMAND_MSG">
+            <summary>
+            AutoNet message that includes a do= tag.</summary>
+            <remarks>Represents a request for a server to perform
+            some action.  </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.DecodedMsg.MESSAGE_TYPES.REPLY_MSG">
+            <summary>
+            AutoNet message that includes a reply= tag.</summary>
+            <remarks>Represents a reply from a server. </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.DecodedMsg.MESSAGE_TYPES.DATA_MSG">
+            <summary>
+            AutoNet message that contains neither a do= or reply= tag.</summary>
+            <remarks>Represents some data, typically unsolicited data, which is sent
+            asynchronously to a request/reply sequence.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Type">
+            <summary>
+            Return the message type: either DecodedMsg.COMMAND_MSG, REPLY_MSG or DATA_MSG.
+            </summary>
+            <remarks>
+            Command messages contain a do= tag
+            Reply messages contain a reply= tag
+            Data messages contain neither do= or reply= tags.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.ReplyCode">
+            <summary>
+            Get the value of the reply= tag as an integer.
+            </summary>
+            <returns>int value of reply= tag or -1 if this is not a reply message.</returns>
+            <remarks>
+            If this is an AutoShell reply message, this query will convert the reply= tag to an
+            integer.  If this is not a reply message, it will return -1.  Note that if you wish to 
+            determine if this is a reply message or not, you should use this.Type == MESSAGES_TYPES.REPLY_MSG 
+            instead of querying the reply code.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Reply">
+            <summary>
+            If this is a reply message, get the value of the reply= tag as a string.
+            </summary>
+            <returns>string value of reply= tag or null if absent
+            </returns>
+            <remarks>
+            If this is an AutoShell reply message, this query will return the reply code as a string.
+            The AutoShell standard reply code is a non-negative integer.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Comment">
+            <summary>
+            Get the value of the comment= tag as a string. 
+            </summary>
+            <returns>The value of comment= if it exists, otherwise null.</returns>
+            <remarks>
+            If comment= holds a dictionary or list, this method returns null.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.MsgString">
+            <summary>
+            Get the contents of this message as the original, unparsed AutoNet string.
+            </summary>
+            <returns>The string used to construct this class.</returns>
+            <remarks>For more information about AutoNet messages, see the class documentation and the 
+            AutoShell reference manual.  For information about what fields are present in the different
+            messages returned from Adventa applications, you will need to look at the reference manual
+            for each application or send the "do=document" command to the AutoShell server which is
+            providing an interface to the application.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Command">
+            <summary>
+            Get the command which this message represents--either the value of do= or command=.
+            </summary>
+            <returns>Value or do= tag if it exists, else value of command=.  Returns null if neither tag exists.</returns>
+            <remarks>
+            If this is a COMMAND message, get the value of the do= tag.
+            If it is a reply message, get the value of the command= tag.
+            In either case, if the value is not a string, null is returned.  
+            </remarks>
+            
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Fr">
+            <summary>
+            Get the value of the fr= tag.
+            </summary>
+            <returns>String value of the fr= tag.</returns>
+            <remarks>By Autonet standard, this tag must be present at the beginning of a message.
+            If the tag is not present or has no value, this method returns null.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.To">
+            <summary>
+            Get the value of the to= tag.
+            </summary>
+            <returns>The string value of the to= tag in the message, or null.</returns>
+            <remarks>Typically this tag is present in an incoming message and identifies your
+            ACI endpoint name (serverName).  Since this library only support ACI messaging, 
+            this value is not of any use in user code.  The accessort
+            been included in this library for backward compatibility with non-ACI implementations of AutoShell.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Do">
+            <summary>
+            Get the value of the do= tag.
+            </summary>
+            <returns>The string value of the do= tag in the message, or null.</returns>
+            <remarks>The do= tag value is present in command messages to request a service from
+            your user code.  By AutoNet standard, if you receive a command message you should 
+            perform some action, then test the value of the 'noreply' flag.  If the flag is not
+            present, you are expected to return an AutoNet reply message.  AutoNet reply messages
+            should return the same ctxt= value as the request, if the ctxt tag is present.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsg.Ctxt">
+            <summary>
+            Get the value of the ctxt tag.
+            </summary>
+            <returns>String value of the ctxt= tag.  If the tag does not exist or does not have a value, 
+            this method returns null.</returns>
+            <remarks>The ctxt tag is automatically inserted into AutoShell request messages by all
+            AutoShell implementations.   It is unique to the sending server.   It must be reflected
+            back in reply messages to ensure that replies are correctly handled.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.#ctor">
+            <exclude/>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.#ctor(System.String)">
+            <summary>
+            Decode an AutoNet message into its corresponding parameters.
+            </summary>
+            <param name="msg">An Ascii string containing a message in AutoNet format.</param>
+            <remarks>See the DecodedMsg class documentation for the definition of an AutoNet message.<br/><br/>
+            At this time, the DecodedMsg class is immutable after construction.
+            </remarks>
+            <returns>DecodedMsg representation of the message.  The original message is accessible by
+            the msgString method in this class.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.#ctor(System.String,System.Boolean)">
+            <summary>
+            Decode an AutoNet message into its corresponding parameters with the option of decoding only
+            the top-level tags (not recursing list enumerations.)
+            </summary>
+            <remarks>
+            This provides a quick way to test a message string for the standard AutoNet tags: fr, to, do,
+            command, ....  Create a DecodedMsg with allLevels=false, then simply ask for the tag by name:
+            myDict.Fr, myDict.To....  You can also ask for any arbitrary tag: myDict.GetValue("atag")
+            or test for flag-type parms:  myDict.ContainsFlag("aflag").
+            </remarks>
+            
+            <param name="msg">AutoNet string message.  See the class documentation for a definition of the AutoNet standard.</param>
+            <param name="allLevels">If allLevels = true, this is identical to the one-argument constructor.  If alllevels == false,
+            only the top-level tags will be decoded.</param>
+            <returns>DecodedMsg representation of the message.  The original message is accessible by
+            the msgString method in this class.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.GetValue(System.String)">
+            <summary>
+            Retrieve the value of a tagged parameter in this DecodedMsg.</summary>
+            <remarks>
+            This method will return different results for enumerated parameters depending on whether
+            or not the DecodedMsg was created with "allLevels=true" or not.<br/><br/>
+            For example, using the one-argument constructor: <br/>
+            DecodedMsg myDict = new DecodedMsg("lot.1=abc")<br/><br/>
+            Then myDict.GetValue("lot") return null because "lot" does not have a value, it has a sublist.
+            Also myDict.GetValue("lot.1") will return null because the DecodedMsg contains the key "lot", not
+            "lot.1".  You should use the GetSublist method to iterate through such entries.<br/><br/>
+            If instead we use the constructor:<br/>
+            DecodedMsg myDict = new DecodedMsg("lot.1=abc", false);<br/>
+            Then myDict.GetValue("lot.1" returns "abc".
+            
+            </remarks>
+            <param name="tag">The tag to query.</param>
+            <returns>The value of the tag in this dictionary, if it has a value.
+            If the tag is not found or if the tag exists without a value, return null.
+            </returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.GetAllValues(System.String)">
+            <summary>
+            Get all values for an enumerated parameter using a wildcarded matchExpression.
+            </summary>
+            <param name="matchExpression">String containing the wildcard character *.</param>
+            <returns>A list of strings containing all values found by searching the decoded
+            message with the given matchExpression.  Null values are not included in the list.</returns>
+            <remarks>This query performs pattern matching in the decoded AutoNet message to 
+            gather all values for an enumerated parameter.  For example, given the message below:
+            <pre>   DecodedMsg m = new DecodedMsg("fr=a to=b lot.1.name=111 lot.2.name=222 lot.3.attr=anAttr")</pre>
+            GetAllValues("lot.*.name" would return {"111", "222"}.<br/><br/>
+            GetAllValues("lot.*.*" would return {{"111", "222", "anAttr"}.<br/><br/>
+            GetAllValues("lot.*") would return an empty list.<br/><br/>
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.ContainsTag(System.String)">
+            <summary>
+            Return true if the DecodedMsg contains the tag name without a sublist.
+            i.e., tag=value 
+            </summary>
+            <remarks>
+            This is a quick test to see if the DecodedMsg has a particular tag.  To get the value of tagged field,
+            use <see>GetValue(string tag)</see>.
+            </remarks>
+            <param name="tag">String representing the tag to search for.</param>
+            <returns>True if the tagged parameter exists.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.ContainsFlag(System.String)">
+            <summary>
+            Return true if the DecodedMsg contains the flag (untagged parameter)
+            </summary>
+            <remarks>This is a quick test to see if the DecodedMsg has a particular flag.</remarks>
+            <param name="tag">String representing the tag to search for.</param>
+            <returns>True if the flag exists.</returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.ContainsChildSublist(System.String)">
+            <summary>
+            Return true if the DecodedMsg contains a child for the given name and the child
+            is a sublist.  
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+            <remarks>This method can be used to see if the message has children (sublists)
+            for the given tag 
+            before attempting to iterate through them.<br/><br/>
+            It is equivalent to (GetChildrenUnder(tag) != null)</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.GetChildrenUnder(System.String)">
+            <summary>
+            Retrieve the children (sublists) under the specified key in this DecodedMsg.
+            If the key is not found, this method returns null.
+            </summary>
+            <param name="tag">The string representing the tag name.  It is case sensitive.</param>
+            <returns>A list of decodedMsgElement or null, if the tag is not found.</returns>
+            <remarks>For example, if a DecodedMsg is constructed from "lot.1.name=a lot.2.name=b", 
+            then the reply to GetChildrenUnder("lot") is a List of two DecodedMsgElements.<br/>
+            If instead it was constructed from "lot.1.name=a lot.1.value=b", then the reply would
+            be simply a list of one element.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.GetChildren">
+            <summary>
+            Get my whole sublist as a List. 
+            </summary>
+            <remarks>The sublist may be empty but will never be null.</remarks>
+            <returns>List of DecodedMsgElement</returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.DisplayString">
+            <summary>
+            Return the decoded message rebuilt into a printable string format.
+            </summary>
+            <remarks>
+            Each line in the string contains one entry in the dictionary.  Entries in sub-dictionaries are indented to
+            show their position.  The standard tab character is used for the indentation.
+            </remarks>
+            <returns>String with newline and tab characters to beautify the output.
+            </returns>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsg.displayString(AutoShellMessaging.DecodedMsgElement,System.String)">
+            <exclude/>
+        </member>
+        <member name="T:AutoShellMessaging.DecodedMsgElement">
+            <summary>
+            Class for storage of groups of parameters decoded from an AutoShell message. 
+            </summary>
+            <remarks>
+            DecodedMsgElement is the underlying data storage of a AutoShell DecodedMsg.  It is very similar to 
+            the DV structure in traditional C++ or Java AutoShell servers.<br/><br/>
+            Each DecodedMsgElement has a name, an optional value, and optional children (consisting of
+            other DecodedMsgElement instances.)<br/><br/>
+            
+            This class can be treated as immutable and therefore thread-safe in your application code.  The 
+            data in the class will not be altered after it is returned to you.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsgElement.Name">
+            <summary>
+            Return the name of the entry as a string.
+            </summary>
+            <remarks>All DecodedMsgElement instances have a nonnull, non-empty name.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsgElement.Value">
+            <summary>
+            Return the value of the entry if it has a value, otherwise return null.
+            </summary>
+            <remarks>
+            A DecodedMsgElement that holds a tag=value pair from a decoded AutoShell message will
+            contain a value, otherwise null will be returned.   For example, in the message:<br/>
+            fr=a to=b lot.1.name=abc<br/>
+            The value of the DecodedMsgElement with name "fr" will be "a".<br/>
+            The value of the DecodedMsgElement with name "lot" will be null.<br/>
+            The value of the DecodedMsgElement with name "name" will be "abc".<br/>
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsgElement.GetChildren">
+            <summary>
+            Return the sublist (or children) held by this DecodedMsgElement.  Returns null if there are none.
+            </summary>
+            <returns>List of type DecodedMsgElement.</returns>
+            <remarks>
+            For example, in the message:<br/>
+            fr=a to=b lot.1.name=abc<br/>
+            When a DecodedMsg holds this message, then each of the tokens in the message are stored in a DecodedMsgElement.
+            Sending GetChild() to the DecodedMsgElement with name "fr" will return null.<br/>
+            Sending GetChild() to the DecodedMsgElement with name "lot" will return a list containing one
+            DecodedMsgElement with Name=1.   The child can then be traversed to retrieve its children.<br/>
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.DecodedMsgElement.HasChildren">
+            <summary>
+            Test whether or not this class has a sublist (children) containing other DecodeMsgElement.
+            </summary>
+            <returns>true if there is a sublist, else false</returns>
+            <remarks>If this method returns true you are guaranteed a sublist with at least one element.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsgElement.GetChild(System.String)">
+            <summary>
+            Returns the child DecodedMsgElement with the given name.
+            </summary>
+            <param name="childName">String name of the child to return.  This is case-sensitive.</param>
+            <returns>the DecodedMsgElement or null if no child exists for the given name.</returns>
+            <remarks>Remember that the children of a DecodedMsgElement are also instances of DecodedMsgElement.
+            So for example, if a DecodedMsgElement is currently holding "lot.1.attr.1=aaa", sending GetChild("1") to
+            the object will return the DecodedMsgElement holding "1.attr.1=aaa".
+            This method can be used in conjunction with DecodedMsgElement.HasChildren to iterate
+            through all children of a DecodedMsgElement tree.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.DecodedMsgElement.GetChildrenUnder(System.String)">
+            <summary>
+            Returns all children (sublists) under the given sublist name.
+            </summary>
+            <param name="childName">The string name of the child DecodedMsgElement.</param>
+            <returns>List of DecodeMsgElement. </returns>
+            <remarks>This is a convenience method for iterating through all children of a child DecodedMsgElement.
+            For example, given the following input to this DecodedMsg:<br/><br/>
+            lot.a.name.1=aaa lot.a.value.1=bbb<br/><br/>
+            Then GetChildrenUnder("a") would return a list containing two DecodedMsgElement, one with name "name" and one with name "value".<br/><br/>
+            </remarks>
+        </member>
+        <member name="T:AutoShellMessaging.EncodedMsg">
+            <summary>
+            Adds methods to DecodedMsg to build up a message from tag/value pairs, flags, and lists of values.
+            </summary>
+            <remarks>EncodedMsg is a subclass of DecodedMsg, but it is typically used in "write-only" mode by
+            user code.  It is used to construct an outgoing AutoNet message.
+            NOTE:  due to problems in the current NDoc documentation generator, the addEnumeratedTag method
+            is missing documentation.  The syntax should be:
+            addEnumeratedTag(string tag, List&lt;string&gt; values).
+            This will add to the outgoing message a "tag.ii=valueString" for each value in the list.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.EncodedMsg.#ctor">
+            <summary>
+            Create a new, empty EncodedMsg
+            </summary>
+            <remarks>Initializes the object with an empty list of DecodedMsgElement.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.EncodedMsg.addTag(System.String,System.String)">
+            <summary>
+            Add an Autonet tagged parameter to the outgoing message.  For example, to add "do=help" to an EncodedMsg,
+            you could use addTag("do", "help");  If the given tag already exists in the outgoing message, its value
+            will be replaced with the new value.
+            </summary>
+            <param name="tag">String tagname.  Cannot be null.</param>
+            <param name="value">String value.  </param>
+        </member>
+        <member name="M:AutoShellMessaging.EncodedMsg.addFlag(System.String)">
+            <summary>
+            Add an Autonet flag parameter to the outgoing message.
+            </summary>
+            <remarks>Flags are used like switches in Autonet messaging, for example in the message:   do=sendData noreply
+            "noreply" is a switch, present or not present.
+            </remarks>
+            <param name="flag">String flag.  Cannot be null.</param>
+        </member>
+        <member name="M:AutoShellMessaging.EncodedMsg.addEnumeratedTag(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Add an Autonet enumerated parameter to the outgoing message.
+            </summary>
+            <remarks>This method is used to add lists such as: lot.0=1111 lot.1=2222 lot.3=bbbb<br/>
+            To construct this message, you would use: addEnumeratedTag("lot", list) where list contains "1111", "2222", "bbbb".<br/>
+            The index starts at zero.</remarks>
+            <param name="tag">string tag name</param>
+            <param name="values">list of strings, processed in order to form the values of the enumerated tags.  Values can
+            be null.</param>
+        </member>
+        <member name="M:AutoShellMessaging.EncodedMsg.toMessageString">
+             <summary>
+             Convert the EncodedMsg to an Autonet string.
+             </summary>
+             <remarks>Creates string by encoding all tag/value pairs as tag=value, all flags as simply the flag name, flag,
+             and enumerations as tag.0=val0 tag.1=val1.....
+            
+             </remarks>
+             <returns>String which can be sent in an Autonet message.</returns>
+        </member>
+        <member name="T:AutoShellMessaging.HandlerRunner">
+            <summary>
+            Handler runner in an internal class to the AshlServer (it could have been a private internal class but
+            the code was getting too big.)
+            It is used simply to invoke methods in the user's AshlMessageHandler in separate threads.
+            </summary>
+        </member>
+        <member name="T:AutoShellMessaging.InterfaceSelectionMethod">
+            <summary>
+            Static definitions for the three methods for selecting which network interface
+            will be used in ACI messaging.
+            </summary>
+            <remarks>This class creates a sole instance of the interface selection
+            methods DEFAULT, FIRST, USER and UNSPECIFIED.  On Windows, DEFAULT, FIRST and 
+            UNSPECIFIED are all equivalent and will signal the AshlServer to use the 
+            first network interface that the Windows OS offers.  USER allows user-specified interface
+            name or address.</remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.DEFAULT">
+            <summary>
+            Selection for the DEFAULT interface.
+            </summary>
+            <remarks>Currently equivalent to FIRST.  This method has
+            been included for possible later enhancements to support the "smallest netmask" method
+            of interface selection which is found in other ACI libraries.
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.FIRST">
+            <summary>
+            Selection for the FIRST interface.
+            </summary>
+            <remarks>Choose the first network interface listed in the Windows network setup.
+            This typically can be displayed with the IPCONFIG command.
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.USER">
+            <summary>
+            Selection for a user-specified interface.
+            </summary>
+            <remarks>Choose the network interface supplied in the InterfaceName parameter.
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.TRYALL">
+            <summary>
+            Selection to try all interfaces until a nameserver replies.
+            </summary>
+            <remarks>This option is experimental.  It can result in a several second delay
+            during startup if several attempts must be made on different interfaces.
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.DISCOVER">
+            <summary>
+            Used internally in AshlServer to flag that the network interface has not been
+            selected and the DEFAULT option will be used.
+            </summary>
+            <remarks>This option is provided for debugging; it allows the AshlServer to correctly
+            log on startup that the interfaceSelection method has not been specified.
+            </remarks>
+        </member>
+        <member name="F:AutoShellMessaging.InterfaceSelectionMethod.UNSPECIFIED">
+            <summary>
+            Used internally in AshlServer to flag that the network interface has not been
+            selected and the DEFAULT option will be used.
+            </summary>
+            <remarks>This option is provided for debugging; it allows the AshlServer to correctly
+            log on startup that the interfaceSelection method has not been specified.
+            </remarks>
+        </member>
+        <member name="M:AutoShellMessaging.InterfaceSelectionMethod.ToString">
+            <summary>
+            Returns the string value of the method description.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AutoShellMessaging.InterfaceSelectionMethod.fromString(System.String)">
+            <summary>
+            Decode a string version of interface selection method.
+            </summary>
+            <remarks>The comparison is not case sensitive.</remarks>
+            <param name="s">The string containing DEFAULT/USER/FIRST.</param>
+            <returns>Sole instance of one of the four InterfaceSelectionMethods</returns>
+        </member>
+        <member name="T:AutoShellMessaging.MessagingSettings">
+            <summary>
+            Structure holding the required and optional settings for ACI messaging.
+            </summary>
+            <remarks>
+            This class is used to construct the AshlServer, as an alternative to 
+            constructing it using getInstanceUsingAppConfig.
+            <br/><br/>
+            It has little or no behavior but may be enhanced in future to validate that
+            all settings are correct prior to calling the AshlServer constructor. 
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.Name">
+            <summary>
+            The ACI name at which the AshlServer will listen for incoming messages.
+            </summary>
+            <remarks>This should be a 1-256 character string.  The dash character should be avoided.  
+            If you do include a dash as part of the name, and if you will be exchanging messages 
+            with ProcessWORKS or Artist, you should set UseDashForBackwardCompatibleAciNames to true.
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.AciConf">
+            <summary>
+            The ACI nameserver host and port, in the format host:port.
+            </summary>
+            <remarks>The nameserver host can be a network name or an IP address. The broadcast
+            address "*" is not supported in this library.
+            <br/><br/>The port is 
+            the namserver's listening TCP/IP port number.  If more than one nameserver address
+            should be attempted, concatenate them together with a semicolon, for example:
+            <br/>host1:port1;host2:port2
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.CheckDuplicateRegistration">
+            <summary>
+            Attempt to prevent duplicate ACI name by checking if another ACI process is 
+            currently listening at the same name.
+            </summary>
+            <remarks>It is highly recommended that you use 'true' for this value.  If 
+            more than one ACI process attempts to listen at the same name, the second 
+            one to register will overwrite the first and message delivery becomes
+            unpredictable.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.UseInterfaceSelectionMethod">
+            <summary>
+            Method of selecting which ethernet interface to register with the ACI nameserver.
+            </summary>
+            <remarks>Supported values are DEFAULT, FIRST, USER and TRYALL and DISCOVER - which is identical to TRYALL.   On Windows both DEFAULT
+            and FIRST have the same behavior -- the first non-loopback address reported by 
+            the operating system will be used.<br/><br/>
+            USER allows you to specify the interface name or address in the parameter InterfaceName.<br/>
+            Valid names are the interface name as reported by the IPCONFIG command, such as "Local Area Connection",
+            or IP address in string format, such as "3.3.3.3".
+            <BR/><br/>
+            TRYALL (and DISCOVER) indicates to try all non-loopback addresses until a nameserver response is received.
+            This is an experimental method used to facilitate new installations; typically in production
+            the USER method should be used. 
+            DISCOVER was added for compatibility with the Java lib (mike 6/2/2014)
+            </remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.InterfaceName">
+            <summary>
+            If UseInterfaceSelectionMethod == USER, this parameter specifies which network
+            interface should be used.
+            </summary>
+            <remarks>
+            Valid names are the interface name as reported by the IPCONFIG command, such as "Local Area Connection",
+            or IP address in string format, such as "3.3.3.3".</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.UseDashForBackwardCompatibleAciNames">
+            <summary>
+            Set to true if your ACI name includes a dash character and you will be 
+            communicating with the Artist real-time server.
+            </summary>
+            <remarks>The Artist real-time server is using an older implementation of 
+            ACI messaging that expects a terminating dash character on ACI names in
+            the connection message.  Setting this flag to true will prevent 
+            Artist from misreading the ACI name in the initial connection message and
+            ensure smooth communications.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.Lookahead">
+            <summary>
+            Number of unacked messages to allow before throwing exception.
+            </summary>
+            <remarks>If a peer is not reading messages and sending the expected acks,
+            this setting limits the number of messages that this server will send 
+            before it marks the peer inactive, retries to look up the peer name in 
+            the ACI nameserver, and resend the message.  This prevents possible 
+            'blocking' of this process if a peer is still running but not reading 
+            messages.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.FileForSavedInterface">
+            <summary>
+            File path in which to save and restore the interface name found when the
+            method "DISCOVER" is used for determining the correct local interface address
+            to register with the nameserver.
+            </summary>
+            <remarks>Optional file which the application will read at startup,
+            to determine which interface name was previously located by the 
+            DISCOVER method. This interface will be placed first in the list used
+            during the DISCOVER of the correct interface for nameserver registration.
+            If this interface fails to work, the search for the correct one
+            will proceed; if one is found, the file will be updated.<br/>
+            Only used when interface selection method is DISCOVER.<br/>
+            Can be a relative or absolute file path; if the file is not
+            writable, a warning will be logged but the lookup will proceed without
+            error.</remarks>
+        </member>
+        <member name="P:AutoShellMessaging.MessagingSettings.NameServerLookupTimeout">
+            <summary>
+            Time in seconds to wait for a response from the nameserver when attempting to register your
+            ACI name.
+            </summary>
+            <remarks>The default is 10 seconds; minimum value is 1 second.  Typically a value of 2-5 seconds
+            will work fine but it may need to be higher if the nameserver is highly loaded or there is an
+            unusual amount of UDP traffic on the network.</remarks>
+        </member>
+        <member name="M:AutoShellMessaging.NameServerConnection.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Constructor for a nameserver connection just reads the list of 
+            nameserver addresses and save it. 
+            </summary>
+        </member>
+        <member name="M:AutoShellMessaging.NameServerConnection.register(System.Net.Sockets.TcpListener)">
+            <summary>
+            Register my name with the nameserver.  This method can block for up to 9 seconds.
+            </summary>
+        </member>
+        <member name="M:AutoShellMessaging.NameServerConnection.unregister">
+            
+             <summary>
+             Unregister my name with the nameserver.  This method can block for
+             up to 9 seconds.
+             </summary>
+        </member>
+        <member name="M:AutoShellMessaging.NameServerConnection.peerLookup(System.String)">
+            Look up a peer's address with the nameserver.  This method can block for
+            up to 9 seconds.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.#ctor(AutoShellMessaging.AciAgent,AutoShellMessaging.QueueLite,System.Net.Sockets.TcpClient,System.String)">
+            PeerConnection constructor
+            	    *  Sets up input and output streams to the socket.
+                    *  Creates a PeerConnectionSender but does not start it running yet.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.run">
+            Run: reads messages from the socket and hands them to the parent
+            IpcAgent for placement on a receive queue.  When first starting up
+            with no name, it reads its name from the socket (a "connection info" 
+            message) and hands the name to the parent.  The parent may return a 
+            list of unsent messages from a previous instance of a PeerCOnnection
+            with this same name.  If so, it hands the unsent message list to the
+            PeerConnectionSender for this connection to be transmitted at startup.
+            It then runs the PeerConnectionSender and goes into a read loop.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.getConnInfo">
+            Read a special 'connection info' message type from the peer.
+            The message contains the peer's name.  
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.peerConnectionReadLoop">
+            This is where the ACI read loop occurs.  Read a 4-byte message size,
+            then read the complete message.   Has the potential to throw a 
+            runtime exception if the message size is invalid.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.sendGoodbye">
+            Send an ACI message of type ACI_IMSG_BYE 
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.goInactive">
+            Called by the parent of this connection, it stops both the send and  
+            receive loop on this PeerConnection.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.getQueue">
+            Called by the parent of this connection, to retrieve unsent messages 
+            in case this connection goes inactive and is then reactivated.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.sendEchoReply(System.UInt32)">
+            Send an ACI message of type ACI_IMSG_ECHO_REPLY
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.handleAutonetMsg(AutoShellMessaging.ACIMessage)">
+            An Autonet message was received.  Check to see it does not possess
+            a duplicate serial number--one we've already seen.  Create an 
+            AutoNet Message object containing its contents, add it to my parent's
+            queue, and ack it.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.handleSecsMsg(AutoShellMessaging.ACIMessage)">
+            A SECS message was received.  Check to see it does not possess
+                     * a duplicate serial number--one we've already seen.  Create an 
+                     * AutoNet Message object containing its contents, add it to my parent's
+                      * queue, and ack it.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.handleAck(AutoShellMessaging.ACIMessage)">
+            Received an ack.  Remove the message with the serial number in the 
+            ack from the 'unsent messages' list.  Also remove any unsent messages
+            older than this one.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.handleClearSerial(AutoShellMessaging.ACIMessage)">
+            Received a ACI_IMSG_CLR_SERNO message.   Clear your incoming message
+            serial number so you will start receiving from serial number 1 again.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.sendAck(System.UInt32)">
+            Send an ACI message type ACI_IMSG_ACK
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnection.send(System.String)">
+            Send version 2. Send a byte[]-based message and increment the out serial
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnectionSender.run">
+            Wait for data to appear on queue.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnectionSender.send(AutoShellMessaging.ACIMessage)">
+            Send places a message on the send queue and wakes up the send thread.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnectionSender.sendFirst(AutoShellMessaging.ACIMessage)">
+            Send places a message on the top of the send queue and wakes up the 
+            send thread.  Typically it is only used at startup time, to make 
+            sure protocol handshaking messages are sent before user data messages.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnectionSender.sendFirst(AutoShellMessaging.ACIMessage[])">
+            Send places a message on the top of the send queue and wakes up the 
+            send thread.  Typically it is only used at startup time, to make 
+            sure protocol handshaking messages are sent before user data messages.
+        </member>
+        <member name="M:AutoShellMessaging.PeerConnectionSender.getQueue">
+            Send places a message on the top of the send queue and wakes up the 
+            send thread.  Typically it is only used at startup time, to make 
+            sure protocol handshaking messages are sent before user data messages.
+        </member>
+        <member name="T:AutoShellMessaging.QueueLite">
+            <summary>
+            A simplified version of the AshlServer Queue class.  It contains only logic for initializing an
+            AciAgentLite instance and holding a queue of received messages, to be returned to the requestor.
+            All message send requests are forwarded to the AciAgent for sending.
+            </summary>
+        </member>
+        <member name="M:AutoShellMessaging.QueueLite.#ctor(AutoShellMessaging.MessagingSettings)">
+             <summary>
+             Creates a message queue for sending or receiving messages.
+             This constructor will use environment variable settings for ACI_CONF, 
+             ACI_COMM_TYPE and ACI_NAME_USES_ASHL.  If the variables do not 
+             exist, ACI_CONF will be determined from files, ACI_COMM_TYPE will be
+             IPC and ACI_NAME_USES_ASHL will be true (or irrelant.)  See the
+             AciAgent class for more information.
+             </summary>
+            @param nameIn	ASCII name for this queue.  Cannot contain
+            whitespace or special characters.  Must be less than 
+            256 characters. 
+            @param destroyAtExitFlagIn	If true, queue will be removed from the system
+            when the process exits.
+        </member>
+        <member name="M:AutoShellMessaging.QueueLite.requestStopAndWait">
+            <summary>
+            Destroys this Queue and any associated resources.  
+            </summary>
+        </member>
+        <member name="M:AutoShellMessaging.QueueLite.put(AutoShellMessaging.IncomingMsg)">
+            Puts a Message onto this queue.  Usually invoked by
+            agent objects or to send messages to self.  This method is 
+            not normally used by server or client developers.
+        </member>
+        <member name="M:AutoShellMessaging.QueueLite.receive">
+            Blocks until next message is available from the queue.  If
+            other processing should occur while waiting for messages, this
+            call should be made from within its own thread.  Returns a
+            Message object.
+        </member>
+        <member name="T:AutoShellMessaging.QueueSyncEvents">
+            <summary>
+            This class is simply lifted from book example of how to set up an event sync mechansim for the Queue
+            class.  It could have been a private class internal to Queue.
+            It simply holds the wait and stop events necessary for a producer/consumer implementation in C# --
+            the Queue class is the consumer, the AciAgent is the producer.  When the AciAgent gets a message,
+            it puts in on the Queue's queue and invokes the Queue method Queue.put to set the flag in this
+            class telling Queue a message is available.
+            When Queue retrieves the message, the flag is reset automatically.
+            </summary>
+        </member>
+    </members>
+</doc>

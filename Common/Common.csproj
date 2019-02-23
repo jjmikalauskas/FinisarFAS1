@@ -30,6 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoShellMessaging">
+      <HintPath>..\packages\AutoShell.3.10.0\AutoShellMessaging.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="SECSInterface">
+      <HintPath>..\packages\AutoShell.3.10.0\SECSInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,29 +61,47 @@
     <Compile Include="Camstar.cs" />
     <Compile Include="EquipmentBase.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="InMemorySink .cs" />
+    <Compile Include="LogEntry.cs" />
     <Compile Include="Lot.cs" />
     <Compile Include="MESContract.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemConfig.cs" />
-    <Compile Include="Tool.cs" />
+    <Compile Include="TestData.cs" />
     <Compile Include="ToolConfig.cs" />
+    <Compile Include="TraceDataCollector.cs" />
     <Compile Include="Wafer.cs" />
     <Compile Include="XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SystemConfigExample.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ToolConfigSample.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ToolConfigSample1.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ToolConfigXMLSchema_1.0.xsd">
+    <None Include="packages.config" />
+    <None Include="ToolConfigs\SystemConfig.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ToolConfigs\ToolConfig.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ToolConfigs\Evatec\ToolConfig.xml" />
+    <Content Include="ToolConfigs\Koyo\ToolConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ToolConfigs\SystemConfig.xml" />
+    <Content Include="ToolConfigs\SystemConfigSample.xml" />
+    <Content Include="..\ToolConfigSample.xml">
+      <SubType>Designer</SubType>
+      <Link>ToolConfigs\ToolConfigSample.xml</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ToolConfigs\MatrixAsher\" />
+    <Folder Include="ToolConfigs\Nissin\" />
+    <Folder Include="ToolConfigs\Plasmatherm\" />
+    <Folder Include="ToolConfigs\SPTS\" />
+    <Folder Include="ToolConfigs\Veeco\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

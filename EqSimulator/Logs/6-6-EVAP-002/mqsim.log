@@ -1,0 +1,533 @@
+02/17/19: 11:16:03.371: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=11.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:16:03.375: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c80000000000b"
+receivetime="1550423763"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:16:03.381: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 81 03 80 00 00 00 00 13 01 02 b1 04 00 00  ................
+   0x0010: 00 0d b1 04 00 00 00 10                          ........
+==================================================
+02/17/19: 11:16:03.401: 
+ SENDING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 01 04 80 00 00 00 00 13 01 02 b1 04 00 00  ................
+   0x0010: 00 05 b1 04 00 00 00 00                          ........
+==================================================
+02/17/19: 11:16:17.534: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:16:17.534: 
+ RECEIVING message, acitype=0x44440003 antype=32000 size=60
+     FROM:    sendmq          (sendmq)
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+fr=sendmq to=6-6-EVAP-002gw do=setProcessState state=Ready 
+==================================================
+02/17/19: 11:16:17.542: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:16:17.545: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:16:17.545: 
+ SENDING message, acitype=0x44440003 antype=32000 size=80
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    sendmq          (sendmq)
+fr=6-6-EVAP-002gw to=sendmq
+
+reply=0 command=setProcessState comment="Success" 
+==================================================
+02/17/19: 11:16:17.547: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:16:17.549: 
+ SENDING message, acitype=0x44440000 antype=1 size=21
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 86 0b 80 00 00 00 00 0e 01 03 41 01 31 41  ............A.1A
+   0x0010: 02 31 30 01 00                                   .10..
+==================================================
+02/17/19: 11:16:17.550: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=14" id=14.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:16:17.554: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=14" id=14.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:16:17.564: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 06 0c 80 00 00 00 00 0e 21 01 00           ..........!..
+==================================================
+02/17/19: 11:16:17.568: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=14.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:16:17.569: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c80000000000e"
+receivetime="1550423777"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:16:17.570: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=14.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:16:17.572: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c80000000000e"
+receivetime="1550423777"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:16:17.594: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 81 03 80 00 00 00 00 17 01 02 b1 04 00 00  ................
+   0x0010: 00 0d b1 04 00 00 00 10                          ........
+==================================================
+02/17/19: 11:16:17.610: 
+ SENDING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 01 04 80 00 00 00 00 17 01 02 b1 04 00 00  ................
+   0x0010: 00 05 b1 04 00 00 00 02                          ........
+==================================================
+02/17/19: 11:17:27.165: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:27.166: 
+ RECEIVING message, acitype=0x44440003 antype=32000 size=60
+     FROM:    sendmq          (sendmq)
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+fr=sendmq to=6-6-EVAP-002gw do=setProcessState state=Ready 
+==================================================
+02/17/19: 11:17:27.175: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:27.177: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:27.177: 
+ SENDING message, acitype=0x44440003 antype=32000 size=80
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    sendmq          (sendmq)
+fr=6-6-EVAP-002gw to=sendmq
+
+reply=0 command=setProcessState comment="Success" 
+==================================================
+02/17/19: 11:17:27.183: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:27.189: 
+ SENDING message, acitype=0x44440000 antype=1 size=21
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 86 0b 80 00 00 00 00 11 01 03 41 01 31 41  ............A.1A
+   0x0010: 02 31 30 01 00                                   .10..
+==================================================
+02/17/19: 11:17:27.192: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=17" id=17.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:27.195: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=17" id=17.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:27.203: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 06 0c 80 00 00 00 00 11 21 01 00           ..........!..
+==================================================
+02/17/19: 11:17:27.211: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=17.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:27.213: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000011"
+receivetime="1550423847"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:17:27.214: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=17.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:27.218: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000011"
+receivetime="1550423847"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:17:27.233: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 81 03 80 00 00 00 00 1b 01 02 b1 04 00 00  ................
+   0x0010: 00 0d b1 04 00 00 00 10                          ........
+==================================================
+02/17/19: 11:17:27.268: 
+ SENDING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 01 04 80 00 00 00 00 1b 01 02 b1 04 00 00  ................
+   0x0010: 00 05 b1 04 00 00 00 02                          ........
+==================================================
+02/17/19: 11:17:52.275: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:52.275: 
+ RECEIVING message, acitype=0x44440003 antype=32000 size=60
+     FROM:    sendmq          (sendmq)
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+fr=sendmq to=6-6-EVAP-002gw do=setProcessState state=Ready 
+==================================================
+02/17/19: 11:17:52.295: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:52.297: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:52.297: 
+ SENDING message, acitype=0x44440003 antype=32000 size=80
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    sendmq          (sendmq)
+fr=6-6-EVAP-002gw to=sendmq
+
+reply=0 command=setProcessState comment="Success" 
+==================================================
+02/17/19: 11:17:52.298: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:52.302: 
+ SENDING message, acitype=0x44440000 antype=1 size=21
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 86 0b 80 00 00 00 00 14 01 03 41 01 31 41  ............A.1A
+   0x0010: 02 31 30 01 00                                   .10..
+==================================================
+02/17/19: 11:17:52.305: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=20" id=20.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:52.308: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=20" id=20.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:52.312: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 06 0c 80 00 00 00 00 14 21 01 00           ..........!..
+==================================================
+02/17/19: 11:17:52.316: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=20.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:52.317: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000014"
+receivetime="1550423872"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:17:52.318: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=20.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:52.320: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000014"
+receivetime="1550423872"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:17:52.338: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 81 03 80 00 00 00 00 1f 01 02 b1 04 00 00  ................
+   0x0010: 00 0d b1 04 00 00 00 10                          ........
+==================================================
+02/17/19: 11:17:52.352: 
+ SENDING message, acitype=0x44440000 antype=1 size=24
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 01 04 80 00 00 00 00 1f 01 02 b1 04 00 00  ................
+   0x0010: 00 05 b1 04 00 00 00 02                          ........
+==================================================
+02/17/19: 11:17:53.530: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:53.530: 
+ RECEIVING message, acitype=0x44440003 antype=32000 size=52
+     FROM:    sendmq          (sendmq)
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=555 
+==================================================
+02/17/19: 11:17:53.532: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=116
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=555 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:53.537: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:17:53.537: 
+ SENDING message, acitype=0x44440003 antype=32000 size=74
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    sendmq          (sendmq)
+fr=6-6-EVAP-002gw to=sendmq
+
+reply=0 command=sendEvent comment="Success" 
+==================================================
+02/17/19: 11:17:53.538: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=116
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=555 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:17:53.541: 
+ SENDING message, acitype=0x44440000 antype=1 size=22
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 86 0b 80 00 00 00 00 17 01 03 41 01 31 41  ............A.1A
+   0x0010: 03 35 35 35 01 00                                .555..
+==================================================
+02/17/19: 11:17:53.542: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=23" id=23.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:53.543: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=23" id=23.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:17:53.549: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 06 0c 80 00 00 00 00 17 21 01 00           ..........!..
+==================================================
+02/17/19: 11:17:53.552: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=23.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:53.554: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000017"
+receivetime="1550423873"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:17:53.554: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=23.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:17:53.555: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000017"
+receivetime="1550423873"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:18:07.726: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:18:07.726: 
+ RECEIVING message, acitype=0x44440003 antype=32000 size=52
+     FROM:    sendmq          (sendmq)
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=101 
+==================================================
+02/17/19: 11:18:07.730: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=116
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=101 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:18:07.730: pathfilter: no filter DVs or non-ANet message.
+02/17/19: 11:18:07.731: 
+ SENDING message, acitype=0x44440003 antype=32000 size=74
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    sendmq          (sendmq)
+fr=6-6-EVAP-002gw to=sendmq
+
+reply=0 command=sendEvent comment="Success" 
+==================================================
+02/17/19: 11:18:07.734: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=116
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=101 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+==================================================
+02/17/19: 11:18:07.736: 
+ SENDING message, acitype=0x44440000 antype=1 size=22
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 86 0b 80 00 00 00 00 19 01 03 41 01 31 41  ............A.1A
+   0x0010: 03 31 30 31 01 00                                .101..
+==================================================
+02/17/19: 11:18:07.737: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=25" id=25.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:18:07.738: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=115
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=send msg="timeout=6-6-EVAP-002 ctxt=25" id=25.6-6-EVAP-002.S6.F11 seconds=30 noreply
+==================================================
+02/17/19: 11:18:07.746: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 06 0c 80 00 00 00 00 19 21 01 00           ..........!..
+==================================================
+02/17/19: 11:18:07.749: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=25.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:18:07.750: 
+ SENDING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000019"
+receivetime="1550423887"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:18:07.750: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=71
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=timer do=cancel id=25.6-6-EVAP-002.S6.F11 noreply
+==================================================
+02/17/19: 11:18:07.752: 
+ RECEIVING INTERNAL message, acitype=0x44440003 antype=32000 size=182
+     FROM:    6-6-EVAP-002gw  
+       TO:    6-6-EVAP-002gw  
+fr=6-6-EVAP-002gw to=6-6-EVAP-002gw 
+eq=6-6-EVAP-002
+header="0000060c800000000019"
+receivetime="1550423887"
+receivesize="13"
+ACKC6="00"
+reply=0 command=event_send comment="success" 
+==================================================
+02/17/19: 11:18:12.182: 
+ RECEIVING message, acitype=0x44440000 antype=1 size=40
+     FROM:    6-6-EVAP-002srv 
+       TO:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+   0x0000: 00 00 82 17 80 00 00 00 00 24 01 05 b1 04 00 00  .........$......
+   0x0010: 00 00 41 06 30 30 30 30 30 35 b1 04 00 00 00 00  ..A.000005......
+   0x0020: b1 04 00 00 00 01 01 00                          ........
+==================================================
+02/17/19: 11:18:12.187: 
+ SENDING message, acitype=0x44440000 antype=1 size=13
+     FROM:    6-6-EVAP-002gw  (6-6-EVAP-002gw)
+       TO:    6-6-EVAP-002srv 
+   0x0000: 80 00 02 18 80 00 00 00 00 24 21 01 00           .........$!..
+==================================================

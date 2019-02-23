@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Common;
+using System.Collections.Generic;
 
 namespace ToolService
 {
@@ -6,7 +7,7 @@ namespace ToolService
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public List<Wafer2> Wafers { get; set; }
+        public List<Wafer> Wafers { get; set; }
 
     }
 }

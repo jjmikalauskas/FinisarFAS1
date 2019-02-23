@@ -1,0 +1,781 @@
+02/17/19: 11:17:27.180: Deleting all contexts related to env  16.
+02/17/19: 11:17:27.181: Putting return code 0 of env 16 into $status.
+02/17/19: 11:17:27.181: Procedure returned 0
+02/17/19: 11:17:27.181: leaving AnObjInterpProc
+02/17/19: 11:17:27.182: Done executing Tcl command
+02/17/19: 11:17:27.183: Setting interpreter result to:
+
+02/17/19: 11:17:27.183: Checking queue.
+*********************************************
+02/17/19: 11:17:27.184: type=32000 size=115
+02/17/19: 11:17:27.184: 
+02/17/19: 11:17:27.186: Parsing Message.
+02/17/19: 11:17:27.186: Checking Command Message Syntax
+02/17/19: 11:17:27.187: Executing "event_send" command.
+02/17/19: 11:17:27.188:  generic_eqcmd called for the 'event_send' command
+02/17/19: 11:17:27.188:  Adding waitreply 17 for event_send
+02/17/19: 11:17:27.189:  Executing SendSECS str=6 fun=11 eq=6-6-EVAP-002 timeout=30
+02/17/19: 11:17:27.189: Sending SECS message.
+02/17/19: 11:17:27.194: NOT sending reply for "event_send" command. code=999.
+02/17/19: 11:17:27.194: Checking queue.
+*********************************************
+02/17/19: 11:17:27.195: type=32000 size=115
+02/17/19: 11:17:27.195: 
+02/17/19: 11:17:27.196: Parsing Message.
+02/17/19: 11:17:27.196: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:27.197: Checking Command Message Syntax
+02/17/19: 11:17:27.197: Executing "send" command.
+02/17/19: 11:17:27.197: sendmsg:  Evaluating send request
+02/17/19: 11:17:27.198: sendmsg:  Storing msg, ttf=1550423877, interval=30, iterations=1
+         raw=0 decode=0 mtype=32000
+02/17/19: 11:17:27.199: sendmsg:  Reseting alarm...
+02/17/19: 11:17:27.199: resetalarm:  Setting alarm.
+02/17/19: 11:17:27.199: resetalarm:  Next msg to be sent in 30 seconds.
+02/17/19: 11:17:27.200: NOT sending reply for "send" command. code=0.
+02/17/19: 11:17:27.204: type=1 size=13
+02/17/19: 11:17:27.204: Non-AutoShell format message received.
+02/17/19: 11:17:27.205: Getting protocol.
+02/17/19: 11:17:27.205: Checking mtype DVs for mtype 1.
+02/17/19: 11:17:27.206: 	Checking mtype 999998.
+02/17/19: 11:17:27.206: 	Checking mtype 999996.
+02/17/19: 11:17:27.207: Looking for sxdecode.
+02/17/19: 11:17:27.207: Executing "sxdecode" to decode message.
+02/17/19: 11:17:27.209: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:17:27.209: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:17:27.209: Executing event_send to handle message.
+02/17/19: 11:17:27.210:  generic_eqcmd called for the 'event_send' command.
+02/17/19: 11:17:27.210:  Executing ReceiveSECS str=6 fun=12  checkack=ACKC6 cancel_timeout
+02/17/19: 11:17:27.212: 	No servers monitoring at present
+02/17/19: 11:17:27.212: Attempting to send a reply, ctxt=17, rc=0,
+ data=eq=6-6-EVAP-002
+header="0000060c800000000011"
+receivetime="1550423847"
+receivesize="13"
+ACKC6="00"
+02/17/19: 11:17:27.213: event_send returned 0
+02/17/19: 11:17:27.213: Message ignored.
+02/17/19: 11:17:27.214: type=32000 size=71
+02/17/19: 11:17:27.214: 
+02/17/19: 11:17:27.215: Parsing Message.
+02/17/19: 11:17:27.216: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:27.216: Checking Command Message Syntax
+02/17/19: 11:17:27.217: Executing "cancel" command.
+02/17/19: 11:17:27.217: resetalarm:  Alarm queue is empty.
+02/17/19: 11:17:27.218: NOT sending reply for "cancel" command. code=0.
+02/17/19: 11:17:27.218: Checking queue.
+*********************************************
+02/17/19: 11:17:27.220: type=32000 size=182
+02/17/19: 11:17:27.221: 
+02/17/19: 11:17:27.221: Parsing Message.
+02/17/19: 11:17:27.221: Message has no ctxt
+02/17/19: 11:17:27.222: Reply Message received and ignored.
+02/17/19: 11:17:27.222: Checking queue.
+*********************************************
+02/17/19: 11:17:27.233: type=1 size=24
+02/17/19: 11:17:27.234: Non-AutoShell format message received.
+02/17/19: 11:17:27.234: Getting protocol.
+02/17/19: 11:17:27.234: Checking mtype DVs for mtype 1.
+02/17/19: 11:17:27.235: 	Checking mtype 999998.
+02/17/19: 11:17:27.235: 	Checking mtype 999996.
+02/17/19: 11:17:27.235: Looking for sxdecode.
+02/17/19: 11:17:27.236: Executing "sxdecode" to decode message.
+02/17/19: 11:17:27.237: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:17:27.237: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:17:27.237: Executing generic_handler to handle message.
+02/17/19: 11:17:27.238:  Hook command 'S1F3_prereply' being executed.
+02/17/19: 11:17:27.238: Executing Tcl script for "S1F3_prereply" command
+02/17/19: 11:17:27.238: Executing: an_S1F3_prereply {prereply currenv=generic_handler } generic_handler
+02/17/19: 11:17:27.239: starting AnObjInterpProc
+02/17/19: 11:17:27.239: Invoking procedure
+02/17/19: 11:17:27.239: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: starting "
+02/17/19: 11:17:27.239: SX_evalstr() returned 100
+02/17/19: 11:17:27.240: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: starting 
+02/17/19: 11:17:27.240: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.240: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: starting "
+02/17/19: 11:17:27.241: SX_evalstr() returned 100
+02/17/19: 11:17:27.241: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: starting 
+02/17/19: 11:17:27.241: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.242: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: checking TransactionAbort= "
+02/17/19: 11:17:27.242: SX_evalstr() returned 100
+02/17/19: 11:17:27.242: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: checking TransactionAbort= 
+02/17/19: 11:17:27.242: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.243: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: returning true "
+02/17/19: 11:17:27.243: SX_evalstr() returned 100
+02/17/19: 11:17:27.243: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: returning true 
+02/17/19: 11:17:27.244: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.244: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 clear currenv=0"
+02/17/19: 11:17:27.244: SX_evalstr() returned 100
+02/17/19: 11:17:27.244: an_cmd executing: do=defsxncode str=1 fun=4 clear currenv=0
+02/17/19: 11:17:27.245: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:27.245: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880 "
+02/17/19: 11:17:27.245: SX_evalstr() returned 100
+02/17/19: 11:17:27.246: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880 
+02/17/19: 11:17:27.246: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.247: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=13 "
+02/17/19: 11:17:27.247: SX_evalstr() returned 100
+02/17/19: 11:17:27.247: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=13 
+02/17/19: 11:17:27.248: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.248: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:27.248: SX_evalstr() returned 100
+02/17/19: 11:17:27.249: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:27.249: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:27.249: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log looking at 13 "
+02/17/19: 11:17:27.250: SX_evalstr() returned 100
+02/17/19: 11:17:27.250: Executing: do=lg name=6-6-EVAP-002gw_log looking at 13 
+02/17/19: 11:17:27.250: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.251: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: 13 returning ControlState 5 "
+02/17/19: 11:17:27.251: SX_evalstr() returned 100
+02/17/19: 11:17:27.252: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: 13 returning ControlState 5 
+02/17/19: 11:17:27.252: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.253: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=5 UI4 lindex=5 "
+02/17/19: 11:17:27.253: SX_evalstr() returned 100
+02/17/19: 11:17:27.253: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=5 UI4 lindex=5 
+02/17/19: 11:17:27.254: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.254: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 pos=1,1 value="5" type=UI4 currenv=0"
+02/17/19: 11:17:27.254: SX_evalstr() returned 100
+02/17/19: 11:17:27.254: an_cmd executing: do=defsxncode str=1 fun=4 pos=1,1 value="5" type=UI4 currenv=0
+02/17/19: 11:17:27.255: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:27.255: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768 "
+02/17/19: 11:17:27.255: SX_evalstr() returned 100
+02/17/19: 11:17:27.256: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768 
+02/17/19: 11:17:27.256: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.256: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=16 "
+02/17/19: 11:17:27.257: SX_evalstr() returned 100
+02/17/19: 11:17:27.257: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=16 
+02/17/19: 11:17:27.257: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.258: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:27.258: SX_evalstr() returned 100
+02/17/19: 11:17:27.258: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:27.258: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:27.259: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log looking at 13 "
+02/17/19: 11:17:27.259: SX_evalstr() returned 100
+02/17/19: 11:17:27.259: Executing: do=lg name=6-6-EVAP-002gw_log looking at 13 
+02/17/19: 11:17:27.260: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.260: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: 16 returning ProcessState 2 "
+02/17/19: 11:17:27.260: SX_evalstr() returned 100
+02/17/19: 11:17:27.261: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: 16 returning ProcessState 2 
+02/17/19: 11:17:27.261: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.261: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=2 UI4 lindex=2 "
+02/17/19: 11:17:27.262: SX_evalstr() returned 100
+02/17/19: 11:17:27.262: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=2 UI4 lindex=2 
+02/17/19: 11:17:27.262: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.263: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 pos=1,2 value="2" type=UI4 currenv=0"
+02/17/19: 11:17:27.263: SX_evalstr() returned 100
+02/17/19: 11:17:27.264: an_cmd executing: do=defsxncode str=1 fun=4 pos=1,2 value="2" type=UI4 currenv=0
+02/17/19: 11:17:27.264: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:27.264: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: ending "
+02/17/19: 11:17:27.265: SX_evalstr() returned 100
+02/17/19: 11:17:27.265: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: ending 
+02/17/19: 11:17:27.265: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:27.266: Procedure returned 0
+02/17/19: 11:17:27.266: leaving AnObjInterpProc
+02/17/19: 11:17:27.267: Done executing Tcl command
+02/17/19: 11:17:27.267: Setting interpreter result to:
+reply=0 command=lg comment="Success"
+02/17/19: 11:17:27.267:  generic_handler executing sxreply
+02/17/19: 11:17:27.268: Sending SECS message.
+02/17/19: 11:17:27.269:  generic_handler executing distribute
+02/17/19: 11:17:27.270: 	No servers monitoring at present
+02/17/19: 11:17:27.270: generic_handler returned 0
+02/17/19: 11:17:27.270: Message ignored.
+02/17/19: 11:17:27.270: Checking queue.
+*********************************************
+02/17/19: 11:17:52.276: type=32000 size=60
+02/17/19: 11:17:52.276: 
+02/17/19: 11:17:52.276: Parsing Message.
+02/17/19: 11:17:52.276: Checking Command Message Syntax
+02/17/19: 11:17:52.277: Executing "setProcessState" command.
+02/17/19: 11:17:52.277: Executing Tcl script for "setProcessState" command
+02/17/19: 11:17:52.277: Executing: an_setProcessState {fr=sendmq to=6-6-EVAP-002gw do=setProcessState state=Ready  currenv=19 } 19
+02/17/19: 11:17:52.277: starting AnObjInterpProc
+02/17/19: 11:17:52.278: Invoking procedure
+02/17/19: 11:17:52.278: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_setProcessState: starting "
+02/17/19: 11:17:52.278: SX_evalstr() returned 100
+02/17/19: 11:17:52.278: Executing: do=lg name=6-6-EVAP-002gw_log an_setProcessState: starting 
+02/17/19: 11:17:52.282: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.283: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_setProcessState: sending event 10 "
+02/17/19: 11:17:52.283: SX_evalstr() returned 100
+02/17/19: 11:17:52.283: Executing: do=lg name=6-6-EVAP-002gw_log an_setProcessState: sending event 10 
+02/17/19: 11:17:52.284: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.284: Checking: "sendEvent event=ProcessStarted|ProcessCompleted|ProcessAborted|%d" against: "do=sendEvent event=10 currenv=0"
+02/17/19: 11:17:52.284: SX_evalstr() returned 100
+02/17/19: 11:17:52.285: an_cmd executing: do=sendEvent event=10 currenv=0
+02/17/19: 11:17:52.285: Executing Tcl script for "sendEvent" command
+02/17/19: 11:17:52.285: Executing: an_sendEvent {do=sendEvent event=10 currenv=0} 0
+02/17/19: 11:17:52.285: starting AnObjInterpProc
+02/17/19: 11:17:52.286: Invoking procedure
+02/17/19: 11:17:52.286: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting "
+02/17/19: 11:17:52.286: SX_evalstr() returned 100
+02/17/19: 11:17:52.287: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting 
+02/17/19: 11:17:52.287: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.288: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:52.288: SX_evalstr() returned 100
+02/17/19: 11:17:52.288: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:52.289: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:52.293: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 10 "
+02/17/19: 11:17:52.293: SX_evalstr() returned 100
+02/17/19: 11:17:52.293: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 10 
+02/17/19: 11:17:52.294: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.294: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log addReports: starting "
+02/17/19: 11:17:52.294: SX_evalstr() returned 100
+02/17/19: 11:17:52.294: Executing: do=lg name=6-6-EVAP-002gw_log addReports: starting 
+02/17/19: 11:17:52.294: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.294: Inside an_msgsend:
+02/17/19: 11:17:52.294: Sending: fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=10 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+02/17/19: 11:17:52.295: Putting stdout of env 0 into TCL out.
+02/17/19: 11:17:52.295: Linking ctxt to caller ctxt
+02/17/19: 11:17:52.295: Putting return code 0 of env 0 into $status.
+02/17/19: 11:17:52.295: Procedure returned 0
+02/17/19: 11:17:52.295: leaving AnObjInterpProc
+02/17/19: 11:17:52.295: Done executing Tcl command
+02/17/19: 11:17:52.295: Setting interpreter result to:
+
+02/17/19: 11:17:52.295: reply=0 command=sendEvent comment="Success" data=.
+02/17/19: 11:17:52.295: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_setProcessState: returning 0 "
+02/17/19: 11:17:52.296: SX_evalstr() returned 100
+02/17/19: 11:17:52.296: Executing: do=lg name=6-6-EVAP-002gw_log an_setProcessState: returning 0 
+02/17/19: 11:17:52.296: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.296: Attempting to send reply for env 19.
+02/17/19: 11:17:52.296: Inside an_send_reply.
+02/17/19: 11:17:52.296: Getting original command name.
+02/17/19: 11:17:52.296: currenv=0E15C8F0
+02/17/19: 11:17:52.296: Getting original client name.
+02/17/19: 11:17:52.296: Mapping command to server command.
+02/17/19: 11:17:52.296: Command found; getting reply comment
+02/17/19: 11:17:52.296: Mapping command to server command.
+02/17/19: 11:17:52.296: Sending reply:
+retcode=0
+replydata=
+command=setProcessState
+dest=sendmq
+ctxt=
+02/17/19: 11:17:52.296: comment:reply=0 command=setProcessState comment="Success"
+02/17/19: 11:17:52.297: Putting stdout of env 19 into TCL out.
+02/17/19: 11:17:52.297: Deleting env 19.
+02/17/19: 11:17:52.297: Deleting all contexts related to env  19.
+02/17/19: 11:17:52.297: Putting return code 0 of env 19 into $status.
+02/17/19: 11:17:52.297: Procedure returned 0
+02/17/19: 11:17:52.298: leaving AnObjInterpProc
+02/17/19: 11:17:52.298: Done executing Tcl command
+02/17/19: 11:17:52.298: Setting interpreter result to:
+
+02/17/19: 11:17:52.298: Checking queue.
+*********************************************
+02/17/19: 11:17:52.299: type=32000 size=115
+02/17/19: 11:17:52.299: 
+02/17/19: 11:17:52.299: Parsing Message.
+02/17/19: 11:17:52.299: Checking Command Message Syntax
+02/17/19: 11:17:52.299: Executing "event_send" command.
+02/17/19: 11:17:52.299:  generic_eqcmd called for the 'event_send' command
+02/17/19: 11:17:52.299:  Adding waitreply 20 for event_send
+02/17/19: 11:17:52.299:  Executing SendSECS str=6 fun=11 eq=6-6-EVAP-002 timeout=30
+02/17/19: 11:17:52.301: Sending SECS message.
+02/17/19: 11:17:52.307: NOT sending reply for "event_send" command. code=999.
+02/17/19: 11:17:52.307: Checking queue.
+*********************************************
+02/17/19: 11:17:52.308: type=32000 size=115
+02/17/19: 11:17:52.308: 
+02/17/19: 11:17:52.308: Parsing Message.
+02/17/19: 11:17:52.309: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:52.309: Checking Command Message Syntax
+02/17/19: 11:17:52.309: Executing "send" command.
+02/17/19: 11:17:52.309: sendmsg:  Evaluating send request
+02/17/19: 11:17:52.309: sendmsg:  Storing msg, ttf=1550423902, interval=30, iterations=1
+         raw=0 decode=0 mtype=32000
+02/17/19: 11:17:52.309: sendmsg:  Reseting alarm...
+02/17/19: 11:17:52.310: resetalarm:  Setting alarm.
+02/17/19: 11:17:52.310: resetalarm:  Next msg to be sent in 30 seconds.
+02/17/19: 11:17:52.311: NOT sending reply for "send" command. code=0.
+02/17/19: 11:17:52.313: type=1 size=13
+02/17/19: 11:17:52.313: Non-AutoShell format message received.
+02/17/19: 11:17:52.313: Getting protocol.
+02/17/19: 11:17:52.313: Checking mtype DVs for mtype 1.
+02/17/19: 11:17:52.313: 	Checking mtype 999998.
+02/17/19: 11:17:52.314: 	Checking mtype 999996.
+02/17/19: 11:17:52.314: Looking for sxdecode.
+02/17/19: 11:17:52.314: Executing "sxdecode" to decode message.
+02/17/19: 11:17:52.315: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:17:52.315: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:17:52.315: Executing event_send to handle message.
+02/17/19: 11:17:52.315:  generic_eqcmd called for the 'event_send' command.
+02/17/19: 11:17:52.315:  Executing ReceiveSECS str=6 fun=12  checkack=ACKC6 cancel_timeout
+02/17/19: 11:17:52.316: 	No servers monitoring at present
+02/17/19: 11:17:52.317: Attempting to send a reply, ctxt=20, rc=0,
+ data=eq=6-6-EVAP-002
+header="0000060c800000000014"
+receivetime="1550423872"
+receivesize="13"
+ACKC6="00"
+02/17/19: 11:17:52.317: event_send returned 0
+02/17/19: 11:17:52.317: Message ignored.
+02/17/19: 11:17:52.318: type=32000 size=71
+02/17/19: 11:17:52.318: 
+02/17/19: 11:17:52.318: Parsing Message.
+02/17/19: 11:17:52.318: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:52.318: Checking Command Message Syntax
+02/17/19: 11:17:52.319: Executing "cancel" command.
+02/17/19: 11:17:52.319: resetalarm:  Alarm queue is empty.
+02/17/19: 11:17:52.319: NOT sending reply for "cancel" command. code=0.
+02/17/19: 11:17:52.319: Checking queue.
+*********************************************
+02/17/19: 11:17:52.320: type=32000 size=182
+02/17/19: 11:17:52.320: 
+02/17/19: 11:17:52.320: Parsing Message.
+02/17/19: 11:17:52.320: Message has no ctxt
+02/17/19: 11:17:52.320: Reply Message received and ignored.
+02/17/19: 11:17:52.320: Checking queue.
+*********************************************
+02/17/19: 11:17:52.338: type=1 size=24
+02/17/19: 11:17:52.339: Non-AutoShell format message received.
+02/17/19: 11:17:52.339: Getting protocol.
+02/17/19: 11:17:52.339: Checking mtype DVs for mtype 1.
+02/17/19: 11:17:52.340: 	Checking mtype 999998.
+02/17/19: 11:17:52.340: 	Checking mtype 999996.
+02/17/19: 11:17:52.340: Looking for sxdecode.
+02/17/19: 11:17:52.340: Executing "sxdecode" to decode message.
+02/17/19: 11:17:52.341: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:17:52.341: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:17:52.341: Executing generic_handler to handle message.
+02/17/19: 11:17:52.341:  Hook command 'S1F3_prereply' being executed.
+02/17/19: 11:17:52.342: Executing Tcl script for "S1F3_prereply" command
+02/17/19: 11:17:52.342: Executing: an_S1F3_prereply {prereply currenv=generic_handler } generic_handler
+02/17/19: 11:17:52.342: starting AnObjInterpProc
+02/17/19: 11:17:52.342: Invoking procedure
+02/17/19: 11:17:52.342: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: starting "
+02/17/19: 11:17:52.342: SX_evalstr() returned 100
+02/17/19: 11:17:52.342: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: starting 
+02/17/19: 11:17:52.343: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.343: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: starting "
+02/17/19: 11:17:52.343: SX_evalstr() returned 100
+02/17/19: 11:17:52.343: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: starting 
+02/17/19: 11:17:52.343: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.343: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: checking TransactionAbort= "
+02/17/19: 11:17:52.343: SX_evalstr() returned 100
+02/17/19: 11:17:52.343: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: checking TransactionAbort= 
+02/17/19: 11:17:52.344: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.344: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: returning true "
+02/17/19: 11:17:52.344: SX_evalstr() returned 100
+02/17/19: 11:17:52.344: Executing: do=lg name=6-6-EVAP-002gw_log checkGlobalFlags: returning true 
+02/17/19: 11:17:52.344: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.344: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 clear currenv=0"
+02/17/19: 11:17:52.344: SX_evalstr() returned 100
+02/17/19: 11:17:52.344: an_cmd executing: do=defsxncode str=1 fun=4 clear currenv=0
+02/17/19: 11:17:52.344: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:52.344: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880 "
+02/17/19: 11:17:52.345: SX_evalstr() returned 100
+02/17/19: 11:17:52.345: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 1 SVID 13 svPtrList 234966880 
+02/17/19: 11:17:52.345: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.345: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=13 "
+02/17/19: 11:17:52.345: SX_evalstr() returned 100
+02/17/19: 11:17:52.345: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=13 
+02/17/19: 11:17:52.345: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.345: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:52.345: SX_evalstr() returned 100
+02/17/19: 11:17:52.345: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:52.345: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:52.346: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log looking at 13 "
+02/17/19: 11:17:52.346: SX_evalstr() returned 100
+02/17/19: 11:17:52.346: Executing: do=lg name=6-6-EVAP-002gw_log looking at 13 
+02/17/19: 11:17:52.346: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.346: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: 13 returning ControlState 5 "
+02/17/19: 11:17:52.347: SX_evalstr() returned 100
+02/17/19: 11:17:52.347: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: 13 returning ControlState 5 
+02/17/19: 11:17:52.347: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.347: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=5 UI4 lindex=5 "
+02/17/19: 11:17:52.347: SX_evalstr() returned 100
+02/17/19: 11:17:52.347: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=5 UI4 lindex=5 
+02/17/19: 11:17:52.348: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.348: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 pos=1,1 value="5" type=UI4 currenv=0"
+02/17/19: 11:17:52.348: SX_evalstr() returned 100
+02/17/19: 11:17:52.348: an_cmd executing: do=defsxncode str=1 fun=4 pos=1,1 value="5" type=UI4 currenv=0
+02/17/19: 11:17:52.348: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:52.348: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768 "
+02/17/19: 11:17:52.348: SX_evalstr() returned 100
+02/17/19: 11:17:52.348: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply Index 2 SVID 16 svPtrList 234966768 
+02/17/19: 11:17:52.348: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.348: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=16 "
+02/17/19: 11:17:52.348: SX_evalstr() returned 100
+02/17/19: 11:17:52.349: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: starting svid=16 
+02/17/19: 11:17:52.349: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.349: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:52.349: SX_evalstr() returned 100
+02/17/19: 11:17:52.349: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:52.349: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:52.349: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log looking at 13 "
+02/17/19: 11:17:52.349: SX_evalstr() returned 100
+02/17/19: 11:17:52.349: Executing: do=lg name=6-6-EVAP-002gw_log looking at 13 
+02/17/19: 11:17:52.349: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.350: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log getValAndType: 16 returning ProcessState 2 "
+02/17/19: 11:17:52.350: SX_evalstr() returned 100
+02/17/19: 11:17:52.350: Executing: do=lg name=6-6-EVAP-002gw_log getValAndType: 16 returning ProcessState 2 
+02/17/19: 11:17:52.350: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.350: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=2 UI4 lindex=2 "
+02/17/19: 11:17:52.350: SX_evalstr() returned 100
+02/17/19: 11:17:52.350: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: valAndType=2 UI4 lindex=2 
+02/17/19: 11:17:52.350: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.350: Checking: "defsxncode str=%s fun=%s [label=%s [condition=%s]]
+  {[pos=%s]
+    {[type=LIST|BIN|BOOL|ASC|SI8|SI1|SI2|SI4|FP8|FP4|UI8|UI1|UI2|UI4]
+      {value=%s [size=%d],
+        -array value.<enum>=%s },
+      clear },
+    check }
+   [lengthbytes=1|2|3]" against: "do=defsxncode str=1 fun=4 pos=1,2 value="2" type=UI4 currenv=0"
+02/17/19: 11:17:52.351: SX_evalstr() returned 100
+02/17/19: 11:17:52.351: an_cmd executing: do=defsxncode str=1 fun=4 pos=1,2 value="2" type=UI4 currenv=0
+02/17/19: 11:17:52.351: reply=0 command=defsxncode comment="success" data=.
+02/17/19: 11:17:52.351: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: ending "
+02/17/19: 11:17:52.351: SX_evalstr() returned 100
+02/17/19: 11:17:52.351: Executing: do=lg name=6-6-EVAP-002gw_log an_S1F3_prereply: ending 
+02/17/19: 11:17:52.352: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:52.352: Procedure returned 0
+02/17/19: 11:17:52.352: leaving AnObjInterpProc
+02/17/19: 11:17:52.352: Done executing Tcl command
+02/17/19: 11:17:52.352: Setting interpreter result to:
+reply=0 command=lg comment="Success"
+02/17/19: 11:17:52.352:  generic_handler executing sxreply
+02/17/19: 11:17:52.352: Sending SECS message.
+02/17/19: 11:17:52.354:  generic_handler executing distribute
+02/17/19: 11:17:52.355: 	No servers monitoring at present
+02/17/19: 11:17:52.355: generic_handler returned 0
+02/17/19: 11:17:52.356: Message ignored.
+02/17/19: 11:17:52.356: Checking queue.
+*********************************************
+02/17/19: 11:17:53.530: type=32000 size=52
+02/17/19: 11:17:53.530: 
+02/17/19: 11:17:53.530: Parsing Message.
+02/17/19: 11:17:53.530: Checking Command Message Syntax
+02/17/19: 11:17:53.530: Executing "sendEvent" command.
+02/17/19: 11:17:53.530: Executing Tcl script for "sendEvent" command
+02/17/19: 11:17:53.530: Executing: an_sendEvent {fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=555  currenv=22 } 22
+02/17/19: 11:17:53.530: starting AnObjInterpProc
+02/17/19: 11:17:53.531: Invoking procedure
+02/17/19: 11:17:53.531: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting "
+02/17/19: 11:17:53.531: SX_evalstr() returned 100
+02/17/19: 11:17:53.531: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting 
+02/17/19: 11:17:53.531: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:53.531: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:17:53.531: SX_evalstr() returned 100
+02/17/19: 11:17:53.531: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:17:53.531: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:17:53.531: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 555 "
+02/17/19: 11:17:53.531: SX_evalstr() returned 100
+02/17/19: 11:17:53.532: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 555 
+02/17/19: 11:17:53.532: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:53.532: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log addReports: starting "
+02/17/19: 11:17:53.532: SX_evalstr() returned 100
+02/17/19: 11:17:53.532: Executing: do=lg name=6-6-EVAP-002gw_log addReports: starting 
+02/17/19: 11:17:53.532: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:17:53.532: Inside an_msgsend:
+02/17/19: 11:17:53.532: Sending: fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=555 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+02/17/19: 11:17:53.533: Attempting to send reply for env 22.
+02/17/19: 11:17:53.533: Inside an_send_reply.
+02/17/19: 11:17:53.533: Getting original command name.
+02/17/19: 11:17:53.533: currenv=0E15C8A0
+02/17/19: 11:17:53.533: Getting original client name.
+02/17/19: 11:17:53.533: Mapping command to server command.
+02/17/19: 11:17:53.533: Command found; getting reply comment
+02/17/19: 11:17:53.533: Mapping command to server command.
+02/17/19: 11:17:53.533: Sending reply:
+retcode=0
+replydata=
+command=sendEvent
+dest=sendmq
+ctxt=
+02/17/19: 11:17:53.533: comment:reply=0 command=sendEvent comment="Success"
+02/17/19: 11:17:53.537: Putting stdout of env 22 into TCL out.
+02/17/19: 11:17:53.537: Deleting env 22.
+02/17/19: 11:17:53.537: Deleting all contexts related to env  22.
+02/17/19: 11:17:53.537: Putting return code 0 of env 22 into $status.
+02/17/19: 11:17:53.537: Procedure returned 0
+02/17/19: 11:17:53.538: leaving AnObjInterpProc
+02/17/19: 11:17:53.538: Done executing Tcl command
+02/17/19: 11:17:53.538: Setting interpreter result to:
+
+02/17/19: 11:17:53.538: Checking queue.
+*********************************************
+02/17/19: 11:17:53.539: type=32000 size=116
+02/17/19: 11:17:53.539: 
+02/17/19: 11:17:53.539: Parsing Message.
+02/17/19: 11:17:53.540: Checking Command Message Syntax
+02/17/19: 11:17:53.540: Executing "event_send" command.
+02/17/19: 11:17:53.540:  generic_eqcmd called for the 'event_send' command
+02/17/19: 11:17:53.540:  Adding waitreply 23 for event_send
+02/17/19: 11:17:53.540:  Executing SendSECS str=6 fun=11 eq=6-6-EVAP-002 timeout=30
+02/17/19: 11:17:53.541: Sending SECS message.
+02/17/19: 11:17:53.542: NOT sending reply for "event_send" command. code=999.
+02/17/19: 11:17:53.543: Checking queue.
+*********************************************
+02/17/19: 11:17:53.543: type=32000 size=115
+02/17/19: 11:17:53.543: 
+02/17/19: 11:17:53.543: Parsing Message.
+02/17/19: 11:17:53.543: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:53.543: Checking Command Message Syntax
+02/17/19: 11:17:53.544: Executing "send" command.
+02/17/19: 11:17:53.544: sendmsg:  Evaluating send request
+02/17/19: 11:17:53.544: sendmsg:  Storing msg, ttf=1550423903, interval=30, iterations=1
+         raw=0 decode=0 mtype=32000
+02/17/19: 11:17:53.544: sendmsg:  Reseting alarm...
+02/17/19: 11:17:53.544: resetalarm:  Setting alarm.
+02/17/19: 11:17:53.544: resetalarm:  Next msg to be sent in 30 seconds.
+02/17/19: 11:17:53.544: NOT sending reply for "send" command. code=0.
+02/17/19: 11:17:53.549: type=1 size=13
+02/17/19: 11:17:53.549: Non-AutoShell format message received.
+02/17/19: 11:17:53.549: Getting protocol.
+02/17/19: 11:17:53.549: Checking mtype DVs for mtype 1.
+02/17/19: 11:17:53.549: 	Checking mtype 999998.
+02/17/19: 11:17:53.549: 	Checking mtype 999996.
+02/17/19: 11:17:53.550: Looking for sxdecode.
+02/17/19: 11:17:53.550: Executing "sxdecode" to decode message.
+02/17/19: 11:17:53.551: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:17:53.551: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:17:53.551: Executing event_send to handle message.
+02/17/19: 11:17:53.552:  generic_eqcmd called for the 'event_send' command.
+02/17/19: 11:17:53.552:  Executing ReceiveSECS str=6 fun=12  checkack=ACKC6 cancel_timeout
+02/17/19: 11:17:53.553: 	No servers monitoring at present
+02/17/19: 11:17:53.553: Attempting to send a reply, ctxt=23, rc=0,
+ data=eq=6-6-EVAP-002
+header="0000060c800000000017"
+receivetime="1550423873"
+receivesize="13"
+ACKC6="00"
+02/17/19: 11:17:53.554: event_send returned 0
+02/17/19: 11:17:53.554: Message ignored.
+02/17/19: 11:17:53.554: type=32000 size=71
+02/17/19: 11:17:53.554: 
+02/17/19: 11:17:53.554: Parsing Message.
+02/17/19: 11:17:53.554: No reply will be sent following command. (noreply specified)
+02/17/19: 11:17:53.554: Checking Command Message Syntax
+02/17/19: 11:17:53.554: Executing "cancel" command.
+02/17/19: 11:17:53.555: resetalarm:  Alarm queue is empty.
+02/17/19: 11:17:53.555: NOT sending reply for "cancel" command. code=0.
+02/17/19: 11:17:53.555: Checking queue.
+*********************************************
+02/17/19: 11:17:53.555: type=32000 size=182
+02/17/19: 11:17:53.556: 
+02/17/19: 11:17:53.556: Parsing Message.
+02/17/19: 11:17:53.556: Message has no ctxt
+02/17/19: 11:17:53.557: Reply Message received and ignored.
+02/17/19: 11:17:53.557: Checking queue.
+*********************************************
+02/17/19: 11:18:07.727: type=32000 size=52
+02/17/19: 11:18:07.727: 
+02/17/19: 11:18:07.727: Parsing Message.
+02/17/19: 11:18:07.727: Checking Command Message Syntax
+02/17/19: 11:18:07.727: Executing "sendEvent" command.
+02/17/19: 11:18:07.727: Executing Tcl script for "sendEvent" command
+02/17/19: 11:18:07.727: Executing: an_sendEvent {fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=101  currenv=24 } 24
+02/17/19: 11:18:07.727: starting AnObjInterpProc
+02/17/19: 11:18:07.728: Invoking procedure
+02/17/19: 11:18:07.728: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting "
+02/17/19: 11:18:07.728: SX_evalstr() returned 100
+02/17/19: 11:18:07.728: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: starting 
+02/17/19: 11:18:07.728: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:07.728: Checking: "restore file=%s [variable=%s] [parse [level=%d]] [trailing_newline=%s]" against: "do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0"
+02/17/19: 11:18:07.728: SX_evalstr() returned 100
+02/17/19: 11:18:07.728: an_cmd executing: do=restore file=../../6-6-EVAP-002/simdata.dv variable=simdata currenv=0
+02/17/19: 11:18:07.728: reply=0 command=restore comment="Success" data=.
+02/17/19: 11:18:07.728: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 101 "
+02/17/19: 11:18:07.729: SX_evalstr() returned 100
+02/17/19: 11:18:07.729: Executing: do=lg name=6-6-EVAP-002gw_log an_sendEvent: sendEvent with ceid 101 
+02/17/19: 11:18:07.729: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:07.729: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log addReports: starting "
+02/17/19: 11:18:07.729: SX_evalstr() returned 100
+02/17/19: 11:18:07.729: Executing: do=lg name=6-6-EVAP-002gw_log addReports: starting 
+02/17/19: 11:18:07.729: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:07.729: Inside an_msgsend:
+02/17/19: 11:18:07.730: Sending: fr=6-6-EVAP-002gw to=6-6-EVAP-002gw do=event_send eq=6-6-EVAP-002 DATAID=1 CEID=101 DATAID_TYPE=UI4 CEID_TYPE=UI4  
+02/17/19: 11:18:07.730: Attempting to send reply for env 24.
+02/17/19: 11:18:07.730: Inside an_send_reply.
+02/17/19: 11:18:07.730: Getting original command name.
+02/17/19: 11:18:07.730: currenv=0E15C890
+02/17/19: 11:18:07.730: Getting original client name.
+02/17/19: 11:18:07.730: Mapping command to server command.
+02/17/19: 11:18:07.730: Command found; getting reply comment
+02/17/19: 11:18:07.730: Mapping command to server command.
+02/17/19: 11:18:07.730: Sending reply:
+retcode=0
+replydata=
+command=sendEvent
+dest=sendmq
+ctxt=
+02/17/19: 11:18:07.730: comment:reply=0 command=sendEvent comment="Success"
+02/17/19: 11:18:07.731: Putting stdout of env 24 into TCL out.
+02/17/19: 11:18:07.731: Deleting env 24.
+02/17/19: 11:18:07.731: Deleting all contexts related to env  24.
+02/17/19: 11:18:07.731: Putting return code 0 of env 24 into $status.
+02/17/19: 11:18:07.731: Procedure returned 0
+02/17/19: 11:18:07.731: leaving AnObjInterpProc
+02/17/19: 11:18:07.731: Done executing Tcl command
+02/17/19: 11:18:07.731: Setting interpreter result to:
+
+02/17/19: 11:18:07.734: Checking queue.
+*********************************************
+02/17/19: 11:18:07.735: type=32000 size=116
+02/17/19: 11:18:07.735: 
+02/17/19: 11:18:07.735: Parsing Message.
+02/17/19: 11:18:07.735: Checking Command Message Syntax
+02/17/19: 11:18:07.735: Executing "event_send" command.
+02/17/19: 11:18:07.735:  generic_eqcmd called for the 'event_send' command
+02/17/19: 11:18:07.735:  Adding waitreply 25 for event_send
+02/17/19: 11:18:07.735:  Executing SendSECS str=6 fun=11 eq=6-6-EVAP-002 timeout=30
+02/17/19: 11:18:07.736: Sending SECS message.
+02/17/19: 11:18:07.738: NOT sending reply for "event_send" command. code=999.
+02/17/19: 11:18:07.738: Checking queue.
+*********************************************
+02/17/19: 11:18:07.738: type=32000 size=115
+02/17/19: 11:18:07.738: 
+02/17/19: 11:18:07.738: Parsing Message.
+02/17/19: 11:18:07.738: No reply will be sent following command. (noreply specified)
+02/17/19: 11:18:07.738: Checking Command Message Syntax
+02/17/19: 11:18:07.738: Executing "send" command.
+02/17/19: 11:18:07.739: sendmsg:  Evaluating send request
+02/17/19: 11:18:07.739: sendmsg:  Storing msg, ttf=1550423917, interval=30, iterations=1
+         raw=0 decode=0 mtype=32000
+02/17/19: 11:18:07.739: sendmsg:  Reseting alarm...
+02/17/19: 11:18:07.739: resetalarm:  Setting alarm.
+02/17/19: 11:18:07.739: resetalarm:  Next msg to be sent in 30 seconds.
+02/17/19: 11:18:07.739: NOT sending reply for "send" command. code=0.
+02/17/19: 11:18:07.747: type=1 size=13
+02/17/19: 11:18:07.747: Non-AutoShell format message received.
+02/17/19: 11:18:07.747: Getting protocol.
+02/17/19: 11:18:07.747: Checking mtype DVs for mtype 1.
+02/17/19: 11:18:07.747: 	Checking mtype 999998.
+02/17/19: 11:18:07.747: 	Checking mtype 999996.
+02/17/19: 11:18:07.747: Looking for sxdecode.
+02/17/19: 11:18:07.747: Executing "sxdecode" to decode message.
+02/17/19: 11:18:07.748: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:18:07.748: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:18:07.749: Executing event_send to handle message.
+02/17/19: 11:18:07.749:  generic_eqcmd called for the 'event_send' command.
+02/17/19: 11:18:07.749:  Executing ReceiveSECS str=6 fun=12  checkack=ACKC6 cancel_timeout
+02/17/19: 11:18:07.749: 	No servers monitoring at present
+02/17/19: 11:18:07.750: Attempting to send a reply, ctxt=25, rc=0,
+ data=eq=6-6-EVAP-002
+header="0000060c800000000019"
+receivetime="1550423887"
+receivesize="13"
+ACKC6="00"
+02/17/19: 11:18:07.750: event_send returned 0
+02/17/19: 11:18:07.750: Message ignored.
+02/17/19: 11:18:07.750: type=32000 size=71
+02/17/19: 11:18:07.750: 
+02/17/19: 11:18:07.751: Parsing Message.
+02/17/19: 11:18:07.751: No reply will be sent following command. (noreply specified)
+02/17/19: 11:18:07.751: Checking Command Message Syntax
+02/17/19: 11:18:07.751: Executing "cancel" command.
+02/17/19: 11:18:07.751: resetalarm:  Alarm queue is empty.
+02/17/19: 11:18:07.752: NOT sending reply for "cancel" command. code=0.
+02/17/19: 11:18:07.752: Checking queue.
+*********************************************
+02/17/19: 11:18:07.754: type=32000 size=182
+02/17/19: 11:18:07.754: 
+02/17/19: 11:18:07.755: Parsing Message.
+02/17/19: 11:18:07.755: Message has no ctxt
+02/17/19: 11:18:07.755: Reply Message received and ignored.
+02/17/19: 11:18:07.755: Checking queue.
+*********************************************
+02/17/19: 11:18:12.183: type=1 size=40
+02/17/19: 11:18:12.183: Non-AutoShell format message received.
+02/17/19: 11:18:12.183: Getting protocol.
+02/17/19: 11:18:12.183: Checking mtype DVs for mtype 1.
+02/17/19: 11:18:12.183: 	Checking mtype 999998.
+02/17/19: 11:18:12.183: 	Checking mtype 999996.
+02/17/19: 11:18:12.183: Looking for sxdecode.
+02/17/19: 11:18:12.184: Executing "sxdecode" to decode message.
+02/17/19: 11:18:12.185: Optimized decode turned on (anchor is >sys>msg)
+02/17/19: 11:18:12.185: reply=0 command=sxdecode comment="decoded SECS message"
+02/17/19: 11:18:12.185: Executing generic_handler to handle message.
+02/17/19: 11:18:12.185:  Hook command 'S2F23_prereply' being executed.
+02/17/19: 11:18:12.185: Executing Tcl script for "S2F23_prereply" command
+02/17/19: 11:18:12.186: Executing: an_S2F23_prereply {prereply currenv=generic_handler } generic_handler
+02/17/19: 11:18:12.186: starting AnObjInterpProc
+02/17/19: 11:18:12.186: Invoking procedure
+02/17/19: 11:18:12.186: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log putAckInNcparms: starting "
+02/17/19: 11:18:12.186: SX_evalstr() returned 100
+02/17/19: 11:18:12.186: Executing: do=lg name=6-6-EVAP-002gw_log putAckInNcparms: starting 
+02/17/19: 11:18:12.186: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.186: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log putAckInNcparms: sf is S2F23 "
+02/17/19: 11:18:12.186: SX_evalstr() returned 100
+02/17/19: 11:18:12.186: Executing: do=lg name=6-6-EVAP-002gw_log putAckInNcparms: sf is S2F23 
+02/17/19: 11:18:12.186: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.187: Procedure returned 0
+02/17/19: 11:18:12.187: leaving AnObjInterpProc
+02/17/19: 11:18:12.187: Done executing Tcl command
+02/17/19: 11:18:12.187: Setting interpreter result to:
+234983264
+02/17/19: 11:18:12.187:  generic_handler executing sxreply
+02/17/19: 11:18:12.187: Sending SECS message.
+02/17/19: 11:18:12.190:  Hook command 'S2F23_postreply' being executed.
+02/17/19: 11:18:12.190: Executing Tcl script for "S2F23_postreply" command
+02/17/19: 11:18:12.190: Executing: an_S2F23_postreply {postreply currenv=generic_handler } generic_handler
+02/17/19: 11:18:12.190: starting AnObjInterpProc
+02/17/19: 11:18:12.190: Invoking procedure
+02/17/19: 11:18:12.191: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: starting "
+02/17/19: 11:18:12.191: SX_evalstr() returned 100
+02/17/19: 11:18:12.191: Executing: do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: starting 
+02/17/19: 11:18:12.191: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.191: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: removing timer id=0 "
+02/17/19: 11:18:12.191: SX_evalstr() returned 100
+02/17/19: 11:18:12.192: Executing: do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: removing timer id=0 
+02/17/19: 11:18:12.192: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.192: Checking: "cancel { msg=%s [route=%s], {id=%s, id.<enum>=%s} [useregexp] }" against: "do=cancel id=0 currenv=0"
+02/17/19: 11:18:12.194: SX_evalstr() returned 100
+02/17/19: 11:18:12.194: an_cmd executing: do=cancel id=0 currenv=0
+02/17/19: 11:18:12.195: Unable to find message id 0 msg  to .
+02/17/19: 11:18:12.195: resetalarm:  Alarm queue is empty.
+02/17/19: 11:18:12.195: reply=1 command=cancel comment="message/receiver was not found" data=.
+02/17/19: 11:18:12.196: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: cancelled timer id=0 "
+02/17/19: 11:18:12.196: SX_evalstr() returned 100
+02/17/19: 11:18:12.197: Executing: do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: cancelled timer id=0 
+02/17/19: 11:18:12.197: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.198: Checking: "lg name=%s [file=%s] [ {msg=%s, %s} ] [level=%d]" against: "do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: totsmp is 0 "
+02/17/19: 11:18:12.198: SX_evalstr() returned 100
+02/17/19: 11:18:12.198: Executing: do=lg name=6-6-EVAP-002gw_log an_S2F23_postreply: totsmp is 0 
+02/17/19: 11:18:12.199: reply=0 command=lg comment="Success" data=.
+02/17/19: 11:18:12.199: Procedure returned 0
+02/17/19: 11:18:12.200: leaving AnObjInterpProc
+02/17/19: 11:18:12.200: Done executing Tcl command
+02/17/19: 11:18:12.200: Setting interpreter result to:
+
+02/17/19: 11:18:12.201:  generic_handler executing distribute
+02/17/19: 11:18:12.201: 	No servers monitoring at present
+02/17/19: 11:18:12.202: generic_handler returned 0
+02/17/19: 11:18:12.202: Message ignored.
+02/17/19: 11:18:12.202: Checking queue.
+*********************************************

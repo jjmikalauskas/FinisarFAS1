@@ -1,0 +1,8 @@
+02/16/19: 13:22:18.329: Bad syntax for 'sendEvent' command.
+	(A tagged field has an incorrect format,
+	 bad field is "event").
+	fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=Complete 
+02/16/19: 13:22:22.601: Bad syntax for 'sendEvent' command.
+	(A tagged field has an incorrect format,
+	 bad field is "event").
+	fr=sendmq to=6-6-EVAP-002gw do=sendEvent event=Completed 

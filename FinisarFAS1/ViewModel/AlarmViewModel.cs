@@ -1,4 +1,5 @@
-﻿using FinisarFAS1.View;
+﻿using Common;
+using FinisarFAS1.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,7 +16,20 @@ namespace FinisarFAS1.ViewModel
     {
         public AlarmViewModel()
         {
-            AlarmLogText = "Lorem ipsum dolor amet typewriter deep v plaid lo-fi. Bicycle rights af mlkshk church-key prism PBR&B vinyl. Wolf heirloom four dollar toast, poke ennui brunch ramps mixtape vice humblebrag artisan. Retro ramps snackwave shaman church-key beard vape wayfarers shoreditch. "; 
+            AlarmLogText = "12/05/2018: 11:38:40 AM: 63-Chamber pressure low\n" +
+                "12/05/2018: 11:42:22 AM: 1-Shutter Moving Error\n" +
+                "12/05/2018: 11:55:32 AM: 258-Forevacuum Pump Error\n";
+            Messenger.Default.Register<EventMessage>(this, EventMessageHandler);
+        }
+
+        private void EventMessageHandler(EventMessage msg)
+        {
+            if (msg.MsgType == "A")
+            {
+                int len = msg.Message.Length > 80 ? 80 : msg.Message.Length;
+                string s = msg.Message.Substring(0, len);
+                AlarmLogText += msg.MsgDateTime + "-" + s + "\n";
+            }
         }
 
         private string _alarmLogText;
@@ -32,6 +46,6 @@ namespace FinisarFAS1.ViewModel
         {
             Messenger.Default.Send(new ToggleAlarmViewMessage(false));
         }
-        
+
     }
 }

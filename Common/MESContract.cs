@@ -13,17 +13,14 @@ namespace Common
 
         DataTable GetResourceStatus(string resourceName);
 
-        bool MoveIn(string container, string errorMsg, bool somebool,
+        bool MoveIn(string container, ref string errorMsg, bool requiredCertification,
                             string employee, string comment, string resourceName, string factoryName);
 
-        bool MoveOut(string container, string errorMsg, bool somebool,
+        bool MoveOut(string container, ref string errorMsg, bool validateData,
                             string employee, string comment);
 
-        bool Hold(string container, string errorMsg,
-             string employee, string comment, string resourceName,
-             string factory, string holdReason);
-
-        //bool LotMoveInCamstar(string lot, string employee, string comments, string errorMsgBack);
+        bool Hold(string container, string holdReason, ref string errorMsg,
+             string comment, string factory, string employee,  string resourceName);
     }
 
     public interface IOperatorRepository

@@ -23,12 +23,11 @@ namespace FinisarFAS1
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyUpEvent, new KeyEventHandler(TextBox_HandleEnterKey));
             base.OnStartup(e);
 
-            //IDialogService2 dialogService = new MyDialogService(MainWindow);
-            //dialogService.Register<DialogViewModel, DialogWindow>();
-            //var vm = new MainViewModel(dialogService);          
+            SplashScreen screen = new SplashScreen("Images/rudolph_logo.jpg"); screen.Show(true);
+
             var vm = new MainViewModel();
             var view = new MainWindow { DataContext = vm };
-            view.ShowDialog();
+            view.ShowDialog();  
         }
 
         // On KeyDown
@@ -40,11 +39,10 @@ namespace FinisarFAS1
             {
                 e.Handled = true;
                 uie.MoveFocus(
-                new TraversalRequest(
-                FocusNavigationDirection.Next));
+                    new TraversalRequest(
+                    FocusNavigationDirection.Next));
             }
         }
-
         //public App()
         //{
         //    DisplayMainWindow();

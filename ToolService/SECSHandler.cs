@@ -7,23 +7,22 @@ using SECSInterface;
 
 namespace ToolService
 {
-    public class SECSHandler<T> : ISECSHandler<T> where T : Tool2
+    public class SECSHandler<T> : ISECSHandler<T> where T : Tool
     {
         private T _tool;
         public SECSHandler(T tool)
         {
             _tool = tool;
         }
-
-        public void InitializeTool(string eqSvr, int timeout)
+        
+        public bool InitializeTool()
         {
-            // call needed set of SECS messages to initialize this specific tool
-            _tool.Initialize(eqSvr, timeout);
+            return _tool.Initialize();
+        }
+        public void StartProcessing(string Port, string[] LotIds, string Recipe)
+        {
+            _tool.StartProcessing(Port, LotIds, Recipe);
         }
 
-        public void EstablishComm()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

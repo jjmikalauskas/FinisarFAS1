@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FinisarFAS1.View
 {
@@ -31,12 +32,25 @@ namespace FinisarFAS1.View
             Messenger.Default.Register<WafersConfirmedMessage>(this, WafersConfirmedHandler);
             Messenger.Default.Register<WafersInGridMessage>(this, WafersInGridHandler);
             Messenger.Default.Register<SelectedWafersInGridMessage>(this, SelectedWafersInGridHandler);
+            // Messenger.Default.Register<RetrievingWafersMessage>(this, RetrievingWafersHandler);
+            // overlay.Visibility = Visibility.Collapsed;
+        }
+
+        private void RetrievingWafersHandler(RetrievingWafersMessage msg)
+        {
+            if (msg.bVisible)
+                //overlay.Visibility = Visibility.Visible;
+            Dispatcher.CurrentDispatcher.Invoke(new Action(() => { overlay.Visibility = Visibility.Visible; }), DispatcherPriority.Normal);
+            else
+                //overlay.Visibility = Visibility.Collapsed;
+            Dispatcher.CurrentDispatcher.Invoke(new Action(() => { overlay.Visibility = Visibility.Collapsed; }), DispatcherPriority.Normal);
+
         }
 
         private void SelectedWafersInGridHandler(SelectedWafersInGridMessage msg)
         {
-            if (msg.wafers?.Count>0)
-               msg.wafers.ForEach(wafer => _maindgPort1.SelectedItems.Add(wafer)); 
+            if (msg.wafers?.Count > 0)
+                msg.wafers.ForEach(wafer => _maindgPort1.SelectedItems.Add(wafer));
         }
 
         private void WafersConfirmedHandler(WafersConfirmedMessage msg)
@@ -54,19 +68,22 @@ namespace FinisarFAS1.View
             var box = sender as TextBox;
             if (box != null)
                 box.SelectAll();
-        }
+        }      
+
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
 
-        }      
+        }
 
-    public bool IsConfirmed { get; set; }
-    public int NumberOfWafers { get; set; }
+        public bool IsConfirmed { get; set; }
+        public int NumberOfWafers { get; set; }
 
-   
-        public MainViewModel MyViewModel {
-            get {
+
+        public MainViewModel MyViewModel
+        {
+            get
+            {
                 return this.DataContext as MainViewModel;
             }
         }
@@ -81,5 +98,14 @@ namespace FinisarFAS1.View
 
             MyViewModel.SelectedWafers = selectedObjects;
         }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //if (overlay.Visibility == Visibility.Collapsed)
+            //    overlay.Visibility = Visibility.Visible;
+            //else
+            //    overlay.Visibility = Visibility.Collapsed;
+        }
+
     }
 }

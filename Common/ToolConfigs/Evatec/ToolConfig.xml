@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToolConfig xmlns="http://rudolphtech.com/ToolConfigXMLSchema.xsd">
+  <ToolType>EvaTec</ToolType>
+  <Toolid>6-6-EVAP-002</Toolid>
+  <CommunicationTimeout>30</CommunicationTimeout>
+  <LoadLock>0</LoadLock>
+  <Loadports>
+    <LoadPortName>Load Port 1</LoadPortName>
+  </Loadports>
+  <SlotColumnName>Pocket</SlotColumnName>
+  <CamstarString>Camstar Status</CamstarString>
+  <StartTimerSeconds>20</StartTimerSeconds>
+  <TimeoutBeforeStartFlag>true</TimeoutBeforeStartFlag>
+  <TimeoutBeforeStartSeconds>1</TimeoutBeforeStartSeconds>
+  <EnableAllEvents>false</EnableAllEvents>
+  <EnableAllAlarms>true</EnableAllAlarms>
+  <EnableDefinedEventsAtAppStart>false</EnableDefinedEventsAtAppStart>
+  <DefineEventsAtAppStart>false</DefineEventsAtAppStart>
+  <ControlStateSVID>13</ControlStateSVID>
+  <ProcessStateSVID>16</ProcessStateSVID>
+  <EmailOnAlarmsFlag>true</EmailOnAlarmsFlag>
+  <PrimaryEmailAddressees>
+    <Addressee>mike.anderson@rudolphtech.com</Addressee>
+    <Addressee>john.mikaluaskas@rudolphtech.com</Addressee>
+  </PrimaryEmailAddressees>
+  <EmailAddresseesForAlarms>
+    <Addressee>mike.anderson@rudolphtech.com</Addressee>
+    <Addressee>john.mikaluaskas@rudolphtech.com</Addressee>
+  </EmailAddresseesForAlarms>
+  <EmailOnAppShutdownFlag>true</EmailOnAppShutdownFlag>
+  <EmailAddresseesForAppshutdown>
+    <Addressee>mike.anderson@rudolphtech.com</Addressee>
+    <Addressee>john.mikaluaskas@rudolphtech.com</Addressee>
+  </EmailAddresseesForAppshutdown>
+  <TraceLogFilesPath>\data</TraceLogFilesPath>
+  <LogFilesPath>\logs</LogFilesPath>
+  <OperatorWaferTableFields>
+    <Field Name="Container ID" />
+    <Field Name="Product" />
+    <Field Name="Operation" />
+    <Field Name="Recipe" />
+    <Field Name="Wafer Status" />
+  </OperatorWaferTableFields>
+  <EngineerWaferTableFields>
+    <Field Name="Container ID" />
+    <Field Name="Product" />
+    <Field Name="Operation" />
+    <Field Name="Recipe" />
+    <Field Name="Wafer Status" />
+  </EngineerWaferTableFields>
+  <EqConstValList>
+    <EqConst>
+      <val>0</val>
+      <name>name1</name>
+    </EqConst>
+    <EqConst>
+      <val>65535</val>
+      <name>name2</name>
+    </EqConst>
+  </EqConstValList>
+  <EqConstList>
+    <EqConst>
+      <val>5710</val>
+      <name>TECSEMACKTIMEOUT</name>
+    </EqConst>
+    <EqConst>
+      <val>5701</val>
+      <name>GENERALALSYSTYPE</name>
+    </EqConst>
+  </EqConstList>
+  <SVidList>
+    <Svid>
+      <name>constant11</name>
+      <id>11</id>
+    </Svid>
+    
+    <Svid>
+      <name>clock</name>
+      <id>22</id>
+    </Svid>
+    <Svid>
+      <name>random</name>
+      <id>33</id>
+    </Svid>
+    <Svid>
+      <name>slope</name>
+      <id>44</id>
+    </Svid>
+    <Svid>
+      <name>onoff</name>
+      <id>55</id>
+    </Svid>
+  </SVidList>
+  <AlarmList>
+    <alarm>
+      <name>ShutterMovingError</name>
+      <id>1</id>
+      
+    </alarm>
+    <alarm>
+      <name>ALAChmbDoorOpenTimerExpired</name>
+      <id>200</id>
+      
+    </alarm>
+    <alarm>
+      <name>BadVacuum</name>
+      <id>1301</id>
+    
+    </alarm>
+  </AlarmList>
+  <TraceReports>
+    <Report id="0">
+      <vids>
+        <vid name="constant11">11</vid>
+        <vid name="random">33</vid>
+        <vid name="onoff">55</vid>
+      </vids>
+      <dsper>000005</dsper>
+      <totsmp>3</totsmp>
+    </Report>
+    
+  </TraceReports>
+  <eventReports>
+    <report id="100">
+      <vids>
+        <vid name="CONTROLSTATE">13</vid>
+        <vid name="PROCESSSTATE">16</vid>
+      </vids>
+      <events>
+        <ceid name="CEIDChamberDoorOpen">2011</ceid>
+		<ceid name="ProcessStateChange">10</ceid>
+      </events>
+    </report>
+
+    <report id="200">
+      <vids>
+        <vid name="LotIds">2200</vid>
+      </vids>
+      <events>
+        <ceid name="CEIDChamberDoorClosed">2012</ceid>
+        <ceid name="CEIDProcessCompleted">101</ceid>
+      </events>
+    </report>
+
+    <report id="300">
+      <vids>
+        <vid name="STARTTIME">2401</vid>
+        <vid name="RUNTIME">2402</vid>
+        <vid name="MAINSTATE">301</vid>
+        <vid name="RUNNUMBER">2600</vid>
+      </vids>
+      <events>
+        <ceid name="CEIDProcessStarted">100</ceid>
+        <ceid name="KhanManinstateChange">30</ceid>
+      </events>
+    </report>
+
+    <report id="400">
+      <vids>
+        <vid name="CurrentPPID">17</vid>
+      </vids>
+      <events>
+        <ceid name="PPSelectedEvent">62</ceid>
+      </events>
+    </report>
+    
+    <report id="600">
+      <vids>
+        <vid name="PROCESSSTEPNAME">220</vid>
+        <vid name="PROCESSSTEPNUMBER">221</vid>
+        <vid name="PROCESSSTEPTYPE">222</vid>
+      </vids>
+      <events>
+        <ceid name="CEIDProcessCompleted">101</ceid>
+        <ceid name="StepInfo">40</ceid>
+      </events>
+    </report>
+    <report id="700">
+      <vids>
+        <vid name="EVAPORATIONRATE1">1001</vid>
+        <vid name="THICKNESS">1100</vid>
+        <vid name="SOURCEPOWER1">1201</vid>
+        <vid name="TEMPERATURE1">1401</vid>
+        <vid name="PRESSURE">1500</vid>
+        <vid name="RFPOWER">1700</vid>
+      </vids>
+      <events>
+        <ceid name="StepInfo">40</ceid>
+        
+      </events>
+    </report>
+  </eventReports>
+  <Dialogs>
+    <ShowConfirmationBox>false</ShowConfirmationBox>
+    <PostStartmessage>Please make sure the door is closed and the ports are ready</PostStartmessage>
+    <ShowEmailBox>false</ShowEmailBox>
+  </Dialogs>
+</ToolConfig>
